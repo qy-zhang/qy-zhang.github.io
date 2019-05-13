@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="cpp,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="《Effective modern c++》读书笔记网络资源">
+<meta name="keywords" content="cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective Modern C++ 读书笔记">
+<meta property="og:url" content="http://yoursite.com/2017/08/06/cpp/Effective Modern C++ 读书笔记/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="《Effective modern c++》读书笔记网络资源">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Effective Modern C++ 读书笔记">
+<meta name="twitter:description" content="《Effective modern c++》读书笔记网络资源">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/06/cpp/Effective Modern C++ 读书笔记/">
+
+
+
+
+
+  <title>Effective Modern C++ 读书笔记 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/06/cpp/Effective Modern C++ 读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Effective Modern C++ 读书笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-06T10:12:50+08:00">
+                2017-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>《Effective modern c++》读书笔记<br><a href="https://www.kancloud.cn/kangdandan/book/169969" target="_blank" rel="noopener">网络资源</a><br><a id="more"></a></p>
+<h1 id="类型推导"><a href="#类型推导" class="headerlink" title="类型推导"></a>类型推导</h1><p>C++98只有一种类型推导规则：函数模板。C++11修改了一点规则样本，并且添加额外的两条规则，一条是auto，另一个是decltype。</p>
+<h2 id="条款1：理解模板类型推导"><a href="#条款1：理解模板类型推导" class="headerlink" title="条款1：理解模板类型推导"></a>条款1：理解模板类型推导</h2><p>一段函数模板和调用一般 形式如下所示：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(ParamType param)</span></span>;</span><br><span class="line">f(expr);</span><br></pre></td></tr></table></figure></p>
+<p>在编译的时候，编译器通过expr来进行推导出两个类型：一个是T，一个是ParamType。T和ParamType是不同的，因为ParamType经常会包含一些类型的装饰，比如引用、const等特性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span><br><span class="line">void f(const T&amp; param);</span><br><span class="line"></span><br><span class="line">int x = 0;</span><br><span class="line">f(x); // 在编译的时候，T被推导成int，ParamType被推导成const T&amp;</span><br></pre></td></tr></table></figure></p>
+<p>除了T和ParamType不同，T和expr的类型也不一定相同。</p>
+<p>template模板类型推导有三种情况：</p>
+<ul>
+<li>ParamType是一个指针或者引用类型，但不是通用引用（不包含右值引用）</li>
+</ul>
+<ol>
+<li>如果expr的类型是一个引用，忽略引用的部分</li>
+<li>然后利用expr的类型和ParamType对比去判断T的类型</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(T&amp; param)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x = <span class="number">27</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> cx = x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; rx = x;</span><br><span class="line"></span><br><span class="line">f(x); <span class="comment">//T是int，ParamType是int&amp;</span></span><br><span class="line">f(cx); <span class="comment">//T是const int，ParamType是const int&amp;</span></span><br><span class="line">f(rx); <span class="comment">//T是const int，ParamType是const int&amp;</span></span><br></pre></td></tr></table></figure>
+<p>当传递一个const对象给一个引用参数，他们期望对象会保留常量特性，也就是说，参数变成了const的引用。这也就是为什么给一个以T&amp;为参数的模板传递一个const对象是安全的：对象的const特性是T类型推导的一部分。</p>
+<ul>
+<li>ParamType是一个通用引用（包含右值引用）</li>
+</ul>
+<ol>
+<li>如果expr是一个左值，T和ParamType都会被推导成左值引用。</li>
+<li>如果expr是一个右值，那么就执行“普通”的法则（第一种情况）</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(T&amp;&amp; param)</span></span>; <span class="comment">//右值引用，是一个通用引用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x = <span class="number">27</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> cx = x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; rx = x;</span><br><span class="line"></span><br><span class="line">f(x); <span class="comment">//x是左值，T是int&amp;，ParamType是int&amp;</span></span><br><span class="line">f(cx); <span class="comment">//cx是左值，T是const int&amp;，ParamType是const int&amp;</span></span><br><span class="line">f(rx); <span class="comment">//rx是左值，T是const int&amp;，ParamType是const int&amp;</span></span><br><span class="line">f(<span class="number">27</span>); <span class="comment">//27是右值，所以T是int，ParamType是int&amp;&amp;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>ParamType不是指针也不是引用，此时T就是参数类型<br>那么调用函数就是按值传递，所以类型推导的T不包含指针、引用信息，直接用参数的类型（int等）表示即可<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(T param)</span></span>; <span class="comment">//既不是指针也不是引用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> x = <span class="number">27</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> cx = x;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span>&amp; rx = x;</span><br><span class="line"></span><br><span class="line">f(x); <span class="comment">// T和ParamType都是int</span></span><br><span class="line">f(cx);<span class="comment">// T和ParamType都是int</span></span><br><span class="line">f(rx);<span class="comment">// T和ParamType都是int</span></span><br><span class="line">f(<span class="number">27</span>);<span class="comment">// T和ParamType都是int</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>数组参数，数组类型和指针类型是不一样的。如果一个数组传递给一个安置传递的模板参数里面情况会如何？<br>T最后推导出来的实际的类型就是数组！类型推导包括了数组的长度。</p>
+<h2 id="条款二：理解auto类型推导"><a href="#条款二：理解auto类型推导" class="headerlink" title="条款二：理解auto类型推导"></a>条款二：理解auto类型推导</h2><p>除了一个例外，auto类型推导就是模板类型推导。<br>在模板类型推导中<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(ParamType param)</span></span>;</span><br><span class="line">f(expr);</span><br></pre></td></tr></table></figure></p>
+<p>在调用f的地方，编译器使用expr来推导T和ParamType的类型。<br>当一个变量被声明为auto，auto相当于模板中的T，而对变量做的相关的类型限定就像ParamType。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">auto x = 27; //既不是指针也不是引用，x类型为int</span><br><span class="line">const auto cx = x; //既不是指针也不是引用，cx类型为const int</span><br><span class="line"></span><br><span class="line">const auto&amp; rx = x; //引用，rx类型为const int&amp;</span><br><span class="line"></span><br><span class="line">auto&amp;&amp; uref1 = x; //右值引用，并且是左值，所以uref1类型为int&amp;</span><br><span class="line">auto&amp;&amp; uref2 = cx; //右值引用，并且是左值，同时cx为const int，所以uref2类型为const int&amp;</span><br><span class="line">auto&amp;&amp; uref3 = 27; //右值引用，并且是右值，所以uref3类型为int&amp;&amp;</span><br></pre></td></tr></table></figure></p>
+<p>除了有一种情况是不一样的。我们从如果你想声明一个用27初始化的int， C++98你有两种语法选择：<code>int x1 = 27; int x2(27);</code><br>C++11，通过标准支持的统一初始化（使用花括号初始化）<code>int x3 = { 27 }; int x4{ 27 };</code><br>使用auto来声明变量比使用固定的类型更好，所以在上述的声明中把int换成auto更好。但是他们被替换的对应语句意义并不一样。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> x1 = <span class="number">27</span>;    <span class="comment">// 类型时int，值是27</span></span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">x2</span><span class="params">(<span class="number">27</span>)</span></span>;     <span class="comment">// 同上</span></span><br><span class="line"><span class="keyword">auto</span> x3 = &#123; <span class="number">27</span> &#125;;<span class="comment">// 类型是std::intializer_list&lt;int&gt; 值是&#123; 27 &#125;</span></span><br><span class="line"><span class="keyword">auto</span> x4&#123; <span class="number">27</span> &#125;;   <span class="comment">// 同上</span></span><br></pre></td></tr></table></figure></p>
+<p>这和auto的一种特殊类型推导有关系。当使用一对花括号来初始化一个auto类型的变量的时候，推导的类型是std::initializer_list。如果这种类型无法被推导（比如在花括号中的变量拥有不同的类型），代码会编译错误。<br><code>auto x5 = {1, 2, 3};</code>推导没问题，被推导成std::initializer_list<int>；但是<code>auto x5 = {1, 2, 3.0};</code>会编译出错，1和3.0会冲突。</int></p>
+<h2 id="条款三：理解decltype"><a href="#条款三：理解decltype" class="headerlink" title="条款三：理解decltype"></a>条款三：理解decltype</h2><p>给定一个变量名或者表达式，decltype会告诉你这个变量名或表达式的类型。</p>
+<p>在C++11中，decltype最主要的用处可能就是用来声明一个函数模板，在这个函数模板中返回值的类型取决于参数的类型。</p>
+<h2 id="条款四：知道如何查看类型推导"><a href="#条款四：知道如何查看类型推导" class="headerlink" title="条款四：知道如何查看类型推导"></a>条款四：知道如何查看类型推导</h2><p>运行时输出：<code>std::cout &lt;&lt; typeid(x).name() &lt;&lt; endl;</code>，不同编译器输出信息不同</p>
+<h1 id="auto关键字"><a href="#auto关键字" class="headerlink" title="auto关键字"></a>auto关键字</h1><h2 id="条款五：优先使用auto而非显式类型声明"><a href="#条款五：优先使用auto而非显式类型声明" class="headerlink" title="条款五：优先使用auto而非显式类型声明"></a>条款五：优先使用auto而非显式类型声明</h2><p>auto变量一定要被初始化，并且对由于类型不匹配引起的兼容和效率问题有免疫力，可以简单化代码重构，一般会比显式的声明类型敲击更少的键盘</p>
+<h2 id="条款6：当auto推导出非预期类型时应当使用显式的类型初始化"><a href="#条款6：当auto推导出非预期类型时应当使用显式的类型初始化" class="headerlink" title="条款6：当auto推导出非预期类型时应当使用显式的类型初始化"></a>条款6：当auto推导出非预期类型时应当使用显式的类型初始化</h2><h1 id="使用现代C"><a href="#使用现代C" class="headerlink" title="使用现代C++"></a>使用现代C++</h1><h2 id="条款7：创建对象时区分-和"><a href="#条款7：创建对象时区分-和" class="headerlink" title="条款7：创建对象时区分()和{}"></a>条款7：创建对象时区分()和{}</h2><h2 id="条款8：优先使用nullptr而不是0或者NULL"><a href="#条款8：优先使用nullptr而不是0或者NULL" class="headerlink" title="条款8：优先使用nullptr而不是0或者NULL"></a>条款8：优先使用nullptr而不是0或者NULL</h2><p>0字面上是一个int类型，而不是指针，这是显而易见的。C++扫描到一个0，但是发现在上下文中仅有一个指针用到了它，编译器将勉强将0解释为空指针，但是这仅仅是一个应变之策。C++最初始的原则是0是int而非指针。</p>
+<p>nullptr的优势是它不再是一个整数类型。诚实的讲，它也不是一个指针类型，但是你可以把它想象成一个可以指向任意类型的指针。nullptr的类型实际上是std::nullptr_t，std::nullptr_t定义为nullptr的类型，这是一个完美的循环定义。<br>std::nullptr_t可以隐式的转换为所有的原始的指针类型，这使得nullptr表现的像可以指向任意类型的指针。<br>使用nullptr作为参数去调用重载函数f将会调用f(void*)重载体，因为nullptr不能被视为整数类型的。</p>
+<h2 id="条款9：优先使用声明别名而不是typedef"><a href="#条款9：优先使用声明别名而不是typedef" class="headerlink" title="条款9：优先使用声明别名而不是typedef"></a>条款9：优先使用声明别名而不是typedef</h2><p>typedef家族是有如此浓厚的C++98气息。他们的确可以在C++11下工作，但是C++11也提供了声明别名（alias declarations）：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt;&gt;</span><br><span class="line">    UPtrMapSS;</span><br><span class="line"><span class="keyword">using</span> UptrMapSS = </span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, <span class="built_in">std</span>::<span class="built_in">string</span>&gt;&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// FP等价于一个函数指针，这个函数的参数是一个int类型和std::string常量类型，没有返回值</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*FP)</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp;)</span></span>;      <span class="comment">// typedef</span></span><br><span class="line"><span class="keyword">using</span> FP = <span class="keyword">void</span> (*)(<span class="keyword">int</span>, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp;);     <span class="comment">// 声明别名</span></span><br></pre></td></tr></table></figure></p>
+<p>模板别名给C++11程序员提供了一个明确的机制来表达在C++98中需要黑客式的将typedef嵌入在模板化的struct中才能完成的东西。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">using</span> MyAllocList = <span class="built_in">std</span>::<span class="built_in">list</span>&lt;T, MyAlloc&lt;T&gt;&gt;;</span><br><span class="line"></span><br><span class="line">MyAllocList&lt;Widget&gt; lw; <span class="comment">//使用别名，相当于 std::list&lt;Widget, MyAlloc&lt;Widget&gt;&gt; lw</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用typedef实现</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyAllocList</span> &#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">list</span>&lt;T, MyAlloc&gt;&gt; type;</span><br><span class="line">&#125;;</span><br><span class="line">MyAllocList&lt;Widget&gt;::type lw;</span><br></pre></td></tr></table></figure></p>
+<p>总结typedef和别名区别：<br>typedef不支持模板化，但是别名声明支持<br>模板别名避免了::type后缀，在模板中，typedef还经常要求使用typename前缀</p>
+<h2 id="条款10：优先使用作用域限制的enmus而不是无作用域的enum"><a href="#条款10：优先使用作用域限制的enmus而不是无作用域的enum" class="headerlink" title="条款10：优先使用作用域限制的enmus而不是无作用域的enum"></a>条款10：优先使用作用域限制的enmus而不是无作用域的enum</h2><p>枚举元素和包含它的枚举类型同属一个作用域空间，这意味着在这个作用域中不能再有同样名字的定义：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Color &#123; black, white, red&#125;;                 <span class="comment">// black, white, red 和 Color同属一个定义域</span></span><br><span class="line"><span class="keyword">auto</span> white = <span class="literal">false</span>;                              <span class="comment">// 错误！因为white在这个定义域已经被声明过</span></span><br></pre></td></tr></table></figure></p>
+<p>事实就是枚举元素泄露到包含它的枚举类型所在的作用域中，对于这种类型的enum官方称作无作用域的（unscoped）。在C++11中对应的使用作用域的enums（scoped enums）不会造成这种泄露：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Color</span> &#123;</span> black, white, red&#125;;            <span class="comment">// black, white, red作用域为 Color</span></span><br><span class="line"><span class="keyword">auto</span> white = <span class="literal">false</span>;                               <span class="comment">// fine, 在这个作用域内没有其他的 "white"</span></span><br><span class="line">Color c = white;                                  <span class="comment">// 错误！在这个定义域中没有叫"white"的枚举元素</span></span><br><span class="line">Color c = Color::white;                           <span class="comment">// fine</span></span><br><span class="line"><span class="keyword">auto</span> c = Color::white;                            <span class="comment">// 同样没有问题</span></span><br></pre></td></tr></table></figure></p>
+<p>因为限制作用域的enum是通过”enum class”来声明的，它们有时被称作枚举类（enum class）。</p>
+<h2 id="条款11：优先使用delete关键字删除函数而不是private却又不实现的函数"><a href="#条款11：优先使用delete关键字删除函数而不是private却又不实现的函数" class="headerlink" title="条款11：优先使用delete关键字删除函数而不是private却又不实现的函数"></a>条款11：优先使用delete关键字删除函数而不是private却又不实现的函数</h2><p>如果你要给其他开发者提供代码，并且还不想让他们调用特定的函数，你只需要不声明这个函数就可以了。没有函数声明，没有就没有函数可以调用。这是没有问题的。但是有时候C++为你声明了一些函数，如果你想阻止客户调用这些函数，就不是那么容易的事了。</p>
+<p>在C++98中阻止这类函数被使用的方法是将这些函数声明为private，并且不定义它们。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">charT</span>, <span class="title">class</span> <span class="title">traits</span> = <span class="title">char_traits</span>&lt;charT&gt; &gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">basic_ios</span> :</span><span class="keyword">public</span> ios_base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    basic_ios(<span class="keyword">const</span> basic_ios&amp; );                  <span class="comment">// 没有定义</span></span><br><span class="line">    <span class="function">basic_ios&amp; <span class="title">operator</span><span class="params">(<span class="keyword">const</span> basic_ios&amp;)</span></span>;         <span class="comment">// 没有定义</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>将这些函数声明为私有来阻止客户调用他们。故意不定义它们是因为，如果有函数访问这些函数（通过成员函数或者友好类）在链接的时候会导致没有定义而触发的错误。</p>
+<p>在C++11中，有一个更好的方法可以基本上实现同样的功能：用= delete标识拷贝复制函数和拷贝赋值函数为删除的函数deleted functions。在C++11中basic_ios被定义为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">charT</span>, <span class="title">class</span> <span class="title">traits</span> = <span class="title">char_traits</span>&lt;charT&gt; &gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">basic_ios</span> :</span> <span class="keyword">public</span> ios_base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ...</span><br><span class="line">    basic_ios(<span class="keyword">const</span> basic_ios&amp; ) = <span class="keyword">delete</span>;</span><br><span class="line">    basic_ios&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> basic_ios&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>删除的函数不能通过任何方式被使用，即便是其他成员函数或者友元函数试图复制basic_ios对象的时候也会导致编译失败。这是对C++98中的行为的升级，因为在C++98中直到链接的时候才会诊断出这个错误。<br>删除函数一个重要的优势是任何函数都可以是删除的，然而仅有成员函数才可以是私有的。</p>
+<p>C++继承于C意味着，很多其他类型被隐式的转换为int类型，但是有些调用可以编译但是没有任何意义：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(isLucky(<span class="string">'a'</span>))                  <span class="comment">// a 是否是幸运数字？</span></span><br><span class="line"><span class="keyword">if</span>(isLucky(ture))                 <span class="comment">// 返回true?</span></span><br><span class="line"><span class="keyword">if</span>(isLucky(<span class="number">3.5</span>))                  <span class="comment">// 我们是否应该在检查它是否幸运之前裁剪为3？</span></span><br></pre></td></tr></table></figure></p>
+<p>如果幸运数字一定要是一个整数，我们希望能到阻止上面那种形式的调用。完成这个任务的一个方法是为想被排除出去的类型的重载函数声明为删除的：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isLucky</span><span class="params">(<span class="keyword">int</span> number)</span></span>;           <span class="comment">// 原本的函数</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isLucky</span><span class="params">(<span class="keyword">char</span>)</span> </span>= <span class="keyword">delete</span>;        <span class="comment">// 拒绝char类型</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isLucky</span><span class="params">(<span class="keyword">bool</span>)</span> </span>= <span class="keyword">delete</span>;        <span class="comment">// 拒绝bool类型</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isLucky</span><span class="params">(<span class="keyword">double</span>)</span> </span>= <span class="keyword">delete</span>;      <span class="comment">// 拒绝double和float类型</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="条款12：使用override关键字声明覆盖的函数"><a href="#条款12：使用override关键字声明覆盖的函数" class="headerlink" title="条款12：使用override关键字声明覆盖的函数"></a>条款12：使用override关键字声明覆盖的函数</h2><p>对于派生类中覆盖体都声明为override不仅仅可以让编译器在应该要去覆盖基类中函数而没有去覆盖的时候可以警告你。它还可以帮助你预估一下更改基类里的虚函数的标识符可能会引起的后果。如果在派生类中到处使用了override，你可以改一下基类中的虚函数的名字，看看这个举动会造成多少损害（即，有多少派生类无法通过编译），然后决定是否可以为了这个改动而承受它带来的问题。如果没有override，你会希望此处有一个无所不包的测试单元，因为，正如我们看到的，派生类中那些原本被认为要覆盖基类函数的部分，不会也不需要引发编译器的诊断信息。</p>
+<h2 id="条款13：优先使用const-iterator而不是iterator"><a href="#条款13：优先使用const-iterator而不是iterator" class="headerlink" title="条款13：优先使用const_iterator而不是iterator"></a>条款13：优先使用const_iterator而不是iterator</h2><p>const_iterator在STL中等价于指向const的指针。被指向的数值是不能被修改的。标准的做法是应该使用const的迭代器的地方，也就是尽可能的在没有必要修改指针所指向的内容的地方使用const_iterator。</p>
+<h1 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h1><h2 id="条款18：使用std-unique-ptr管理独占资源"><a href="#条款18：使用std-unique-ptr管理独占资源" class="headerlink" title="条款18：使用std::unique_ptr管理独占资源"></a>条款18：使用std::unique_ptr管理独占资源</h2><p>std::unique_ptr具现了独占（exclusive ownership）语义，一个非空的std::unique_ptr永远拥有它指向的对象，move一个std::unique_ptr会将所有权从源指针转向目的指针（源指针指向为null）。拷贝一个std::unique_ptr是不允许的。因此，std::unique_ptr是一个move-only类型。</p>
+<p>默认情况下，释放资源由delete来完成，也可以指定自定义的析构函数来替代。但是具有丰富状态的deleters和以函数指针作为deleters增大了std::unique_ptr的存储开销。</p>
+<p>很容易将一个std::unique_ptr转化为std::shared_ptr</p>
+<h2 id="条款19：使用std-shared-ptr管理共享资源"><a href="#条款19：使用std-shared-ptr管理共享资源" class="headerlink" title="条款19：使用std::shared_ptr管理共享资源"></a>条款19：使用std::shared_ptr管理共享资源</h2><p>std::shared_ptr可以通过查询资源的引用计数(reference count)来确定它是不是最后一个指向该资源的指针，引用计数是一个伴随在资源旁的一个值，它记录着有多少个std::shared_ptr指向了该资源。std::shared_ptr的构造函数会自动递增这个计数，析构函数会自动递减这个计数，而拷贝构造函数可能两者都做(比如，赋值操作sp1=sp2,sp1和sp2都是std::shared_ptr类型，它们指向了不同的对象，赋值操作使得sp1指向了原来sp2指向的对象。赋值带来的连锁效应使得原来sp1指向的对象的引用计数减1，原来sp2指向的对象的引用计数加1.)如果std::shared_ptr在执行减1操作后发现引用计数变成了0，这就说明了已经没有其他的std::shared_ptr在指向这个资源了，所以std::shared_ptr直接析构了它指向的空间。</p>
+<p>引用计数的存在对性能会产生部分影响：</p>
+<ul>
+<li>std::shared_ptr是原生指针的两倍大小。因为它们内部除了包含了一个指向资源的原生指针之外，同时还包含了指向资源的引用计数</li>
+<li>引用计数的内存必须被动态分配。引用计数会伴随着被指向的对象，但是被指向的对象对此一无所知。因此，他们没有为引用计数准备存储空间。</li>
+<li>引用计数的递增或者递减必须是原子的。</li>
+</ul>
+<p>从另外一个std::shared_ptr move构造一个std::shared_ptr会使得源std::shared_ptr指向为null，这就意味着新的std::shared_ptr取代了老的std::shared_ptr来指向原来的资源，所以就不需要再修改引用计数了。move构造std::shared_ptr要比拷贝构造std::shared_ptr快：copy需要修改引用计数，然而拷贝缺不需要。对于赋值构造也是一样的。最后得出结论，move构造要比拷贝构造快，Move赋值要比copy赋值快。</p>
+<p>像std::unique_ptr(Item 18)那样,std::shared_ptr也把delete作为它默认的资源析构机制。但是它也支持自定义的deleter.然后，它支持这种机制的方式不同于std::unique_ptr.对于std::unique_ptr,自定义的deleter是智能指针类型的一部分，对于std::shared_ptr,情况可就不一样了:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> loggingDel = [](widget *pw) &#123;	</span><br><span class="line">    makeLogEntry(pw);</span><br><span class="line">	<span class="keyword">delete</span> pw;</span><br><span class="line">&#125;<span class="comment">//自定义的deleter(如Item 18所说)</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;Widget, <span class="keyword">decltype</span>(loggingDel)&gt;upw(<span class="keyword">new</span> Widget, loggingDel);<span class="comment">//deleter类型是智能指针类型的一部分</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;Widget&gt; spw(<span class="keyword">new</span> Widget, loggingDel);<span class="comment">//deleter类型不是智能指针类型的一部分</span></span><br></pre></td></tr></table></figure></p>
+<p>引用计数是一个叫做控制块的很大的数据结构。每一个由std::shared_ptr管理的对象都对应了一个控制块。改控制块不仅包含了引用计数，还包含了一份自定义deleter的拷贝（在指定好的情况下）。如果指定了一个自定义的allocator，也会被包含在其中。</p>
+<p>一个对象的控制块被第一个创建指向它的std::shared_ptr的函数来设立.至少这也是理所当然的。一般情况下，函数在创建一个std::shared_ptr时，它不可能知道这时是否有其他的std::shared_ptr已经指向了这个对象，所以在创建控制块时，它会遵循以下规则：</p>
+<ul>
+<li>std::make_shared总是会创建一个控制块。它制造了一个新的可以指向的对象，所以可以确定这个新的对象在std::make_shared被调用时肯定没有相关的控制块。</li>
+<li>当一个std::shared_ptr被一个独占性的指针（例如，一个std::unique_ptr或者std::auto_ptr）构建时，控制块被相应的被创建。独占性的指针并不使用控制块，所以被指向的对象此时还没有控制块相关联。（构造的一个过程是，由std::shared_ptr来接管了被指向对象的所有权，所以原来的独占性指针被设置为null）</li>
+</ul>
+<p>对于std::shared_ptr在这里总结两点：</p>
+<ul>
+<li>避免给std::shared_ptr构造函数传递原生指针。通常的取代做法是使用std::make_shared</li>
+<li>如果你必须要给std::shared_ptr构造函数传递一个原生指针，那么请直接传递new语句</li>
+</ul>
+<h2 id="条款20：在std-shared-ptr类似指针可以悬挂时使用std-weak-ptr"><a href="#条款20：在std-shared-ptr类似指针可以悬挂时使用std-weak-ptr" class="headerlink" title="条款20：在std::shared_ptr类似指针可以悬挂时使用std::weak_ptr"></a>条款20：在std::shared_ptr类似指针可以悬挂时使用std::weak_ptr</h2><p>std::weak_ptr通常由一个std::shared_ptr来创建，它们指向相同的地方，std::shared_ptr来初始化它们，但是std::weak_ptr不会影响到它所指向对象的引用计数<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> spw = <span class="built_in">std</span>::make_shared&lt;Widget&gt;();<span class="comment">//spw 被构造之后，被指向的Widget对象的引用计数为1</span></span><br><span class="line"><span class="built_in">std</span>::weak_ptr&lt;Widget&gt; wpw(spw);<span class="comment">//wpw和spw指向了同一个Widget,但是RC(这里指引用计数，下同)仍旧是1</span></span><br><span class="line">spw = <span class="literal">nullptr</span>;<span class="comment">//RC变成了0，Widget也被析构，wpw现在处于悬挂状态</span></span><br></pre></td></tr></table></figure></p>
+<p>悬挂的std::weak_ptr可以称作是过期了(expired),可以直接检查是否过期：<code>if (wpw.expired()) ...</code></p>
+<p>我们最经常的想法是：查看std::weak_ptr是否已经过期，如果没有过期的话，访问它所指向的对象。想的容易做起来难啊。因为std::weak_ptr缺少解引用操作，也就没办法写完成这样操作的代码。<br>我们需要的是将检查std::weak_ptr是否过期，以及如果未过期的话获得访问所指对象的权限这两种操作合成一个原子操作。这是通过由std::weak_ptr创建出一个std::shared_ptr来完成的。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;Widget&gt; spw1 = wpw.lock();<span class="comment">//如果wpw已经过期</span></span><br><span class="line"><span class="comment">//spw1的值是null</span></span><br><span class="line"><span class="keyword">auto</span> spw2 = wpw.lock();<span class="comment">//结果同上，这里使用了auto</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="条款21：优先使用std-make-unique和std-make-shared而不是直接使用new"><a href="#条款21：优先使用std-make-unique和std-make-shared而不是直接使用new" class="headerlink" title="条款21：优先使用std::make_unique和std::make_shared而不是直接使用new"></a>条款21：优先使用std::make_unique和std::make_shared而不是直接使用new</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cpp/" rel="tag"># cpp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/05/programming/编译器与解释器的区别/" rel="next" title="编译器与解释器的区别">
+                <i class="fa fa-chevron-left"></i> 编译器与解释器的区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/08/back-end/Linux管道学习/" rel="prev" title="Linux管道学习">
+                Linux管道学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类型推导"><span class="nav-number">1.</span> <span class="nav-text">类型推导</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#条款1：理解模板类型推导"><span class="nav-number">1.1.</span> <span class="nav-text">条款1：理解模板类型推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款二：理解auto类型推导"><span class="nav-number">1.2.</span> <span class="nav-text">条款二：理解auto类型推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款三：理解decltype"><span class="nav-number">1.3.</span> <span class="nav-text">条款三：理解decltype</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款四：知道如何查看类型推导"><span class="nav-number">1.4.</span> <span class="nav-text">条款四：知道如何查看类型推导</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#auto关键字"><span class="nav-number">2.</span> <span class="nav-text">auto关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#条款五：优先使用auto而非显式类型声明"><span class="nav-number">2.1.</span> <span class="nav-text">条款五：优先使用auto而非显式类型声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款6：当auto推导出非预期类型时应当使用显式的类型初始化"><span class="nav-number">2.2.</span> <span class="nav-text">条款6：当auto推导出非预期类型时应当使用显式的类型初始化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用现代C"><span class="nav-number">3.</span> <span class="nav-text">使用现代C++</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#条款7：创建对象时区分-和"><span class="nav-number">3.1.</span> <span class="nav-text">条款7：创建对象时区分()和{}</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款8：优先使用nullptr而不是0或者NULL"><span class="nav-number">3.2.</span> <span class="nav-text">条款8：优先使用nullptr而不是0或者NULL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款9：优先使用声明别名而不是typedef"><span class="nav-number">3.3.</span> <span class="nav-text">条款9：优先使用声明别名而不是typedef</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款10：优先使用作用域限制的enmus而不是无作用域的enum"><span class="nav-number">3.4.</span> <span class="nav-text">条款10：优先使用作用域限制的enmus而不是无作用域的enum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款11：优先使用delete关键字删除函数而不是private却又不实现的函数"><span class="nav-number">3.5.</span> <span class="nav-text">条款11：优先使用delete关键字删除函数而不是private却又不实现的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款12：使用override关键字声明覆盖的函数"><span class="nav-number">3.6.</span> <span class="nav-text">条款12：使用override关键字声明覆盖的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款13：优先使用const-iterator而不是iterator"><span class="nav-number">3.7.</span> <span class="nav-text">条款13：优先使用const_iterator而不是iterator</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#智能指针"><span class="nav-number">4.</span> <span class="nav-text">智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#条款18：使用std-unique-ptr管理独占资源"><span class="nav-number">4.1.</span> <span class="nav-text">条款18：使用std::unique_ptr管理独占资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款19：使用std-shared-ptr管理共享资源"><span class="nav-number">4.2.</span> <span class="nav-text">条款19：使用std::shared_ptr管理共享资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款20：在std-shared-ptr类似指针可以悬挂时使用std-weak-ptr"><span class="nav-number">4.3.</span> <span class="nav-text">条款20：在std::shared_ptr类似指针可以悬挂时使用std::weak_ptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条款21：优先使用std-make-unique和std-make-shared而不是直接使用new"><span class="nav-number">4.4.</span> <span class="nav-text">条款21：优先使用std::make_unique和std::make_shared而不是直接使用new</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

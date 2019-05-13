@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="cpp,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="我们经常用到的输入和输出，都是以终端为对象的，即从键盘输入数据，运行结果输出到显示器屏幕上。从操作系统的角度看，每一个与主机相连的输入输出设备都被看作一个文件。程序的输入指的是从输入文件将数据传送给程序，程序的输出指的是从程序将数据传送给输出文件。在C语言中，用printf和scanf进行输入输出，往往不能保证所输入输出的数据是可靠的安全的。在C++的输入输出中，编译系统对数据类型进行严格的检查，">
+<meta name="keywords" content="cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++输入输出">
+<meta property="og:url" content="http://yoursite.com/2017/07/17/cpp/C++输入输出/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="我们经常用到的输入和输出，都是以终端为对象的，即从键盘输入数据，运行结果输出到显示器屏幕上。从操作系统的角度看，每一个与主机相连的输入输出设备都被看作一个文件。程序的输入指的是从输入文件将数据传送给程序，程序的输出指的是从程序将数据传送给输出文件。在C语言中，用printf和scanf进行输入输出，往往不能保证所输入输出的数据是可靠的安全的。在C++的输入输出中，编译系统对数据类型进行严格的检查，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/image/cpp/iostream_class.png">
+<meta property="og:image" content="http://yoursite.com/image/cpp/fstream_class.png">
+<meta property="og:image" content="http://yoursite.com/image/cpp/iomanip.png">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++输入输出">
+<meta name="twitter:description" content="我们经常用到的输入和输出，都是以终端为对象的，即从键盘输入数据，运行结果输出到显示器屏幕上。从操作系统的角度看，每一个与主机相连的输入输出设备都被看作一个文件。程序的输入指的是从输入文件将数据传送给程序，程序的输出指的是从程序将数据传送给输出文件。在C语言中，用printf和scanf进行输入输出，往往不能保证所输入输出的数据是可靠的安全的。在C++的输入输出中，编译系统对数据类型进行严格的检查，">
+<meta name="twitter:image" content="http://yoursite.com/image/cpp/iostream_class.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/17/cpp/C++输入输出/">
+
+
+
+
+
+  <title>C++输入输出 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/17/cpp/C++输入输出/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++输入输出</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T23:44:37+08:00">
+                2017-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们经常用到的输入和输出，都是以终端为对象的，即从键盘输入数据，运行结果输出到显示器屏幕上。从操作系统的角度看，每一个与主机相连的输入输出设备都被看作一个文件。<br>程序的输入指的是从输入文件将数据传送给程序，程序的输出指的是从程序将数据传送给输出文件。<br>在C语言中，用printf和scanf进行输入输出，往往不能保证所输入输出的数据是可靠的安全的。<br>在C++的输入输出中，编译系统对数据类型进行严格的检查，凡是类型不正确的数据都不可能通过编译。因此C++的I/O操作是<em>类型安全(type safe)</em>的。C++的I/O操作是可扩展的，不仅可以用来输入输出标准类型的数据，也可以用于用户自定义类型的数据。<br><a id="more"></a></p>
+<h1 id="C语言的输入输出"><a href="#C语言的输入输出" class="headerlink" title="C语言的输入输出"></a>C语言的输入输出</h1><p>在C语言中，用prinf和scanf进行输人输出。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, i); <span class="comment">// i为整型变量，正确，输出i的值</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="string">"C++"</span>); <span class="comment">//输出宇符串"C++"的地址</span></span><br></pre></td></tr></table></figure></p>
+<p>编译系统认为以上语句都是合法的，而不对数据类型的合法性进行检查。<br>还有一个经常在scanf中出现的问题，忘记在变量名前面加上取址符号：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;i); <span class="comment">//正确，输入一个整数，将值赋给i</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, i); <span class="comment">//漏写了取址符，这样就会把输入的数值放到别的位置上了，由于之前对i赋值为了1，这样就会把输入的数值放到内存地址为000001的内存单元中，会发生严重错误</span></span><br></pre></td></tr></table></figure></p>
+<p>由此看见，C语言中输入输出数据没有对类型进行检查，只是输出对应字节的内容。</p>
+<p>此外，用printf和scanf无法输入用户自己声明的类型（数组、结构体、类）。</p>
+<h1 id="C-输入输出流"><a href="#C-输入输出流" class="headerlink" title="C++输入输出流"></a>C++输入输出流</h1><h2 id="流的概念"><a href="#流的概念" class="headerlink" title="流的概念"></a>流的概念</h2><p>输入和输出是数据传送的过程，数据如流水一样从一处流向另一处。C++形象地将此过程称为流(Stream)。C++的输入输出流是指由若干字节组成的宇节序列，这些宇节中的数据按顺序从一个对象传送到另一对象。流表示了信息从源到目的端的流动。在输入操作时，字节流从输入设备（如键盘、磁盘）流向内存，在输出操作时，字节流从内存流向输出设备(如屏幕、打印机、磁盘等)。流中的内容可以是ASCII字符、二进制形式的数据、图形图像、数字音频视频或其他形式的信息。</p>
+<p>实际上，在内存中为每一个数据流开辟一个内存缓冲区，用来存放流中的数据。当用cout和插入运算符“&lt;&lt;”向显示器输出数据时，先将这些数据送到程序中的输出缓冲区保存，直到缓冲区满了或遇到endl，就将缓冲区中的全部数据送到显示器显示出来。在输入时，从键盘输入的数据先放在键盘的缓冲区中，当按回车键时，键盘缓冲区中的数据输入到程序中的输入缓冲区，形成cin流，然后用提取运算符“ &gt;&gt;”从输入缓冲区中提取数据送给程序中的有关变量。总之，流是与内存缓冲区相对应的，或者说，缓冲区中的数据就是流。</p>
+<p>在C++中，输入输出流被定义为类。C++的I/O库中的类称为流类(stream class)。 用流类定义的对象称为流对象。</p>
+<p>所以在C中printf和scanf是库函数，而cin和cout是类对象，两者是有很大的区别的。</p>
+<h2 id="iostream"><a href="#iostream" class="headerlink" title="iostream"></a>iostream</h2><p>iostream这个单词是由3个部分组成的，即i、o、stream，意为输入输出流。<br><img src="/image/cpp/iostream_class.png" alt="I/O类库中的常用流类"></p>
+<p>ios是抽象基类，由它派生出istream类和ostream类，两个类名中第1个字母i和o分别代表输入(input)和输出(output)。istream类支持输入操作，ostream类支持输出操作， iostream类支持输入输出操作。iostream类是从istream类和ostream类通过多重继承而派生的类，整体看起来是一个菱形继承。<br>C++对文件的输入输出需要用ifstrcam和ofstream类。ifstream支持对文件的输入操作，ofstream支持对文件的输出操作。类ifstream继承了类istream，类ofstream继承了类ostream，类fstream继承了类iostream。<br><img src="/image/cpp/fstream_class.png" alt="fstream继承图"></p>
+<p>iostream中包含了对输入输出流进行操作所需的基本信息，因此大多数C++程序都包括iostream。在iostream头文件中不仅定义了有关的类，还定义了4种流对象：<br>cin、cout、cerr、clog<br>以cout为例，在iostream头文件中定义如下:<code>ostream cout(stdout);</code>，把标准输出设备stdout作为参数，这样它就与标准输出设备(显示器)联系起来。</p>
+<h2 id="重载-gt-gt-和-lt-lt"><a href="#重载-gt-gt-和-lt-lt" class="headerlink" title="重载 &gt;&gt; 和 &lt;&lt;"></a>重载 &gt;&gt; 和 &lt;&lt;</h2><p>“&lt;&lt;”和“&gt;&gt;”本来在C++中是被定义为左位移运算符和右位移运算符的，由于在iostream头文件中对它们进行了重载，使它们能用作标准类型数据的输入和输出运算符。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ostream <span class="keyword">operator</span> &lt;&lt; (im); <span class="comment">//用于向输出流插入一个int数据</span></span><br><span class="line">ostream <span class="keyword">operator</span> &lt;&lt; (<span class="keyword">float</span>); <span class="comment">//用于向输出流插入一个float数据</span></span><br><span class="line">ostream <span class="keyword">operator</span> &lt;&lt; (<span class="keyword">char</span>); <span class="comment">//用于向输出流插入一个char数据</span></span><br><span class="line">ostream <span class="keyword">operator</span> &lt;&lt; (<span class="keyword">char</span>*); <span class="comment">//用于向输出流插入一个字符串数据</span></span><br></pre></td></tr></table></figure></p>
+<p>如果在程序中有下面的表达式：<code>cout&lt;&lt;&quot;C++&quot;;</code>，实际上相当于：<code>cout.operator &lt;&lt;(&quot;C++&quot;)</code></p>
+<p>在ostream类中将“&lt;&lt;”重载为插入运算符，其适用类型除了以上的标准类型外，还增加了一个void*类型。所以如果我们自己对&gt;&gt;进行重载，就能够达到想要的自定义数据输入输出的效果了。</p>
+<h1 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h1><p>在输出数据时，为简便起见，往往不指定输出的格式，由系统根据数据的类型采取默认的格式，但有时希望数据按指定的格式输出，如要求以十六进制或八进制形式输出一个整数，对输出的小数只保留两位小数等。<br>有两种方式可以实现：控制符、流对象的成员函数</p>
+<h2 id="控制符"><a href="#控制符" class="headerlink" title="控制符"></a>控制符</h2><p>C++提供了在输入输出流中使用的控制符：<br><img src="/image/cpp/iomanip.png" alt="输入输出流的控制符"><br>如果使用了控制符，在程序单位的开头除了要加iostream头文件外，还要加iomanip头文件。<br>具体使用实例如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> a=<span class="number">123.456789012345</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;a; <span class="comment">//输出： 123.456</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;setprecision(<span class="number">9</span>)&lt;&lt;a;  <span class="comment">//输出： 123.456789</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;setprecision(<span class="number">6</span>); <span class="comment">//恢复默认格式(精度为6)</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt; setiosflags(ios∷fixed); <span class="comment">//输出： 123.456789</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;setiosflags(ios∷fixed)&lt;&lt;setprecision(<span class="number">8</span>)&lt;&lt;a; <span class="comment">//输出： 123.45678901</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;setiosflags(ios∷scientific)&lt;&lt;a; <span class="comment">//输出： 1.234568e+02</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;setiosflags(ios∷scientific)&lt;&lt;setprecision(<span class="number">4</span>)&lt;&lt;a; <span class="comment">//输出： 1.2346e02</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *pt=<span class="string">"China"</span>;  <span class="comment">//pt指向字符串"China"</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;setw(<span class="number">10</span>)&lt;&lt;pt&lt;&lt;<span class="built_in">endl</span>;  <span class="comment">//指定域宽为,输出字符串</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;setfill(<span class="string">'*'</span>)&lt;&lt;setw(<span class="number">10</span>)&lt;&lt;pt&lt;&lt;<span class="built_in">endl</span>;  <span class="comment">//指定域宽,输出字符串,空白处以'*'填充</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="流对象的成员函数"><a href="#流对象的成员函数" class="headerlink" title="流对象的成员函数"></a>流对象的成员函数</h2><p>既然是调用类对象的成员函数，那么调用者就是cin和cout类对象了。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *pt=<span class="string">"China"</span>;              <span class="comment">//pt指向字符串"China"</span></span><br><span class="line"><span class="built_in">cout</span>.width(<span class="number">10</span>);                <span class="comment">//指定域宽为10</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;pt&lt;&lt;<span class="built_in">endl</span>;                <span class="comment">//输出字符串"     China"</span></span><br><span class="line"><span class="built_in">cout</span>.fill(<span class="string">'*'</span>);                <span class="comment">//指定空白处以'*'填充</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;pt&lt;&lt;<span class="built_in">endl</span>;                <span class="comment">//输出字符串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> pi=<span class="number">22.0</span>/<span class="number">7.0</span>;</span><br><span class="line"><span class="built_in">cout</span>.precision(<span class="number">6</span>);            <span class="comment">//保留位小数</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;pi&lt;&lt;<span class="built_in">endl</span>;               <span class="comment">//输出pi,注意数符“+”的位置</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="http://c.biancheng.net/cpp/biancheng/view/251.html" target="_blank" rel="noopener">参考博客</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cpp/" rel="tag"># cpp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/14/cpp/C函数和C++函数相互调用/" rel="next" title="C函数和C++函数相互调用">
+                <i class="fa fa-chevron-left"></i> C函数和C++函数相互调用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/18/cpp/C++ STL中map排序/" rel="prev" title="C++ STL中map排序">
+                C++ STL中map排序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C语言的输入输出"><span class="nav-number">1.</span> <span class="nav-text">C语言的输入输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-输入输出流"><span class="nav-number">2.</span> <span class="nav-text">C++输入输出流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流的概念"><span class="nav-number">2.1.</span> <span class="nav-text">流的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iostream"><span class="nav-number">2.2.</span> <span class="nav-text">iostream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重载-gt-gt-和-lt-lt"><span class="nav-number">2.3.</span> <span class="nav-text">重载 &gt;&gt; 和 &lt;&lt;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#格式化输出"><span class="nav-number">3.</span> <span class="nav-text">格式化输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#控制符"><span class="nav-number">3.1.</span> <span class="nav-text">控制符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流对象的成员函数"><span class="nav-number">3.2.</span> <span class="nav-text">流对象的成员函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

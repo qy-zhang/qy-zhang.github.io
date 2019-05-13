@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="programming,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="看云上面的一篇文档，介绍UML与需求分析相关知识">
+<meta name="keywords" content="programming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UML学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/08/03/programming/UML学习笔记/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="看云上面的一篇文档，介绍UML与需求分析相关知识">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/image/programming/UML_Model.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/UML_Object.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/UML_Activity1.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/UML_Activity2.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/UML_Activity3.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/UML_UserCase.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/UML_UserCase2.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/UML_Deployment.jpg">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UML学习笔记">
+<meta name="twitter:description" content="看云上面的一篇文档，介绍UML与需求分析相关知识">
+<meta name="twitter:image" content="http://yoursite.com/image/programming/UML_Model.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/03/programming/UML学习笔记/">
+
+
+
+
+
+  <title>UML学习笔记 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/03/programming/UML学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UML学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T15:16:37+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://www.kancloud.cn/digest/switch-uml/120842" target="_blank" rel="noopener">看云</a>上面的一篇文档，介绍UML与需求分析相关知识<br><a id="more"></a></p>
+<h1 id="UML基础概述"><a href="#UML基础概述" class="headerlink" title="UML基础概述"></a>UML基础概述</h1><h2 id="UML的分类"><a href="#UML的分类" class="headerlink" title="UML的分类"></a>UML的分类</h2><p>UML中有大量的图，常用的有十一种，大致可以分为两类：结构型和行为型。<br>结构型：描述的是某种结构，这种结构应该是”稳定的”、”静态的”；行为型：描述的是某种行为，是”动态的”。</p>
+<h3 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a>结构型</h3><p>类图(Class Diagram)<br>对象图(Object Diagram)<br>构件图(Component Diagram)<br>部署图(Deployment Diagran)<br>包图(Package Diagram)</p>
+<h3 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a>行为型</h3><p>动图(Activity Diagram)<br>状态机图(State Machine Diagram)<br>顺序图(Sequence Diagram)<br>通信图(Communication Diagram)<br>用例图(Use Case Diagram)<br>时序图(Timing Diagram)</p>
+<h2 id="UML建模"><a href="#UML建模" class="headerlink" title="UML建模"></a>UML建模</h2><p>不同的图用在不同的UML模型中<br><img src="/image/programming/UML_Model.jpg" alt></p>
+<h1 id="UML和需求分析"><a href="#UML和需求分析" class="headerlink" title="UML和需求分析"></a>UML和需求分析</h1><p>常常会听到这样一句话，客户需要的是一把梯子，系统分析师了解到的是一张凳子，开发人员做出来的是一张桌子。由此可以看出需求分析的准确性和正确性的重要之处。</p>
+<h2 id="需求分析中出现差异性问题的原因"><a href="#需求分析中出现差异性问题的原因" class="headerlink" title="需求分析中出现差异性问题的原因"></a>需求分析中出现差异性问题的原因</h2><p>很多角色会参与到需求分析中来<br>不同的角色会有不同的出发点<br>人的需求分析能力是有差异的<br>需求的“词不达意”<br>需求是不断在变化的</p>
+<h2 id="需求分析的几大要点"><a href="#需求分析的几大要点" class="headerlink" title="需求分析的几大要点"></a>需求分析的几大要点</h2><h3 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h3><p>为什么会有这个项目？<br>客户为什么会想做这样的一个项目？<br>如果没有这个项目会怎样？</p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>本项目解决了客户什么问题？<br>本项目涉及了哪些涉众？<br>本项目的目标是什么？<br>本项目的范围是什么？<br>本项目的成功标准是什么？</p>
+<h3 id="UML与需求分析的关系"><a href="#UML与需求分析的关系" class="headerlink" title="UML与需求分析的关系"></a>UML与需求分析的关系</h3><p>可以通过UML中的各种图来对需求进行更为简洁，无二义性的描述：</p>
+<ol>
+<li>结构型的UML图对业务进行结构建模</li>
+<li>行为型的UML图对业务进行行为建模</li>
+<li>功能型的UML图对业务应有功能进行功能建模</li>
+</ol>
+<h1 id="UML类图与对象图"><a href="#UML类图与对象图" class="headerlink" title="UML类图与对象图"></a>UML类图与对象图</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>类可以视作一现实事物抽象出的统一的、相似的模型。<br>对象可以看做是类的具体化，就像模具导出的产品一样。</p>
+<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p>类图就是描述类与类之间关系的图。</p>
+<h3 id="类图的建模步骤"><a href="#类图的建模步骤" class="headerlink" title="类图的建模步骤"></a>类图的建模步骤</h3><p>识别出类。<br>识别出类的主要属性。<br>画出类之间的关系。<br>对各类进行分析、抽象、整理。</p>
+<h2 id="对象图"><a href="#对象图" class="headerlink" title="对象图"></a>对象图</h2><p>如果说类图代表了一类事物，那么对象图就代表着某个具体的事物。<br><img src="/image/programming/UML_Object.jpg" alt="对象图"></p>
+<h1 id="UML活动图"><a href="#UML活动图" class="headerlink" title="UML活动图"></a>UML活动图</h1><p>活动图(Activity Diagram)是用来表达流程的常用的一种UML。它与流程图很相似。</p>
+<h2 id="流程图与活动图的比较"><a href="#流程图与活动图的比较" class="headerlink" title="流程图与活动图的比较"></a>流程图与活动图的比较</h2><p>以起床到上班为例介绍活动图<br><img src="/image/programming/UML_Activity1.jpg" alt="流程图"><br><img src="/image/programming/UML_Activity2.jpg" alt="活动图"></p>
+<h2 id="活动图介绍"><a href="#活动图介绍" class="headerlink" title="活动图介绍"></a>活动图介绍</h2><p>活动图基本语法如下<br><img src="/image/programming/UML_Activity3.jpg" alt="活动图语法"><br>每个活动图都有一个开始状态、一个或多个结束状态。<br>圆角矩形表示活动，该活动应当能一个持续一定时间，也就是说是一个持续动作。在不使用泳道的情况下，其中文字应该是主谓宾形式，使用泳道，应该是动宾形式。<br>流程方向，代表该活动往什么方向进行。<br>菱形用作判定和合并，也就是说用户条件分支和合并。<br>同步栅代表的是一个并行活动，同步栅应当分叉、合并配对使用<br>流程方向上的中括号表示条件，其中的文字叫做监护，简单的理解就是，该文字用于表示流程中所发生的分叉，比如是、否这样的分叉。</p>
+<h1 id="UML状态机图"><a href="#UML状态机图" class="headerlink" title="UML状态机图"></a>UML状态机图</h1><p>状态机图描述的是围绕某一事物状态变化的图。它也是三大流程分析利器之一。它和活动图的区别在于，活动图是描述事物发生的流程，是多个角色参与的，而状态机描述的是事物的状态变化，并没有角色这个概念。</p>
+<h1 id="UML用例图"><a href="#UML用例图" class="headerlink" title="UML用例图"></a>UML用例图</h1><p>用例图(Use Case Diagram)是用于描述某某角色通过某某系统能做什么事情。当需要对系统整体或者某一部分功能进行行为建模时，就能够使用用例图了。<br><img src="/image/programming/UML_UserCase.jpg" alt="用例图"><br>主角表示执行者(Actor)，其表示的是与当前系统交互交互的人或者其他系统。<br>用例能够表示系统能够为执行者提供什么功能。<br>用例是以动词加名词的形式，也就是动宾结构。<br>外边框表示系统边界，要注明是什么系统，外边框可以不画，个人建议画上比较清晰。<br>线条有三种：无箭头的，指向用例的箭头，指向执行者的箭头。<br>箭头可以有两种解释：数据流向，箭头指向用例，说明向系统输入数据。箭头指向执行者，说明系统输出数据；谁启动谁，箭头指向用例，说明启动系统中某一模块。箭头指向执行者，说明系统启动另一系统。</p>
+<p>举例说明使用：<br><img src="/image/programming/UML_UserCase2.jpg" alt="信息管理系统"><br>&lt;<uses>&gt;表示包含关系<br>&lt;<extend>&gt;表示扩展关系</extend></uses></p>
+<h1 id="UML部署图和构件图"><a href="#UML部署图和构件图" class="headerlink" title="UML部署图和构件图"></a>UML部署图和构件图</h1><p>部署图和网络拓扑图相似，都是在物理层次上做整体的系统规划。<br>构件图也叫作组件图，构件图用于描述系统中某一模块。<br><img src="/image/programming/UML_Deployment.jpg" alt="部署图和组件图"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/programming/" rel="tag"># programming</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/30/back-end/Redis设计与实现 功能的实现/" rel="next" title="Redis设计与实现 功能的实现">
+                <i class="fa fa-chevron-left"></i> Redis设计与实现 功能的实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/04/algorithm/算法设计方法/" rel="prev" title="算法设计方法">
+                算法设计方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UML基础概述"><span class="nav-number">1.</span> <span class="nav-text">UML基础概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UML的分类"><span class="nav-number">1.1.</span> <span class="nav-text">UML的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构型"><span class="nav-number">1.1.1.</span> <span class="nav-text">结构型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行为型"><span class="nav-number">1.1.2.</span> <span class="nav-text">行为型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UML建模"><span class="nav-number">1.2.</span> <span class="nav-text">UML建模</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML和需求分析"><span class="nav-number">2.</span> <span class="nav-text">UML和需求分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求分析中出现差异性问题的原因"><span class="nav-number">2.1.</span> <span class="nav-text">需求分析中出现差异性问题的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#需求分析的几大要点"><span class="nav-number">2.2.</span> <span class="nav-text">需求分析的几大要点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目背景"><span class="nav-number">2.2.1.</span> <span class="nav-text">项目背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">2.2.2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UML与需求分析的关系"><span class="nav-number">2.2.3.</span> <span class="nav-text">UML与需求分析的关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML类图与对象图"><span class="nav-number">3.</span> <span class="nav-text">UML类图与对象图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类图"><span class="nav-number">3.2.</span> <span class="nav-text">类图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类图的建模步骤"><span class="nav-number">3.2.1.</span> <span class="nav-text">类图的建模步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象图"><span class="nav-number">3.3.</span> <span class="nav-text">对象图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML活动图"><span class="nav-number">4.</span> <span class="nav-text">UML活动图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#流程图与活动图的比较"><span class="nav-number">4.1.</span> <span class="nav-text">流程图与活动图的比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#活动图介绍"><span class="nav-number">4.2.</span> <span class="nav-text">活动图介绍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML状态机图"><span class="nav-number">5.</span> <span class="nav-text">UML状态机图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML用例图"><span class="nav-number">6.</span> <span class="nav-text">UML用例图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UML部署图和构件图"><span class="nav-number">7.</span> <span class="nav-text">UML部署图和构件图</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

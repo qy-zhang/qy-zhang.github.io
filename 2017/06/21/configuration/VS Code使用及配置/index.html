@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="configuration,editor,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="VS Code使用及配置VS code配置">
+<meta name="keywords" content="configuration,editor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VS Code使用及配置">
+<meta property="og:url" content="http://yoursite.com/2017/06/21/configuration/VS Code使用及配置/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="VS Code使用及配置VS code配置">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-13T01:35:16.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VS Code使用及配置">
+<meta name="twitter:description" content="VS Code使用及配置VS code配置">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/21/configuration/VS Code使用及配置/">
+
+
+
+
+
+  <title>VS Code使用及配置 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/21/configuration/VS Code使用及配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">VS Code使用及配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-21T17:33:08+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Blog/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="VS-Code使用及配置"><a href="#VS-Code使用及配置" class="headerlink" title="VS Code使用及配置"></a>VS Code使用及配置</h1><p>VS code配置<br><a id="more"></a></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="编辑技巧"><a href="#编辑技巧" class="headerlink" title="编辑技巧"></a>编辑技巧</h2><p>安装插件 IntelliJ IDEA Keybindings<br>| 快捷键 | 作用 |<br>| — | — |<br>| 列编辑 | alt + shift + 鼠标拖动，或者alt+鼠标点选 |<br>| 折叠展开代码块 | command + 和 command - |<br>| 回退到上一个光标操作 | command + u |<br>| 查看diff | 在explorer里选择文件右键 Set file to compare，然后需要对比的文件上右键选择Compare with ‘file_name_you_chose’ |<br>| 当前文件切换语言模式 | command + k m |<br>| 跳转到定义处 | F12 |<br>| 定义处缩略图 | 只看一眼而不跳转过去Alt+F12 |<br>| 列出所有的引用 | Shift+F12 |<br>| 同时修改本文件中所有匹配的 | Ctrl+F12 |</p>
+<h2 id="显示"><a href="#显示" class="headerlink" title="显示"></a>显示</h2><p>分屏：菜单栏中 查看 -&gt; 拆分编辑器，快捷键为ctrl + \，最多拆分为3个。如果想上下拆分菜单栏中 查看 -&gt; 切换编辑器组布局，快捷键为alt + shift + 1</p>
+<h2 id="命令使用"><a href="#命令使用" class="headerlink" title="命令使用"></a>命令使用</h2><p>ctrl + shift + p或F1调出命令面板，可以访问VS Code所有功能</p>
+<p>ctrl + p打开窗口，可以干很多事情<br>直接输入文件名，快速打开文件</p>
+<ul>
+<li>? 列出当前可执行的动作</li>
+<li>! 显示Errors 或Warnings，也可以ctrl+shift+m</li>
+<li>: 跳转到行数，也可以ctrl + g直接进入</li>
+<li>@ 跳转到symbol（搜索变量或者函数），也可以ctrl + shift + o直接进入</li>
+<li>@: 根据分类跳转symbol，查找属性或函数，也可以ctrl + shift + o后输入:进入</li>
+<li><h1 id="根据名字查找symbol，也可以ctrl-t"><a href="#根据名字查找symbol，也可以ctrl-t" class="headerlink" title="根据名字查找symbol，也可以ctrl + t"></a>根据名字查找symbol，也可以ctrl + t</h1></li>
+</ul>
+<p>安装插件命令，ctrl + p打开<br><code>ext install c++</code></p>
+<h1 id="代码管理"><a href="#代码管理" class="headerlink" title="代码管理"></a>代码管理</h1><h2 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h2><p>TODO Highlight插件查看整个项目中的待办事项<br>替代插件有vscode-todo、Parse TODO等</p>
+<h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><p>Git History 插件查看项目的git log</p>
+<h1 id="开发环境配置"><a href="#开发环境配置" class="headerlink" title="开发环境配置"></a>开发环境配置</h1><h2 id="一些实用插件"><a href="#一些实用插件" class="headerlink" title="一些实用插件"></a>一些实用插件</h2><h3 id="code-runner"><a href="#code-runner" class="headerlink" title="code runner"></a>code runner</h3><p>安装插件code runner，能够一键运行各种语言的代码<br>安装完成之后配置code runner的编译选项，在 文件-&gt;首选项-&gt;设置 中编辑用户配置文件<br>比如说默认的c/c++编译选项是没有添加<code>-g -Wall</code>的，所以这里我们修改对应的位置，添加上，同时对于c++添加上<code>-std=c++11</code>来支持c++11特性。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">"code-runner.executorMap":&#123;</span><br><span class="line">    "c": "cd $dir &amp;&amp; gcc -g -Wall $fileName -o $fileNameWithoutExt &amp;&amp; start cmd /c \"$fileNameWithoutExt &amp; pause\"",</span><br><span class="line">    "cpp": "cd $dir &amp;&amp; g++ -g -Wall -std=c++11 $fileName -o $fileNameWithoutExt &amp;&amp; start cmd /c \"$fileNameWithoutExt &amp; pause\"",</span><br><span class="line">    "csharp": "cd $dir &amp;&amp; csc $fileName &amp;&amp; start cmd /c \"$fileNameWithoutExt &amp; pause\"",</span><br><span class="line">    "python": "cd $dir &amp;&amp; start cmd /c \"python $fileName &amp; pause\"",</span><br><span class="line">    "java": "cd $dir &amp;&amp; javac $fileName &amp;&amp; start cmd /c \"java $fileNameWithoutExt &amp; pause\"",    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以cpp为例分析编译命令：cd $dir &amp;&amp; g++ -g -Wall -std=c++11 $fileName -o $fileNameWithoutExt &amp;&amp; start cmd /c \”$fileNameWithoutExt &amp; pause\”<br>首先code runner会在命令行下执行，上面的命令就是bat命令格式，&amp;&amp;表示接下来运行下一条命令</p>
+<p>cd $dir 切换到当前文件所在目录下<br>g++ -g -Wall -std=c++11 $filename -o $fileNameWithoutExt    用g++编译（附加调试信息，支持C++11特性）当前文件，编译文件后生成同名的可执行文件<br>start cmd /c \”$fileNameWithoutExt &amp; pause\”    新开一个命令行，/c后面是一串字符串参数，作为启动cmd的参数<br>重点是这一句话，我们希望在新开的命令行中运行程序，然后我们按任意键退出命令行，所以使用/c参数，表示执行完成之后推出命令行，但是如果直接退出会看不到输出结果，所以需要在命令行中暂停等按下任意键退出，需要<code>&amp; pause</code>。执行程序和暂停要作为一整个参数输入给新开的命令行，所以要将他们拼接成一个字符串，\是转义符，用两个双引号将他们拼接起来就行了。</p>
+<p>通过上述配置可以编译程序，然后在命令行中运行程序（可以通过控制台输入）</p>
+<h3 id="WakaTime"><a href="#WakaTime" class="headerlink" title="WakaTime"></a>WakaTime</h3><p>能够记录你每天在什么编辑器上、什么语言、什么项目上花的时间。</p>
+<h3 id="Code-Spellchecker"><a href="#Code-Spellchecker" class="headerlink" title="Code Spellchecker"></a>Code Spellchecker</h3><p>代码中英文单词检查，是否符合单词规范</p>
+<h2 id="C-开发环境"><a href="#C-开发环境" class="headerlink" title="C++开发环境"></a>C++开发环境</h2><p>VS Code自带调试器，能够方便的调试代码，同时有很良好的界面观察调试中的变量。<br>安装C++插件：C/C++、C/C++ Clang Command、C/C++ Snippets、C++ Intellisense</p>
+<p>如果是在windows下，编译器使用mingw，推荐使用TDM-GCC，安装好之后配置环境目录。<br>点击右边的蜘蛛debug，再点击左边调试栏上方的设置按钮，选择c++编译环境，然后编辑launch.json文件<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">    <span class="attr">"configurations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            "name": "(gdb) Launch", // 配置名称，将会在启动配置的下拉菜单中显示</span><br><span class="line">            "type": "cppdbg", // 配置类型，这里只能为cppdbg</span><br><span class="line">            "request": "launch", // 请求配置类型，可以为launch（启动）或attach（附加）</span><br><span class="line">            "program": "$&#123;file&#125;.exe", // 将要进行调试的程序的路径，会生成test.cpp.exe这样的文件，没有去掉后缀名</span><br><span class="line">            "args": [], // 程序调试时传递给程序的命令行参数，一般设为空即可</span><br><span class="line">            "stopAtEntry": false, // 设为true时程序将暂停在程序入口处，一般设置为false</span><br><span class="line">            "cwd": "$&#123;workspaceRoot&#125;", // 调试程序时的工作目录，一般为$&#123;workspaceRoot&#125;即代码所在目录</span><br><span class="line">            "environment": [], // 调试时是否显示控制台窗口，一般设置为true显示控制台</span><br><span class="line">            "externalConsole": true, // 调试时是否显示控制台窗口，一般设置为true显示控制台</span><br><span class="line">            "MIMode": "gdb", </span><br><span class="line">            "miDebuggerPath": "D:\\TDM-GCC-64\\bin\\gdb.exe", // miDebugger的路径，注意这里要与MinGw的路径对应</span><br><span class="line">            "preLaunchTask": "g++", // 调试会话开始前执行的任务，一般为编译程序，c++为g++, c为gcc</span><br><span class="line">            "setupCommands": [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">"description"</span>: <span class="string">"Enable pretty-printing for gdb"</span>,</span><br><span class="line">                    <span class="attr">"text"</span>: <span class="string">"-enable-pretty-printing"</span>,</span><br><span class="line">                    <span class="attr">"ignoreFailures"</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>保存之后切换到cpp文件，按下F5进行调试，会弹出信息框要求配置任务运行程序，选择others编辑tasks.json配置文件<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"0.1.0"</span>,</span><br><span class="line">    <span class="attr">"command"</span>: <span class="string">"g++"</span>,</span><br><span class="line">    <span class="attr">"args"</span>: [</span><br><span class="line">        // Build parameters for g++.</span><br><span class="line">        <span class="string">"-g"</span>, <span class="string">"-Wall"</span>, <span class="string">"-std=c++11"</span>, <span class="string">"$&#123;file&#125;"</span>, <span class="string">"-o"</span>, <span class="string">"$&#123;file&#125;.exe"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"problemMatcher"</span>: &#123;</span><br><span class="line">        <span class="attr">"owner"</span>: <span class="string">"cpp"</span>,</span><br><span class="line">        <span class="attr">"fileLocation"</span>: [<span class="string">"relative"</span>, <span class="string">"$&#123;workspaceRoot&#125;"</span>],</span><br><span class="line">        <span class="attr">"pattern"</span>: &#123;</span><br><span class="line">            <span class="attr">"regexp"</span>: <span class="string">"^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$"</span>,</span><br><span class="line">            <span class="attr">"file"</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="attr">"line"</span>: <span class="number">2</span>,</span><br><span class="line">            <span class="attr">"column"</span>: <span class="number">3</span>,</span><br><span class="line">            <span class="attr">"severity"</span>: <span class="number">4</span>,</span><br><span class="line">            <span class="attr">"message"</span>: <span class="number">5</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="C-开发环境-1"><a href="#C-开发环境-1" class="headerlink" title="C#开发环境"></a>C#开发环境</h3><p>安装插件C#</p>
+<h3 id="Python开发环境"><a href="#Python开发环境" class="headerlink" title="Python开发环境"></a>Python开发环境</h3><p>安装插件Python</p>
+<h3 id="java开发环境"><a href="#java开发环境" class="headerlink" title="java开发环境"></a>java开发环境</h3><p>自定义 snippets<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">"main": &#123;</span><br><span class="line">    "prefix": "psvm",</span><br><span class="line">    "body": [</span><br><span class="line">        "public static void main(String[] args) &#123;",</span><br><span class="line">        "\t$1",</span><br><span class="line">        <span class="string">"&#125;"</span></span><br><span class="line">    ],</span><br><span class="line">    "description": "main"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="个人配置"><a href="#个人配置" class="headerlink" title="个人配置"></a>个人配置</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">// 将设置放入此文件中以覆盖默认设置</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"code-runner.executorMap"</span>:&#123;</span><br><span class="line">        <span class="attr">"javascript"</span>: <span class="string">"node"</span>,</span><br><span class="line">        <span class="attr">"java"</span>: <span class="string">"cd $dir &amp;&amp; javac $fileName &amp;&amp; start cmd /c \"java $fileNameWithoutExt &amp; pause\""</span>,</span><br><span class="line">        <span class="attr">"c"</span>: <span class="string">"cd $dir &amp;&amp; gcc -g -Wall $fileName -o $fileNameWithoutExt &amp;&amp; start cmd /c \"$fileNameWithoutExt &amp; pause\""</span>,</span><br><span class="line">        <span class="attr">"cpp"</span>: <span class="string">"cd $dir &amp;&amp; g++ -g -Wall -std=c++11 $fileName -o $fileNameWithoutExt &amp;&amp; start cmd /c \"$fileNameWithoutExt &amp; pause\""</span>,</span><br><span class="line">        <span class="attr">"objective-c"</span>: <span class="string">"cd $dir &amp;&amp; gcc -framework Cocoa $fileName -o $fileNameWithoutExt &amp;&amp; start cmd /c \"$fileNameWithoutExt &amp; pause\""</span>,</span><br><span class="line">        <span class="attr">"php"</span>: <span class="string">"php"</span>,</span><br><span class="line">        <span class="attr">"python"</span>: <span class="string">"cd $dir &amp;&amp; start cmd /c \"python $fileName &amp; pause\""</span>,</span><br><span class="line">        <span class="attr">"perl"</span>: <span class="string">"perl"</span>,</span><br><span class="line">        <span class="attr">"ruby"</span>: <span class="string">"ruby"</span>,</span><br><span class="line">        <span class="attr">"go"</span>: <span class="string">"go run"</span>,</span><br><span class="line">        <span class="attr">"lua"</span>: <span class="string">"lua"</span>,</span><br><span class="line">        <span class="attr">"groovy"</span>: <span class="string">"groovy"</span>,</span><br><span class="line">        <span class="attr">"powershell"</span>: <span class="string">"powershell -ExecutionPolicy ByPass -File"</span>,</span><br><span class="line">        <span class="attr">"bat"</span>: <span class="string">"cmd /c"</span>,</span><br><span class="line">        <span class="attr">"shellscript"</span>: <span class="string">"bash"</span>,</span><br><span class="line">        <span class="attr">"fsharp"</span>: <span class="string">"fsi"</span>,</span><br><span class="line">        <span class="attr">"csharp"</span>: <span class="string">"cd $dir &amp;&amp; csc $fileName &amp;&amp; start cmd /c \"$fileNameWithoutExt &amp; pause\""</span>,</span><br><span class="line">        <span class="attr">"vbscript"</span>: <span class="string">"cscript //Nologo"</span>,</span><br><span class="line">        <span class="attr">"typescript"</span>: <span class="string">"ts-node"</span>,</span><br><span class="line">        <span class="attr">"coffeescript"</span>: <span class="string">"coffee"</span>,</span><br><span class="line">        <span class="attr">"scala"</span>: <span class="string">"scala"</span>,</span><br><span class="line">        <span class="attr">"swift"</span>: <span class="string">"swift"</span>,</span><br><span class="line">        <span class="attr">"julia"</span>: <span class="string">"julia"</span>,</span><br><span class="line">        <span class="attr">"crystal"</span>: <span class="string">"crystal"</span>,</span><br><span class="line">        <span class="attr">"ocaml"</span>: <span class="string">"ocaml"</span>,</span><br><span class="line">        <span class="attr">"r"</span>: <span class="string">"Rscript"</span>,</span><br><span class="line">        <span class="attr">"applescript"</span>: <span class="string">"osascript"</span>,</span><br><span class="line">        <span class="attr">"clojure"</span>: <span class="string">"lein exec"</span>,</span><br><span class="line">        <span class="attr">"haxe"</span>: <span class="string">"haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt"</span>,</span><br><span class="line">        <span class="attr">"rust"</span>: <span class="string">"cd $dir &amp;&amp; rustc $fileName &amp;&amp; $dir$fileNameWithoutExt"</span>,</span><br><span class="line">        <span class="attr">"racket"</span>: <span class="string">"racket"</span>,</span><br><span class="line">        <span class="attr">"ahk"</span>: <span class="string">"autohotkey"</span>,</span><br><span class="line">        <span class="attr">"autoit"</span>: <span class="string">"autoit3"</span>,</span><br><span class="line">        <span class="attr">"kotlin"</span>: <span class="string">"cd $dir &amp;&amp; kotlinc $fileName -include-runtime -d $fileNameWithoutExt.jar &amp;&amp; java -jar $fileNameWithoutExt.jar"</span>,</span><br><span class="line">        <span class="attr">"dart"</span>: <span class="string">"dart"</span>,</span><br><span class="line">        <span class="attr">"pascal"</span>: <span class="string">"cd $dir &amp;&amp; fpc $fileName &amp;&amp; $dir$fileNameWithoutExt"</span>,</span><br><span class="line">        <span class="attr">"d"</span>: <span class="string">"cd $dir &amp;&amp; dmd $fileName &amp;&amp; $dir$fileNameWithoutExt"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"terminal.integrated.shell.windows"</span>: <span class="string">"C:\\WINDOWS\\Sysnative\\cmd.exe"</span>,</span><br><span class="line">    <span class="attr">"extensions.ignoreRecommendations"</span>: <span class="literal">false</span>,</span><br><span class="line">    </span><br><span class="line">    <span class="attr">"workbench.iconTheme"</span>: <span class="string">"vscode-icons"</span>,</span><br><span class="line">    <span class="attr">"vsicons.dontShowNewVersionMessage"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"workbench.activityBar.visible"</span>: <span class="literal">false</span>,</span><br><span class="line">    "window.title": "$&#123;dirty&#125;$&#123;activeEditorLong&#125;$&#123;separator&#125;$&#123;folderName&#125;$&#123;separator&#125;$&#123;appName&#125;", //显示</span><br><span class="line">    "editor.minimap.enabled": false,    //关掉右侧边minimap代码代码预览</span><br><span class="line">    "explorer.autoReveal": false,   //不根据文件自动展开文件夹</span><br><span class="line">    "explorer.openEditors.visible": 0,  //不显示“打开的编辑器窗口”</span><br><span class="line"></span><br><span class="line">    "window.restoreWindows": "all"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/configuration/" rel="tag"># configuration</a>
+          
+            <a href="/tags/editor/" rel="tag"># editor</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/20/algorithm/数据结构-图/" rel="next" title="数据结构-图">
+                <i class="fa fa-chevron-left"></i> 数据结构-图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/22/programming/程序是怎样跑起来的 读书笔记/" rel="prev" title="程序是怎样跑起来的 读书笔记">
+                程序是怎样跑起来的 读书笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VS-Code使用及配置"><span class="nav-number">1.</span> <span class="nav-text">VS Code使用及配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编辑技巧"><span class="nav-number">2.1.</span> <span class="nav-text">编辑技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示"><span class="nav-number">2.2.</span> <span class="nav-text">显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令使用"><span class="nav-number">2.3.</span> <span class="nav-text">命令使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#根据名字查找symbol，也可以ctrl-t"><span class="nav-number">3.</span> <span class="nav-text">根据名字查找symbol，也可以ctrl + t</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码管理"><span class="nav-number">4.</span> <span class="nav-text">代码管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任务"><span class="nav-number">4.1.</span> <span class="nav-text">任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git"><span class="nav-number">4.2.</span> <span class="nav-text">git</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发环境配置"><span class="nav-number">5.</span> <span class="nav-text">开发环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些实用插件"><span class="nav-number">5.1.</span> <span class="nav-text">一些实用插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#code-runner"><span class="nav-number">5.1.1.</span> <span class="nav-text">code runner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WakaTime"><span class="nav-number">5.1.2.</span> <span class="nav-text">WakaTime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code-Spellchecker"><span class="nav-number">5.1.3.</span> <span class="nav-text">Code Spellchecker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-开发环境"><span class="nav-number">5.2.</span> <span class="nav-text">C++开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-开发环境-1"><span class="nav-number">5.2.1.</span> <span class="nav-text">C#开发环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python开发环境"><span class="nav-number">5.2.2.</span> <span class="nav-text">Python开发环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java开发环境"><span class="nav-number">5.2.3.</span> <span class="nav-text">java开发环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#个人配置"><span class="nav-number">6.</span> <span class="nav-text">个人配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="cpp,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="用C++来理解设计模式">
+<meta name="keywords" content="cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++设计模式">
+<meta property="og:url" content="http://yoursite.com/2017/07/06/cpp/C++设计模式/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="用C++来理解设计模式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++设计模式">
+<meta name="twitter:description" content="用C++来理解设计模式">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/06/cpp/C++设计模式/">
+
+
+
+
+
+  <title>C++设计模式 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/06/cpp/C++设计模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++设计模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-06T09:09:37+08:00">
+                2017-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>用C++来理解设计模式<br><a id="more"></a></p>
+<h1 id="设计模式简介"><a href="#设计模式简介" class="headerlink" title="设计模式简介"></a>设计模式简介</h1><p>设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了重用代码、让代码更容易被他人理解、保证代码可靠性。<br>根据设计模式的参考书Design Patterns - Elements of Reusable Object-Oriented Software（中文译名：设计模式 - 可复用的面向对象软件元素）中所提到的，总共有23种设计模式。这些模式可以分为三大类：创建型模式（Creational Patterns）、结构型模式（Structural Patterns）、行为型模式（Behavioral Patterns）。</p>
+<p>设计模式的六大原则：</p>
+<ol>
+<li>开闭原则：对扩展开放，对修改关闭</li>
+<li>里氏代换原则：任何基类可以出现的地方，子类一定可以出现</li>
+<li>依赖倒转原则：针对接口编程，依赖于抽象而不依赖于具体</li>
+<li>接口隔离原则：使用多个隔离的接口比使用单一的接口要好</li>
+<li>最少知道原则：一个实体应尽量少地与其他实体之间发生相互作用</li>
+<li>合成复用原则：尽量使用合成/聚合的方式，而不是使用继承</li>
+</ol>
+<h1 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h1><h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p>在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。</p>
+<p>意图：定义一个创建对象的接口，让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行。<br>主要解决：主要解决接口选择的问题。<br>何时使用：我们明确地计划不同条件下创建不同实例时。<br>如何解决：让其子类实现工厂接口，返回的也是一个抽象的产品。<br>关键代码：创建过程在其子类执行。<br>应用实例：需要一辆汽车，可以直接从工厂里面提货，而不用去管这辆汽车是怎么做出来的，以及这个汽车里面的具体实现。<br>优点： 1、一个调用者想创建一个对象，只要知道其名称就可以了。 2、扩展性高，如果想增加一个产品，只要扩展一个工厂类就可以。 3、屏蔽产品的具体实现，调用者只关心产品的接口。<br>缺点：每次增加一个产品时，都需要增加一个具体类和对象实现工厂，使得系统中类的个数成倍增加，在一定程度上增加了系统的复杂度，同时也增加了系统具体类的依赖。这并不是什么好事。</p>
+<p>实现：创建一个Shape抽象类，然后创建一些形状类继承他，最后定义一个工厂类。通过工厂类来产生Shape对象<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// FactoryPattern.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"FactoryPattern.h"</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> :</span> <span class="keyword">public</span> Shape&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">draw</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="string">"Rectangle::draw()"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Square</span> :</span> <span class="keyword">public</span> Shape&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">draw</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="string">"Square::draw()"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> :</span> <span class="keyword">public</span> Shape&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">draw</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="string">"Circle::draw()"</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Shape* ShapeFactory::GetShape(<span class="built_in">std</span>::<span class="built_in">string</span> shapeType) &#123;</span><br><span class="line">    <span class="keyword">if</span> (shapeType.empty()) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> (shapeType == <span class="string">"Rectangle"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Rectangle();</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (shapeType == <span class="string">"Square"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Square();</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (shapeType == <span class="string">"Circle"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Circle();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// FactoryPattern.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Shape</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">virtual</span> <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">draw</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShapeFactory</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Shape* <span class="title">GetShape</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span> shapeType)</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line">ShapeFactory shapeFactory;</span><br><span class="line">Shape* shape = shapeFactory.GetShape(<span class="string">"Circle"</span>);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; shape-&gt;draw() &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><p>抽象工厂模式（Abstract Factory Pattern）是围绕一个超级工厂创建其他工厂。该超级工厂又称为其他工厂的工厂。</p>
+<p>意图：提供一个创建一系列相关或相互依赖对象的接口，而无需指定他们具体的类<br>主要解决：主要解决接口选择的问题。<br>何时使用：系统的产品有多于一个的产品族，而系统只消费其中某一族的产品。<br>如何解决：在一个产品族里面，定义多个产品。<br>关键代码：在一个工厂里聚合多个同类产品。<br>优点：当一个产品族中的多个对象被设计成一起工作时，它能保证客户端始终只使用同一个产品族中的对象。<br>缺点：产品族扩展非常困难，要增加一个系列的某一产品，既要在抽象的 Creator 里加代码，又要在具体的里面加代码。</p>
+<p>考虑上面介绍的工厂模式，能够根据需求在工厂ShapeFactory中new不同的对象来生成不同的形状，对于抽象工厂模式，就是说对ShapeFactory能够有选择。<br>我们对工厂再进行一级抽象，抽象出形状工厂ShapeFactory来产生不同的形状、颜色工厂ColorFactory来产生不同的颜色。所以<em>抽象工厂是对工厂的抽象</em>。<br>抽象工厂的工厂是类；工厂方法的工厂是方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// AbstractFactory.h</span><br><span class="line">class AbstractFactory &#123;</span><br><span class="line">public:</span><br><span class="line">    virtual Shape* GetShape(std::string shapeType) = 0;</span><br><span class="line">    virtual Color* GetColor(std::string colorType) = 0;</span><br><span class="line">&#125;;</span><br><span class="line">class FactoryProducer &#123;</span><br><span class="line">public:</span><br><span class="line">    AbstractFactory* GetFactory(std::string factoryType);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//AbstractFactory.cpp</span><br><span class="line">AbstractFactory* FactoryProducer::GetFactory(std::string factoryType) &#123;</span><br><span class="line">    if (factoryType == &quot;ShapeFactory&quot;) &#123;</span><br><span class="line">        return new ShapeFactory2();</span><br><span class="line">    &#125; else if (factoryType == &quot;ColorFactory&quot;) &#123;</span><br><span class="line">        return new ColorFactory();</span><br><span class="line">    &#125;</span><br><span class="line">    return NULL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// main.cpp</span><br><span class="line">FactoryProducer factoryProducer;</span><br><span class="line">AbstractFactory* abstractFactory = factoryProducer.GetFactory(&quot;ColorFactory&quot;); // 从抽象工厂中创建一个颜色工厂</span><br><span class="line">Color* color = abstractFactory-&gt;GetColor(&quot;Blue&quot;); // 从颜色工厂中创建一个颜色</span><br><span class="line">cout &lt;&lt; color-&gt;fill() &lt;&lt; endl;</span><br></pre></td></tr></table></figure></p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>单例模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。</p>
+<p>意图：保证一个类仅有一个实例，并提供一个访问它的全局访问点。<br>主要解决：一个全局使用的类频繁地创建与销毁。<br>何时使用：当您想控制实例数目，节省系统资源的时候。<br>如何解决：判断系统是否已经有这个单例，如果有则返回，如果没有则创建。<br>关键代码：构造函数是私有的。<br>优点： 1、在内存里只有一个实例，减少了内存的开销，尤其是频繁的创建和销毁实例（比如管理学院首页页面缓存）。 2、避免对资源的多重占用（比如写文件操作）。<br>缺点：没有接口，不能继承，与单一职责原则冲突，一个类应该只关心内部逻辑，而不关心外面怎么样来实例化。</p>
+<p>单例模式就是维持只能有一个类对象，所以实现起来是先在类的内部实例化好一个静态类对象，并且禁止外部实例化类对象，只允许外部通过一个静态方法来获取这个静态的实例化好的类对象。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SingletonPattern.h</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingletonPattern</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> SingletonPattern&amp; <span class="title">GetInsance</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">showMessage</span><span class="params">()</span> </span>&#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"message from SingletonPattern"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    SingletonPattern() &#123;&#125;</span><br><span class="line">    <span class="keyword">static</span> SingletonPattern* instance_;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// SingletonPattern.cpp</span></span><br><span class="line">SingletonPattern* SingletonPattern::instance_ = <span class="literal">NULL</span>;</span><br><span class="line">SingletonPattern&amp; SingletonPattern::GetInsance() &#123;</span><br><span class="line">    <span class="keyword">if</span> (instance_ == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        instance_ = <span class="keyword">new</span> SingletonPattern;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *instance_;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line">SingletonPattern singletonPattern = SingletonPattern::GetInsance();</span><br><span class="line">singletonPattern.showMessage();</span><br></pre></td></tr></table></figure></p>
+<p>考虑到实例被创建的时间、多线程等问题，我们把单例模式分为以下几种实现方式：</p>
+<ul>
+<li><p>懒汉式，线程不安全<br>我们上面实现的方式就是不安全的懒汉式<br>饿汉式是线程安全的，在类创建的同时就已经创建好一个静态的对象供系统使用，以后不再改变；懒汉式是开始将单例对象置为NULL，直到第一次请求创建对象才会实例化单例对象。<br>懒汉式是线程不安全的，我们考虑如果多个线程都同时进入了判断语句<code>if (instance_ == NULL)</code>，都认为此时单例对象没有被实例化，这样会导致生成多个单例对象了。</p>
+</li>
+<li><p>懒汉式，线程安全<br>想要实现线程安全的懒汉式，就必须保证多个线程运行时，只能有一个线程执行<code>if (instance_ == NULL)</code>语句，从多线程的思想上看，就是要实现线程同步，要定义一个互斥量，拥有这个互斥量的线程才能进入到这个临界区（函数）中。<br>在java中有一个关键字synchronized可以实现加锁，在方法的声明中加上synchronized关键字保证同一时刻最多只有一个线程执行该段代码，其他线程必须等待当前线程执行完这个代码块以后才能执行该代码块。在C++中我们可以通过mutex来实现，如下所示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">getFoo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>相当于c++中的<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">GetFoo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">pthread_mutex_t</span> mutex = PTHREAD_MUTEX_INITIALIZER;</span><br><span class="line">        pthread_mutex_lock(&amp;mutex);</span><br><span class="line">        <span class="comment">// 临界区处理</span></span><br><span class="line">        pthread_mutex_unlock(&amp;mutex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>所以通过加锁实现懒汉单例模式就是在if判断前后加锁，if判断代码块放到临界区中。<br>通过对函数加上mutex互斥量，能够实现线程安全的懒汉式。这样做会比较影响效率，其他线程必须等待。</p>
+<p>Double Check Lock实现<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> Singleton&amp; <span class="title">GetInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (m_instance == <span class="literal">NULL</span>) &#123; <span class="comment">// 第一次检查，如果实例创建了，那就不需要同步了，直接返回就好了；否则就开始同步线程</span></span><br><span class="line">            Lock();</span><br><span class="line">            <span class="keyword">if</span> (m_instance == <span class="literal">NULL</span>) &#123; <span class="comment">// 第二次检查，如果被同步的线程中，有一个线程创建了对象，那么别的线程就不用再创建了；否则开始创建线程</span></span><br><span class="line">                m_instance = <span class="keyword">new</span> Singleton();</span><br><span class="line">            &#125;</span><br><span class="line">            Unlock();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *m_instance;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Singleton() &#123;&#125;</span><br><span class="line">    <span class="keyword">static</span> Singleton* m_instance;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// C++11之后要求编译器保证内部静态变量的线程安全性，所以可以用不加锁实现</span></span><br><span class="line"><span class="comment">// 这种内部静态变量实现方式比较好，以后可以作为模板使用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingletonInside</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> SingletonInside&amp; <span class="title">GetInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> SingletonInside instance;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    SingletonInside() &#123;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>饿汉式<br>饿汉式是线程安全的，类被加载的时候就初始化了，不过如果之后很久才用到这个实例，前面一段时间这个实例都一直在内存中，这样会浪费内存。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SingletonPattern.h</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingletonHungry</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> SingletonHungry&amp; <span class="title">GetInstance</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> *instance_; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">showMessage</span><span class="params">()</span> </span>&#123; <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"message from SingletonHungry"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    SingletonHungry() &#123;&#125;</span><br><span class="line">    <span class="keyword">static</span> SingletonHungry* instance_;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// SingletonPattern.cpp</span></span><br><span class="line">SingletonHungry* SingletonHungry::instance_ = <span class="keyword">new</span> SingletonHungry();</span><br><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line">SingletonHungry singletonHungry = SingletonHungry::GetInstance();</span><br><span class="line">singletonHungry.showMessage();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>扩展：N例模式的实现：最多存在N个实例<br>可以参考引用计数的原理，我们设置一个静态变量count来计数，当创建一个实例的时候count减1，销毁一个实例的时候count加1。count减为0的时候不再创建实例，直接返回NULL。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NSingleton</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> count;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> NSingleton* <span class="title">GetInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (count &lt;= <span class="number">0</span>) &#123; <span class="comment">// 已经存在了N个实例，不再创建实例，直接返回NULL</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        --count; <span class="comment">// 创建一个实例，计数减1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> NSingleton;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DeleteInstance</span><span class="params">(NSingleton* pInstance)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">delete</span> pInstance;</span><br><span class="line">        pInstance = <span class="literal">NULL</span>;</span><br><span class="line">        ++count; <span class="comment">// 销毁一个实例，count加1</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    NSingleton() &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> NSingleton::count = <span class="number">3</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h2><p>建造者模式使用多个简单的对象一步一步构建成一个复杂的对象。</p>
+<p>意图：讲一个复杂的构建与其表示相分离，使得同样的构建过程可以创建不同的表示<br>主要解决：<br>何时使用：一些基本部分不会变，而其组合经常变化的时候<br>如何解决：将不变和变化的部分分离开<br>关键代码：建造者创建和提供实例；导演管理建造出来的实例的依赖关系<br>优点： 1、建造者独立，易扩展。 2、便于控制细节风险。<br>缺点： 1、产品必须有共同点，范围有限制。 2、如内部变化复杂，会有很多的建造类。</p>
+<p>我们假设一个快餐店的商业案例：<br>一个典型的套餐可以是一个汉堡和一杯冷饮。汉堡可以是素食汉堡或鸡肉汉堡，它们是包在纸盒中；冷饮可以是可口可乐或百事可乐，它们是装在瓶子中。<br>可以分析出如下关系：由底向上分析<br>纸盒、瓶子继承打包方式；素食汉堡、鸡肉汉堡继承汉堡；可口可乐、百事可乐继承冷饮；汉堡和冷饮中有一个打包方式的组合形式；汉堡和冷饮继承食物；</p>
+<p>上述的这些都是Builder，负责创建对象。然后在创建一个MealBuilder类来将这些对象组合起来</p>
+<h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><p>原型模式是用于创建重复的对象，同时又能保证性能。<br>这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
+<p>意图：用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。<br>主要解决：在运行期建立和删除原型。<br>何时使用： 1、当一个系统应该独立于它的产品创建，构成和表示时。 2、当要实例化的类是在运行时刻指定时，例如，通过动态装载。 3、为了避免创建一个与产品类层次平行的工厂类层次时。 4、当一个类的实例只能有几个不同状态组合中的一种时。建立相应数目的原型并克隆它们可能比每次用合适的状态手工实例化该类更方便一些。<br>如何解决：利用已有的一个原型对象，快速地生成和原型对象一样的实例。</p>
+<p>个人的理解：就是希望能够将一个类对象的当前状态拷贝下来。比如说类中有个成员变量count，在某一个类的对象中count变为了100。现在想要新创建一个类对象，同时新的类对象的属性跟之前的那个相同。我们就实现一个Clone函数，同时实现类的拷贝构造函数，在拷贝构造函数中将类的一些属性、状态复制。然后clone函数通过调用拷贝构造函数，函数参数为this指针指向的对象，就能够返回一个当前对象的拷贝了。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A(<span class="keyword">const</span> A&amp; rhs) &#123;...&#125; <span class="comment">// 实现拷贝构造函数</span></span><br><span class="line">    <span class="function">A* <span class="title">Clone</span><span class="params">()</span> </span>&#123; <span class="comment">// 实现一个拷贝函数Clone，在Clone中调用拷贝构造函数，参数为当前类对象的this指针指向的对象，然后然会这个新拷贝出来的对象的指针。</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> A(*<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从直观上来看直接使用类的拷贝构造函数就能够实现这样的功能，为什么还需要外包一层Clone函数呢？<br>分析Clone函数的写法与拷贝构造函数的区别：拷贝构造函数没有返回值，只能拷贝生成一个当前类的对象；但是Clone函数的返回值是当前类对象的指针。从多态的角度来理解的话，Clone函数是可以生成一个派生类对象的，而拷贝构造函数不能。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> Base* <span class="title">Clone</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> Base(*<span class="keyword">this</span>); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span> :</span> <span class="keyword">public</span> Base &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> Base* <span class="title">Clone</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> Derived(*<span class="keyword">this</span>); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Show</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Derived"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Base* obj1 = <span class="keyword">new</span> Derived(); <span class="comment">// 基类指针指向派生类对象，触发虚机制</span></span><br><span class="line">obj1-&gt;Show(); <span class="comment">// 调用派生类虚函数，输出Derived</span></span><br><span class="line">Base* obj2 = obj1-&gt;Clone(); <span class="comment">// 使用原型模式拷贝对象，返回的是指针，也是基类指针指向派生类对象，也会触发虚机制</span></span><br><span class="line">obj2-&gt;Show(); <span class="comment">// 调用派生类虚函数，输出Derived</span></span><br><span class="line"><span class="function">Base <span class="title">obj3</span><span class="params">(*obj1)</span></span>; <span class="comment">// 直接使用拷贝构造函数，返回的是类对象，不是指针或者引用，不会触发虚机制</span></span><br><span class="line">obj3.Show(); <span class="comment">// 没有虚机制触发，调用的函数还是Base的Show函数，输出Base</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="结构型"><a href="#结构型" class="headerlink" title="结构型"></a>结构型</h1><h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><p>适配器模式是作为两个不兼容的接口之间的桥梁。</p>
+<p>意图：将一个类的接口转换成客户希望的另外一个接口。适配器模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。<br>主要解决：主要解决在软件系统中，常常要将一些”现存的对象”放到新的环境中，而新环境要求的接口是现对象不能满足的。<br>如何解决：继承或依赖（推荐）。<br>关键代码：适配器继承或依赖已有的对象，实现想要的目标接口。</p>
+<p>实例：音频播放器设备只能播放 mp3 文件，通过使用一个更高级的音频播放器来播放 vlc 和 mp4 文件。</p>
+<h2 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h2><p>桥接是用于把抽象化与实现化解耦，使得二者可以独立变化。</p>
+<p>意图：将抽象部分与实现部分分离，使它们都可以独立的变化。<br>主要解决：在有多种可能会变化的情况下，用继承会造成类爆炸问题，扩展起来不灵活。<br>何时使用：实现系统可能有多个角度分类，每一种角度都可能变化。<br>如何解决：把这种多角度分类分离出来，让它们独立变化，减少它们之间耦合。<br>关键代码：抽象类依赖实现类。</p>
+<h2 id="过滤器模式"><a href="#过滤器模式" class="headerlink" title="过滤器模式"></a>过滤器模式</h2><h2 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h2><p>组合模式把一组相似的对象当作一个单一的对象。</p>
+<h2 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h2><p>装饰器模式允许向一个现有的对象添加新的功能，同时又不改变其结构。</p>
+<p>装饰器模式的本质就是动态组合。动态是手段，组合才是目的。总之，装饰模式是通过把复杂的功能简单化，分散化，然后再运行期间，根据需要来动态组合的这样一个模式。它使得我们可以给某个对象而不是整个类添加一些功能。</p>
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>代理模式实现一个类代表另一个类的功能。</p>
+<p>意图：为其他对象提供一种代理以控制对这个对象的访问。<br>主要解决：在直接访问对象时带来的问题，比如说：要访问的对象在远程的机器上。在面向对象系统中，有些对象由于某些原因（比如对象创建开销很大，或者某些操作需要安全控制，或者需要进程外的访问），直接访问会给使用者或者系统结构带来很多麻烦，我们可以在访问此对象时加上一个对此对象的访问层。<br>何时使用：想在访问一个类时做一些控制。<br>如何解决：增加中间层。<br>关键代码：实现与被代理类组合。</p>
+<h1 id="行为型"><a href="#行为型" class="headerlink" title="行为型"></a>行为型</h1><h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><p>迭代器模式用于顺序访问集合对象的元素，不需要知道集合对象的底层表示。</p>
+<p>意图：提供一种方法顺序访问一个聚合对象中各个元素, 而又无须暴露该对象的内部表示。<br>主要解决：不同的方式来遍历整个整合对象。<br>何时使用：遍历一个聚合对象。<br>如何解决：把在元素之间游走的责任交给迭代器，而不是聚合对象。<br>关键代码：定义接口：hasNext, next。</p>
+<h2 id="MVC模式"><a href="#MVC模式" class="headerlink" title="MVC模式"></a>MVC模式</h2><p>MVC 模式代表 Model-View-Controller（模型-视图-控制器） 模式。这种模式用于应用程序的分层开发。<br>Model（模型） - 模型代表一个存取数据的对象或 JAVA POJO。它也可以带有逻辑，在数据变化时更新控制器。<br>View（视图） - 视图代表模型包含的数据的可视化。<br>Controller（控制器） - 控制器作用于模型和视图上。它控制数据流向模型对象，并在数据变化时更新视图。它使视图与模型分离开。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cpp/" rel="tag"># cpp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/04/programming/python源码剖析 读书笔记/" rel="next" title="Python源码剖析 读书笔记">
+                <i class="fa fa-chevron-left"></i> Python源码剖析 读书笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/10/algorithm/数据结构-并查集/" rel="prev" title="数据结构-并查集">
+                数据结构-并查集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设计模式简介"><span class="nav-number">1.</span> <span class="nav-text">设计模式简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建型"><span class="nav-number">2.</span> <span class="nav-text">创建型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂模式"><span class="nav-number">2.1.</span> <span class="nav-text">工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象工厂模式"><span class="nav-number">2.2.</span> <span class="nav-text">抽象工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">2.3.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建造者模式"><span class="nav-number">2.4.</span> <span class="nav-text">建造者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型模式"><span class="nav-number">2.5.</span> <span class="nav-text">原型模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构型"><span class="nav-number">3.</span> <span class="nav-text">结构型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#适配器模式"><span class="nav-number">3.1.</span> <span class="nav-text">适配器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#桥接模式"><span class="nav-number">3.2.</span> <span class="nav-text">桥接模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤器模式"><span class="nav-number">3.3.</span> <span class="nav-text">过滤器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合模式"><span class="nav-number">3.4.</span> <span class="nav-text">组合模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装饰器模式"><span class="nav-number">3.5.</span> <span class="nav-text">装饰器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代理模式"><span class="nav-number">3.6.</span> <span class="nav-text">代理模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#行为型"><span class="nav-number">4.</span> <span class="nav-text">行为型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器模式"><span class="nav-number">4.1.</span> <span class="nav-text">迭代器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC模式"><span class="nav-number">4.2.</span> <span class="nav-text">MVC模式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

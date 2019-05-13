@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="Spring的核心 Spring之旅 简化Java开发 激发POJO潜能 依赖注入 应用切面   容纳你的Bean bean的生命周期 Spring模块   装配Bean Spring配置方案 自动化装配Bean 通过Java代码装配Bean 通过XML装配Bean   高级装配 环境与profile 配置profile bean 激活profile   处理自动装配的歧义 标示首选 限定自动装">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Spring实战》">
+<meta property="og:url" content="http://yoursite.com/2018/08/19/java/spring/Spring实战 读书笔记/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="Spring的核心 Spring之旅 简化Java开发 激发POJO潜能 依赖注入 应用切面   容纳你的Bean bean的生命周期 Spring模块   装配Bean Spring配置方案 自动化装配Bean 通过Java代码装配Bean 通过XML装配Bean   高级装配 环境与profile 配置profile bean 激活profile   处理自动装配的歧义 标示首选 限定自动装">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/08/19/java/spring/image/java/SpringInAction-aop-demo.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/19/java/spring/image/java/SpringInAction-bean-lifecycle.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/19/java/spring/image/java/SpringInAction-aop-demo.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/19/java/spring/image/java/SpringInAction-aop-terms.png">
+<meta property="og:updated_time" content="2019-05-13T01:42:00.754Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Spring实战》">
+<meta name="twitter:description" content="Spring的核心 Spring之旅 简化Java开发 激发POJO潜能 依赖注入 应用切面   容纳你的Bean bean的生命周期 Spring模块   装配Bean Spring配置方案 自动化装配Bean 通过Java代码装配Bean 通过XML装配Bean   高级装配 环境与profile 配置profile bean 激活profile   处理自动装配的歧义 标示首选 限定自动装">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/19/java/spring/image/java/SpringInAction-aop-demo.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/19/java/spring/Spring实战 读书笔记/">
+
+
+
+
+
+  <title>《Spring实战》 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/java/spring/Spring实战 读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《Spring实战》</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T22:51:53+08:00">
+                2018-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><a href="#spring的核心">Spring的核心</a><ul>
+<li><a href="#spring之旅">Spring之旅</a><ul>
+<li><a href="#简化java开发">简化Java开发</a></li>
+<li><a href="#激发pojo潜能">激发POJO潜能</a></li>
+<li><a href="#依赖注入">依赖注入</a></li>
+<li><a href="#应用切面">应用切面</a></li>
+</ul>
+</li>
+<li><a href="#容纳你的bean">容纳你的Bean</a><ul>
+<li><a href="#bean的生命周期">bean的生命周期</a></li>
+<li><a href="#spring模块">Spring模块</a></li>
+</ul>
+</li>
+<li><a href="#装配bean">装配Bean</a><ul>
+<li><a href="#spring配置方案">Spring配置方案</a></li>
+<li><a href="#自动化装配bean">自动化装配Bean</a></li>
+<li><a href="#通过java代码装配bean">通过Java代码装配Bean</a></li>
+<li><a href="#通过xml装配bean">通过XML装配Bean</a></li>
+</ul>
+</li>
+<li><a href="#高级装配">高级装配</a><ul>
+<li><a href="#环境与profile">环境与profile</a><ul>
+<li><a href="#配置profile-bean">配置profile bean</a></li>
+<li><a href="#激活profile">激活profile</a></li>
+</ul>
+</li>
+<li><a href="#处理自动装配的歧义">处理自动装配的歧义</a><ul>
+<li><a href="#标示首选">标示首选</a></li>
+<li><a href="#限定自动装配">限定自动装配</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#面向切面的spring">面向切面的Spring</a><ul>
+<li><a href="#什么是面向切面编程">什么是面向切面编程</a></li>
+<li><a href="#定义aop术语">定义AOP术语</a><h1 id="Spring的核心"><a href="#Spring的核心" class="headerlink" title="Spring的核心"></a>Spring的核心</h1><h2 id="Spring之旅"><a href="#Spring之旅" class="headerlink" title="Spring之旅"></a>Spring之旅</h2><h3 id="简化Java开发"><a href="#简化Java开发" class="headerlink" title="简化Java开发"></a>简化Java开发</h3>Spring最根本的使命：<strong>简化Java开发</strong><br>许多框架都声称在某些方面做了简化， 但Spring的目标是致力于全方位的简化Java开发。Spring采取了以下四种关键策略：</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基于POJO的轻量级和最小侵入性编程；</li>
+<li>通过依赖注入和面向接口实现松耦合；</li>
+<li>基于切面和惯例进行声明式编程；</li>
+<li>通过切面和模板减少样板式代码。<br>前两种的目的是<strong>松耦合</strong>，后两种的目的是<strong>可复用</strong>。</li>
+</ul>
+<h3 id="激发POJO潜能"><a href="#激发POJO潜能" class="headerlink" title="激发POJO潜能"></a>激发POJO潜能</h3><p>很多框架通过强迫应用继承它们的类或实现它们的接口从而导致应用<strong>与框架绑死</strong>。<br>Spring的类通常没有任何痕迹表明你使用了Spring。 最坏的场景是，一个类或许会使用Spring注解，但它依旧是POJO。</p>
+<h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p>耦合具有两面性（two-headed beast）。一方面，紧密耦合的代码难以测试、难以复用、难以理解，并且典型地表现出“打地鼠”式的bug特性（修复一个bug，将会出现一个或者更多新的bug）。另一方面，一定程度的耦合又是必须的——完全没有耦合的代码什么也做不了。为了完成有实际意义的功能，不同的类必须以适当的方式进行交互。总而言之，耦合是必须的，但应当被小心谨慎地管理。<br>创建应用组件之间协作的行为通常称为<strong>装配</strong>（wiring）。Spring有多种装配bean的方式，采用XML是很常见的一种装配方式。Spring通过应用上下文（Application Context）装载bean的定义并把它们组装起来。 </p>
+<h3 id="应用切面"><a href="#应用切面" class="headerlink" title="应用切面"></a>应用切面</h3><p><img src="../image/java/SpringInAction-aop-demo.png" alt="Spring AOP demo"><br>在整个系统内，关注点（例如日志和安全）的调用经常散布到各个模块中，而这些关注点并不是模块的核心业务。AOP能够使这些服务模块化，并以声明的方式将它们应用到它们需要影响的组件中去。所造成的结果就是这些组件会具有更高的内聚性并且会更加关注自身的业务，完全不需要了解涉及系统服务所带来复杂性。</p>
+<h2 id="容纳你的Bean"><a href="#容纳你的Bean" class="headerlink" title="容纳你的Bean"></a>容纳你的Bean</h2><p>使用Spring是在基于XML的配置文件中如何配置bean和切面，但这些文件是如何加载的呢？它们被加载到哪里去了？<br><strong>Spring容器</strong>是应用中的所有 bean所驻留的地方。容器是Spring框架的核心。Spring容器使用DI管理构成应用的组件，它会创建相互协作的组件之间的关联。Spring自带了多个容器实现，可以归为两种不同的类型：</p>
+<ol>
+<li>bean工厂：由org.springframework.beans.factory.BeanFactory接口定义，是最简单的容器，提供基本的DI支持。</li>
+<li>应用上下文：由org.springframework.context.ApplicationContext接口定义，基于BeanFactory构建，并提供应用框架级别的服务，例如从属性文件解析文本信息以及发布应用事件给感兴趣的事件监听者。</li>
+</ol>
+<h3 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h3><p><img src="../image/java/SpringInAction-bean-lifecycle.png" alt="bean的生命周期"></p>
+<ol>
+<li>Spring对bean进行实例化; </li>
+<li>Spring将值和bean的引用注入到bean对应的属性中; </li>
+<li>如果bean实现了BeanNameAware接口，Spring将bean的ID传递给setBean-Name()方法; </li>
+<li>如果bean实现了BeanFactoryAware接口，Spring将调用setBeanFactory()方法，将 BeanFactory容器实例传入; </li>
+<li>如果bean实现了ApplicationContextAware接口，Spring将调 用setApplicationContext()方法，将bean所在的应用上下文的引用传入进来; </li>
+<li>如果bean实现了BeanPostProcessor接口，Spring将调用它们的post- ProcessBeforeInitialization()方法; </li>
+<li>如果bean实现了InitializingBean接口，Spring将调用它们的after- PropertiesSet()方法。类似地，如果bean使用init-method声明了初始化方法，该方法也 会被调用; </li>
+<li>如果bean实现了BeanPostProcessor接口，Spring将调用它们的post- ProcessAfterInitialization()方法; </li>
+<li>此时，bean已经准备就绪，可以被应用程序使用了，它们将一直驻留在应用上下文中，直到该 应用上下文被销毁; </li>
+<li>如果bean实现了DisposableBean接口，Spring将调用它的destroy()接口方法。同样， 如果bean使用destroy-method声明了销毁方法，该方法也会被调用。 </li>
+</ol>
+<h3 id="Spring模块"><a href="#Spring模块" class="headerlink" title="Spring模块"></a>Spring模块</h3><p>Spring框架由20个不同的模块组成，这些模块依据其所属的功能可以划分为6类不同的功能：Spring核心容器、Spring的AOP模块、数据访问与集成、Web与远程调用、Instrumentation、测试。<br><img src="../image/java/SpringInAction-aop-demo.png" alt="Spring模块"></p>
+<h2 id="装配Bean"><a href="#装配Bean" class="headerlink" title="装配Bean"></a>装配Bean</h2><p>在Spring中，对象无需自己查找或创建与其所关联的其他对象。相反，容器负责把需要相互协作的对象引用赋予各个对象。创建应用对象之间协作关系的行为通常称为装配（wiring），这也是 依赖注入（DI）的本质。</p>
+<h3 id="Spring配置方案"><a href="#Spring配置方案" class="headerlink" title="Spring配置方案"></a>Spring配置方案</h3><p>三种：在XML中显式配置、在Java中显式配置和隐式Bean发现自动装配。<br>尽可能地使用自动配置的机制。显式配置越少越好。当你必须要显式配置bean的时候（比如，有些源码不是由你来维护的，而当你需要为这些代码配置bean的时候），我推荐使用类型安全并且比XML更加强大的JavaConfig。最后，只有当你想要使用便利的XML命名空间，并且在JavaConfig中没有同样的实现时，才应该使用XML。</p>
+<h3 id="自动化装配Bean"><a href="#自动化装配Bean" class="headerlink" title="自动化装配Bean"></a>自动化装配Bean</h3><p>Spring从两个角度来实现自动化装配：</p>
+<ol>
+<li>组件扫描（componentscanning）：Spring会自动发现应用上下文中所创建的bean。</li>
+<li>自动装配（autowiring）：Spring自动满足bean之间的依赖。</li>
+</ol>
+<h3 id="通过Java代码装配Bean"><a href="#通过Java代码装配Bean" class="headerlink" title="通过Java代码装配Bean"></a>通过Java代码装配Bean</h3><h3 id="通过XML装配Bean"><a href="#通过XML装配Bean" class="headerlink" title="通过XML装配Bean"></a>通过XML装配Bean</h3><h2 id="高级装配"><a href="#高级装配" class="headerlink" title="高级装配"></a>高级装配</h2><h3 id="环境与profile"><a href="#环境与profile" class="headerlink" title="环境与profile"></a>环境与profile</h3><p>在开发软件的时候，有一个很大的挑战就是将应用程序从一个环境迁移到另外一个环境。</p>
+<h4 id="配置profile-bean"><a href="#配置profile-bean" class="headerlink" title="配置profile bean"></a>配置profile bean</h4><p>要使用profile，你首先要将所有不同的bean定义整理到一个或多个profile之中，在将应用部署到每个环境时，要确保对应的profile处于激活（active）的状态。</p>
+<ol>
+<li><p>在Java代码中可以使用@Profile注解指定某个bean属于哪一个profile。只有dev profile激活时才会创建下面的bean。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Profile</span>(<span class="string">"dev"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductionProfileConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在XML中配置可以为不同的环境创建不同的XML</p>
+<h4 id="激活profile"><a href="#激活profile" class="headerlink" title="激活profile"></a>激活profile</h4><p>Spring在确定哪个profile处于激活状态时，需要依赖两个独立的属性：<code>spring.profiles.active</code>和<code>spring.profiles.default</code>。<br>推荐使用DispatcherServlet的参数将来设置<code>spring.profiles.default</code>。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-value</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 为上下文设置默认的profile --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>spring.profiles.default<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 为dispatchServlet设置默认的profile --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>spring.profiles.default<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>dispatcherServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Spring提供了@ActiveProfiles注解，我们可以使用它来指定运行 测试时要激活哪个profile。</p>
+<h3 id="处理自动装配的歧义"><a href="#处理自动装配的歧义" class="headerlink" title="处理自动装配的歧义"></a>处理自动装配的歧义</h3><p>仅有一个bean匹配所需的结果时，自动装配才是有效的。否则Spring会抛出<code>NoUniqueBeanDefinitionException</code><br>当确实发生歧义性的时候，Spring提供了多种可选方案来解决这样的问题。你可以将可选bean中的某一个设为首选（primary）的bean，或者使用限定符（qualifier）来帮助Spring将可选的bean的范围缩小到只有一个bean。</p>
+<h4 id="标示首选"><a href="#标示首选" class="headerlink" title="标示首选"></a>标示首选</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Primary</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cake</span> <span class="keyword">implements</span> <span class="title">Dessert</span> </span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"iceCream"</span> <span class="attr">class</span>=<span class="string">"com.desserteater.IceCream"</span> <span class="attr">primary</span>=<span class="string">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="限定自动装配"><a href="#限定自动装配" class="headerlink" title="限定自动装配"></a>限定自动装配</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="meta">@Qualifier</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDessert</span><span class="params">(Dessert dessert)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.dessert = dessert;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果希望能够限定为多个bean，可以自己实现注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(&#123;ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Qualifier</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Cold &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Qualifier</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Creamy &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Cold</span></span><br><span class="line"><span class="meta">@Creamy</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IceCream</span> <span class="keyword">implements</span> <span class="title">Dessert</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="面向切面的Spring"><a href="#面向切面的Spring" class="headerlink" title="面向切面的Spring"></a>面向切面的Spring</h2><h3 id="什么是面向切面编程"><a href="#什么是面向切面编程" class="headerlink" title="什么是面向切面编程"></a>什么是面向切面编程</h3><p>切面提供了取代继承和委托的另一种可选方案，而且在很多场景下更清晰简洁。在使用面向切面编程时，我们仍然在一个地方定义通用功能，但是可以通过声明的方式定义这个功能要以何种方式在何处应用，而无需修改受影响的类。</p>
+<h3 id="定义AOP术语"><a href="#定义AOP术语" class="headerlink" title="定义AOP术语"></a>定义AOP术语</h3><p><img src="../image/java/SpringInAction-aop-terms.png" alt="AOP术语"></p>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通知</td>
+<td>切面是什么，以及何时使用</td>
+</tr>
+<tr>
+<td>连接点</td>
+<td>程序执行过程中能被插入的一个点，可以是调用方法、抛出异常、修改字段等</td>
+</tr>
+<tr>
+<td>切点</td>
+<td>何处使用切面，缩小通知连接点的范围</td>
+</tr>
+<tr>
+<td>切面</td>
+<td>通知和切点的结合，它是什么、在何时、何处使用</td>
+</tr>
+<tr>
+<td>引入</td>
+<td>向现有类添加新方法或属性（无需修改现有类让他有新行为和状态）</td>
+</tr>
+<tr>
+<td>织入</td>
+<td>把切面应用到目标对象并创建代理对象</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/05/java/Intellij插件开发入门/" rel="next" title="Intellij插件开发入门">
+                <i class="fa fa-chevron-left"></i> Intellij插件开发入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/19/programming/Git常用命令/" rel="prev" title="git常用命令记录">
+                git常用命令记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring的核心"><span class="nav-number">1.</span> <span class="nav-text">Spring的核心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring之旅"><span class="nav-number">1.1.</span> <span class="nav-text">Spring之旅</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简化Java开发"><span class="nav-number">1.1.1.</span> <span class="nav-text">简化Java开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激发POJO潜能"><span class="nav-number">1.1.2.</span> <span class="nav-text">激发POJO潜能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖注入"><span class="nav-number">1.1.3.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用切面"><span class="nav-number">1.1.4.</span> <span class="nav-text">应用切面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容纳你的Bean"><span class="nav-number">1.2.</span> <span class="nav-text">容纳你的Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bean的生命周期"><span class="nav-number">1.2.1.</span> <span class="nav-text">bean的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring模块"><span class="nav-number">1.2.2.</span> <span class="nav-text">Spring模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装配Bean"><span class="nav-number">1.3.</span> <span class="nav-text">装配Bean</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring配置方案"><span class="nav-number">1.3.1.</span> <span class="nav-text">Spring配置方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动化装配Bean"><span class="nav-number">1.3.2.</span> <span class="nav-text">自动化装配Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过Java代码装配Bean"><span class="nav-number">1.3.3.</span> <span class="nav-text">通过Java代码装配Bean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过XML装配Bean"><span class="nav-number">1.3.4.</span> <span class="nav-text">通过XML装配Bean</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级装配"><span class="nav-number">1.4.</span> <span class="nav-text">高级装配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境与profile"><span class="nav-number">1.4.1.</span> <span class="nav-text">环境与profile</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置profile-bean"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">配置profile bean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#激活profile"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">激活profile</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理自动装配的歧义"><span class="nav-number">1.4.2.</span> <span class="nav-text">处理自动装配的歧义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#标示首选"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">标示首选</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#限定自动装配"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">限定自动装配</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向切面的Spring"><span class="nav-number">1.5.</span> <span class="nav-text">面向切面的Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是面向切面编程"><span class="nav-number">1.5.1.</span> <span class="nav-text">什么是面向切面编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义AOP术语"><span class="nav-number">1.5.2.</span> <span class="nav-text">定义AOP术语</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

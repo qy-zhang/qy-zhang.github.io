@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="programming,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="面向对象系统分析设计的目的：高内聚低耦合(Cohesion Coupling)设计模式分为三种类型：创建型、结构型、行为型：创建型：工厂方法，抽象工厂，builder模式，单例，原型(clone)结构型：适配器，装饰，桥接，外观，合成，代理模式行为型：观察者，策略模式，模板，状态模式，迭代器模式，备忘录模式，命令模式">
+<meta name="keywords" content="programming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式介绍">
+<meta property="og:url" content="http://yoursite.com/2017/03/29/programming/设计模式介绍/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="面向对象系统分析设计的目的：高内聚低耦合(Cohesion Coupling)设计模式分为三种类型：创建型、结构型、行为型：创建型：工厂方法，抽象工厂，builder模式，单例，原型(clone)结构型：适配器，装饰，桥接，外观，合成，代理模式行为型：观察者，策略模式，模板，状态模式，迭代器模式，备忘录模式，命令模式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式介绍">
+<meta name="twitter:description" content="面向对象系统分析设计的目的：高内聚低耦合(Cohesion Coupling)设计模式分为三种类型：创建型、结构型、行为型：创建型：工厂方法，抽象工厂，builder模式，单例，原型(clone)结构型：适配器，装饰，桥接，外观，合成，代理模式行为型：观察者，策略模式，模板，状态模式，迭代器模式，备忘录模式，命令模式">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/29/programming/设计模式介绍/">
+
+
+
+
+
+  <title>设计模式介绍 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/programming/设计模式介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">设计模式介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T23:01:49+08:00">
+                2017-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>面向对象系统分析设计的目的：高内聚低耦合(Cohesion Coupling)<br>设计模式分为三种类型：创建型、结构型、行为型：<br>创建型：工厂方法，抽象工厂，builder模式，单例，原型(clone)<br>结构型：适配器，装饰，桥接，外观，合成，代理模式<br>行为型：观察者，策略模式，模板，状态模式，迭代器模式，备忘录模式，命令模式<br><a id="more"></a></p>
+<h1 id="面向对象基本原则"><a href="#面向对象基本原则" class="headerlink" title="面向对象基本原则"></a>面向对象基本原则</h1><h2 id="开闭原则-Open-Closed-Principle"><a href="#开闭原则-Open-Closed-Principle" class="headerlink" title="开闭原则(Open-Closed Principle)"></a>开闭原则(Open-Closed Principle)</h2><blockquote>
+<p>对扩展开放，对修改封闭</p>
+</blockquote>
+<p>对于面向对象系统来说，不允许修改系统的抽象层，而允许系统的实现层继承抽象层进行扩展。</p>
+<h2 id="里氏代换原则LSP"><a href="#里氏代换原则LSP" class="headerlink" title="里氏代换原则LSP"></a>里氏代换原则LSP</h2><blockquote>
+<p>派生类必须能够替换他们的基类，反过来不成立</p>
+</blockquote>
+<p>正方形不能作为长方形的派生类，它们违反了里氏代换原则<br>正方形类内部设置长等于宽。如果我们现在对长方形类添加一个方法，测试长方形的宽度是否大于高度，如果不满足就增加宽度，满足就停下来，如果传入长方形类可以正常运行，但是如果传入子类正方形，长宽会一起增加，会陷入死循环。所以正方形派生类不能替换它的基类长方形，他就不满足里氏代换原则。</p>
+<h2 id="依赖倒置原则DIP"><a href="#依赖倒置原则DIP" class="headerlink" title="依赖倒置原则DIP"></a>依赖倒置原则DIP</h2><blockquote>
+<p>要依赖于抽象，不要依赖于具体</p>
+</blockquote>
+<p>使用传统过程化程序设计所创建的依赖关系，策略依赖于细节，这是糟糕的，因为策略受到细节改变的影响。依赖倒置原则使细节和策略都依赖于抽象，抽象的稳定性决定了系统的稳定性。</p>
+<h2 id="接口隔离原则ISP"><a href="#接口隔离原则ISP" class="headerlink" title="接口隔离原则ISP"></a>接口隔离原则ISP</h2><blockquote>
+<p>使用多个专门的接口比使用单一的总接口好</p>
+</blockquote>
+<h2 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h2><blockquote>
+<p>尽量使用合成、聚合，尽量不要使用继承</p>
+</blockquote>
+<h2 id="最少知识原则LLKP"><a href="#最少知识原则LLKP" class="headerlink" title="最少知识原则LLKP"></a>最少知识原则LLKP</h2><blockquote>
+<p>一个对象应当对其它对象有尽可能少的了解</p>
+</blockquote>
+<h1 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h1><h2 id="Factory-Method工厂方法模式"><a href="#Factory-Method工厂方法模式" class="headerlink" title="Factory Method工厂方法模式"></a>Factory Method工厂方法模式</h2><p>创建一个生成对象的接口，让子类去决定实例化哪一个类。用于编程时不能预见需要创建哪种类的实例。<br>举例说明：<br>食客需要吃食物，厨师做食物（返回食物）<br>厨师开始时不知道客户想吃什么，这个时候创建一个做饭的厨师类，厨师类提供做不同菜品的方法。（菜品继承食物抽象类）<br>但是如果食客想吃另一个菜，那么需要修改厨师类的方法，这样不符合开闭原则。<br>我们把厨师抽象成基类（厨师工厂），派生出做不同菜的厨师，这样要添加新菜只用继承一下厨师基类，扩展一个新派生类即可。</p>
+<h2 id="Abstract-Factory抽象工厂模式"><a href="#Abstract-Factory抽象工厂模式" class="headerlink" title="Abstract Factory抽象工厂模式"></a>Abstract Factory抽象工厂模式</h2><p>对工厂类再向上抽象出一个工厂抽象类，来提供不同的工厂<br>接着上述例子：<br>现在食客想吃一个菜系（鲁菜还是粤菜），我们把菜品向下继承，红烧肉生成鲁菜红烧肉、粤菜红烧肉…还要修改厨师基类的返回值，现在要返回具体菜品了而不是食物基类。所以将厨师再抽象一层，抽成鲁菜厨师，粤菜厨师，这样我们就能抽象出鲁菜工厂、粤菜工厂。</p>
+<h2 id="Builder模式"><a href="#Builder模式" class="headerlink" title="Builder模式"></a>Builder模式</h2><p>将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
+<p>例子：<br>客户要买套餐（包含多个品种的菜），有几种套餐可以选择<br>收银员通知厨师准备套餐<br>厨师按照收银员要求准备多个菜品组成的套餐<br>最后套餐放在一个盘子里表示出来</p>
+<p>这个厨师就是Builder</p>
+<p>在以下情况使用Builder模式</p>
+<ol>
+<li>当创建复杂对象的算法应该独立于该对象的组成部分以及它们的装配方式时。</li>
+<li>当构造过程必须允许被构造的对象有不同的表示时。</li>
+</ol>
+<h2 id="Singleton单例模式"><a href="#Singleton单例模式" class="headerlink" title="Singleton单例模式"></a>Singleton单例模式</h2><p>将类的构造函数私有化，定义一个static的数据成员和static的instance函数成员来操作唯一的实例化对象。</p>
+<p>单例模式应用的场景一般发现在以下条件下：</p>
+<ol>
+<li>资源共享的情况下，避免由于资源操作时导致的性能或损耗等。如日志文件、应用配置</li>
+<li>控制资源的情况下，方便资源之间的互相通信。如线程池等。</li>
+</ol>
+<h1 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h1><h2 id="Adapter适配器模式"><a href="#Adapter适配器模式" class="headerlink" title="Adapter适配器模式"></a>Adapter适配器模式</h2><blockquote>
+<p>将一个类的接口转换为客户需要的接口</p>
+</blockquote>
+<p>每种电子产品的充电接口并不一定相同，我需要一个适配器，使其能配合我们的电压，这个适配器里实现了不同充电接口的电压转换。 </p>
+<h2 id="Bridge桥接模式"><a href="#Bridge桥接模式" class="headerlink" title="Bridge桥接模式"></a>Bridge桥接模式</h2><blockquote>
+<p>将抽象部分与实现部分分离，使它们都可以独立的变化。</p>
+</blockquote>
+<p>比如对车（抽象类）来说，其有基类（实现）如小车、卡车、公交等，<br>现在我们增加特性类比如颜色（抽象类），其有基类（实现）如红色、黄色、紫色<br>我们可以将这两个类桥连起来（这个关联的方式，可以是类的组合）<br>在车抽象基类中添加颜色抽象基类的对象。</p>
+<p>如果继承不能保证开闭原则的话，就应该考虑用桥接模式。</p>
+<h2 id="Composite组合模式"><a href="#Composite组合模式" class="headerlink" title="Composite组合模式"></a>Composite组合模式</h2><blockquote>
+<p>将对象组合成树形结构以表示“部分整体”的层次结构。组合模式使得用户对单个对象和使用具有一致性。</p>
+</blockquote>
+<p>计算机的文件系统就是以递归结构来组织的。如果你想要描述这样的数据结构，那么你可以使用组合模式Composite。</p>
+<h2 id="Decorator装饰者模式"><a href="#Decorator装饰者模式" class="headerlink" title="Decorator装饰者模式"></a>Decorator装饰者模式</h2><blockquote>
+<p>动态地给一个对象添加额外的职责</p>
+</blockquote>
+<p>我们有时候需要为一个已经定义好的类添加新的职责（操作）， 一般会定义一个新类继承之前设计好的类，但是这样继承的深度会变得很深。 </p>
+<p>使用场景：对象由主体+许多可选的部件或者功能构成，使用继承或者接口会产生很多类，且很难扩展。例如，现在需要一个汉堡，主体是鸡腿堡，可以选择添加生菜、酱、辣椒等等许多其他的配料，这种情况下就可以使用装饰者模式。<br>汉堡基类，配料作为装饰类继承汉堡类，生菜、辣椒等作为装饰者继承配料类</p>
+<p>装饰者模式比继承更灵活，可扩展性强，但是会导致程序中出现许多小对象，让程序变复杂</p>
+<h2 id="Facade外观模式"><a href="#Facade外观模式" class="headerlink" title="Facade外观模式"></a>Facade外观模式</h2><blockquote>
+<p>将放置多个类的各个接口集中管理起来</p>
+</blockquote>
+<p>外观模式中，一个子系统的外部与其内部的通信通过一个统一的外观类进行，外观类将客户类与子系统的内部复杂性分隔开，使得客户类只需要与外观角色打交道，而不需要与子系统内部的很多对象打交道。</p>
+<h2 id="Proxy代理模式"><a href="#Proxy代理模式" class="headerlink" title="Proxy代理模式"></a>Proxy代理模式</h2><blockquote>
+<p>创建开销大的对象时候，我们将这个创建的过程交给代理去完成。</p>
+</blockquote>
+<p>如果构建一个对象很耗费时间和计算机资源，代理模式(Proxy)允许我们控制这种情况，直到我们需要使用实际的对象。一个代理(Proxy)通常包含和将要使用的对象同样的方法，一旦开始使用这个对象，这些方法将通过代理(Proxy)传递给实际的对象。</p>
+<h1 id="行为模式"><a href="#行为模式" class="headerlink" title="行为模式"></a>行为模式</h1><h2 id="Observer观察者模式"><a href="#Observer观察者模式" class="headerlink" title="Observer观察者模式"></a>Observer观察者模式</h2><blockquote>
+<p>观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</p>
+</blockquote>
+<p>将一个系统分割成一个一些类相互协作的类有一个不好的副作用，那就是需要维护相关对象间的一致性。我们不希望为了维持一致性而使各类紧密耦合，这样会给维护、扩展和重用都带来不便。观察者就是解决这类的耦合关系的。</p>
+<p>观察者模式实例：MVC(Model/View/Control)结构，DV(Document/View)结构</p>
+<p>观察者模式可以解除耦合，让耦合的双方都依赖于抽象，从而使得各自的变换都不会影响另一边的变换。</p>
+<h2 id="Template模板方法"><a href="#Template模板方法" class="headerlink" title="Template模板方法"></a>Template模板方法</h2><p>在面向对象系统的分析与设计过程中经常会遇到这样一种情况：对于某一个业务逻辑（算法实现）在不同的对象中有不同的细节实现， 但是逻辑（算法） 的框架（或通用的应用算法）是相同的。<br>Template 模式是采用继承的方式实现这一点： 将逻辑（算法） 框架放在抽象基类中， 并定义好细节的接口，子类中实现细节。</p>
+<h2 id="Strategy策略"><a href="#Strategy策略" class="headerlink" title="Strategy策略"></a>Strategy策略</h2><p>Strategy 模式和 Template 模式要解决的问题是相同（类似）的，都是为了给业务逻辑（算法）具体实现和抽象接口之间的解耦。Strategy模式将逻辑（算法封装到一个类（Context）里面，通过组合的方式将具体算法的实现在组合对象中实现，再通过委托的方式将抽象接口的实现委托给组合对象实现。<br>模板模式操作的是提供具体实现的子类，而策略模式操作的是组合类（也就是存入抽象接口的类），而在被组合对象中放置接口的具体实现。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/programming/" rel="tag"># programming</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/29/cpp/C++类内存布局/" rel="next" title="C++类内存布局">
+                <i class="fa fa-chevron-left"></i> C++类内存布局
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/30/cpp/C++语法总结/" rel="prev" title="C++语法总结">
+                C++语法总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#面向对象基本原则"><span class="nav-number">1.</span> <span class="nav-text">面向对象基本原则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开闭原则-Open-Closed-Principle"><span class="nav-number">1.1.</span> <span class="nav-text">开闭原则(Open-Closed Principle)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#里氏代换原则LSP"><span class="nav-number">1.2.</span> <span class="nav-text">里氏代换原则LSP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖倒置原则DIP"><span class="nav-number">1.3.</span> <span class="nav-text">依赖倒置原则DIP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口隔离原则ISP"><span class="nav-number">1.4.</span> <span class="nav-text">接口隔离原则ISP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合成复用原则"><span class="nav-number">1.5.</span> <span class="nav-text">合成复用原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最少知识原则LLKP"><span class="nav-number">1.6.</span> <span class="nav-text">最少知识原则LLKP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建型模式"><span class="nav-number">2.</span> <span class="nav-text">创建型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Factory-Method工厂方法模式"><span class="nav-number">2.1.</span> <span class="nav-text">Factory Method工厂方法模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract-Factory抽象工厂模式"><span class="nav-number">2.2.</span> <span class="nav-text">Abstract Factory抽象工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Builder模式"><span class="nav-number">2.3.</span> <span class="nav-text">Builder模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Singleton单例模式"><span class="nav-number">2.4.</span> <span class="nav-text">Singleton单例模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结构型模式"><span class="nav-number">3.</span> <span class="nav-text">结构型模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Adapter适配器模式"><span class="nav-number">3.1.</span> <span class="nav-text">Adapter适配器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bridge桥接模式"><span class="nav-number">3.2.</span> <span class="nav-text">Bridge桥接模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Composite组合模式"><span class="nav-number">3.3.</span> <span class="nav-text">Composite组合模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decorator装饰者模式"><span class="nav-number">3.4.</span> <span class="nav-text">Decorator装饰者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Facade外观模式"><span class="nav-number">3.5.</span> <span class="nav-text">Facade外观模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy代理模式"><span class="nav-number">3.6.</span> <span class="nav-text">Proxy代理模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#行为模式"><span class="nav-number">4.</span> <span class="nav-text">行为模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Observer观察者模式"><span class="nav-number">4.1.</span> <span class="nav-text">Observer观察者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Template模板方法"><span class="nav-number">4.2.</span> <span class="nav-text">Template模板方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Strategy策略"><span class="nav-number">4.3.</span> <span class="nav-text">Strategy策略</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

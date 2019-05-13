@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="back-end,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="Nginx（发音同 engine x）是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强。">
+<meta name="keywords" content="back-end">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx模块开发与结构解析 读书笔记">
+<meta property="og:url" content="http://yoursite.com/2017/05/15/back-end/Nginx模块开发与架构解析 读书笔记/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="Nginx（发音同 engine x）是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/image/programming/nginx_process_model.png">
+<meta property="og:image" content="http://yoursite.com/image/programming/Nginx_event_Web_structure.png">
+<meta property="og:image" content="http://yoursite.com/image/programming/Nginx_event_structure.png">
+<meta property="og:image" content="http://yoursite.com/image/programming/Nginx_master_worker.png">
+<meta property="og:image" content="http://yoursite.com/image/algorithm/nginx_palloc_large.jpg">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx模块开发与结构解析 读书笔记">
+<meta name="twitter:description" content="Nginx（发音同 engine x）是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强。">
+<meta name="twitter:image" content="http://yoursite.com/image/programming/nginx_process_model.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/15/back-end/Nginx模块开发与架构解析 读书笔记/">
+
+
+
+
+
+  <title>Nginx模块开发与结构解析 读书笔记 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/15/back-end/Nginx模块开发与架构解析 读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nginx模块开发与结构解析 读书笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T14:13:50+08:00">
+                2017-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Nginx（发音同 engine x）是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强。<br><a id="more"></a></p>
+<h1 id="nginx平台初探"><a href="#nginx平台初探" class="headerlink" title="nginx平台初探"></a>nginx平台初探</h1><h2 id="初探nginx架构"><a href="#初探nginx架构" class="headerlink" title="初探nginx架构"></a>初探nginx架构</h2><p>nginx在启动后，在unix系统中会以daemon的方式在后台运行，后台进程包含一个master进程和多个worker进程。<br>注：daemon表示Linux下的守护进程，守护进程就是一直在后台运行的进程，让他像服务一样成为后台任务。<br>Linux命令行下通过在命令尾部加上符号&amp;，启动的进程就会变成为“后台任务”，如果要让正在运行的”前台任务”变为”后台任务”，可以先按ctrl + z，然后执行bg命令。<br><a href="http://wbwk2005.blog.51cto.com/2215231/400260" target="_blank" rel="noopener">参考博客</a></p>
+<p>守护进程的创建：创建子进程，然后父进程先退出，子进程就变为孤儿进程，并由init进程作为其父进程收养。<br>孤儿进程和僵尸进程的区别：僵尸进程是指子进程先于父进程结束，而且父进程没有函数调用wait()或waitpid()等待子进程结束，使得子进程的进程列表信息没法回收。</p>
+<p>master进程主要用来管理worker进程，包含：接收来自外界的信号，向各worker进程发送信号，监控worker进程的运行状态，当worker进程退出后(异常情况下)，会自动重新启动新的worker进程。而基本的网络事件，则是放在worker进程中来处理了。多个worker进程之间是对等的，他们同等竞争来自客户端的请求，各进程互相之间是独立的。一个请求，只可能在一个worker进程中处理，一个worker进程，不可能处理其它进程的请求。nginx的进程模型，可以由下图来表示：<br><img src="/image/programming/nginx_process_model.png" alt="nginx的进程模型"><br>每个worker进程都是从master进程fork过来，在master进程里面，先建立好需要listen的socket（listenfd）之后，然后再fork出多个worker进程。所有worker进程的listenfd会在新连接到来时变得可读，为保证只有一个进程处理该连接，所有worker进程在注册listenfd读事件前抢accept_mutex，抢到互斥锁的那个进程注册listenfd读事件，在读事件里调用accept接受该连接。当一个worker进程在accept这个连接之后，就开始读取请求，解析请求，处理请求，产生数据后，再返回给客户端，最后才断开连接，这样一个完整的请求就是这样的了。我们可以看到，一个请求，完全由worker进程来处理，而且只在一个worker进程中处理。</p>
+<h1 id="如何编写http模块"><a href="#如何编写http模块" class="headerlink" title="如何编写http模块"></a>如何编写http模块</h1><h2 id="开发一个简单的http模块"><a href="#开发一个简单的http模块" class="headerlink" title="开发一个简单的http模块"></a>开发一个简单的http模块</h2><h1 id="深入Nginx"><a href="#深入Nginx" class="headerlink" title="深入Nginx"></a>深入Nginx</h1><h2 id="Nginx基础架构"><a href="#Nginx基础架构" class="headerlink" title="Nginx基础架构"></a>Nginx基础架构</h2><h3 id="事件驱动架构"><a href="#事件驱动架构" class="headerlink" title="事件驱动架构"></a>事件驱动架构</h3><p>所谓事件驱动架构，就是由一些事件发生源来产生事件，由一个或者多个事件收集器来收集、分发事件，然后许多事件处理器会组册自己感兴趣的事件，同时会“消费”事件。<br>对于传统的Web服务器来说，事件驱动仅限于TCP连接建立、关闭事件上，一个连接建立以后，在其关闭之前的所有操作都不再是事件驱动，这时会退化成按序执行每个操作的批处理模式。这种方式可以把一个进程或线程作为事件消费者，当一个请求产生事件被该进程处理时，知道这个请求处理结束时进程资源都将被这一个请求所占用。<br><img src="/image/programming/Nginx_event_Web_structure.png" alt="传统Web服务器的事件模型"><br>Nginx不会使用进程或线程作为时间消费者。只有事件收集、分发器才有资格占用进程资源，他们会在分发某个事件时调用事件消费模块使用当前占用的进程资源。<br><img src="/image/programming/Nginx_event_structure.png" alt="Nginx事件模型"></p>
+<p>传统Web服务器与Nginx间的重要区别：<br>前者是每个事件消费者独占一个进程资源，后者的事件消费者只是被事件分发者进程短期调用而已。<br>Nginx这种设计能够使得服务器的网络吞吐量增大，但是每个事件消费者不能有阻塞行为，否则将会由于长时间占用事件分发者进程而导致其他事件得不到及时响应。</p>
+<h3 id="请求的多阶段异步处理"><a href="#请求的多阶段异步处理" class="headerlink" title="请求的多阶段异步处理"></a>请求的多阶段异步处理</h3><p>只有把请求分为多个阶段，才有所谓的异步处理。<br>把一个请求的处理过程按照事件的触发方式划分为多个阶段，每个阶段都可以由事件收集、分发器来触发。划分方式一般是找到请求处理流程中的阻塞方法。</p>
+<h3 id="管理进程、多工作进程设计"><a href="#管理进程、多工作进程设计" class="headerlink" title="管理进程、多工作进程设计"></a>管理进程、多工作进程设计</h3><p>Nginx采用一个master管理进程、多个worker工作进程的设计方式。<br><img src="/image/programming/Nginx_master_worker.png" alt="Nginx进程设计"><br>这样设计带来以下优点：</p>
+<ul>
+<li>利用多核系统的并发处理能力：多个worker进程平等，并发处理</li>
+<li>负载均衡：一个请求到来时更容易被分配到负载较轻的worker工作进程中处理。</li>
+<li>管理进程会负责监控工作进程的状态，并负责管理其行为：管理进程是用来启动、停止、监控或停止其他行为来控制工作进程，这样提高了系统的可靠性。</li>
+</ul>
+<h2 id="事件模块"><a href="#事件模块" class="headerlink" title="事件模块"></a>事件模块</h2><h3 id="epoll事件驱动模块"><a href="#epoll事件驱动模块" class="headerlink" title="epoll事件驱动模块"></a>epoll事件驱动模块</h3><p>设想一个场景：有100万用户同时与一个进程保持着TCP连接，而每一时刻只有几十个TCP连接是活跃的（接收到TCP包），也就是说每一时刻进程只需要处理这100万连接中的一小部分连接。那么如何才能高效地处理这种场景呢？<br>进程每次询问操作系统收集有事件发生的TCP连接时，把这100万个连接告诉操作系统，然后由操作系统找出其中有事件发生的几十个连接。select和poll事件驱动就是这样做的。<br>我们可以发现这样做效率特别低：每次收集事件时，都要把这100万连接的套接字传给操作系统（涉及到用户态到内核态的大量复制）。<br>epoll把原先的select和poll分成了三个部分：调用epoll_create创建一个epoll对象、调用epoll_ctl想epoll对象注册这100万个连接的套接字、调用epoll_wait收集发生事件的连接。epoll_wait没有100万个连接，内核不需要遍历所有的连接了。</p>
+<p>Linux内核实现：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">eventepoll</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rb_root</span> <span class="title">rbr</span>;</span> <span class="comment">// 红黑树的根结点，树存储所有添加到epoll中的事件</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">rdllist</span>;</span> <span class="comment">// 双向链表保存要通过epoll_wait返回给用户的事件</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>每个epoll对象都有一个独立的eventpoll结构体，这个结构体会在内核空间中创造独立的内存，用于存储使用epoll_ctl方法向epoll对象中添加进来的事件。每个事件都会挂到rbr红黑树上，重复添加的事件会跳过（红黑树性质）<br>当调用epoll_wait检查是否有发生事件的连接时，只是检查eventpoll对象中的rdllist双向链表是否有epitem元素而已，如果rdllist链表不为空，就把这里面的事件赋值到用户态。因此epoll_wait效率非常高。</p>
+<h2 id="进程间的通信机制"><a href="#进程间的通信机制" class="headerlink" title="进程间的通信机制"></a>进程间的通信机制</h2><p>Nginx由一个master进程和多个worker进程组成，但master进程或者worker进程中并不会再创建线程（Nginx的多线程机制一直停留在测试状态）<br>Nginx框架使用了3种消息传递方式：共享内存、套接字、信号；在多个进程访问共享资源时，使用了3中同步方式：原子操作、信号量、文件锁。</p>
+<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><p>Nginx定义了ngx_shm_t结构体用于描述一块共享内存：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    u_char *addr; <span class="comment">// 指向共享内存的起始地址</span></span><br><span class="line">    <span class="keyword">size_t</span> size; <span class="comment">// 共享内存的长度</span></span><br><span class="line">    <span class="keyword">ngx_str_t</span> name; <span class="comment">// 这块共享内存的名称</span></span><br><span class="line">    <span class="keyword">ngx_log_t</span> *<span class="built_in">log</span>; <span class="comment">// 日志对象</span></span><br><span class="line">    <span class="keyword">ngx_uint_t</span> exists; <span class="comment">// 表示共享内存是否已经分配过的标志位</span></span><br><span class="line">&#125; <span class="keyword">ngx_shm_t</span>;</span><br></pre></td></tr></table></figure></p>
+<p>先以mmap为例说明Linux是怎样向应用程序提供共享内存的：<br><code>void *mmap(void *start, size_t length, int prot, int flags, int fd, off_t offset);</code><br>mmap可以将磁盘文件映射到内存中，直接操作内存时Linux内核将负责同步内存和磁盘文件中的数据<br>fd参数就指向需要同步的磁盘文件；offset代表从文件的这个偏移量出开始共享；length表示要在内存中开辟的地址空间大小；prot参数表示操作共享内存的方式（只读或者可读可写）；start参数说明共享内存起始映射地址。</p>
+<p>在nginx中使用ngx_shm_alloc来申请共享内存，实现就是调用mmap函数。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ngx_int_t</span></span><br><span class="line">ngx_shm_alloc(<span class="keyword">ngx_shm_t</span> *shm)</span><br><span class="line">&#123;</span><br><span class="line">    shm-&gt;addr = (u_char *) mmap(<span class="literal">NULL</span>, shm-&gt;size,</span><br><span class="line">                                PROT_READ|PROT_WRITE,</span><br><span class="line">                                MAP_ANON|MAP_SHARED, <span class="number">-1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (shm-&gt;addr == MAP_FAILED) &#123;</span><br><span class="line">        ngx_log_error(NGX_LOG_ALERT, shm-&gt;<span class="built_in">log</span>, ngx_errno,</span><br><span class="line">                      <span class="string">"mmap(MAP_ANON|MAP_SHARED, %uz) failed"</span>, shm-&gt;size);</span><br><span class="line">        <span class="keyword">return</span> NGX_ERROR;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> NGX_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h3><p>能够执行原子操作的原子变量只有整形，包括无符号整形和有符号整形，这两种类型都使用了volatile关键字告诉C编译器不要做优化。</p>
+<p>基于原子操作，Nginx实现了一个自旋锁。自旋锁是一种非睡眠锁：在拿不到锁时，这个进程的代码会一直在自旋锁代码处执行，直到其他进程释放了锁且当前进程获取到锁后，代码才继续向下执行。<br>自旋锁要解决的问题时进程使用锁的时间非常短（如果使用时间长，一直执行会占用大量CPU资源）。Nginx的worker进程最好不要进入睡眠状态，因为它非常繁忙，在这个进程的epoll上可能会有几百万的TCP连接等待着处理，进程一旦睡眠后必须等待其他事件的唤醒，这中间极其频繁的进程间切换带来的负载消耗可能让用户无法接受。</p>
+<p>ngx_spinlock函数实现了自旋锁</p>
+<h3 id="Nginx频道"><a href="#Nginx频道" class="headerlink" title="Nginx频道"></a>Nginx频道</h3><p>ngx_channel_t频道是Nginx中master进程和worker进程之间通信的主要工具，使用本机套接字实现。<br>ngx_channel_t结构体格式：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">ngx_uint_t</span> command; <span class="comment">// 传递的TCP消息中的命令</span></span><br><span class="line">    <span class="keyword">ngx_pid_t</span> pid; <span class="comment">// 进程ID，一般是发送命令方的进程ID</span></span><br><span class="line">    <span class="keyword">ngx_int_t</span> slot; <span class="comment">// 表示发送命令方在ngx_processes进程数组间的序号</span></span><br><span class="line">    <span class="keyword">ngx_fd_t</span> fd; <span class="comment">// 通信的套接字句柄</span></span><br><span class="line">&#125; <span class="keyword">ngx_channel_t</span>;</span><br></pre></td></tr></table></figure></p>
+<p>使用socketpair方法创建父子进程间使用的套机字。这个方法可以创建一对关联的套接字。<br>master通过socketpair产生的套接字发送命令，来启动、停止worker子进程。<br>ngx_write_channel发送消息，ngx_read_channel接收消息。<br>worker使用ngx_add_channel_event方法把接收频道消息的套接字添加到epoll中，当接收到父进程消息时子进程会通过epoll的事件回调相应的handler方法来处理这个频道消息。</p>
+<h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><p>信号量是用来保证两个或多个代码段不被并发访问，是一种保证共享资源有序访问的工具。使用信号量作为互斥锁有可能导致进程睡眠，因此要谨慎使用。</p>
+<p>最初的信号量sem值为0，调用sem_post方法会把sem值加1，这个操作不会有任何阻塞；调用sem_wait方法会把信号量sem的值减1，如果sem值已经小于或等于0了，则阻塞住当前进程（进程会进入睡眠状态），知道其他进程将信号量sem的值改变为正数后，这是才能通过将sem减1而使得当前进程继续向下执行。因此sem_post方法可以实现解锁的功能，而sem_wait可以实现加锁的功能。</p>
+<h3 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h3><p><img src="/image/algorithm/nginx_palloc_large.jpg" alt="互斥锁五种操作方法"><br>ngx_shmtx_lock会阻塞进程，ngx_shmtx_trylock不会阻塞进程。<br>他们都通过操作ngx_shmtx_t类型的结构体来实现互斥操作。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> (NGX_HAVE_ATOMIC_OPS)</span></span><br><span class="line">    <span class="keyword">ngx_atomic_t</span> *lock; <span class="comment">// 原子变量锁</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> (NGX_HAVE_POSIX_SEM)</span></span><br><span class="line">    <span class="keyword">ngx_uint_t</span> semaphore; <span class="comment">// 表示获取锁将可能使用到的信号量</span></span><br><span class="line">    <span class="keyword">sem_t</span> sem; <span class="comment">// sem就是信号量锁</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="keyword">ngx_fd_t</span> fd; <span class="comment">// 使用文件锁时fd表示使用的文件句柄</span></span><br><span class="line">    u_char *name; <span class="comment">// 文件名</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">ngx_uint_t</span> spin; <span class="comment">// 自旋次数，表示在自旋状态下等待其他处理器执行结果中释放锁的时间</span></span><br><span class="line">&#125; <span class="keyword">ngx_shmtx_t</span>;</span><br></pre></td></tr></table></figure></p>
+<p>结构体对应着三种不同的实现：</p>
+<ol>
+<li>支持原子操作，但是不支持信号量</li>
+<li>支持原子操作，同时支持信号量</li>
+<li>不支持原子操作，使用文件锁实现</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/back-end/" rel="tag"># back-end</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/14/cpp/C++空指针调用类成员函数/" rel="next" title="C++空指针调用类成员函数">
+                <i class="fa fa-chevron-left"></i> C++空指针调用类成员函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/15/programming/编程语言语法概念/" rel="prev" title="编程语言语法概念">
+                编程语言语法概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx平台初探"><span class="nav-number">1.</span> <span class="nav-text">nginx平台初探</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初探nginx架构"><span class="nav-number">1.1.</span> <span class="nav-text">初探nginx架构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何编写http模块"><span class="nav-number">2.</span> <span class="nav-text">如何编写http模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发一个简单的http模块"><span class="nav-number">2.1.</span> <span class="nav-text">开发一个简单的http模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深入Nginx"><span class="nav-number">3.</span> <span class="nav-text">深入Nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx基础架构"><span class="nav-number">3.1.</span> <span class="nav-text">Nginx基础架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件驱动架构"><span class="nav-number">3.1.1.</span> <span class="nav-text">事件驱动架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求的多阶段异步处理"><span class="nav-number">3.1.2.</span> <span class="nav-text">请求的多阶段异步处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理进程、多工作进程设计"><span class="nav-number">3.1.3.</span> <span class="nav-text">管理进程、多工作进程设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件模块"><span class="nav-number">3.2.</span> <span class="nav-text">事件模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll事件驱动模块"><span class="nav-number">3.2.1.</span> <span class="nav-text">epoll事件驱动模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程间的通信机制"><span class="nav-number">3.3.</span> <span class="nav-text">进程间的通信机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#共享内存"><span class="nav-number">3.3.1.</span> <span class="nav-text">共享内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原子操作"><span class="nav-number">3.3.2.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx频道"><span class="nav-number">3.3.3.</span> <span class="nav-text">Nginx频道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量"><span class="nav-number">3.3.4.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#互斥锁"><span class="nav-number">3.3.5.</span> <span class="nav-text">互斥锁</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

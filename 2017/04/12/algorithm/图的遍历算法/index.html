@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="algorithm,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="和树的遍历类似，我们希望从图中某一顶点出发遍历图中其余顶点，且使每一个顶点仅被访问一次，这一过程就叫做图的遍历。图的遍历算法是求解图的连通性问题、拓扑排序和求解关键路径等算法的基础。然而图的遍历要比树的遍历复杂得多。因为图的任何一个顶点都可能和其余的顶点相邻接。所以在访问了某个顶点之后，可能沿着某条路径搜索之后，又回到该顶点上了。为了避免同一顶点被访问多次，在遍历图的过程中，必须记下每个已访问过的">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图的遍历算法">
+<meta property="og:url" content="http://yoursite.com/2017/04/12/algorithm/图的遍历算法/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="和树的遍历类似，我们希望从图中某一顶点出发遍历图中其余顶点，且使每一个顶点仅被访问一次，这一过程就叫做图的遍历。图的遍历算法是求解图的连通性问题、拓扑排序和求解关键路径等算法的基础。然而图的遍历要比树的遍历复杂得多。因为图的任何一个顶点都可能和其余的顶点相邻接。所以在访问了某个顶点之后，可能沿着某条路径搜索之后，又回到该顶点上了。为了避免同一顶点被访问多次，在遍历图的过程中，必须记下每个已访问过的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/image/algorithm/graph_example.png">
+<meta property="og:image" content="http://yoursite.com/image/algorithm/dijkstra_graph.jpg">
+<meta property="og:image" content="http://yoursite.com/image/algorithm/dijkstra_graph_process.jpg">
+<meta property="og:image" content="http://yoursite.com/image/algorithm/floyd_graph.png">
+<meta property="og:image" content="http://yoursite.com/image/algorithm/floyd_negative_graph.png">
+<meta property="og:image" content="http://yoursite.com/image/algorithm/dijkstra_graph.jpg">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图的遍历算法">
+<meta name="twitter:description" content="和树的遍历类似，我们希望从图中某一顶点出发遍历图中其余顶点，且使每一个顶点仅被访问一次，这一过程就叫做图的遍历。图的遍历算法是求解图的连通性问题、拓扑排序和求解关键路径等算法的基础。然而图的遍历要比树的遍历复杂得多。因为图的任何一个顶点都可能和其余的顶点相邻接。所以在访问了某个顶点之后，可能沿着某条路径搜索之后，又回到该顶点上了。为了避免同一顶点被访问多次，在遍历图的过程中，必须记下每个已访问过的">
+<meta name="twitter:image" content="http://yoursite.com/image/algorithm/graph_example.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/12/algorithm/图的遍历算法/">
+
+
+
+
+
+  <title>图的遍历算法 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/12/algorithm/图的遍历算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">图的遍历算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-12T09:55:08+08:00">
+                2017-04-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Blog/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>和树的遍历类似，我们希望从图中某一顶点出发遍历图中其余顶点，且使每一个顶点仅被访问一次，这一过程就叫做图的遍历。图的遍历算法是求解图的连通性问题、拓扑排序和求解关键路径等算法的基础。<br>然而图的遍历要比树的遍历复杂得多。因为图的任何一个顶点都可能和其余的顶点相邻接。所以在访问了某个顶点之后，可能沿着某条路径搜索之后，又回到该顶点上了。为了避免同一顶点被访问多次，在遍历图的过程中，必须记下每个已访问过的顶点。为此我们可以设置一个辅助数组visited[0…n-1]，他的初始值设为false或0，一旦访问了顶点vi，就把visited[i]置为true或被访问时的序号。</p>
+<p>通常有两条遍历图的路径：深度优先搜索和广度优先搜索。他们对有向图和无向图都适用。<br>深度优先相当于前序遍历树，广度优先相当于层次遍历树。<br><img src="/image/algorithm/graph_example.png" alt="图"><br>广度优先算法的遍历顺序为：1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6-&gt;7-&gt;8<br>深度优先算法的遍历顺序为：1-&gt;2-&gt;4-&gt;8-&gt;5-&gt;3-&gt;6-&gt;7<br><a id="more"></a></p>
+<h1 id="深度优先和广度优先"><a href="#深度优先和广度优先" class="headerlink" title="深度优先和广度优先"></a>深度优先和广度优先</h1><h2 id="深度优先"><a href="#深度优先" class="headerlink" title="深度优先"></a>深度优先</h2><p>深度优先搜索(Depth First Search)是沿着树的深度遍历树的节点，尽可能深的搜索树的分支。相当于树的前序遍历，总结起来就是“打破沙锅问到底”。<br>当节点v的所有边都己被探寻过，搜索将回溯到发现节点v的那条边的起始节点。这一过程一直进行到已发现从源节点可达的所有节点为止。如果还存在未被发现的节点，则选择其中一个作为源节点并重复以上过程，整个进程反复进行直到所有节点都被访问为止。属于盲目搜索。</p>
+<p>实现方式有两种，递归和非递归方式，递归方式比较简单，主要介绍一下非递归方式。<br>非递归实现：借助节点类型为队列的栈实现<br>联系树的前序遍历的非递归实现：无非是分成“探左”和“访右”两大块，访右需借助栈中弹出的结点进行。<br>在图的深度优先搜索中，可以分为“深度探索”和“回访上层未访问结点”两块：<br>考虑将每一个当前结点的下层节点中，如果有m个未访问节点，则最左的一个需要访问，而将剩余的m-1个结点按从左到右的顺序入队到一个队列中，然后将这个队列压入一个栈中。<br>当当前结点的邻接节点全部被访问时，需要回访上层未访问结点了，就将栈顶的队列节点依次出队就可以了。当队列出队完毕为空了，说明这一层的结点访问完毕，弹栈，接着去遍历栈顶的队列，就是上一层的节点了。</p>
+<p>伪码实现：递归版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">算法执行前visited[n]=0</span><br><span class="line">访问顶点v，visited[v]=1;</span><br><span class="line"></span><br><span class="line">w=顶点v的第一个邻接点</span><br><span class="line">while（w存在）</span><br><span class="line">    if（w未被访问）</span><br><span class="line">        从顶点w出发递归执行该算法； </span><br><span class="line">    w=顶点v的下一个邻接点；</span><br></pre></td></tr></table></figure></p>
+<p>非递归版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">栈S初始化</span><br><span class="line">visited[n]=0</span><br><span class="line">访问顶点v，visited[v]=1</span><br><span class="line">顶点v入栈S</span><br><span class="line"></span><br><span class="line">while (栈S非空)</span><br><span class="line">    x = 栈S的顶元素； // 此时还不出栈</span><br><span class="line">    if (存在并找到未被访问的x的邻接点w)</span><br><span class="line">        访问w；visited[w]=1；</span><br><span class="line">        w进栈；</span><br><span class="line">    else</span><br><span class="line">        x出栈；</span><br></pre></td></tr></table></figure></p>
+<p>stackoverflow上面的一个python实现<a href="https://stackoverflow.com/questions/5278580/non-recursive-depth-first-search-algorithm" target="_blank" rel="noopener">链接</a></p>
+<h2 id="广度优先"><a href="#广度优先" class="headerlink" title="广度优先"></a>广度优先</h2><p>广度优先搜索(Breadth First Search)又称作宽度优先搜索，或横向优先搜索，是从根节点开始，沿着树的宽度遍历树的节点，如果发现目标，则演算终止。相当于树的层次遍历。在Prime最小生成树算法，和Dijkstra单源最短路径算法中，都采用了与BFS算法类似的思想。<br>一般实现上参考树的层次遍历，使用队列来存储。</p>
+<p>伪码实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">初始化队列Q；</span><br><span class="line">visited[n] = 0；</span><br><span class="line">访问顶点v，visited[v] = 1；</span><br><span class="line">顶点v入队列Q；</span><br><span class="line"></span><br><span class="line">while（队列Q非空）   </span><br><span class="line">    v = 队列Q的队头元素，出队；</span><br><span class="line">    w = 顶点v的第一个邻接点；</span><br><span class="line">    while（w存在且未被访问过）</span><br><span class="line">        访问顶点w，visited[w]=1；</span><br><span class="line">        顶点w入队列Q；</span><br><span class="line">        w = 顶点v的下一个邻接点</span><br></pre></td></tr></table></figure></p>
+<h2 id="深度优先和广度优先的比较"><a href="#深度优先和广度优先的比较" class="headerlink" title="深度优先和广度优先的比较"></a>深度优先和广度优先的比较</h2><p>广度优先使用队列，入队出队，占内存多，速度快<br>深度优先使用栈，占内存少，递归压栈，速度慢</p>
+<h1 id="A-算法"><a href="#A-算法" class="headerlink" title="A*算法"></a>A*算法</h1><p>DFS和BFS在展开子结点时均属于盲目型搜索，也就是说，它不会选择哪个结点在下一次搜索中更优而去跳转到该结点进行下一步的搜索。在运气不好的情形中，均需要试探完整个解集空间，显然只能适用于问题规模不大的搜索问题中。<br>启发式搜索，就在于当前搜索结点往下选择下一步结点时，可以通过一个启发函数来进行选择，选择代价最少的结点作为下一步搜索结点而跳转其上（遇到有一个以上代价最少的结点，不妨选距离当前搜索点最近一次展开的搜索点进行下一步搜索）。<br>一个经过仔细设计的启发函数，往往在很快的时间内就可得到一个搜索问题的最优解，对于NP问题，亦可在多项式时间内得到一个较优解。是的，关键就是如何设计这个启发函数。</p>
+<p>A*算法，作为启发式算法中很重要的一种，被广泛应用在最优路径求解和一些策略设计的问题中。常用于游戏中的NPC的移动计算，或线上游戏的BOT的移动计算上。该算法像Dijkstra算法一样，可以找到一条最短路径；也像BFS一样，进行启发式的搜索。</p>
+<p>A<em>算法最为核心的部分，就在于它的一个估值函数的设计上：<br><code>f(n)=g(n)+h(n)</code><br>其中f(n)是每个可能试探点的估值，它有两部分组成：<br>一部分，为g(n)它表示从起始搜索点到当前点的代价（通常用某结点在搜索树中的深度来表示）<br>一部分，即h(n)它表示启发式搜索中最为重要的一部分，即当前结点到目标结点的估值，h(n)设计的好坏，直接影响着具有此种启发式函数的启发式算法的是否能称为A</em>算法。</p>
+<p>简述A*最短路径算法的方法：<br>目标：从当前位置A到目标位置B找到一条最短的行走路径。</p>
+<p>方法：从A点开始，遍历所有的可走路径，记录到一个结构中，记录内容为（位置点，最小步数）<br>当任何第二次走到一个点的时候，判断最小步骤是否小于记录的内容，如果是，则更新掉原最小步数，一直到所有的路径点都不能继续到了为止，最终那个点被标注的最小步数既即是最短路径，<br>而反向找跟它相连的步数相继少一个值的点连起来就形成了最短路径，当多个点相同，则任意取一条即可。</p>
+<p><a href="http://blog.csdn.net/hitwhylz/article/details/23089415" target="_blank" rel="noopener">参考博客</a></p>
+<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><p>首先将起始结点S放入OPEN表，CLOSE表置空，算法开始时：</p>
+<ol>
+<li>如果OPEN表不为空，从表头取一个结点n，如果为空算法失败。</li>
+<li>n是目标解吗？是，找到一个解（继续寻找，或终止算法）。</li>
+<li>将n的所有后继结点展开，就是从n可以直接关联的结点（子结点），如果不在CLOSE表中，就将它们放入OPEN表，并把S放入CLOSE表，同时计算每一个后继结点的估价值f(n)，将OPEN表按f(x)排序，最小的放在表头，重复算法，回到1。</li>
+</ol>
+<p>考虑到算法性能，外循环中每次从OPEN表取一个元素，共取了n次（共n个结点），每次展开一个结点的后续结点时，需O(n)次，同时再对OPEN表做一次排序，OPEN表大小是O(n)量级的，若用快排就是O(nlogn)，乘以外循环总的复杂度是O(n^2 * logn)，</p>
+<p>如果每次不是对OPEN表进行排序，因为总是不断地有新的结点添加进来，所以不用进行排序，而是每次从OPEN表中求一个最小的，那只需要O(n)的复杂度，所以总的复杂度为O(n*n)，这相当于Dijkstra算法。</p>
+<h1 id="最短路径算法"><a href="#最短路径算法" class="headerlink" title="最短路径算法"></a>最短路径算法</h1><h2 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h2><p>Dijkstra(迪杰斯特拉)算法是典型的单源最短路径算法，用于计算一个节点到其他所有节点的最短路径。</p>
+<p>算法思想：<br>设G = (V, E)是一个带权有向图。将图中的顶点集合V分成两个部分，一个部分是已经求出源点到该顶点的最短路径的点组成的集合（用S表示，初始化时只有一个出发源点a，以后每求出a到一个顶点v的最短路径，就将v添加到集合S中，直到全部顶点都被添加到S中，算法结束），第二个部分是还没有源点到该顶点的最短路径的点组成的集合（用U表示）</p>
+<p>算法步骤：</p>
+<ul>
+<li>初始化时，S只包含源点，S = {a}，a的距离为0。U包含顶点集合V中的除了源点a所有其他顶点。如果a和U中的顶点v相邻，则距离为正常权值&lt;a, v&gt;，如果不相邻，则距离为无穷</li>
+<li>从U中选取一个距离a最小的顶点v，把v加入到S中（这个距离就是a到v的最短路径长度），第一层处理完毕</li>
+<li>第二层顶点为所有第一层顶点能够到达的点，源点a到第二层顶点u的距离是所有第一层顶点的距离加上第一层顶点到第二层顶点u距离之和的最小值。</li>
+<li>重复上述操作直到处理完所有的集合U中的顶点。</li>
+</ul>
+<p>实例：一个图<br><img src="/image/algorithm/dijkstra_graph.jpg" alt="一个图"><br>处理流程<br><img src="/image/algorithm/dijkstra_graph_process.jpg" alt="处理流程"></p>
+<h2 id="Floyd最短路径算法"><a href="#Floyd最短路径算法" class="headerlink" title="Floyd最短路径算法"></a>Floyd最短路径算法</h2><blockquote>
+<p>Floyd-Warshall算法，中文亦称弗洛伊德算法，是解决任意两点间的最短路径的一种算法。可以正确处理有向图或负权（但不可存在负权回路)的最短路径问题，同时也被用于计算有向图的传递闭包。算法时间复杂度为O(N^3)，空间复杂度为O(N^2)。</p>
+</blockquote>
+<p>引一篇博客介绍弗洛伊德算法<a href="http://wiki.jikexueyuan.com/project/easy-learn-algorithm/floyd.html" target="_blank" rel="noopener">只有五行的 Floyd 最短路算法</a><br>假设准备去四个城市旅游。有些城市之间有公路，有些城市之间则没有，两个城市之间能够有连接表示能够直接到达，相当于一个有向图。如下图所示：<br><img src="/image/algorithm/floyd_graph.png" alt="城市关系图"><br>为了节省经费以及方便计划旅程，希望在出发之前知道任意两个城市之前的最短路程。<br>我们建立一张表，保存每两个城市之间的距离，如果不能直接到达就将其标为无穷，用inf表示</p>
+<table>
+<thead>
+<tr>
+<th>g</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>2</td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>inf</td>
+<td>0</td>
+<td>3</td>
+<td>inf</td>
+</tr>
+<tr>
+<td>3</td>
+<td>7</td>
+<td>inf</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>inf</td>
+<td>12</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>现在我们假设只允许经过1号顶点，求任意两点之间的最短距离。两点之间的直接距离为e[i][j]，经过1号顶点之后两点之间的记录为两段之和e[i][1]+e[1][j]，比较两者大小取较小值即可。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e[i][j] &gt; e[i][<span class="number">1</span>] + e[<span class="number">1</span>][j]) &#123;</span><br><span class="line">            e[i][j] = e[i][<span class="number">1</span>] + e[<span class="number">1</span>][j]; <span class="comment">// 取两者较小值</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在最短路径表更新为了</p>
+<table>
+<thead>
+<tr>
+<th>g</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>2</td>
+<td>6</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>inf</td>
+<td>0</td>
+<td>3</td>
+<td>inf</td>
+</tr>
+<tr>
+<td>3</td>
+<td>7</td>
+<td>9</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>7</td>
+<td>11</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>通过上图我们发现：在只通过 1 号顶点中转的情况下，3 号顶点到 2 号顶点（e[3][2]）、4 号顶点到 2 号顶点（e[4][2]）以及 4 号顶点到 3 号顶点（e[4][3]）的路程都变短了。</p>
+<p>那么允许经过顶点1和定点2两个点，求任意两点之间的最短距离如何求解？先计算只允许经过顶点1时任意两点的最短距离，然后在此基础上更新经过顶点2能够使得上面的距离表变短，得到最后的表就是最终的距离表<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先经过顶点1</span></span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e[i][j] &gt; e[i][<span class="number">1</span>] + e[<span class="number">1</span>][j]) &#123;</span><br><span class="line">            e[i][j] = e[i][<span class="number">1</span>] + e[<span class="number">1</span>][j]; <span class="comment">// 取两者较小值</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 然后经过顶点2</span></span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e[i][j] &gt; e[i][<span class="number">2</span>] + e[<span class="number">1</span>][<span class="number">2</span>]) &#123;</span><br><span class="line">            e[i][j] = e[i][<span class="number">2</span>] + e[<span class="number">1</span>][<span class="number">2</span>]; <span class="comment">// 取两者较小值</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么推广到允许经过任意顶点，求任意两点之间的最短距离，从1到n计算即可<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (k = <span class="number">1</span>; k &lt;= n; ++k) &#123;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e[i][j] &gt; e[i][k] + e[k][j]) &#123;</span><br><span class="line">                e[i][j] = e[i][k] + e[k][j]; <span class="comment">// 取两者较小值</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过分析可以清晰的看出，空间复杂度用了一个二维距离矩阵，为O(n^2)，时间复杂度三层遍历，为O(n^3)</p>
+<p>注意弗洛伊德算法不能解决带有“负权回路”的图，因为带有“负权回路”的图没有最短路径。<br>例如如下图就不存在顶点1到顶点3的最短路径。因为1-&gt;2-&gt;3-&gt;1-&gt;2-&gt;3…每绕一次1-&gt;2-&gt;3这样的环，最短路径就会减少1，所以永远不会找到最短路径。<br><img src="/image/algorithm/floyd_negative_graph.png" alt="负权图"></p>
+<h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><blockquote>
+<p>迪科斯彻算法使用了广度优先搜索解决赋权有向图的单源最短路径问题，算法最终得到一个最短路径树。该算法常用于路由算法或者作为其他图算法的一个子模块。</p>
+</blockquote>
+<p>上面介绍的弗洛伊德算法，可以方便的求得任意两点的最短路径，这称为“多源最短路径”，而Dijkstra算法可以计算指定一个点到其余各个顶点的最短路径，也叫做“单源最短路径”。<br><img src="/image/algorithm/dijkstra_graph.jpg" alt="图"><br>同弗洛伊德算法一样，我们使用一个二维数组存储顶点之间的关系</p>
+<table>
+<thead>
+<tr>
+<th>g</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>12</td>
+<td>inf</td>
+<td>inf</td>
+<td>inf</td>
+</tr>
+<tr>
+<td>2</td>
+<td>inf</td>
+<td>0</td>
+<td>9</td>
+<td>3</td>
+<td>inf</td>
+<td>inf</td>
+</tr>
+<tr>
+<td>3</td>
+<td>inf</td>
+<td>inf</td>
+<td>0</td>
+<td>inf</td>
+<td>5</td>
+<td>inf</td>
+</tr>
+<tr>
+<td>4</td>
+<td>inf</td>
+<td>inf</td>
+<td>4</td>
+<td>0</td>
+<td>13</td>
+<td>15</td>
+</tr>
+<tr>
+<td>5</td>
+<td>inf</td>
+<td>inf</td>
+<td>inf</td>
+<td>inf</td>
+<td>0</td>
+<td>4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>inf</td>
+<td>inf</td>
+<td>inf</td>
+<td>inf</td>
+<td>inf</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>然后再用一个一维数组dis来存储1号顶点到其余各个顶点的初始路程</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>12</td>
+<td>inf</td>
+<td>inf</td>
+<td>inf</td>
+</tr>
+</tbody>
+</table>
+<p>将此时dis数组中的值称为最短路的“估计值”<br>既然是求 1 号顶点到其余各个顶点的最短路程，那就先找一个离 1 号顶点最近的顶点。通过数组 dis 可知当前离 1 号顶点最近是 2 号顶点。当选择了 2 号顶点后，dis[2]的值就已经从“估计值”变为了“确定值”，即 1 号顶点到 2 号顶点的最短路程就是当前 dis[2]值。为什么呢？目前离 1 号顶点最近的是 2 号顶点，并且这个图所有的边都是正数，那么肯定不可能通过第三个顶点中转，使得 1 号顶点到 2 号顶点的路程进一步缩短了。因为 1 号顶点到其它顶点的路程肯定没有 1 号到 2 号顶点短。</p>
+<p>接下来再来看 2 号顶点有哪些出边呢。有 2-&gt;3 和 2-&gt;4 这两条边。先讨论通过 2-&gt;3 这条边能否让 1 号顶点到 3 号顶点的路程变短。也就是说现在来比较 dis[3]和 dis[2]+e[2][3]的大小。其中 dis[3]表示 1 号顶点到 3 号顶点的路程。dis[2]+e[2][3]中 dis[2]表示 1 号顶点到 2 号顶点的路程，e[2][3]表示 2-&gt;3 这条边。所以 dis[2]+e[2][3]就表示从 1 号顶点先到 2 号顶点，再通过 2-&gt;3 这条边，到达 3 号顶点的路程。</p>
+<p>我们发现dis[3]=12，dis[2]+e[2][3]=1+9=10，dis[3]&gt;dis[2]+e[2][3]，因此dis[3]要更新为10。这个过程有个专业术语叫做<em>松弛</em>。即1号顶点到3号顶点的路程即dis[3]，通过2-&gt;3这条边松弛成功。这便是Dijkstra算法的主要思想：通过“边”来松弛1号顶点到其余各个顶点的路程。<br>根据这个松弛策略我们就能够得到1号顶点到其余各个顶点的最短路径了。</p>
+<p>dijkstra算法思想：<br>先找到离源点最近的一个顶点，然后以这个顶点为中心进行扩展，最终得到源点到其余所有点的最短路径。</p>
+<ol>
+<li>将所有顶点分为两个部分：已知最短路程的顶点集合P和未知最短路径的顶点集合Q。最开始集合P中只有源点一个顶点。用book[i]数组来记录哪些点在集合P中。</li>
+<li>设置源点s到自己的最短路径为0即dis=0。若存在源点有能直接到达的顶点i，则把dis[i]设为e[s][i]。同时把所有其它（源点不能直接到达的）顶点的最短路径为设为inf</li>
+<li>在集合Q的所有顶点中选择一个离源点s最近的顶点u（即dis[u]最小）加入到集合P。并考察所有以点u为起点的边，对每一条边进行松弛操作。例如存在一条从u到v的边，那么可以通过将边u-&gt;v添加到尾部来拓展一条从s到v的路径，这条路径的长度是dis[u]+e[u][v]。如果这个值比目前已知的dis[v]的值要小，我们可以用新值来替代当前dis[v]中的值。</li>
+<li>重复第3步，如果集合Q为空，算法结束。最终dis数组中的值就是源点到所有顶点的最短路径。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    dis[i] = e[<span class="number">1</span>][i]; <span class="comment">// 1号顶点到其余各个顶点的初始路程</span></span><br><span class="line">    book[i] = <span class="number">0</span>; <span class="comment">// 开始没有点在已知最短路程的顶点集合P中</span></span><br><span class="line">&#125;</span><br><span class="line">book[<span class="number">1</span>] = <span class="number">1</span>; <span class="comment">// 将顶点1放入已知最短路程的顶级集合P中</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n<span class="number">-1</span>; ++i) &#123; <span class="comment">// 顶点1已经放入了，所以还需要循环n-1次</span></span><br><span class="line">    <span class="keyword">int</span> min = inf; <span class="comment">// 找到离1号顶点最近的顶点，设置初始值为无穷大</span></span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">        <span class="keyword">if</span> (book[j] == <span class="number">0</span> &amp;&amp; dis[j] &lt; min) &#123;</span><br><span class="line">            min = dis[j]; <span class="comment">// 找到最近的顶点</span></span><br><span class="line">            index = j; <span class="comment">// 最近的顶点的索引</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    book[index] = <span class="number">1</span>; <span class="comment">// 将最近的顶点加入到集合P中</span></span><br><span class="line">    <span class="keyword">for</span> (k = <span class="number">1</span>; k &lt;= n; ++k) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e[index][k] != inf) &#123;</span><br><span class="line">            <span class="keyword">if</span> (dis[k] &gt; dis[index] + e[index][k]) &#123;</span><br><span class="line">                dis[k] = dis[index] + e[index][k]; <span class="comment">// 松弛这条路径</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>，这个算法的时间复杂度是 O(N^2)。其中每次找到离 1 号顶点最近的顶点的时间复杂度是 O(N)，这里我们可以用“堆”（以后再说）来优化，使得这一部分的时间复杂度降低到 O(logN)。另外对于边数 M 少于 N2 的稀疏图来说（我们把 M 远小于 N2 的图称为稀疏图，而 M 相对较大的图称为稠密图），我们可以用邻接表（这是个神马东西？不要着急，下周再仔细讲解）来代替邻接矩阵，使得整个时间复杂度优化到 O( (M+N)logN )。请注意！在最坏的情况下 M 就是 N2，这样的话 MlogN 要比 N2 还要大。但是大多数情况下并不会有那么多边，因此(M+N)logN 要比 N2 小很多。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/11/cpp/程序开发中常见错误/" rel="next" title="程序开发中常见错误">
+                <i class="fa fa-chevron-left"></i> 程序开发中常见错误
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/12/algorithm/GC垃圾回收算法/" rel="prev" title="GC垃圾回收算法">
+                GC垃圾回收算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#深度优先和广度优先"><span class="nav-number">1.</span> <span class="nav-text">深度优先和广度优先</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#深度优先"><span class="nav-number">1.1.</span> <span class="nav-text">深度优先</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广度优先"><span class="nav-number">1.2.</span> <span class="nav-text">广度优先</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深度优先和广度优先的比较"><span class="nav-number">1.3.</span> <span class="nav-text">深度优先和广度优先的比较</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A-算法"><span class="nav-number">2.</span> <span class="nav-text">A*算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法流程"><span class="nav-number">2.1.</span> <span class="nav-text">算法流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最短路径算法"><span class="nav-number">3.</span> <span class="nav-text">最短路径算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dijkstra算法"><span class="nav-number">3.1.</span> <span class="nav-text">Dijkstra算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Floyd最短路径算法"><span class="nav-number">3.2.</span> <span class="nav-text">Floyd最短路径算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dijkstra"><span class="nav-number">3.3.</span> <span class="nav-text">Dijkstra</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Linux,back-end,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="UNIX环境高级编程 读书笔记">
+<meta name="keywords" content="Linux,back-end">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UNIX环境高级编程 读书笔记">
+<meta property="og:url" content="http://yoursite.com/2017/05/05/back-end/UNIX环境高级编程 读书笔记/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="UNIX环境高级编程 读书笔记">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/image/programming/UNIX_structure.png">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UNIX环境高级编程 读书笔记">
+<meta name="twitter:description" content="UNIX环境高级编程 读书笔记">
+<meta name="twitter:image" content="http://yoursite.com/image/programming/UNIX_structure.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/05/back-end/UNIX环境高级编程 读书笔记/">
+
+
+
+
+
+  <title>UNIX环境高级编程 读书笔记 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/05/back-end/UNIX环境高级编程 读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UNIX环境高级编程 读书笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-05T19:24:41+08:00">
+                2017-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>UNIX环境高级编程 读书笔记<br><a id="more"></a></p>
+<h1 id="UNIX基础知识"><a href="#UNIX基础知识" class="headerlink" title="UNIX基础知识"></a>UNIX基础知识</h1><h2 id="UNIX体系结构"><a href="#UNIX体系结构" class="headerlink" title="UNIX体系结构"></a>UNIX体系结构</h2><p>从严格意义上说可将操作系统定义为一种软件，它控制计算机硬件资源，提供程序运行环境。我们通常将这种软件称为<em>内核</em>(kernel)，因为它相对较小，而且位于环境的核心。<br><img src="/image/programming/UNIX_structure.png" alt="UNIX体系结构"></p>
+<p>内核的接口被称为<em>系统调用</em>(system call)，公共函数库构建在系统调用接口上，应用程序既可使用公共函数库，也可使用系统调用。shell是一个特殊的应用程序，为运行其他应用程序提供了一个接口。</p>
+<h2 id="文件和目录"><a href="#文件和目录" class="headerlink" title="文件和目录"></a>文件和目录</h2><p>UNIX文件系统是目录和文件的一种层次结构，所有东西的起点是称为根(root)的目录，这个目录的名称是一个字符”/“。目录是一个包含目录项的文件。每个目录项都包含一个文件名、文件属性信息。<br>创建新目录时会自动创建两个文件名：.（点）和..（点点）。点指向当前目录，点点指向父目录。在最高层次的根目录中，点点与点相同。<br>以斜线开头的路径名称为绝对路径名，否则称为相对路径名。相对路径名指向相对于当前目录的文件。文件系统跟的名字(/)是一个特殊的绝对路径名，它不包含文件名。</p>
+<p>使用C库函数实现ls命令<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dirent.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    DIR * dp;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">dirent</span>* <span class="title">dirp</span>;</span></span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"usage: ls directory_name!\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ((dp = opendir(argv[<span class="number">1</span>])) == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"can't open %s!\n"</span>, argv[<span class="number">1</span>]);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ((dirp = readdir(dp)) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, dirp-&gt;d_name);</span><br><span class="line">    &#125;</span><br><span class="line">    closedir(dp);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="输入和输出"><a href="#输入和输出" class="headerlink" title="输入和输出"></a>输入和输出</h2><ol>
+<li>文件描述符<br>文件描述符通常是一个小的非负整数，内核用以标识一个特定进程正在访问的文件。当内核打开一个现有文件或创建一个新文件时，它都返回一个文件描述符。在读、写文件时，可以使用这个文件描述符。</li>
+<li>标准输入、标准输出和标准错误<br>每当运行一个新程序时，所有的shell都为其打开3个文件描述符，即标准输入、标准输出、标准错误。如果不做特殊处理，这三个描述符都链接向终端。大多数shell都提供一种方法，是其中任何一个或所有者三个描述符都能重新定向到某个文件。<br>ls &gt; file.list<br>执行ls命令，其标准输出重新定向到名为file.list的文件</li>
+<li>不带缓冲的I/O<br>函数open、read、write、lseek以及close提供了不带缓冲的I/O。这些函数都使用文件描述符。</li>
+<li>标准I/O<br>标准I/O函数为那些不带缓冲的I/O函数提供了一个带缓冲的接口。最常见的标准I/O函数时printf，该头文件包括了所有标准I/O函数的原型。</li>
+</ol>
+<h2 id="程序和进程"><a href="#程序和进程" class="headerlink" title="程序和进程"></a>程序和进程</h2><ol>
+<li>程序<br>程序是一个存储在磁盘上的可执行文件。内核使用exec函数将程序读入内存并执行程序</li>
+<li>进程和进程ID<br>程序的执行实例被称为进程。UNIX系统确保每个进程都有一个唯一的数字标识符（非负整数），称为进程ID。</li>
+<li>进程控制<br>有3个用于进程控制的主要函数：fork、exec和waitpid</li>
+<li>线程和线程ID<br>通常一个进程只有一个控制线程。线程是某一时刻执行的一组机器指令。<br>一个进程内的所有线程共享同一地址空间、文件描述符、栈以及与进程相关的属性。因为他们能访问同一存储区，所以各线程在访问共享数据时需要采取同步措施以避免不一致性。<br>线程ID只在它所属的进程内部起作用。一个进程中的线程ID在另一个进程中没有意义。当在一进程中对某个特定线程进行处理时，我们可以使用该线程的ID引用它。</li>
+</ol>
+<h2 id="出错处理"><a href="#出错处理" class="headerlink" title="出错处理"></a>出错处理</h2><p>当UNIX系统函数出错时，通常会返回一个负值，而且整形变量errno通常被设置为具有特定信息的值。头文件errno.h中定义了errno以及可以赋予它的各种常量。<br>可以将在errno.h中定义的出错分为两类：致命性的和非致命性的。对于致命性的错误，无法执行恢复动作。最多能做的是在用户屏幕上打印出一条出错消息或者将一条出错消息写入日志文件中，然后退出。对于非致命性的出错，有时可以较妥善地进行处理。大多数非致命性出错时暂时的（如资源短缺），对于资源相关的非致命性出错的典型恢复操作是延迟一段时间然后重试。这种技术可应用于其他情况。</p>
+<h2 id="用户标识"><a href="#用户标识" class="headerlink" title="用户标识"></a>用户标识</h2><ol>
+<li>用户ID：ID为0的用户为root，root用户对系统有自由支配权。</li>
+<li>组ID：组将若干用户集合到不同的地方去，同组用户共享资源，组外用户不能访问。</li>
+</ol>
+<h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><p>UNIX系统使用两种时间：</p>
+<ol>
+<li>日历时间：自从1970年1月1日00:00:00以来经历过的秒数累计值。用time_t数据类型来保存这种时间值。</li>
+<li>进程时间：以时钟计时单元来计算，用clock_t数据类型保存这种时间值。</li>
+</ol>
+<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>信号用于通知进程发生了某种情况。<br>终端键盘上有两种产生信号的方法，分别称为中断键(Ctrl+c或Delete键)和退出键(Ctrl+)，他们被用于终端当前运行的进程。另一种产生信号的方法是调用kill函数。在一个进程中调用此函数就可以想另一个进程发送一个信号。当向一个进程发送信号时，我们必须是那个进程的所有者或者是超级用户。</p>
+<h2 id="UNIX标准"><a href="#UNIX标准" class="headerlink" title="UNIX标准"></a>UNIX标准</h2><p>ISO C：意图是提供C程序的可移植性，使得它能够适合于大量不同的操作系统。<br>POSIX(Portable Operating System Interface): 指的是可移植操作系统接口。该标准的目的是提升应用程序在各种UNIX系统环境之间的可移植性。<br>目前UNIX主要有以下实现：SVR4(UNIX System V Release 4)、4.4 BSD(Berkeley Software Distribution)、FreeBSD、Linux、Mac OS X、Solaris</p>
+<h1 id="文件I-O"><a href="#文件I-O" class="headerlink" title="文件I/O"></a>文件I/O</h1><p>本章描述的函数经常被称为 <em>不带缓冲</em>的I/O(unbuffered I/O)。不带缓冲是指每个read和write有调用内核中的一个系统调用。只要涉及在多个进程间共享资源，原子操作的概念就变得非常重要。我们通过文件I/O和open函数的参数来讨论此概念。</p>
+<h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>对于内核而言，所有打开的文件都通过文件描述符引用。当打开一个现有文件或创建一个新文件时，内核向进程返回一个文件描述符，当读、写一个文件时，使用open或create返回的文件描述符标识该文件，将其作为参数传送给read或write。<br>UNIX系统shell将文件描述符0与进程标准输入关联，1与标准输出关联，2与标准错误关联。</p>
+<h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><p>原子操作(automic operation)指的是由多步组成的一个操作。如果该操作原子地执行，则要么执行完所有步骤，要么一步也不执行，不可能只执行所有步骤的一个子集。</p>
+<h1 id="文件和目录-1"><a href="#文件和目录-1" class="headerlink" title="文件和目录"></a>文件和目录</h1><h2 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h2><p>UNIX系统文件类型包括以下几种：</p>
+<ol>
+<li>普通文件</li>
+<li>目录文件。这种文件包含了其他文件名字以及指向与这些文件有关信息的指针。对一个目录文件具有读权限的任意进程都可以读该目录的内容，但只有内核可以直接写目录文件</li>
+<li>块特殊文件。提供对设备（如磁盘）带缓冲的访问，每次访问以固定长度为单位进行。</li>
+<li>字符特殊文件。提供对设备不带缓冲的访问</li>
+<li>FIFO。用于进程间通信，被称为命名管道</li>
+<li>套接字socket。用于进程间的网络通信，也可用于一台宿主机上进程间的非网络通信。</li>
+<li>符号链接。指向另一个文件</li>
+</ol>
+<h2 id="文件访问权限"><a href="#文件访问权限" class="headerlink" title="文件访问权限"></a>文件访问权限</h2><p>每个文件有9个访问权限位，可将它们分为3类<br>用户、组、其他，3类中有三个权限读、写、执行</p>
+<h2 id="几个函数"><a href="#几个函数" class="headerlink" title="几个函数"></a>几个函数</h2><p>umask函数为进程设置文件模式创建屏蔽字，并返回之前的值。<br>在进程创建一个新文件或新目录时，就一定会使用文件模式创建屏蔽字。用户可以设置umask值以控制他们所创建文件的默认权限。</p>
+<p>chmod函数使我们可以更改现有文件的访问权限。</p>
+<h1 id="标准I-O库"><a href="#标准I-O库" class="headerlink" title="标准I/O库"></a>标准I/O库</h1><p>标准I/O库处理很多细节，如缓冲区分配、以优化的块长度执行I/O等。这些处理使用户不必担心如何选择使用正确的块长度。</p>
+<h2 id="缓冲"><a href="#缓冲" class="headerlink" title="缓冲"></a>缓冲</h2><p>标准I/O库提供缓冲的目的是尽可能减少使用read和write调用的次数。它也对每个I/O刘自动地进行缓冲管理。标准I/O提供了以下3种类型的缓冲：</p>
+<ol>
+<li>全缓冲。在填满标准I/O缓冲区后才进行实际I/O操作。flush意味着将缓冲区中的内容写到磁盘上（在终端驱动程序上flush表示丢弃已存储在缓冲区中的数据）</li>
+<li>行缓冲。当在输入输出中遇到换行符时，标准I/O库执行I/O操作。</li>
+<li>不带缓冲。标准I/O库不对字符进行缓冲存储。字符信息很快输出出来</li>
+</ol>
+<h2 id="格式化I-O"><a href="#格式化I-O" class="headerlink" title="格式化I/O"></a>格式化I/O</h2><ol>
+<li>格式化输出：printf，将格式化数据写到标准输出</li>
+<li>格式化输入：scanf</li>
+</ol>
+<h1 id="进程环境"><a href="#进程环境" class="headerlink" title="进程环境"></a>进程环境</h1><h2 id="C程序"><a href="#C程序" class="headerlink" title="C程序"></a>C程序</h2><p>C程序总是从main函数开始执行，内核执行C程序时（使用exec函数）在调用main前先调用一个特殊的启动例程。可执行程序文件将此启动例程指定为程序的起始地址。</p>
+<p>C程序的存储空间布局：</p>
+<ol>
+<li>正文段。可共享，只读</li>
+<li>初始化数据段。存放程序中需明确的赋初值的变量</li>
+<li>未初始化数据段。BSS(block started by symbol)段，程序开始执行之前，内核将此段中的数据初始化为0或空指针</li>
+<li>栈。自动变量和函数调用保存的信息保存在此段中</li>
+<li>堆。动态存储分配数据</li>
+</ol>
+<h2 id="共享库"><a href="#共享库" class="headerlink" title="共享库"></a>共享库</h2><p>共享库使得可执行文件中不再需要包含公共的库函数，而只需在所有进程都可引用的存储区中保存这种库例程的一个副本。共享库的另一个优点是可以用库函数的新版本代替老版本而无需对使用该库的程序重新连接编辑。</p>
+<h2 id="函数setjmp和longjmp"><a href="#函数setjmp和longjmp" class="headerlink" title="函数setjmp和longjmp"></a>函数setjmp和longjmp</h2><p>在C中，goto语句时不能跨越函数的，而执行这种类型跳转功能的是函数setjmp和longjmp。这两个函数对于处理发生在很深层嵌套函数调用中的出错情况是非常有用的。<br>使用longjmp后返回到main函数时，main函数中的自动变量和寄存器变量的值不一定能恢复到以前调用setjmp是的数值。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;setjmp.h&gt;</span></span></span><br><span class="line"><span class="keyword">static</span> jmp_buf buf;  </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">second</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"second\n"</span>);         <span class="comment">// 打印</span></span><br><span class="line">    longjmp(buf,<span class="number">1</span>);             <span class="comment">// 跳回setjmp的调用处 - 使得setjmp返回值为1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">first</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    second();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"first\n"</span>);          <span class="comment">// 不可能执行到此行</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ( ! setjmp(buf) ) &#123;</span><br><span class="line">        first();                <span class="comment">// 进入此行前，setjmp返回0</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;                    <span class="comment">// 当longjmp跳转回，setjmp返回1，因此进入此行</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"main\n"</span>);       <span class="comment">// 打印</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>程序最后输出second main<br>1、setjmp与longjmp结合使用时，它们必须有严格的先后执行顺序，也即先调用setjmp函数，之后再调用longjmp函数，以恢复到先前被保存的“程序执行点”。否则，如果在setjmp调用之前，执行longjmp函数，将导致程序的执行流变的不可预测，很容易导致程序崩溃而退出。</p>
+<ol start="2">
+<li>longjmp必须在setjmp调用之后，而且longjmp必须在setjmp的作用域之内。具体来说，在一个函数中使用setjmp来初始化一个全局标号，然后只要该函数未曾返回，那么在其它任何地方都可以通过longjmp调用来跳转到 setjmp的下一条语句执行。实际上setjmp函数将发生调用处的局部环境保存在了一个jmp_buf的结构当中，只要主调函数中对应的内存未曾释放 （函数返回时局部内存就失效了），那么在调用longjmp的时候就可以根据已保存的jmp_buf参数恢复到setjmp的地方执行。</li>
+</ol>
+<h1 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h1><h2 id="进程标识"><a href="#进程标识" class="headerlink" title="进程标识"></a>进程标识</h2><p>每个进程都有一个非负整数表示的唯一进程ID。进程ID是唯一的、可复用的。（UNIX系统实现延迟复用算法，使得赋予新建进程的ID不同于最近终止进程所使用的ID，这防止了将新进程误认为是使用同一ID的某个已终止的先前进程）<br>使用getpid函数可以返回进程的进程ID<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="keyword">pid_t</span> getpid(<span class="keyword">void</span>); <span class="comment">// 返回值：调用进程的进程ID</span></span><br></pre></td></tr></table></figure></p>
+<p>pid_t定义在types.h头文件中，就是int类型</p>
+<h2 id="fork函数"><a href="#fork函数" class="headerlink" title="fork函数"></a>fork函数</h2><p>一个现有的进程可以调用fork函数创建一个新进程。<br>由fork创建的新进程被称为子进程。fork函数被调用一次，但返回两次：子进程返回值为0,父进程返回值为子进程的进程ID。<br>子进程和父进程继续执行fork调用之后的指令，子进程是父进程的副本，子进程获得父进程数据空间、堆和栈的副本。但是父进程和子进程并不共享这些存储空间部分，他们只共享正文段(text segment，代码段)。<br>由于在fork之后经常跟随者exec，所以现在的很多实现并不执行一个父进程数据段、栈和堆的完全副本。作为替代，使用了写时复制技术。这些区域由父进程和子进程共享，而且内核将它们的访问权限改变为只读。如果父进程和子进程中人一个试图修改这些区域，则内核只为修改区域的那块内存制作一个副本。<br>fork之后是父进程先执行还是子进程先执行时不确定的，这取决于内核所使用的调度算法</p>
+<p>当用户的进程总数超过了CHILD_MAX系统规定最大进程数，fork会失败。</p>
+<p>一个已经终止、但是其父进程尚未对其进行善后处理（获取终止子进程的有关信息、释放它仍占用的资源）的进程被称为僵尸进程。</p>
+<p>fork有以下两方面的用法：一般用于实现并发操作</p>
+<ol>
+<li><p>一个父进程希望复制自己，使父进程和子进程同时执行不同的代码段（使用if语句判断fork函数值返回是否为0来执行不同代码块）。这在网络服务器进程中最常见——父进程等待客户端的服务请求，当请求到达时，父进程调用fork产生子进程，子进程处理客户端的请求，而父进程接着等待客户端的请求。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    connfd = accept();</span><br><span class="line">    <span class="keyword">if</span> ((pid = fork()) == <span class="number">0</span>) &#123;</span><br><span class="line">        close(listenfd);</span><br><span class="line">        service();</span><br><span class="line">        close(connfd);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>):</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        close(connfd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>一个进程要执行不同的程序。在shell中很常见。在这种情况下子进程从fork返回后立即调用exec，一般这个时候可以使用vfork函数。</p>
+</li>
+</ol>
+<p>一旦进程调用了exec函数，系统把代码段替换成新的程序的代码，废弃原有的数据段和堆栈段，唯一留下的是进程号。对系统而言，还是同一个进程，不过已经是另一个程序了。</p>
+<p>stdlib.h中的system函数在实现中调用了fork、exec和waitpid<br>waitpid是如果子进程正在运行，则阻塞</p>
+<h1 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h1><h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>管道两个局限：半双工（数据只能在一个方向上流动）、进程需要有父子关系（有名管道FIFO可以用于任意两个进程间的通信）<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> fd[<span class="number">2</span>])</span></span>; <span class="comment">// 无名管道</span></span><br></pre></td></tr></table></figure></p>
+<p>fd[0]为读而打开，fd[1]为写而打开，fd[1]的输出是fd[0]的输入。</p>
+<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><p>共享内存是运行在同一台机器上的进程间通信最快的方式，因为数据不需要在不同的进程间复制。通常由一个进程创建一块共享内存区，其余进程对这块内存区进行读写。<br>使用共享存储来实现进程间通信的注意点是对数据存取的同步，必须确保当一个进程去读取数据时，它所想要的数据已经写好了。通常，信号量被要来实现对共享存储数据存取的同步。</p>
+<p>共享内存是一段可以被多进程共享的物理内存，各个进程在使用之前，需要将这段物理内存映射到本进程的虚拟地址空间，系统调用是shmget+shmat或者shm_open+mmap。</p>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>本质上，信号量是一个计数器，它用来记录对某个资源（如共享内存）的存取状况。<br>为了获得共享资源，进程需要执行下列操作：</p>
+<ol>
+<li>测试控制该资源的信号量。</li>
+<li>若此信号量的值为正，则允许进行使用该资源。进程将进号量减1。</li>
+<li>若此信号量为0，则该资源目前不可用，进程进入睡眠状态，直至信号量值大于0，进程被唤醒，转入步骤1。</li>
+<li>当进程不再使用一个信号量控制的资源时，信号量值加1。如果此时有进程正在睡眠等待此信号量，则唤醒此进程。</li>
+</ol>
+<p>信号量是原子操作，只允许对它进行PV操作。(P操作获取资源，信号量减1,V操作释放资源，信号量加1)，信号量一般是用来同步。</p>
+<h2 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h2><p>网络间进程通信</p>
+<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><h2 id="线程的基本概念"><a href="#线程的基本概念" class="headerlink" title="线程的基本概念"></a>线程的基本概念</h2><p>线程的3个基本状态：就绪、执行、阻塞<br>就绪→执行、执行→阻塞、阻塞→就绪、执行→就绪<br>本来是就绪、执行、阻塞三个的循环，但是多了一个执行到就绪状态，这个是当一个线程正在执行，但是时间片使用完了，所以从执行态转换成了就绪态。</p>
+<p>线程的分类：根据操作系统内核是否对线程可感知，可以把线程分为内核线程和用户线程</p>
+<ol>
+<li>用户级线程：由用户来管理线程，内核意识不到用户级线程的实现，还是对进程单线程管理。</li>
+<li>内核级线程：</li>
+</ol>
+<p>原子操作：则要么执行完所有步骤，要么一步也不执行，不可能只执行所有步骤的一个子集。<br>线程安全：多线程的程序运行结果是可预期的，多个线程同时调用该函数，允许出现互相影响的情况。<br>可重入：函数被多次调用但是结果具有可再现性。比线程安全要求更高，要求不使用、返回任何非常量的 全局、静态 变量，也不调用任何不可重入函数。</p>
+<p>可重入函数必定是线程安全的，但是线程安全的函数不一定是可重入的。</p>
+<p>多线程中栈是私有的，堆是公有的。</p>
+<h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><ol>
+<li><p>互斥量：mutex从本质上来说是一把锁，在访问共享资源前对互斥量进行加锁，访问完后解锁互斥量。对互斥量加锁以后，任何其他视图再次对胡次梁加锁的线程都会被阻塞。<br>注意死锁的出现：<br>假设：当线程1获取锁1，再获取锁2后才能进入临界区1，线程2获取锁2，再获取锁1才能进入临界区2。某个时刻，线程1获取了锁1，再去获取锁2的时候发现锁2已经被线程2锁住了，而线程2获取锁2后，发现锁1被线程1锁住了。这样2个线程谁也不让谁，都进不了自己的临界区，就产生了死锁现象！一般遇到这种情况常见的解决办法是：规定统一的加锁顺序。线程1和线程2都按照先锁1，再锁2。</p>
+</li>
+<li><p>临界区：</p>
+</li>
+<li><p>读写锁：可以理解为共享互斥锁，当是读模式锁住时，表示是以共享模式锁住的（所有以读模式对他加锁的线程都有访问权）；当是写模式锁住时，表示是以互斥模式锁住的（任何以写模式对他加锁的线程都会阻塞）。当读入数据次数远多于写入数据的情况时，读写锁非常合适。</p>
+</li>
+<li><p>条件变量：信号量只有锁住和不锁两种状态，而且当条件变量和信号量一起使用时，允许线程以无竞争的方式等待特定的条件发生。</p>
+</li>
+</ol>
+<h1 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h1><p>守护进程daemon：生存期长的一种进程。它们经常在系统引导启动时启动，仅在系统关闭时终止；它们没有控制终端，因此是在后台运行的。</p>
+<p>守护进程是一种很有用的进程。Linux的大多数服务器就是用守护进程实现的。比如，Internet服务器inetd，Web服务器httpd等。同时，守护进程完成许多系统任务。比如，作业规划进程crond，打印进程lpd等。（这里的结尾字母d就是Daemon的意思）</p>
+<p>大多数守护进程都是以root特权运行，没有控制终端，所以在ps显示的信息中，终端名为问号。</p>
+<p>编写守护进程步骤：</p>
+<ul>
+<li><p>使进程在后台运行<br>为了让进程在后台运行，我们可以fork出一个子进程，然后让当前进程退出，那么子进程就是在后台运行了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((pid = fork()) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">//父进程退出</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (pid &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    perror(<span class="string">"fail to fork"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>脱离控制终端，登录会话和进程组（创建新会话）<br>Linux中的进程与控制终端，登录会话和进程组之间的关系：<br>进程属于一个进程组，进程组号（GID）就是进程组长的进程号（PID）。<br>登录会话可以包含多个进程组。这些进程组共享一个控制终端。这个控制终端通常是创建进程的登录终端。<br>控制终端、登录会话和进程组通常是从父进程继承下来的。我们的目的就是要摆脱它们，使之不受它们的影响。</p>
+</li>
+</ul>
+<p>调用setsid()函数使得进程成为会话组长，并与原来的登录会话和进程组脱离，由于会话过程对控制终端的独占性，进程同时与控制终端脱离。</p>
+<ul>
+<li><p>关闭所有文件描述符<br>进程从创建它的父进程那里继承了打开的文件描述符。如不关闭，将会浪费系统资源，造成进程所在的文件系统无法卸下以及引起无法预料的错误。</p>
+</li>
+<li><p>改变当前工作目录<br>进程活动时，其工作目录所在的文件系统不能卸下。一般需要将工作目录改变到根目录。</p>
+</li>
+<li><p>重设权限掩码<br>进程从创建它的父进程那里继承了文件创建掩码。它可能修改守护进程所创建的文件的存取位。为防止这一点，将文件创建掩模清除。</p>
+</li>
+</ul>
+<p>总结起来就是要脱离所有跟父进程相关的东西，变成后台的独立运行的进程<br>所以fork之后退出父进程让子进程变成后台运行<br>setsid让子进程变成新的进程组长<br>关掉之前父进程打开的文件描述符<br>重设权限<br>切换目录<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pid;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (pid = fork()) &#123;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>); <span class="comment">//结束父进程</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pid &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        perror(<span class="string">"fail to fork"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 子进程，后台继续执行</span></span><br><span class="line">    setsid(); <span class="comment">//子进程成为新的会话组长和进程组长</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; FOPEN_MAX; ++i) &#123; <span class="comment">//关闭打开的文件描述符</span></span><br><span class="line">        close(i);</span><br><span class="line">    &#125;</span><br><span class="line">    chdir(<span class="string">"/"</span>); <span class="comment">//切换工作目录</span></span><br><span class="line">    umask(<span class="number">0</span>); <span class="comment">//重设文件创建掩模</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="单例守护进程"><a href="#单例守护进程" class="headerlink" title="单例守护进程"></a>单例守护进程</h2><p>为了正常运行，某些守护进程要求实现为单例模式：任何时刻只能运行一个该守护进程。<br>为了创建单例守护进程，可以使用文件和记录锁。</p>
+<ul>
+<li>如果为守护进程创建一个固定名字的文件，并且在该文件的整体上加一把写锁，那么只允许创建一把这样的写锁。在此之后创建写锁的任何尝试都将失败。</li>
+<li>如果某个守护进程对该文件创建写锁失败，则说明已经存在了一个守护进程的副本</li>
+<li>当持有文件写锁的守护进程终止时，这把锁将被自动删除</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/back-end/" rel="tag"># back-end</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/05/fore-end/HTTP协议学习/" rel="next" title="HTTP协议学习">
+                <i class="fa fa-chevron-left"></i> HTTP协议学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/06/cpp/setjmp和longjmp/" rel="prev" title="setjmp和longjmp">
+                setjmp和longjmp <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UNIX基础知识"><span class="nav-number">1.</span> <span class="nav-text">UNIX基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UNIX体系结构"><span class="nav-number">1.1.</span> <span class="nav-text">UNIX体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件和目录"><span class="nav-number">1.2.</span> <span class="nav-text">文件和目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入和输出"><span class="nav-number">1.3.</span> <span class="nav-text">输入和输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序和进程"><span class="nav-number">1.4.</span> <span class="nav-text">程序和进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#出错处理"><span class="nav-number">1.5.</span> <span class="nav-text">出错处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户标识"><span class="nav-number">1.6.</span> <span class="nav-text">用户标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间"><span class="nav-number">1.7.</span> <span class="nav-text">时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号"><span class="nav-number">1.8.</span> <span class="nav-text">信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UNIX标准"><span class="nav-number">1.9.</span> <span class="nav-text">UNIX标准</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件I-O"><span class="nav-number">2.</span> <span class="nav-text">文件I/O</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件描述符"><span class="nav-number">2.1.</span> <span class="nav-text">文件描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原子操作"><span class="nav-number">2.2.</span> <span class="nav-text">原子操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件和目录-1"><span class="nav-number">3.</span> <span class="nav-text">文件和目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件类型"><span class="nav-number">3.1.</span> <span class="nav-text">文件类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件访问权限"><span class="nav-number">3.2.</span> <span class="nav-text">文件访问权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个函数"><span class="nav-number">3.3.</span> <span class="nav-text">几个函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标准I-O库"><span class="nav-number">4.</span> <span class="nav-text">标准I/O库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓冲"><span class="nav-number">4.1.</span> <span class="nav-text">缓冲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化I-O"><span class="nav-number">4.2.</span> <span class="nav-text">格式化I/O</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程环境"><span class="nav-number">5.</span> <span class="nav-text">进程环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C程序"><span class="nav-number">5.1.</span> <span class="nav-text">C程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享库"><span class="nav-number">5.2.</span> <span class="nav-text">共享库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数setjmp和longjmp"><span class="nav-number">5.3.</span> <span class="nav-text">函数setjmp和longjmp</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程控制"><span class="nav-number">6.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程标识"><span class="nav-number">6.1.</span> <span class="nav-text">进程标识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fork函数"><span class="nav-number">6.2.</span> <span class="nav-text">fork函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间通信"><span class="nav-number">7.</span> <span class="nav-text">进程间通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#管道"><span class="nav-number">7.1.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享内存"><span class="nav-number">7.2.</span> <span class="nav-text">共享内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量"><span class="nav-number">7.3.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#socket"><span class="nav-number">7.4.</span> <span class="nav-text">socket</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">8.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的基本概念"><span class="nav-number">8.1.</span> <span class="nav-text">线程的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程同步"><span class="nav-number">8.2.</span> <span class="nav-text">线程同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#守护进程"><span class="nav-number">9.</span> <span class="nav-text">守护进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例守护进程"><span class="nav-number">9.1.</span> <span class="nav-text">单例守护进程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

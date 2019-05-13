@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="cpp,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="C++11,之前被称作C++0x，即ISO/IEC 14882:2011，是目前的C++编程语言的正式标准。新的标准包含了几个核心语言增加的新特性，而且扩展C++标准程序库，并入了大部分的C++ Technical Report 1程序库(数学的特殊函数除外)。">
+<meta name="keywords" content="cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++11新特征">
+<meta property="og:url" content="http://yoursite.com/2017/03/02/cpp/C++11新特性/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="C++11,之前被称作C++0x，即ISO/IEC 14882:2011，是目前的C++编程语言的正式标准。新的标准包含了几个核心语言增加的新特性，而且扩展C++标准程序库，并入了大部分的C++ Technical Report 1程序库(数学的特殊函数除外)。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++11新特征">
+<meta name="twitter:description" content="C++11,之前被称作C++0x，即ISO/IEC 14882:2011，是目前的C++编程语言的正式标准。新的标准包含了几个核心语言增加的新特性，而且扩展C++标准程序库，并入了大部分的C++ Technical Report 1程序库(数学的特殊函数除外)。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/02/cpp/C++11新特性/">
+
+
+
+
+
+  <title>C++11新特征 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/02/cpp/C++11新特性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++11新特征</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-02T21:07:00+08:00">
+                2017-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>C++11,之前被称作C++0x，即ISO/IEC 14882:2011，是目前的C++编程语言的正式标准。<br>新的标准包含了几个核心语言增加的新特性，而且扩展C++标准程序库，并入了大部分的C++ Technical Report 1程序库(数学的特殊函数除外)。<br><a id="more"></a></p>
+<h1 id="核心语言的扩充"><a href="#核心语言的扩充" class="headerlink" title="核心语言的扩充"></a>核心语言的扩充</h1><p>核心语言被大幅改进的领域包括: 多线程支持, 泛型编程支持, 统一的初始化和提高性能.<br>可以将核心语言的特性和变化大致分为：提高运行期性能，提高编译期性能，增强可用性，和新特性4大类。某些特性可以被划分到多个分类中，但只会在主要体现该特性的分类中讨论一次。</p>
+<h1 id="提高核心语言运行性能"><a href="#提高核心语言运行性能" class="headerlink" title="提高核心语言运行性能"></a>提高核心语言运行性能</h1><h2 id="右值引用和移动构造"><a href="#右值引用和移动构造" class="headerlink" title="右值引用和移动构造"></a>右值引用和移动构造</h2><h2 id="右值引用引入的背景"><a href="#右值引用引入的背景" class="headerlink" title="右值引用引入的背景"></a>右值引用引入的背景</h2><p>临时对象的产生和拷贝所带来的效率折损，一直是C++所为人诟病的问题。但是C++标准允许编译器对于临时对象的产生具有完全的自由度，从而发展出了Copy Elision、RVO（包括NRVO）等编译器优化技术，它们可以防止某些情况下临时对象产生和拷贝。</p>
+<ul>
+<li>Copy Elision拷贝省略<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">A</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;&#125;</span><br><span class="line">    A(<span class="keyword">const</span> A&amp; other) &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"copy constructor"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">A <span class="title">a</span><span class="params">(<span class="number">42</span>)</span></span>; <span class="comment">//直接初始化，调用A::A(42)</span></span><br><span class="line">A a2 = A(<span class="number">42</span>); <span class="comment">//拷贝初始化，但是有拷贝省略，仍然调用A::A(42)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>A a = 42</code>这个语句分为三步操作：由42构造一个A的临时对象、以临时对象为参数调用拷贝构造a、析构临时对象。<br>如果A类比较大，资源比较多，这么操作构造析构会造成很大的内存开销。所以想要以42为参数直接构造a。</p>
+<ul>
+<li>RVO返回值优化<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span> &#123;</span></span><br><span class="line">    A(<span class="keyword">int</span>) &#123;&#125;</span><br><span class="line">    A(<span class="keyword">const</span> A &amp;) &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function">A <span class="title">get</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> A(<span class="number">1</span>);&#125;</span><br><span class="line">A a = get();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>A a = get()</code>这个语句按照正常的分析，将执行如下步骤：get()函数中创建临时对象temp1、以temp1为参数拷贝构造返回值temp2、以temp2为参数拷贝构造a。（忽略了temp1和temp2的析构）</p>
+<h2 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h2><p>左值是有明确内存地址的值，不是左值的就是右值。<br>右值引用，是对临时对象的一种引用。</p>
+<p>举几个例子来比较左值和右值的区别：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">42</span>;</span><br><span class="line">i = <span class="number">43</span>; </span><br><span class="line"><span class="keyword">int</span>* p = &amp;i; <span class="comment">// ok, i 是左值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">foo</span><span class="params">()</span></span>;</span><br><span class="line">foo() = <span class="number">42</span>; <span class="comment">// ok, foo() 是左值</span></span><br><span class="line"><span class="keyword">int</span>* p1 = &amp;foo(); <span class="comment">// ok, foo() 是左值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foobar</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">j = foobar(); <span class="comment">// ok, foobar() 是右值</span></span><br><span class="line"><span class="keyword">int</span>* p2 = &amp;foobar(); <span class="comment">// 错误，不能获取右值的地址</span></span><br><span class="line">j = <span class="number">42</span>; <span class="comment">// ok, 42 是右值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;     <span class="comment">// a 是左值</span></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;     <span class="comment">// b 是左值</span></span><br><span class="line"><span class="keyword">int</span> c = a + b; <span class="comment">// a和b自动转换为右值求和</span></span><br></pre></td></tr></table></figure></p>
+<p>const与左值右值的绑定有如下几条规则：</p>
+<ol>
+<li>非const左值引用只能绑定到非const左值</li>
+<li>const左值引用可绑定到const左值、非const左值、const右值、非const右值</li>
+<li>非const右值引用只能绑定到非const右值</li>
+<li>const右值引用可绑定到const右值和非const右值，不能绑定到左值<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s;</span><br><span class="line"><span class="built_in">string</span>&amp; sref = s;   <span class="comment">//非const左值引用绑定到非const左值上</span></span><br><span class="line"><span class="built_in">string</span>&amp; r = <span class="built_in">std</span>::<span class="built_in">string</span>();   <span class="comment">//调用string默认构造函数生成一个空string，返回的是一个临时对象，是一个右值，非const右值引用不能绑定到右值上</span></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">string</span>&amp; r = <span class="built_in">std</span>::<span class="built_in">string</span>(); <span class="comment">//这样就可以了，const右值引用可以绑定到右值上</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>它是在初始化时完成引用的，但是右值引用不代表引用临时对象后就不能改变右值引用所引用对象的值，仍然可以在初始化后改变临时对象的值。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>&amp;&amp; temp = <span class="number">0</span>; <span class="comment">// 正确，0为右值，temp为左值</span></span><br><span class="line"><span class="keyword">int</span>&amp;&amp; temp2 = <span class="number">1</span>;</span><br><span class="line">temp = temp2; <span class="comment">// 正确，左值赋值操作</span></span><br><span class="line"><span class="keyword">int</span>&amp;&amp; temp3 = temp2; <span class="comment">// 错误，temp2是个左值，在定义的时候需要绑定右值</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="移动构造函数"><a href="#移动构造函数" class="headerlink" title="移动构造函数"></a>移动构造函数</h2><p>在C++11之前，如果要将源对象的状态转移到目标对象只能通过复制。<br>而现在在某些情况下，我们没有必要复制对象——只需要移动它们。</p>
+<p>move语句得到右值<br>正常情况下我们用对象A复制一个新对象B，对象A是个左值，对A对象做深拷贝得到B<br>现在我们使用移动构造函数，用右值对象A（使用move语句获得<code>move(A)</code>）得到一个新对象B，此时直接将A对象的资源的指针复制给新对象B，然后将A对象的资源指针置为nullptr，做了浅拷贝，而且还将对象A的指针置空。<br>右值对象A是临时值，会被系统自动清理。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IntVec</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">...</span><br><span class="line">    IntVec&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> IntVec&amp; other) &#123;</span><br><span class="line">        IntVec temp(other); <span class="comment">//构造一个临时对象，因为other为const，不能被修改</span></span><br><span class="line">        <span class="comment">// 与临时对象交换类的成员变量值，出作用域临时对象自动析构</span></span><br><span class="line">        <span class="comment">// copy-swap策略，先分配资源再交换，防止分配资源失败又要回滚</span></span><br><span class="line">        <span class="built_in">std</span>::swap(<span class="keyword">this</span>.m_size, temp.m_size);</span><br><span class="line">        <span class="built_in">std</span>::swap(<span class="keyword">this</span>.m_data, temp.m_data);</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    IntVec&amp; <span class="keyword">operator</span>=(IntVec&amp;&amp; other) &#123;</span><br><span class="line">        <span class="comment">//直接使用右值引用，可以修改这个传入的临时对象</span></span><br><span class="line">        <span class="built_in">std</span>::swap(<span class="keyword">this</span>.m_size, temp.m_size);</span><br><span class="line">        <span class="built_in">std</span>::swap(<span class="keyword">this</span>.m_data, temp.m_data);</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    IntVec&amp; <span class="keyword">operator</span>=(IntVec&amp;&amp; other) &#123;</span><br><span class="line">        m_data = move(other.m_data);</span><br><span class="line">        m_size = move(other.m_size);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">size_t</span> m_size;</span><br><span class="line">    <span class="keyword">int</span>* m_data;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="泛化的常数表达式"><a href="#泛化的常数表达式" class="headerlink" title="泛化的常数表达式"></a>泛化的常数表达式</h2><p>C++一直以来都有常量表达式的概念.这种表达式就像3+4这种在编译期和运行时都能得到相同结果的表达式. 常量表达式给编译器提供了优化的机会, 编译器计算出他们的值并把结果硬编码到程序中. 并且C++规格文档中有很多地方要求使用常量表达式. 例如,定义一个数组需要常量表达式(来指定数组大小), 枚举值必须是常量表达式.<br>C++11引入了constexpr关键字, 允许用户去保证一个函数或对象的构造函数是一个编译期常量.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constexpr</span> <span class="keyword">int</span> <span class="title">get_five</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> <span class="number">5</span>;&#125;</span><br><span class="line"><span class="keyword">int</span> some_value[get_five() + <span class="number">7</span>]; <span class="comment">// 创建一个包含12个整数的数组. 这种形式在C++11中是合法的.</span></span><br></pre></td></tr></table></figure></p>
+<p>这样可以让编译器理解并验证get_five()是一个编译期常量!作用在函数上的constexpr关键字对函数的行为施加了一些限制. 首先, 这个函数的返回值类型不能是void; 其次, 在函数体中不能声明变量或新类型; 第三, 函数体内只能包含声明语句,空语句和单个return语句且,return语句中的表达式也必须是常量表达式.<br>这种数据变量是隐式的常量, 必须用常量表达式初始化.想要构造用户定义类型的常量值,构造函数也必须用constexpr声明.</p>
+<h1 id="核心语言可用性的增强"><a href="#核心语言可用性的增强" class="headerlink" title="核心语言可用性的增强"></a>核心语言可用性的增强</h1><h2 id="类型推导"><a href="#类型推导" class="headerlink" title="类型推导"></a>类型推导</h2><p>在C++03(还有C)中，必须显式指定变量的类型。然而随着模板类型和模板元编程技术的出现，某些东西的类型，尤其是函数的返回类型，可能不是那么容易表示的了。在这种情况下，将中间结果存储在某个变量中是件很困难的事情。可能需要去了解特定的模板元编程库的内部实现。<br>C++11提供两种方法来缓解上述问题：</p>
+<ol>
+<li>定义有显式初始化的变量可以用auto关键字来自动确定变量类型。</li>
+<li>关键字decltype可以用来在编译期确定表达式的类型。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> some_strange_callable_type = boost::bind(&amp;some_function, _2, _1, some_object);</span><br><span class="line"><span class="keyword">auto</span> other_variable = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> some_int;</span><br><span class="line"><span class="keyword">decltype</span>(some_int) other_integer_variable = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>decltype和auto一起使用会更为有用，因为auto参数的类型只有编译器知道。然而decltype对于那些大量运用运算符重载和类型特化来编码的表达式非常有用。</p>
+<h2 id="理解类型推导"><a href="#理解类型推导" class="headerlink" title="理解类型推导"></a>理解类型推导</h2><p>auto的推导方式和template是一样的，首先我们看template是如何推导类型的<br>分三种情况：引用、右值引用、既不是指针也不是引用。引用的情况自动加上const；右值引用如果是左值加上&amp;，是右值跟第一种一样；既不是指针也不是引用就是参数类型。<br>模板类型推导是使用下面的通用模板函数来解释的：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(ParamType param)</span></span>;</span><br><span class="line">f(expr);                    <span class="comment">// 使用一些表达式来当做调用f的参数</span></span><br></pre></td></tr></table></figure></p>
+<p>在调用f的地方，编译器使用expr来推导T和ParamType的类型。<br>当一个变量被声明为auto，auto相当于模板中的T，而对变量做的相关的类型限定就像ParamType。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">auto x = 27; //既不是指针也不是引用，x类型为int</span><br><span class="line">const auto cx = x; //既不是指针也不是引用，cx类型为const int</span><br><span class="line"></span><br><span class="line">const auto&amp; rx = x; //引用，rx类型为const int&amp;</span><br><span class="line"></span><br><span class="line">auto&amp;&amp; uref1 = x; //右值引用，并且是左值，所以uref1类型为int&amp;</span><br><span class="line">auto&amp;&amp; uref2 = cx; //右值引用，并且是左值，同时cx为const int，所以uref2类型为const int&amp;</span><br><span class="line">auto&amp;&amp; uref3 = 27; //右值引用，并且是右值，所以uref3类型为int&amp;&amp;</span><br></pre></td></tr></table></figure></p>
+<h2 id="基于范围的for循环"><a href="#基于范围的for循环" class="headerlink" title="基于范围的for循环"></a>基于范围的for循环</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> my_array[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="comment">// double the value of each element in my_array:</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> &amp;x : my_array)</span><br><span class="line">&#123;</span><br><span class="line">    x *= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种形式的for语句叫作”基于范围的for语句”,它会遍历列表中的每一个元素.</p>
+<h2 id="Lamda函数与表达式"><a href="#Lamda函数与表达式" class="headerlink" title="Lamda函数与表达式"></a>Lamda函数与表达式</h2><p>这个从函数式编程中借来的强大特性，使很多其他特性以及类库得以实现。你可以在任何使用函数对象或者函子(functor)或std::function的地方使用lambda。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">v.push_back(<span class="number">1</span>);</span><br><span class="line">v.push_back(<span class="number">2</span>);</span><br><span class="line">v.push_back(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::for_each(<span class="built_in">std</span>::begin(v), <span class="built_in">std</span>::end(v), [](<span class="keyword">int</span> n) &#123;<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; n &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;&#125;); <span class="comment">// lambda函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> is_odd = [](<span class="keyword">int</span> n) &#123;<span class="keyword">return</span> n%<span class="number">2</span>==<span class="number">1</span>;&#125;; <span class="comment">// lambda函数</span></span><br><span class="line"><span class="keyword">auto</span> pos = <span class="built_in">std</span>::find_if(<span class="built_in">std</span>::begin(v), <span class="built_in">std</span>::end(v), is_odd);</span><br><span class="line"><span class="keyword">if</span>(pos != <span class="built_in">std</span>::end(v))</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *pos &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
+<p>更复杂的是递归lambda。考虑一个实现Fibonacci函数的lambda<br>如果你试图用auto来声明，就会得到一个编译错误：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> fib = [&amp;fib](<span class="keyword">int</span> n) &#123;<span class="keyword">return</span> n &lt; <span class="number">2</span> ? <span class="number">1</span> : fib(n<span class="number">-1</span>) + fib(n<span class="number">-2</span>);&#125;;</span><br><span class="line"></span><br><span class="line">error C3533: 'auto &amp;': a parameter cannot have a type that contains 'auto'</span><br><span class="line">error C3531: 'fib': a symbol whose type contains 'auto' must have an initializer</span><br><span class="line">error C3536: 'fib': cannot be used before it is initialized</span><br><span class="line">error C2064: term does <span class="keyword">not</span> evaluate to a function taking <span class="number">1</span> arguments</span><br></pre></td></tr></table></figure></p>
+<p>问题出在auto意味着对象类型由初始表达式决定，然而初始表达式又包含了对其自身的引用，因此要求先知道它的类型，这就导致了无穷递归。解决问题的关键就是打破这种循环依赖，用std::function显式的指定函数类型：<br><code>std::function&lt;int(int)&gt; lfib = [&amp;lfib](int n) {return n &lt; 2 ? 1 : lfib(n-1) + lfib(n-2);};</code></p>
+<h2 id="显式重写（覆盖，override）和final"><a href="#显式重写（覆盖，override）和final" class="headerlink" title="显式重写（覆盖，override）和final"></a>显式重写（覆盖，override）和final</h2><p>override，表示函数应当重写基类中的虚函数。<br>final，表示派生类不应当重写这个虚函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">short</span>)</span> </span>&#123;<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"B::f"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> :</span> <span class="keyword">public</span> B</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>)</span> override </span>&#123;<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"D::f"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>由于参数不同，子类没有重写基类的虚函数，会触发一个编译错误<br><code>&#39;D::f&#39; : method with override specifier &#39;override&#39; did not override any base class methods</code></p>
+<h2 id="空指针常量nullptr"><a href="#空指针常量nullptr" class="headerlink" title="空指针常量nullptr"></a>空指针常量nullptr</h2><p>NULL通常被定义为0或(void*)0</p>
+<p>而在C++中不支持void<em>的隐式类型转换，所以NULL被明确定义为常数0，这样如果对于一个函数来说有两个重载函数`void fun(char</em>)<code>和</code>void fun(int)<code>，
+现在如果调用的时候直接用NULL作为参数调用</code>fun(NULL)`那么就不知道该调用哪个函数了。（测试中gcc会调用fun(int)函数）<br>在C++11中为了null指针不会隐式转换为整数，专门引入了nullptr</p>
+<p>关键字nullptr是std::nullptr_t类型的值，用来指代空指针。nullptr和任何指针类型以及类成员指针类型的空值之间可以发生隐式类型转换，同样也可以隐式转换为bool型（取值为false）。但是不存在到整形的隐式类型转换。<br>为了向前兼容，0仍然是个合法的空指针值。</p>
+<h2 id="强类型枚举"><a href="#强类型枚举" class="headerlink" title="强类型枚举"></a>强类型枚举</h2><p>传统的C++枚举类型存在一些缺陷：它们会将枚举常量暴露在外层作用域中（这可能导致名字冲突，如果同一个作用域中存在两个不同的枚举类型，但是具有相同的枚举常量就会冲突），而且它们会被隐式转换为整形，无法拥有特定的用户定义类型。<br>在C++11中通过引入了一个称为强类型枚举的新类型，修正了这种情况。强类型枚举由关键字enum class标识。它不会将枚举常量暴露到外层作用域中，也不会隐式转换为整形，并且拥有用户指定的特定类型（传统枚举也增加了这个性质）。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">Enumeration</span> &#123;</span></span><br><span class="line">    Val1,</span><br><span class="line">    Val2,</span><br><span class="line">    Val3 = <span class="number">100</span>,</span><br><span class="line">    Val4 <span class="comment">// = 101</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>这种枚举是类型安全的;枚举值不能隐式地转换成整数,所以也不可以和整数做比较.表达式 Enumeration::Val4 == 101会报一个编译错误.</p>
+<h2 id="右尖括号-gt-gt"><a href="#右尖括号-gt-gt" class="headerlink" title="右尖括号 &gt;&gt;"></a>右尖括号 &gt;&gt;</h2><p>C++03的解析器都把”&gt;&gt;”定义为右移运算符.但是,在嵌套的模板声明中,程序员往往倾向于忽略两个右尖括号之间的空格.这会导致编译器报一个语法错误.<br>C++11改进了编译器的解析规则,尽可能地将多个右尖括号(&gt;)解析成模板参数结束符.可以用圆括号来改变这个规则,圆号的优先级比它高.</p>
+<h1 id="C-标准程序库的变化"><a href="#C-标准程序库的变化" class="headerlink" title="C++标准程序库的变化"></a>C++标准程序库的变化</h1><h2 id="通用智能指针"><a href="#通用智能指针" class="headerlink" title="通用智能指针"></a>通用智能指针</h2><p>现在能使用的，带引用计数，并且能自动释放内存的智能指针包括以下几种：<br>unique_ptr: 如果内存资源的所有权不需要共享，就应当使用这个（它没有拷贝构造函数），但是它可以转让给另一个unique_ptr（存在move构造函数）。<br>shared_ptr:  如果内存资源需要共享，那么使用这个（所以叫这个名字）。<br>weak_ptr: 持有被shared_ptr所管理对象的引用，但是不会改变引用计数值。它被用来打破依赖循环（想象在一个tree结构中，父节点通过一个共享所有权的引用(chared_ptr)引用子节点，同时子节点又必须持有父节点的引用。如果这第二个引用也共享所有权，就会导致一个循环，最终两个节点内存都无法释放）。</p>
+<h2 id="c-11-中的计时器"><a href="#c-11-中的计时器" class="headerlink" title="c++11 中的计时器"></a>c++11 中的计时器</h2><p>在c与语言中主要使用一下两种方式来实现计时的功能<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="comment">//使用 clock_t 来完成计时</span></span><br><span class="line"><span class="keyword">clock_t</span> start = clock();</span><br><span class="line">algorithm();</span><br><span class="line"><span class="keyword">clock_t</span> end = clock();</span><br><span class="line"><span class="keyword">double</span> time = (<span class="keyword">double</span>) (end-start) / CLOCKS_PER_SEC * <span class="number">1000.0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用 time_t 来完成计时</span></span><br><span class="line"><span class="keyword">time_t</span> start = time(<span class="number">0</span>);</span><br><span class="line">algorithm();</span><br><span class="line"><span class="keyword">time_t</span> end = time(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">double</span> time = difftime(end, start) * <span class="number">1000.0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>上述两种方式也有区别</p>
+<blockquote>
+<p>It depends what you want: <code>time</code> measures the real time while <code>clock</code> measures the processing time taken by the current process. If your process sleeps for any appreciable amount of time, or the system is busy with other processes, the two will be very different.</p>
+</blockquote>
+<p>使用clock_t比较好，当存在多个线程同步操作的时候，time_t会增加计时</p>
+<p>在c++11中，有一个十分优秀的库 <code>&lt;chrono&gt;</code><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;chrono&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::this_thread::sleep_for(<span class="built_in">std</span>::chrono::seconds(<span class="number">1</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> t1 = <span class="built_in">std</span>::chrono::high_resolution_clock::now();</span><br><span class="line">    f();</span><br><span class="line">    <span class="keyword">auto</span> t2 = <span class="built_in">std</span>::chrono::high_resolution_clock::now();</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"f() took "</span></span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::chrono::duration_cast&lt;<span class="built_in">std</span>::chrono::milliseconds&gt;(t2-t1).count()</span><br><span class="line">              &lt;&lt; <span class="string">" milliseconds\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参照使用即可</p>
+<h2 id="c-11从g-4-7版本开始支持"><a href="#c-11从g-4-7版本开始支持" class="headerlink" title="c++11从g++4.7版本开始支持"></a>c++11从g++4.7版本开始支持</h2><p>在阿里云上准备部署多音调检测算法，但是发现无法运行c++程序，会报如下错误<br><code>cc1plus: error: unrecognized command line option “-std=c++11”</code></p>
+<blockquote>
+<p>That flag was not added until a later version of g++ (4.7) to get the gcc 4.4 compat (as much as was there) you need to use the -std=c++0x flag.</p>
+</blockquote>
+<p><code>error: no matching function for call to ‘std::basic_ifstream</code><br>在读取文件的时候使用下面函数会导致出现上述问题<br><code>ifstream file(filename);</code></p>
+<p>在c++11之前的版本中，<code>ifstream</code>函数使用<code>const char*</code>作为函数的参数，而不是<code>string</code><br>在c++11之后就是用的是<code>string</code>了，所以在之前的版本中要显式的将其转换<br><code>ifstream file(filename.c_str());</code></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cpp/" rel="tag"># cpp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/08/cpp/C++ cast 四种强制类型转换关键字/" rel="next" title="C++ cast 四种显式类型转换关键字">
+                <i class="fa fa-chevron-left"></i> C++ cast 四种显式类型转换关键字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/08/unity/Unity碰撞和触发/" rel="prev" title="Unity碰撞和触发">
+                Unity碰撞和触发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#核心语言的扩充"><span class="nav-number">1.</span> <span class="nav-text">核心语言的扩充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提高核心语言运行性能"><span class="nav-number">2.</span> <span class="nav-text">提高核心语言运行性能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#右值引用和移动构造"><span class="nav-number">2.1.</span> <span class="nav-text">右值引用和移动构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#右值引用引入的背景"><span class="nav-number">2.2.</span> <span class="nav-text">右值引用引入的背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#右值引用"><span class="nav-number">2.3.</span> <span class="nav-text">右值引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动构造函数"><span class="nav-number">2.4.</span> <span class="nav-text">移动构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛化的常数表达式"><span class="nav-number">2.5.</span> <span class="nav-text">泛化的常数表达式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核心语言可用性的增强"><span class="nav-number">3.</span> <span class="nav-text">核心语言可用性的增强</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类型推导"><span class="nav-number">3.1.</span> <span class="nav-text">类型推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解类型推导"><span class="nav-number">3.2.</span> <span class="nav-text">理解类型推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于范围的for循环"><span class="nav-number">3.3.</span> <span class="nav-text">基于范围的for循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lamda函数与表达式"><span class="nav-number">3.4.</span> <span class="nav-text">Lamda函数与表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显式重写（覆盖，override）和final"><span class="nav-number">3.5.</span> <span class="nav-text">显式重写（覆盖，override）和final</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空指针常量nullptr"><span class="nav-number">3.6.</span> <span class="nav-text">空指针常量nullptr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强类型枚举"><span class="nav-number">3.7.</span> <span class="nav-text">强类型枚举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#右尖括号-gt-gt"><span class="nav-number">3.8.</span> <span class="nav-text">右尖括号 &gt;&gt;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-标准程序库的变化"><span class="nav-number">4.</span> <span class="nav-text">C++标准程序库的变化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通用智能指针"><span class="nav-number">4.1.</span> <span class="nav-text">通用智能指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c-11-中的计时器"><span class="nav-number">4.2.</span> <span class="nav-text">c++11 中的计时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c-11从g-4-7版本开始支持"><span class="nav-number">4.3.</span> <span class="nav-text">c++11从g++4.7版本开始支持</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

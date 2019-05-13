@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="back-end,database,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="除了针对单个键值对的操作外，Redis还提供了一些同时对多个键值对进行处理的功能，比如事务和Lua脚本。另外，一些辅助性的功能，比如慢查询，以及一些和数据库无关的功能，比如订阅与发布，我们也会经常用到。通过理解这些功能的底层实现，我们可以更有效地使用它们。">
+<meta name="keywords" content="back-end,database">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis设计与实现 功能的实现">
+<meta property="og:url" content="http://yoursite.com/2017/07/30/back-end/Redis设计与实现 功能的实现/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="除了针对单个键值对的操作外，Redis还提供了一些同时对多个键值对进行处理的功能，比如事务和Lua脚本。另外，一些辅助性的功能，比如慢查询，以及一些和数据库无关的功能，比如订阅与发布，我们也会经常用到。通过理解这些功能的底层实现，我们可以更有效地使用它们。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/image/programming/Redis_Transaction.png">
+<meta property="og:image" content="http://yoursite.com/image/programming/redis_replication.jpg">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis设计与实现 功能的实现">
+<meta name="twitter:description" content="除了针对单个键值对的操作外，Redis还提供了一些同时对多个键值对进行处理的功能，比如事务和Lua脚本。另外，一些辅助性的功能，比如慢查询，以及一些和数据库无关的功能，比如订阅与发布，我们也会经常用到。通过理解这些功能的底层实现，我们可以更有效地使用它们。">
+<meta name="twitter:image" content="http://yoursite.com/image/programming/Redis_Transaction.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/30/back-end/Redis设计与实现 功能的实现/">
+
+
+
+
+
+  <title>Redis设计与实现 功能的实现 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/30/back-end/Redis设计与实现 功能的实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis设计与实现 功能的实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-30T15:46:53+08:00">
+                2017-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>除了针对单个键值对的操作外，Redis还提供了一些同时对多个键值对进行处理的功能，比如事务和Lua脚本。另外，一些辅助性的功能，比如慢查询，以及一些和数据库无关的功能，比如订阅与发布，我们也会经常用到。<br>通过理解这些功能的底层实现，我们可以更有效地使用它们。<br><a id="more"></a></p>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>Redis通过MULTI、DISCARD、EXEC和WATCH四个命令来实现事务功能。</p>
+<p>一个事务从开始到执行会经历以下三个阶段：开始事务、命令入队、执行事务。</p>
+<h2 id="开始事务"><a href="#开始事务" class="headerlink" title="开始事务"></a>开始事务</h2><p>MULTI命令的执行标记着事务的开始。这个命令唯一做的就是，将客户端的REDIS_MULTI选项打开，让客户端从非事务状态切换到事务状态。</p>
+<h2 id="命令入队"><a href="#命令入队" class="headerlink" title="命令入队"></a>命令入队</h2><p>当客户端处于非事务状态下时，所有发送给服务器端的命令都会立即被服务器执行；但是当客户端进入事务状态之后，服务器在收到来自客户端的命令时，不会立即执行命令，而是将这些命令全部放进一个事务队列里，然后返回QUEUED，表示命令已入队。</p>
+<h2 id="执行事务"><a href="#执行事务" class="headerlink" title="执行事务"></a>执行事务</h2><p>其实并不是所有的命令都会被放进事务队列，其中的例外就是EXEC、DISCARD、MULTI和WATCH这四个命令——当这四个命令从客户端发送到服务器时，它们会像客户端处于非事务状态一样，直接被服务器执行。<br><img src="/image/programming/Redis_Transaction.png" alt="服务器处理事务流程"><br>如果客户端正处于事务状态，那么当EXEC命令执行时，服务器根据客户端所保存的事务队列，以先进先出（FIFO）的方式执行事务队列中的命令：最先入队的命令最先执行，而最后入队的命令最后执行。<br>当事务队列里的所有命令被执行完之后，EXEC命令会将回复队列作为自己的执行结果返回给客户端，客户端从事务状态返回到非事务状态，至此，事务执行完毕。</p>
+<p>DISCARD命令用于取消一个事务，它清空客户端的整个事务队列，然后将客户端从事务状态调整回非事务状态，最后返回字符串OK给客户端，说明事务已被取消。<br>Redis的事务是不可嵌套的，当客户端已经处于事务状态，而客户端又再向服务器发送MULTI时，服务器只是简单地向客户端发送一个错误，然后继续等待其他命令的入队。MULTI命令的发送不会造成整个事务失败，也不会修改事务队列中已有的数据。</p>
+<p>WATCH命令用于在事务开始之前监视任意数量的键：当调用EXEC命令执行事务时，如果任意一个被监视的键已经被其他客户端修改了，那么整个事务不再执行，直接返回失败。</p>
+<h2 id="事务的ACID性质"><a href="#事务的ACID性质" class="headerlink" title="事务的ACID性质"></a>事务的ACID性质</h2><p>Redis事务保证了其中的一致性（C）和隔离性（I），但并不保证原子性（A）和持久性（D）。</p>
+<p>原子性：单个Redis命令的执行是原子性的，但Redis没有在事务上增加任何维持原子性的机制，所以Redis事务的执行并不是原子性的。事务失败Redis不回滚。<br>一致性：保证“能量守恒”，在Redis中带有不正确入队命令的事务不会被执行。<br>隔离性：Redis是单进程程序，并且它保证在执行事务时，不会对事务进行中断，事务可以运行直到执行完所有事务队列中的命令为止。因此，Redis的事务是总是带有隔离性的。<br>持久性：因为事务不过是用队列包裹起了一组Redis命令，并没有提供任何额外的持久性功能，所以事务的持久性由Redis所使用的持久化模式决定。</p>
+<h1 id="订阅与发布"><a href="#订阅与发布" class="headerlink" title="订阅与发布"></a>订阅与发布</h1><p>Redis通过PUBLISH、SUBSCRIBE等命令实现了订阅与发布模式，这个功能提供两种信息机制 分别是订阅/发布到频道和订阅/发布到模式。</p>
+<h2 id="频道的订阅与信息发送"><a href="#频道的订阅与信息发送" class="headerlink" title="频道的订阅与信息发送"></a>频道的订阅与信息发送</h2><p>Redis的SUBSCRIBE命令可以让客户端订阅任意数量的频道，每当有新信息发送到被订阅的频道时，信息就会被发送给所有订阅指定频道的客户端。</p>
+<p>每个Redis服务器进程都维持着一个表示服务器状态的redis.h/redisServer结构，结构的pubsub_channels属性是一个字典，这个字典就用于保存订阅频道的信息。<br>其中，字典的键为正在被订阅的频道，而字典的值则是一个链表，链表中保存了所有订阅这个频道的客户端。<br>当客户端调用SUBSCRIBE命令时，程序就将客户端和要订阅的频道在pubsub_channels字典中关联起来。</p>
+<p>当调用<code>PUBLISH channel message</code>命令，程序首先根据pubsub_channels定位到字典的键，然后将信息发送给字典值链表中的所有客户端。</p>
+<h2 id="模式的订阅与信息发送"><a href="#模式的订阅与信息发送" class="headerlink" title="模式的订阅与信息发送"></a>模式的订阅与信息发送</h2><p>当使用PUBLISH命令发送信息到某个频道时，不仅所有订阅该频道的客户端会收到信息，如果有某个/某些模式和这个频道匹配的话，那么所有订阅这个/这些频道的客户端也同样会收到信息。</p>
+<p>举个例子：tweet.shop.<em> 模式匹配了 tweet.shop.kindle 频道和 tweet.shop.ipad 频道。当有信息发送到 tweet.shop.kindle 频道时，订阅了tweet.shop.</em> 模式的也会收到。</p>
+<h1 id="慢查询日志"><a href="#慢查询日志" class="headerlink" title="慢查询日志"></a>慢查询日志</h1><p>慢查询日志是Redis提供的一个用于观察系统性能的功能。</p>
+<h1 id="内部运作机制"><a href="#内部运作机制" class="headerlink" title="内部运作机制"></a>内部运作机制</h1><h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>Redis中的每个数据库，都由一个redis.h/redisDb结构表示<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">redisDb</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> id; <span class="comment">//数据库的号码</span></span><br><span class="line">    dict *dict; <span class="comment">//数据库中的所有键值对数据，也被称为键空间（key space）</span></span><br><span class="line">    dict *expires; <span class="comment">//键的过期信息</span></span><br><span class="line">    <span class="comment">// 实现列表阻塞原语，如 BLPOP</span></span><br><span class="line">    <span class="comment">// 在列表类型一章有详细的讨论</span></span><br><span class="line">    dict *blocking_keys;</span><br><span class="line">    dict *ready_keys;</span><br><span class="line">    dict *watched_keys; <span class="comment">// 用于实现 WATCH 命令</span></span><br><span class="line">&#125; redisDb;</span><br></pre></td></tr></table></figure></p>
+<p>redisDb结构的id域保存着数据库的号码。当Redis服务器初始化时，它会创建出redis.h/REDIS_DEFAULT_DBNUM个数据库，并将所有数据库保存到redis.h/redisServer.db数组中，每个数据库的id为从0到REDIS_DEFAULT_DBNUM-1的值。<br>当执行<code>SELECT number</code>命令时，程序直接使用redisServer.db[number]来切换数据库。</p>
+<p>在redisDb结构的dict属性中，保存着数据库的所有键值对数据。</p>
+<p>在数据库中，所有键的过期时间都被保存在redisDb结构的expires字典里。<br>过期的键有三种情况下删除：定时删除（过期就删）、惰性删除（过期了下次查询时才删）、定期删除（每个一段时间删除所有过期）。<br>redis使用惰性删除和定期删除结合的方式。</p>
+<p>总结：<br>数据库主要由dict和expires两个字典构成，其中dict保存键值对，而expires则保存键的过期时间。<br>数据库的键总是一个字符串对象，而值可以是任意一种Redis数据类型，包括字符串、哈希、集合、列表和有序集。<br>expires的某个键和dict的某个键共同指向同一个字符串对象，而expires键的值则是该键以毫秒计算的UNIX过期时间戳。<br>Redis使用惰性删除和定期删除两种策略来删除过期的键。<br>数据库的dict字典和expires字典的扩展策略和普通字典一样。它们的收缩策略是：当节点的填充百分比不足10%时，将可用节点数量减少至大于等于当前已用节点数量。</p>
+<h2 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h2><p>在运行情况下，Redis以数据结构的形式将数据维持在内存中，为了让这些数据在Redis重启之后仍然可用，Redis分别提供了RDB和AOF两种持久化模式。</p>
+<h2 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h2><p>在Redis运行时，RDB程序将当前内存中的数据库快照保存到磁盘文件中，在Redis重启动时，RDB程序可以通过载入RDB文件来还原数据库的状态。<br>RDB功能最核心的是rdbSave和rdbLoad两个函数，前者用于生成RDB文件到磁盘，而后者则用于将RDB文件中的数据重新载入到内存中。</p>
+<p>rdbSave函数负责将内存中的数据库数据以RDB格式保存到磁盘中。<br>如果使用SAVE命令的话，会阻塞Redis主进程，直到保存完成为止。在主进程阻塞期间，服务器不能处理客户端的任何请求。<br>如果使用BGSAVE命令的话，会fork出一个子进程，调用rdbSave函数，保存完成之后向主进程发送一个信号通知保存完成。</p>
+<h2 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h2><p>快照模式并不十分健壮，当系统停止，或者无意中Redis被kill掉，最后写入Redis的数据就会丢失。<br>AOF以协议文本的方式，将所有对数据库进行过写入的命令（及其参数）记录到AOF文件，以此达到记录数据库状态的目的。我们可以称这个记录过程为同步。</p>
+<p>同步命令到AOF文件的整个过程可以分为三个阶段：</p>
+<ul>
+<li>命令传播：Redis将执行完的命令、命令的参数、命令的参数个数等信息发送到AOF程序中。</li>
+<li>缓存追加：AOF程序根据接收到的命令数据，将命令转换为网络通讯协议的格式，然后将协议内容追加到服务器的AOF缓存中。</li>
+<li>文件写入和保存：AOF缓存中的内容被写入到AOF文件末尾，如果设定的AOF保存条件被满足的话，fsync函数或者fdatasync函数会被调用，将写入的内容真正地保存到磁盘中。</li>
+</ul>
+<h1 id="Redis的复制"><a href="#Redis的复制" class="headerlink" title="Redis的复制"></a>Redis的复制</h1><p>Redis的复制方式有两种，一种是主（master）-从（slave）模式，一种是从（slave）-从（slave）模式。<br>可以通过配置多个Redis实例独立运行、定向复制，形成Redis集群，master负责写、slave负责读。</p>
+<h2 id="复制的优点"><a href="#复制的优点" class="headerlink" title="复制的优点"></a>复制的优点</h2><p>通过配置多个Redis实例，数据备份在不同的实例上，master库专注写请求，slave库负责读请求，这样的好处主要体现在下面几个方面：</p>
+<ol>
+<li>高可用性<br>在一个Redis集群中，如果master宕机，slave可以介入并取代master的位置，因此对于整个Redis服务来说不至于提供不了服务，这样使得整个Redis服务足够安全。</li>
+<li>高性能<br>在一个Redis集群中，master负责写请求，slave负责读请求，这么做一方面通过将读请求分散到其他机器从而大大减少了master服务器的压力，另一方面slave专注于提供读服务从而提高了响应和读取速度。</li>
+<li>水平扩展性<br>通过增加slave机器可以横向（水平）扩展Redis服务的整个查询服务的能力。</li>
+</ol>
+<p>复制也有一些缺点：</p>
+<ol>
+<li>数据一致性问题，如何保证master服务器写入的数据能够及时同步到slave机器上。</li>
+<li>编程复杂，如何在客户端提供读写分离的实现方案，通过客户端实现将读写请求分别路由到master和slave实例上。</li>
+</ol>
+<h2 id="复制原理"><a href="#复制原理" class="headerlink" title="复制原理"></a>复制原理</h2><p>Redis复制主要由SYNC命令实现，复制过程如下图：<br><img src="/image/programming/redis_replication.jpg" alt="Redis replication"><br>步骤如下：</p>
+<ol>
+<li>slave向master发送sync命令。</li>
+<li>master开启子进程来将dataset写入rdb文件，同时将子进程完成之前接收到的写命令缓存起来。</li>
+<li>子进程写完，父进程得知，开始将RDB文件发送给slave。</li>
+<li>master发送完RDB文件，将缓存的命令也发给slave。</li>
+<li>master增量的把写命令发给slave。</li>
+</ol>
+<p>免持久化机制官方叫做Diskless Replication，不需要将rdb写入磁盘，直接通过网络将rdb发送给slave，还是实验阶段</p>
+<h1 id="Redis分布式"><a href="#Redis分布式" class="headerlink" title="Redis分布式"></a>Redis分布式</h1><p>一致性哈希<br>豌豆荚开发codis</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/back-end/" rel="tag"># back-end</a>
+          
+            <a href="/tags/database/" rel="tag"># database</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/27/cpp/GDB调试core文件/" rel="next" title="GDB调试core文件">
+                <i class="fa fa-chevron-left"></i> GDB调试core文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/03/programming/UML学习笔记/" rel="prev" title="UML学习笔记">
+                UML学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事务"><span class="nav-number">1.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始事务"><span class="nav-number">1.1.</span> <span class="nav-text">开始事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令入队"><span class="nav-number">1.2.</span> <span class="nav-text">命令入队</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行事务"><span class="nav-number">1.3.</span> <span class="nav-text">执行事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的ACID性质"><span class="nav-number">1.4.</span> <span class="nav-text">事务的ACID性质</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#订阅与发布"><span class="nav-number">2.</span> <span class="nav-text">订阅与发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#频道的订阅与信息发送"><span class="nav-number">2.1.</span> <span class="nav-text">频道的订阅与信息发送</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模式的订阅与信息发送"><span class="nav-number">2.2.</span> <span class="nav-text">模式的订阅与信息发送</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#慢查询日志"><span class="nav-number">3.</span> <span class="nav-text">慢查询日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内部运作机制"><span class="nav-number">4.</span> <span class="nav-text">内部运作机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库"><span class="nav-number">4.1.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#持久化"><span class="nav-number">4.2.</span> <span class="nav-text">持久化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RDB"><span class="nav-number">4.3.</span> <span class="nav-text">RDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AOF"><span class="nav-number">4.4.</span> <span class="nav-text">AOF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis的复制"><span class="nav-number">5.</span> <span class="nav-text">Redis的复制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复制的优点"><span class="nav-number">5.1.</span> <span class="nav-text">复制的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制原理"><span class="nav-number">5.2.</span> <span class="nav-text">复制原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis分布式"><span class="nav-number">6.</span> <span class="nav-text">Redis分布式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

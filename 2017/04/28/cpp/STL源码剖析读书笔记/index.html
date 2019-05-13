@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="cpp,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="《STL源码剖析》读书笔记网络资源">
+<meta name="keywords" content="cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL源码剖析读书笔记">
+<meta property="og:url" content="http://yoursite.com/2017/04/28/cpp/STL源码剖析读书笔记/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="《STL源码剖析》读书笔记网络资源">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_allocator_union_obj.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_allocator_memory_pool.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_list_transfer.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_list_sort.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_deque_architecture.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_rbtree_iterator.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_rbtree_head.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_rbtree_head.png">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL源码剖析读书笔记">
+<meta name="twitter:description" content="《STL源码剖析》读书笔记网络资源">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_allocator_union_obj.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/28/cpp/STL源码剖析读书笔记/">
+
+
+
+
+
+  <title>STL源码剖析读书笔记 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/28/cpp/STL源码剖析读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">STL源码剖析读书笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-28T20:25:43+08:00">
+                2017-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>《STL源码剖析》读书笔记<br><a href="https://www.kancloud.cn/digest/stl-sources/177262" target="_blank" rel="noopener">网络资源</a><br><a id="more"></a></p>
+<h1 id="STL概论"><a href="#STL概论" class="headerlink" title="STL概论"></a>STL概论</h1><h2 id="STL六大组件"><a href="#STL六大组件" class="headerlink" title="STL六大组件"></a>STL六大组件</h2><ol>
+<li>容器（container）：各种数据结构，如vector,list,deque,set，容器是一种class template</li>
+<li>算法（algorithms）：各种常用算法，如sort,search,erase，算法是一种function template</li>
+<li>迭代器（iterators）：泛型指针，作为容器和算法之间的胶合剂</li>
+<li>仿函数（functors）：行为类似函数，重载了operator()的class或class template，一般函数指针可视为狭义的仿函数</li>
+<li>适配器（adapters）：修饰容器、仿函数、迭代器接口的东西</li>
+<li>配置器（allocators）：实现动态空间配置、空间管理、空间释放的class template</li>
+</ol>
+<h1 id="空间配置器allocator"><a href="#空间配置器allocator" class="headerlink" title="空间配置器allocator"></a>空间配置器allocator</h1><p>以STL运用的角度而言，空间配置器总是隐藏在一切组件的背后。但就STL 的实现角度而言，我们需要了解空间配置器，因为整个STL 的操作对象(所有数值，“value”语意)都存放在容器之内，而容器一定需要配置空间以置放数据。</p>
+<h2 id="构造和析构"><a href="#构造和析构" class="headerlink" title="构造和析构"></a>构造和析构</h2><p>一般而言，我们所习惯的C++ 内存配置操作和释放操作是这样的<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span>...&#125;;</span><br><span class="line">A* a = <span class="keyword">new</span> A;</span><br><span class="line"><span class="keyword">delete</span> a;</span><br></pre></td></tr></table></figure></p>
+<p>new运算符包含两段操作：1.调用::operator new配置内存，2.调用构造函数A()构造对象。<br>delete运算符也包含两段操作：1.调用析构函数~A()将对象析构，2.调用::operator delete释放内存。</p>
+<p>在STL中，空间配置在C++的基础上增加了一些特性。STL allocator 将这两个阶段分开操作，内存配置操作由空间配置器stl::alloc中的alloc::allocate()，内存释放由alloc::deallocate()负责；对象构造操作由::construct()负责，对象析构操作由::destroy()负责。SGI STL中考虑到了异常处理，内置轻量级内存池（主要用于处理小块内存的分配，应对内存碎片问题）实现，多线程中的内存分配处理（主要是针对内存池的互斥访问）等。</p>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p>考录到小型区块所可能造成的内存碎片为题，SGI设计了双层级配置器<br>第一级配置器直接封装malloc、realloc和free，并考虑到了分配失败后的异常处理，重新实现函数处理new-handler。<br>第二级配置器在第一级配置器的基础上还考虑了内存碎片的问题，通过内置一个轻量级的内存池，及在多线程环境下内存池互斥访问的机制。</p>
+<h2 id="第一级配置器"><a href="#第一级配置器" class="headerlink" title="第一级配置器"></a>第一级配置器</h2><p>第一级配置器以malloc、realloc和free等C函数执行实际的内存配置、释放、重配置操作，并实现出类似C++ new handler的机制。<br>它不能直接运用C++ new handler机制，因为它并非使用::operator new来配置内存。<br>所谓C++ new handler机制是指：可以要求系统在内存配置需求无法被满足时，调用一个你所指定的函数。一旦::operator new无法完成任务，在丢出std::bad_alloc异常状态之前，会先调用由客户端指定的处理例程。该处理例程通常被称为new handler，new handler解决内存不足的做法有特定的模式。</p>
+<p>SGI不能直接使用C++的set_new_handler()，自己实现了oom_malloc(),oom_realloc()，这两个函数都有内循环，当malloc(),realloc()函数调用分配内存失败，会调用上述两个函数，不断调用尝试再分配内存，来处理内存不足问题。</p>
+<p>第一级配置器内存分配失败一般是由于内存不足out-of-memory(oom)，处理异常时，首先用户自己设计异常处理例程，若用户没有定义，仅仅是打印错误信息并强制退出。总的来说，就是留给用户异常处理接口和默认强制退出处理。</p>
+<h2 id="第二级配置器"><a href="#第二级配置器" class="headerlink" title="第二级配置器"></a>第二级配置器</h2><p>SGI第二级配置器做法是：如果区块够大，超过128bytes时，就移交第一级配置器处理；当区块小于128bytes时，则以内存池（memory pool）以及伙伴系统管理，每次配置一大块内存，并维护对应之自由链表(free-list)。下次若再有相同大小的内存需求，就直接从free-list中拔出。</p>
+<p>为了维护这个链表，每个节点需要额外的指针（next指针指向下一个），可能会带来额外的负担。但是在实现的过程中使用的是union来保存。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> obj &#123;</span><br><span class="line">    <span class="keyword">union</span> obj * free_list_link;<span class="comment">//指向下一个内存的地址</span></span><br><span class="line">    <span class="keyword">char</span> client_data[<span class="number">1</span>];    <span class="comment">//内存的首地址</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>union obj的大小就是一个指针大小，实现一物二用。client_data是一种变长数组实现方式，（如果编译器支持char[0]，可以声明称char[0]，这在Linux中很常见）<br><img src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_allocator_union_obj.png" alt="union obj"><br><em>事实上我们所关注的并不是client_data[1]里面的内容，而是client_data这个数组首地址</em><br>由于free_list_link长度较大，union obj的长度为它的整数倍，client_data[1]只占了其头部的一个字节。因此client_data首地址指向的也就是整个union obj的首地址，亦即实际区块的地址。更多union obj细节参见<a href="http://blog.csdn.net/w450468524/article/details/51649222" target="_blank" rel="noopener">博客</a></p>
+<p>这个free-list有两个作用：一个是指向下一块空白内存（当存在于free-list中时），一个就是供用户使用的一块内存（不存在于free-list）。<br>用一个union obj数组free_list来存储内存的地址，数组的每一个元素都指向一个obj链表，也就是内存链表。数组从小到大表示负责8b、16b、24b、……、120b、128b（8的倍数，总共自由链表有128/8=16个）的内存请求。当请求的内存为n时，会将请求上条至2的指数大小，并从数组相应位置获取内存。例如如果请求为20b，则请求会上调至24b。</p>
+<p>内存空间的分配大致是这样的：配置器分配空间时，先从free-list中拨出，如果有，就直接拨出，该需求大小的区块位于free-list对应编号的第一位置，然后从该链表中拨出，这样该区块就不位于free-list中对应编号内，第一位置向后移动指向，仅此一区块（刚已经拨出去），则指向0，表示free-list中没有该大小的区块；如果没有则需要向free-list填补区块，继而转向内存块分配函数，然后分配所需大小的新区块（一次性缺省分配20个，不够就分配小于20的，至少一个），分配成功后，第一个区块直接划给客户端，然后后面的（如果有）就填进free-list，这样下次再有相同大小的内存需求时，可直接从free-list中拨出，如果一个区块都分配不出，就转向调用第一级配置器里的内存分配异常处理例程。配置器还可以回收释放的内存，释还的小额内存区块划进free-list中（其实是关联到free-list对应编号区域）。</p>
+<p><img src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_allocator_memory_pool.png" alt="二级配置器"><br>当程序释放这块内存时，第二级配置器还负责回收这块内存，等下次有请求时，可以直接使用这块内存。<br>大于128的内存，客户程序Deallocate之后会调free释放掉，归还给了系统。但是内存池中的获取的空间最后没有还给系统，还在自由链表中，所以他们是存放在静态存储区的，空间配置器的所有方法、成员也都是静态的。<br>所以内存池的释放时机就是程序运行结束。</p>
+<h2 id="空间配置"><a href="#空间配置" class="headerlink" title="空间配置"></a>空间配置</h2><p>空间配置函数allocate()的具体实现步骤如下：</p>
+<ol>
+<li>若用户申请的内存大于128bytes，则调用第一级配置器分配空间；</li>
+<li>若小于128bytes检查对应的自由链表free_list，如果自由链表存在可用的区块，则直接使用，若不存在，则调用填充函数refill()为自由链表重新填充空间；<br>空间配置函数allocate()的源代码如下：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span>* <span class="title">allocate</span><span class="params">(<span class="keyword">size_t</span> __n)</span> </span>&#123; <span class="comment">// 函数是static的</span></span><br><span class="line">    <span class="keyword">void</span>* __ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (__n &gt; (<span class="keyword">size_t</span>) _MAX_BYTES) &#123;</span><br><span class="line">        __ret = malloc_alloc::allocate(__n);<span class="comment">//内存大于128时，采用第一级配置器处理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        _Obj* __STL_VOLATILE* __my_free_list</span><br><span class="line">            = _S_free_list + _S_freelist_index(__n);</span><br><span class="line">        <span class="comment">// Acquire the lock here with a constructor call.</span></span><br><span class="line">        <span class="comment">// This ensures that it is released in exit or during stack</span></span><br><span class="line">        <span class="comment">// unwinding.</span></span><br><span class="line">        <span class="meta">#<span class="meta-keyword">ifndef</span> _NOTHREADS</span></span><br><span class="line">        <span class="comment">/*REFERENCED*/</span></span><br><span class="line">        _Lock __lock_instance;</span><br><span class="line">        <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">        _Obj* __RESTRICT __result = *__my_free_list;</span><br><span class="line">        <span class="keyword">if</span> (__result == <span class="number">0</span>) <span class="comment">//若自由链表free_list不存在可用的区块，则从内存池中填充自由链表</span></span><br><span class="line">            __ret = _S_refill(_S_round_up(__n));</span><br><span class="line">        <span class="keyword">else</span> &#123;<span class="comment">//若自由链表free_list存在可用区块，调整free_list</span></span><br><span class="line">            *__my_free_list = __result -&gt; _M_free_list_link;</span><br><span class="line">            __ret = __result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> __ret;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>空间释放函数deallocate()，首先判断区块的大小，大于128bytes直接调用第一级配置器，若小于128bytes，则找出相应的自由链表free_list，将其回收。源代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* __p may not be 0 */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deallocate</span><span class="params">(<span class="keyword">void</span>* __p, <span class="keyword">size_t</span> __n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (__n &gt; (<span class="keyword">size_t</span>) _MAX_BYTES)<span class="comment">//内存大于128时，采用第一级配置器处理</span></span><br><span class="line">        malloc_alloc::deallocate(__p, __n);</span><br><span class="line">    <span class="keyword">else</span> &#123;<span class="comment">//否则，找到相应的自由链表位置，将其回收</span></span><br><span class="line">        _Obj* __STL_VOLATILE*  __my_free_list</span><br><span class="line">            = _S_free_list + _S_freelist_index(__n);</span><br><span class="line">        _Obj* __q = (_Obj*)__p;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// acquire lock</span></span><br><span class="line">    <span class="meta">#       <span class="meta-keyword">ifndef</span> _NOTHREADS</span></span><br><span class="line">        <span class="comment">/*REFERENCED*/</span></span><br><span class="line">        _Lock __lock_instance;</span><br><span class="line">    <span class="meta">#       <span class="meta-keyword">endif</span> <span class="comment">/* _NOTHREADS */</span></span></span><br><span class="line">        __q -&gt; _M_free_list_link = *__my_free_list;</span><br><span class="line">        *__my_free_list = __q;</span><br><span class="line">        <span class="comment">// lock is released here</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重新填充函数refill函数是在自由链表不存在可用的区块时被调用。默认是为自由链表申请20个节点，第1个给客户端，剩下19个留给自由链表管理。</p>
+<h2 id="内存池管理机制"><a href="#内存池管理机制" class="headerlink" title="内存池管理机制"></a>内存池管理机制</h2><p>chunk_alloc函数具体实现步骤如下：</p>
+<ol>
+<li>内存池剩余空间完全满足20个区块的需求量，则直接获取对应大小的空间。</li>
+<li>内存池剩余空间不能完全满足20个区块的需求量，但是足够供应一个及以上的区块，则获取满足条件的区块个数的空间。</li>
+<li>内存池剩余空间不能满足一个区块的大小，则：</li>
+</ol>
+<ul>
+<li>首先判断内存池中是否有残余零头内存空间，如果有则进行回收，将其编入free_list。</li>
+<li>然后向heap申请空间，补充内存池。</li>
+<li>heap有足够的空间，空间分配成功。</li>
+<li>heap空间不足，即malloc()调用失败。则</li>
+<li>查找free_list中尚有未用区块，调整以进行释放，将其编入内存池。然后递归调用chunk_alloc函数从内存池取空间供free_list备用。</li>
+<li>搜寻free_list释放空间也未能解决问题，这时候调用第一级配置器，利用out-of-memory机制尝试解决内存不足问题。</li>
+</ul>
+<h2 id="多线程环境下内存池的互斥访问"><a href="#多线程环境下内存池的互斥访问" class="headerlink" title="多线程环境下内存池的互斥访问"></a>多线程环境下内存池的互斥访问</h2><p>在第二级配置器中，存在着多线程环境的内存池管理，解决多线程环境下内存池互斥访问，需在自由链表free_list中进行修改调整，我们从SGI STL第二级配置器源码中看到，嵌套一个类class_Lock，该类的作用是解决互斥访问，并且只有两个函数：构造函数和析构函数；使用构造函数对内存池进行加锁，使用析构函数对内存池进行解锁。</p>
+<p>把锁对象作为class_Lock对象的一个成员(m_lock),然后在class_Lock对象的构造中对m_lock进行加锁:m_lock.acquire()，在class_Lock对象的析构函数中进行解锁:m_lock.release()<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> _STL_mutex_lock _S_node_allocator_lock;<span class="comment">//互斥锁变量</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> _<span class="title">Lock</span> &#123;</span><span class="comment">//解决内存池在多线程环境下的管理</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    _Lock() &#123; __NODE_ALLOCATOR_LOCK; &#125;</span><br><span class="line">    ~_Lock() &#123; __NODE_ALLOCATOR_UNLOCK; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> __NODE_ALLOCATOR_LOCK <span class="meta-keyword">if</span> (threads &amp;&amp; __us_rsthread_malloc) \</span></span><br><span class="line">                &#123; _S_node_allocator_lock._M_acquire_lock(); &#125;</span><br><span class="line"><span class="meta">#   <span class="meta-keyword">define</span> __NODE_ALLOCATOR_UNLOCK <span class="meta-keyword">if</span> (threads &amp;&amp; __us_rsthread_malloc) \</span></span><br><span class="line">                &#123; _S_node_allocator_lock._M_release_lock(); &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用配置器"><a href="#使用配置器" class="headerlink" title="使用配置器"></a>使用配置器</h2><p>使用一个模板类封装alloc的分配和回收内存函数，并提供了四个用于内存操作的接口。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">simple_alloc</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> T *<span class="title">allocate</span><span class="params">(<span class="keyword">size_t</span> n)</span></span></span><br><span class="line"><span class="function">                </span>&#123; <span class="keyword">return</span> <span class="number">0</span> == n? <span class="number">0</span> : (T*) Alloc::allocate(n * <span class="keyword">sizeof</span> (T)); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> T *<span class="title">allocate</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function">                </span>&#123; <span class="keyword">return</span> (T*) Alloc::allocate(<span class="keyword">sizeof</span> (T)); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deallocate</span><span class="params">(T *p, <span class="keyword">size_t</span> n)</span></span></span><br><span class="line"><span class="function">                </span>&#123; <span class="keyword">if</span> (<span class="number">0</span> != n) Alloc::deallocate(p, n * <span class="keyword">sizeof</span> (T)); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deallocate</span><span class="params">(T *p)</span></span></span><br><span class="line"><span class="function">                </span>&#123; Alloc::deallocate(p, <span class="keyword">sizeof</span> (T)); &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在vector中定义了一个simple_alloc数据成员，当需要动态分配内存时，调用simple_alloc的成员函数<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span> = <span class="title">alloc</span>&gt;  //<span class="title">alloc</span>被默认为第二级配置器</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">vector</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">typedef</span> T value_type;</span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="keyword">typedef</span> simple_alloc&lt;value_type, Alloc&gt; data_allocator;</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://luodw.cc/2015/10/26/Calloc/" target="_blank" rel="noopener">参见网络博客</a></p>
+<h1 id="迭代器概念与traits编程技法"><a href="#迭代器概念与traits编程技法" class="headerlink" title="迭代器概念与traits编程技法"></a>迭代器概念与traits编程技法</h1><p>在Design Pattern设计模式作用，有一种iterator模式：提供一种方法，使之能够依序巡访某个聚合物（容器）所含的各个元素，而又无需暴露该聚合物的内部表述方式。</p>
+<p>迭代器设计思维：将数据容器（container）和算法（algorithms）分开，彼此独立，然后用一个胶合剂将他们撮合在一起。container使用class template、algorithms使用function template就可以实现泛型化了，设计胶合剂才是大难题。</p>
+<p>迭代器是一种行为类似指针的对象，指针各种行为中最常见也最重要的便是 内容提领（dereference）和成员访问（member access）。因此迭代器最重要的工作就是对operator*和operator-&gt;进行重载。</p>
+<p>在STL的算法设计中需要迭代器的型别，根据不同要求和不同型别，有不同的技巧解决；如：使用模板参数推导机制推导出局部变量类型；内嵌型别求出返回值类型；traits技术解决返回值类型和偏特化traits技术解决原生指针问题。</p>
+<h2 id="Traits编程技法——STL源代码门钥"><a href="#Traits编程技法——STL源代码门钥" class="headerlink" title="Traits编程技法——STL源代码门钥"></a>Traits编程技法——STL源代码门钥</h2><p>traits表示特征，下面一步一步介绍什么事Traits编程技法，以及为什么要使用Traits</p>
+<h2 id="内嵌类型声明"><a href="#内嵌类型声明" class="headerlink" title="内嵌类型声明"></a>内嵌类型声明</h2><p>下面是一个以迭代器为模板形参的函数模板<br><code>template &lt;typename Iterator&gt; void func(Iterator iter) { ... }</code><br>假如现在算法中需要声明一个变量，而变量的类型是迭代器所指对象的类型，应该怎么处理呢?<br>如果直接在函数模板中用Iterator解引用定义一个对象，<code>*Iterator var;</code>。肯定不行，模板都不知道类型，编译无法确定定义的类型是什么。就算是使用typeid关键字，也只能获得RTTI中类型的名字，不能用来定义变量。</p>
+<p>我们可以利用函数模板的参数类型自动推导机制解决问题：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func_impl</span><span class="params">(Iterator iter, T t)</span> </span>&#123;</span><br><span class="line">    T temp;<span class="comment">//这里就解决了问题  </span></span><br><span class="line">    <span class="comment">//这里做原本func()的工作  </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iterator&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(Iterator iter)</span> </span>&#123;</span><br><span class="line">    func_impl(iter, *iter);<span class="comment">//func的工作全部都移到func_impl里面了</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    func(&amp;i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>函数func作为对外接口，实际的操作却由函数func_impl执行，通过函数func_impl的参数类型推导，获取到Iterator指向对象的类型T</p>
+<p>这个问题解决了，但是如果我们想要返回迭代器所指对象的类型，就无法利用函数模板的参数类型推导机制了，只能推导函数参数，不能推导函数返回值。</p>
+<p>STL解决这种问题的办法就是 <em>内嵌类型声明</em>，即在迭代器内部添加一种“特性”，通过这种“特性”，算法可以很容易地获知迭代器所指对象的类型<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Iterator</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">typedef</span> T value_type; <span class="comment">//内嵌类型声明</span></span><br><span class="line">    Iterator(T *p = <span class="number">0</span>) : m_ptr(p) &#123;&#125;</span><br><span class="line">    T&amp; <span class="keyword">operator</span>*() <span class="keyword">const</span> &#123; <span class="keyword">return</span> *m_ptr;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    T *m_ptr;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//以迭代器所指对象的类型作为返回类型</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> Iterator::<span class="function">value_type <span class="title">func</span><span class="params">(Iterator iter)</span> </span>&#123; <span class="keyword">return</span> *iter; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    Iterator&lt;<span class="keyword">int</span>&gt; iter(<span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">10</span>));</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;func(iter)&lt;&lt;<span class="built_in">endl</span>;  <span class="comment">//输出：10</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>整个代码关键在于在Iterator类中内嵌了类型声明<code>typedef T value_type</code>，以及定义函数的方式<code>template&lt;typename Iterator&gt; typename Iterator::value_type fun(Iterator iter);</code>。<br><code>template&lt;typename Iterator&gt;</code>是为了让编译器能够识别模板Iterator<br><code>typename Iterator::value_type</code>中Iterator::value_type表示类的成员变量，一定要加typename，在编译器实例化func函数之前，对Iterator<t>::value_type完全没有概念，不知道他是一个类型还是一个函数。</t></p>
+<h2 id="迭代器萃取机——iterator-traits"><a href="#迭代器萃取机——iterator-traits" class="headerlink" title="迭代器萃取机——iterator_traits"></a>迭代器萃取机——iterator_traits</h2><p>STL里面使用iterator_traits这个结构来专门“萃取”迭代器的特性，上述的value_type就是迭代器的特性之一。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> Iterator::<span class="function">value_type <span class="title">func</span><span class="params">(Iterator iter)</span> </span>&#123; <span class="keyword">return</span> *iter; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过iterator_traits作用后的版本</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iterator&gt;</span><br><span class="line"><span class="keyword">typename</span> iterator_traits&lt;Iterator&gt;::value_type </span><br><span class="line">func(Iterator iter) &#123; <span class="keyword">return</span> *iter; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>从长度上看，好像需要敲的代码更多了，为什么要这么麻烦加上一层间接层呢？由于原生指针也是一种迭代器，而且不是一种类类型，因此原生指针并不能定义内嵌类型。这里通过实现iterator_traits的一个偏特化版本就可以解决这个问题了<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//iterator_traits的偏特化版本，针对迭代器是个原生指针的情况  </span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">iterator_traits</span>&lt;T*&gt;</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> T value_type;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>STL根据经验，定义了迭代器最常用到的五种类型：value_type、difference_type、pointer、reference、iterator_category，任何开发者如果想将自己开发的容器与STL结合在一起，就一定要为自己开发的容器的迭代器定义这五种类型，这样都可以通过统一接口iterator_traits萃取出相应的类型，下面列出STL中iterator_traits的完整定义：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tempalte&lt;<span class="keyword">typename</span> I&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">iterator_traits</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> I::iterator_category iterator_category;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> I::value_type value_type;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> I:difference_type difference_type;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> I::pointer pointer;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">typename</span> I::reference reference;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>iterator_traits的偏特化版本解决了原生指针的问题。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Tp</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">iterator_traits</span>&lt;Tp*&gt; &#123;</span></span><br><span class="line">  <span class="keyword">typedef</span> Tp       value_type;</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Tp</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> <span class="title">iterator_traits</span>&lt;const Tp*&gt; &#123;</span></span><br><span class="line">  <span class="keyword">typedef</span> Tp       value_type;</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h1 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h1><h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><p>vector的数据安排以及操作方式，与array非常相似。<br>array是静态空间，一旦配置了就不能改变；要换个大（或小）一点的房子，可以，一切琐细都得由客户端自己来：首先配置一块新空间，然后将元素从旧址一一搬往新址，再把原来的空间释还给系统。<br>vector是动态空间，随着元素的加入，它的内部机制会自行扩充空间以容纳新元素。</p>
+<h2 id="vector的构造和内存管理"><a href="#vector的构造和内存管理" class="headerlink" title="vector的构造和内存管理"></a>vector的构造和内存管理</h2><p>vector容器有已使用空间和可用空间，已使用空间是指vector容器的大小，可用空间是指vector容器可容纳的最大数据空间capacity。</p>
+<p>当我们以push_back()将新元素插入于vector尾端时，该函数首先检查是否还有备用空间，如果有就直接在备用空间上构造元素，并调整迭代器finish，使vector变大；如果没有备用空间了，就扩充空间（重新配置、移动数据、释放原空间）</p>
+<p>vector动态增加大小时，并不是在原空间之后持续新空间（因为无法保证原空间之后尚有可供配置的空间），而是以原大小的两倍另外配置一块较大的空间，然后将原内容拷贝过来，然后才开始在原内容之后构造新元素，并释放原空间。因此，对vector的任何操作，<em>一旦引起空间重新配置，指向原vector的所有迭代器就都失效了</em>。</p>
+<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>STL用环状双向链表来实现list，链表持有一个空白结点，不存储数据，只作为链表的入口。迭代链表的时候首先获得这个空白节点，然后通过next迭代所有的结点。<br>STL将链表的空白节点作为链表的end结点，空白节点的next指向链表的begin结点（说明是循环链表），这样就能与其他容器一样，用[begin, end)左开右闭形式代表迭代器的范围。<br>同时链表结构中不止有next指针，还有prev指针，指向前一个结点，所以是双向链表，同时还是一个环状双向链表，它只需要一个指针便可以完整迭代整个链表。</p>
+<p>以下是STL list的节点结构<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> __<span class="title">list_node</span> &#123;</span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">void</span>* void_pointer;</span><br><span class="line">  void_pointer next;  <span class="comment">// 为void*类型，其实可以是__list_node&lt;T&gt;*</span></span><br><span class="line">  void_pointer prev;</span><br><span class="line">  T data;<span class="comment">//存储数据</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="list迭代器"><a href="#list迭代器" class="headerlink" title="list迭代器"></a>list迭代器</h2><p>list数据与vector不同，不是存储在连续的内存中的，所以不能通过指针加减1来实现递增递减操作。<br>迭代器向后移用next指针实现，迭代器向前移用prev指针实现。<br>同时有一个重要性质，<em>插入操作和接合操作都不会造成原有的list迭代器失效</em>。只有“指向被删除元素”的那个迭代器失效，其他迭代器不受任何影响。</p>
+<h2 id="list的构造和内存管理"><a href="#list的构造和内存管理" class="headerlink" title="list的构造和内存管理"></a>list的构造和内存管理</h2><p>构造函数，上述提到了list尾部有一个空白节点，可以分析出：当初始化一个空链表的时候，需要先分配一个空白节点。为了保持链表的双向环属性，先让空白节点的next和prev指针都指向自己。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>() &#123; empty_initialize(); &#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">empty_initialize</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    node = get_node();    <span class="comment">//创建一个节点，就是调用配置器分配内存 </span></span><br><span class="line">    node-&gt;next = node;    <span class="comment">//空白节点的前后都指向自己，形成一个环</span></span><br><span class="line">    node-&gt;prev = node;　</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对链表插入一个节点，使用insert函数。实现起来就是更新插入位置前后结点的next和prev指针指向<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">iterator <span class="title">insert</span><span class="params">(iterator position, <span class="keyword">const</span> T&amp; x)</span> </span>&#123;</span><br><span class="line">    link_type tmp = create_node(x); <span class="comment">// 用x初始化一个节点</span></span><br><span class="line">    <span class="comment">// 把这个节点插入到position之前，更新前后指针关系</span></span><br><span class="line">    tmp-&gt;next = position.node;</span><br><span class="line">    tmp-&gt;prev = position.node-&gt;prev;</span><br><span class="line">    (link_type(position.node-&gt;prev))-&gt;next = tmp;</span><br><span class="line">    position.node-&gt;prev = tmp;</span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="list的几个函数"><a href="#list的几个函数" class="headerlink" title="list的几个函数"></a>list的几个函数</h2><p>通过上面我们知道，list链表构造的时候首先创建的是空白节点node，后续的操作都是基于这个node的操作。</p>
+<p>尾结点end()实现：尾结点就是空白节点node，返回node即可。<br><code>iterator end() { return node; }</code><br>头结点begin()实现：前面提到了空白节点node的next指向了begin，所以返回(<em>node).next即可<br>`iterator begin() { return (link_type)((</em>node).next); }<code>判断链表是否为空empty()实现：如果空白节点node的next还是node的话说明为空</code>bool empty() const { return node == node-&gt;next; }<code>链表的头尾元素front()、back()</code>reference front() { return <em>begin(); }<code></code>reference back() { return </em>(–end()); }`</p>
+<p>交换两个链表：实际上交换两个空白节点即可，空白节点就是每个链表的入口<br><code>void swap(list&lt;T, Alloc&gt;&amp; x) { __STD::swap(node, x.node); }</code></p>
+<p>remove函数，移除链表中数值为value的节点<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">list</span>&lt;T, Alloc&gt;:</span>:remove(<span class="keyword">const</span> T&amp; value) &#123;</span><br><span class="line">    iterator first = begin();</span><br><span class="line">    iterator last = end();</span><br><span class="line">    <span class="keyword">while</span> (first != last) &#123;</span><br><span class="line">        iterator next = first;</span><br><span class="line">        ++next;</span><br><span class="line">        <span class="keyword">if</span> (*first == value) erase(first);</span><br><span class="line">        first = next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="transfer函数"><a href="#transfer函数" class="headerlink" title="transfer函数"></a>transfer函数</h2><p>list内部提供一个所谓的迁移操作(transfer):将某连续范围的元素迁移到某个特定位置的前面。技术上的实现仍然是节点之间的指针关系转换。有了这个函数，我们能够很方便的实现一些复杂的操作splice、sort、merge。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// transfer函数，将[first,last)内的元素移动到position前面</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">transfer</span><span class="params">(iterator position, iterator first, iterator last)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (position != last) &#123;</span><br><span class="line">        (*(link_type((*last.node).prev))).next = position.node; 　　　　<span class="comment">// (1)</span></span><br><span class="line">        (*(link_type((*first.node).prev))).next = last.node;            <span class="comment">// (2)</span></span><br><span class="line">        (*(link_type((*position.node).prev))).next = first.node;        <span class="comment">// (3)</span></span><br><span class="line">        link_type tmp = link_type((*position.node).prev);               <span class="comment">// (4)</span></span><br><span class="line">        (*position.node).prev = (*last.node).prev;                      <span class="comment">// (5)</span></span><br><span class="line">        (*last.node).prev = (*first.node).prev;                         <span class="comment">// (6)</span></span><br><span class="line">        (*first.node).prev = tmp;                                       <span class="comment">// (7)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_list_transfer.png" alt="迁移操作示例图"></p>
+<p>基于这个迁移操作可以实现如下函数：<br>merge函数，合并两个有序链表称为一个有序链表<br>使用的是transfer函数，移动之后x链表将为空<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Alloc</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">list</span>&lt;T, Alloc&gt;:</span>:merge(<span class="built_in">list</span>&lt;T, Alloc&gt;&amp; x) &#123;</span><br><span class="line">    iterator first1 = begin();</span><br><span class="line">    iterator last1 = end();</span><br><span class="line">    iterator first2 = x.begin();</span><br><span class="line">    iterator last2 = x.end();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (first1 != last1 &amp;&amp; first2 != last2) &#123;</span><br><span class="line">        <span class="keyword">if</span> (*first2 &lt; *first1) &#123; <span class="comment">// 如果first2的值更小，前面放first2</span></span><br><span class="line">            iterator next = first2;</span><br><span class="line">            <span class="comment">// 把first2的一个节点移动到first1前面</span></span><br><span class="line">            transfer(first1, first2, ++next);</span><br><span class="line">            first2 = next;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// first1的值更小，直接移动first1指针即可</span></span><br><span class="line">            ++first1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (first2 != last2) transfer(last1, first2, last2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>reverse函数，将链表数据反转<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="built_in">list</span>&lt;T, Alloc&gt;::reverse() &#123;</span><br><span class="line">    <span class="comment">// 链表元素个数为0或1，不用反转</span></span><br><span class="line">    <span class="keyword">if</span> (node-&gt;next == node || link_type(node-&gt;next)-&gt;next == node) <span class="keyword">return</span>;</span><br><span class="line">    iterator first = begin();</span><br><span class="line">    ++first;</span><br><span class="line">    <span class="keyword">while</span> (first != end()) &#123;</span><br><span class="line">        iterator old = first;</span><br><span class="line">        ++first;</span><br><span class="line">        <span class="comment">// 从链表头开始，一个一个插入到begin之前</span></span><br><span class="line">        transfer(begin(), old, first);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://luodw.cc/2015/10/28/STL-list/" target="_blank" rel="noopener">内容参考</a></p>
+<h2 id="list-sort"><a href="#list-sort" class="headerlink" title="list.sort()"></a>list.sort()</h2><p>STL中有一个std::sort算法，但它是不支持std::list的，因为list不提供RandomIterator的支持，但list自己提供了sort算法。<br>总体上来说，算法的思想就是准备64个槽，编号为0,1,…,63,分别表示已经排序长为1,2,4,…,2^64的链表。一开始这64个槽为空。<br>一开始槽为空，然后进行如下操作：</p>
+<ol>
+<li>如果待排序链表还有未被取出的元素则取出下一个元素，否则转到3</li>
+<li>将这个元素先和0号槽合并，如果此时0号槽为空则，将合并后结果放入0号槽；如果不为空那么合并后长度变为2，则清空0号槽，继续和1号槽合并，依次类推一直合并到i号槽，且i号槽为空，则将合并结果放入i号槽。转到1。</li>
+<li>将这64个槽从低到高依次合并，得到最终的结果<br>下面以链表数据4，2，1，5，6，9，7，8，10为例分析这个迭代版的代码过程<br><img src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_list_sort.png" alt="stl list sort"></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//仿照SGI STL里面的List容器的sort函数，实现迭代版的归并排序</span></span><br><span class="line"><span class="function">ListNode *<span class="title">ListSort</span><span class="params">(ListNode *pHead)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!pHead || !pHead-&gt;next)  <span class="keyword">return</span> pHead;</span><br><span class="line">    <span class="built_in">vector</span>&lt;ListNode*&gt; counter(<span class="number">64</span>, <span class="literal">NULL</span>);</span><br><span class="line">    ListNode *carry;</span><br><span class="line">    ListNode *pos = pHead;</span><br><span class="line">    <span class="keyword">int</span> fill = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(pos) &#123;</span><br><span class="line">        carry = <span class="keyword">new</span> ListNode(pos-&gt;val);</span><br><span class="line">        pos = pos-&gt;next;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; fill &amp;&amp; counter[i]; ++i) &#123;</span><br><span class="line">            <span class="comment">//合并两个已排序的链表</span></span><br><span class="line">            carry = MergeSortedList(carry, counter[i]); </span><br><span class="line">            counter[i] = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        counter[i] = carry;</span><br><span class="line">        <span class="keyword">if</span>(i == fill) fill++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; fill; ++i)&#123;</span><br><span class="line">        counter[i] = MergeSortedList(counter[i<span class="number">-1</span>], counter[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> counter[fill<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里其实也就是形成了一颗归并树，时间复杂度依然是O(nlgn)，空间复杂度为O(1)</p>
+<h2 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h2><p>deque是一种双向开口的连续线性空间，可以在头尾两端分别插入删除元素。<br>vector也可以在头尾两端插入删除元素，但是在头部进行操作要将整个后面的空间平移，效率比较低。</p>
+<p>deque和vector的差异在于：</p>
+<ol>
+<li>deque可以在常数时间内对头部进行插入删除操作</li>
+<li>deque没有容量(capacity)的概念，它是动态地以分段连续空间组合而成，随时可以增加一段新空间并连接起来。所以deque也没有空间保留(reserve)功能。</li>
+</ol>
+<p>除非必要，我们应尽可能选择使用vector而非deque，对deque进行的排序操作，为了提高效率，可以先将deque复制到一个vector，将vector进行sort排序之后再复制回deque。</p>
+<p>deque由一段一段的定量连续空间构成。一旦有必要在deque的前端或尾端增加新空间，便配置一段定量连续空间，串接在整个deque的头端或尾端。deque的最大任务，便是在这些分段的定量连续空间上，维护其整体连续的假象，并提供随机存取的接口。避开了“重新配置、复制、释放”的轮回，代价则是复杂的迭代器架构。</p>
+<p>由于deque的设计思想就是由一块块的缓存区连接起来的，因此它的内存管理会比较复杂。插入的时候要考虑是否要跳转缓存区、是否要新建map节点（和vector一样，其实是重新分配一块空间给map，删除原来空间）、插入后元素是前面元素向前移动还是后面元素向后面移动（谁小移动谁）。而在删除元素的时候，考虑是将前面元素后移覆盖需要移除元素的地方还是后面元素前移覆盖（谁小移动谁）。移动完以后要析构冗余的元素，释放冗余的缓存区。 </p>
+<p>下面的图片展示deque的内部结构设计：<br>可以看到，deque拥有一个bitmap结构（称之为map），map中每一个元素指向一块连续的内存块，后者才是真正存储deque元素的地方，因为每个块都是固定大小的，但是每个块之间不要求是连续的，所以扩充空间的时候，就没有vector那样的副作用了。<br><img src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_deque_architecture.png" alt="deque内部结构"></p>
+<p>stack、queue都是以deque为底层数据结构实现的。</p>
+<h1 id="关联式容器"><a href="#关联式容器" class="headerlink" title="关联式容器"></a>关联式容器</h1><p>标准的STL关联式容器分为set(集合)和map(映射表)两大类，以及这两大类的衍生体，这些容器的底层机制均以RB-tree(红黑树)来实现。<br>还有hash table为底层机制的hash_set、hash_map</p>
+<h2 id="红黑树原理"><a href="#红黑树原理" class="headerlink" title="红黑树原理"></a>红黑树原理</h2><p>红黑树和平衡二叉树一样，本质上都是二叉搜索树(左子树上所有结点的值小于根结点的值，右子树的所有结点值大于根结点的值)，但是二者的搜索效率都能实现平均效率logn，比二叉搜索树性能好。<br>红黑树性质：</p>
+<ol>
+<li>每个结点要么是红的，要么是黑的。</li>
+<li>根结点是黑的。</li>
+<li>每个叶结点，即空结点（NIL）是黑的。</li>
+<li>如果一个结点是红的，那么它的俩个儿子都是黑的。</li>
+<li>对每个结点，从该结点到其子孙结点的所有路径上包含相同数目的黑结点。 </li>
+</ol>
+<p>由第5条可以得出，某个到所有叶子节点最长路径是最短路径的两倍。即一条路径为一黑一红和一条路径为全黑，大体上红黑树是平衡的，只是没有AVL树要求那么严格。<br>AVL树的定义:<br>一棵AVL树满足以下的条件：它的左子树和右子树都是AVL树；左子树和右子树的高度差不能超过1。<br>性质:</p>
+<ol>
+<li>一棵n个结点的AVL树的其高度保持在0(log2(n)),不会超过3/2log2(n+1)</li>
+<li>一棵n个结点的AVL树的平均搜索长度保持在0(log2(n)).</li>
+<li>一棵n个结点的AVL树删除一个结点做平衡化旋转所需要的时间为0(log2(n)).</li>
+</ol>
+<p>红黑树能够以O(logn)的时间复杂度进行搜索、插入、删除操作。此外，由于它的设计，任何不平衡都会在三次旋转之内解决。当然，还有一些更好的，但实现起来更复杂的数据结构，能够做到一步旋转之内达到平衡，但红黑树能够给我们一个比较“便宜”的解决方案。红黑树的算法时间复杂度和AVL相同，但统计性能比AVL树更高。</p>
+<p>红黑树节点源码：红黑树的结构和所存储的数据分离<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">bool</span> __rb_tree_color_type;</span><br><span class="line"><span class="keyword">const</span> __rb_tree_color_type __rb_tree_red = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">const</span> __rb_tree_color_type __rb_tree_black = <span class="literal">true</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> __<span class="title">rb_tree_node_base</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> __rb_tree_color_type color_type;</span><br><span class="line">    <span class="keyword">typedef</span> __rb_tree_node_base* base_ptr;</span><br><span class="line">    <span class="comment">// 关键的四个域</span></span><br><span class="line">    color_type color;     <span class="comment">// 红黑树的颜色</span></span><br><span class="line">    base_ptr parent;      <span class="comment">// 父节点</span></span><br><span class="line">    base_ptr left;        <span class="comment">// 左子节点</span></span><br><span class="line">    base_ptr right;       <span class="comment">// 右子节点</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Value</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> __<span class="title">rb_tree_node</span> :</span> <span class="keyword">public</span> __rb_tree_node_base</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">typedef</span> __rb_tree_node&lt;Value&gt;* link_type;</span><br><span class="line">    Value value_field;    <span class="comment">// 存储的数据</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="红黑树迭代器"><a href="#红黑树迭代器" class="headerlink" title="红黑树迭代器"></a>红黑树迭代器</h2><p><img src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_rbtree_iterator.png" alt="__rb_tree_iterator迭代器与节点的关系"><br>重点看看<strong>rb_tree_iterator的operator++跟operator–，实际是调用</strong>rb_tree_base_iterator的increment跟decrement。<br>可以看出迭代器前移/后移的时候会按key的顺序找到下一个/上一个结点。<br>(set/map&lt;…&gt;::begin()会返回RB-tree中key最小的结点，因此使用operator++遍历会按key的顺序从小到大遍历结点)</p>
+<p>考虑increment的实现：对于当前结点来说，其左边的值都比他小，右边的值都比他大。<br>所以increment就是先向右走一步，然后向左走到头。<br>但是如果右结点不存在，要一直向上找根结点。如果当前结点在根结点的左边，说明根结点的值比当前结点的值大，那么increment递增的下一个值就是根结点了；如果当前结点在根结点的右边，说明根结点的值比当前结点的值小，还要继续向上找找，直到当前结点在根结点的左边才停止。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node-&gt;right != <span class="number">0</span>) &#123; <span class="comment">// 右节点存在，向右边走一步，然后向左走到头</span></span><br><span class="line">        node = node-&gt;right;</span><br><span class="line">        <span class="keyword">while</span> (node-&gt;left != <span class="number">0</span>) node = node-&gt;left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123; <span class="comment">// 右结点不存在</span></span><br><span class="line">        base_ptr y = node-&gt;parent;</span><br><span class="line">        <span class="keyword">while</span> (node == y-&gt;right) &#123;</span><br><span class="line">            node = y;</span><br><span class="line">            y = y-&gt;parent;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (node-&gt;right != y) node = y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>考虑decrement的实现<br>decrement就是先向左走一步，然后向右走到头<br>同理当左结点不存在的时候，要一直向上找根结点，直到当前结点在根结点的右边才停止。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">decrement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node-&gt;color == __rb_tree_red &amp;&amp; node-&gt;parent-&gt;parent == node)</span><br><span class="line">        node = node-&gt;right;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (node-&gt;left != <span class="number">0</span>) &#123;</span><br><span class="line">        base_ptr y = node-&gt;left;</span><br><span class="line">        <span class="keyword">while</span> (y-&gt;right != <span class="number">0</span>) y = y-&gt;right;</span><br><span class="line">        node = y;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        base_ptr y = node-&gt;parent;</span><br><span class="line">        <span class="keyword">while</span> (node = y-&gt;left) &#123;</span><br><span class="line">            node = y;</span><br><span class="line">            y = y-&gt;parent;</span><br><span class="line">        &#125;</span><br><span class="line">        node = y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://luodw.cc/2015/11/19/STL-map/" target="_blank" rel="noopener">参考</a></p>
+<h2 id="head结点"><a href="#head结点" class="headerlink" title="head结点"></a>head结点</h2><p>rb_tree使用了一个header结点，用来代表整个rb_tree。<br>head结点与root结点互为父结点，head结点的left指向最左(key最小)的结点，right指向最右(key最大)的结点。<br>所以header也可以作为end()迭代器指向的值。<br><img src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_rbtree_head.png" alt="rb_tree的head结点"></p>
+<h2 id="KeyOfValue"><a href="#KeyOfValue" class="headerlink" title="KeyOfValue"></a>KeyOfValue</h2><p>主要功能就是从一个节点中获取这个节点存储的键值。<br>对于set而言，这个函数对象为identity&lt;value_type&gt;，这个函数对象返回的就是这个set存储的值；<br>而对于map而言，这个函数对象为select1st&lt;value_type&gt;（map的值域为pair对象，所以select1st就是获取这个pair的第一个成员。）</p>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p>map底层用的是红黑树，所以map只是在红黑树上加了一层封装。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//map中红黑树的定义</span></span><br><span class="line"><span class="keyword">typedef</span> rb_tree&lt;key_type, value_type, select1st&lt;value_type&gt;, key_compare, Alloc&gt; rep_type;</span><br><span class="line"></span><br><span class="line">rep_type t;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到在map中，传入红黑树的KeyOfValue函数对象是select1st&lt;value_type&gt;，而value_type为pair类型，这个函数对象就是获取pair第一个键值，为了键值比较排序。</p>
+<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>使用value_type和pair插入一个键值对到map中的效果不同：当这个键值对的key在map中已经存在时，由于map的唯一性，使用pair插入会忽略当前键值对，插入不成功。使用value_type会覆盖掉前面的相同key的键值对。<br>使用举例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt; stuMap;</span><br><span class="line"><span class="comment">// 插入一个键值对</span></span><br><span class="line">stuMap.insert(pair&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;(<span class="number">3</span>, <span class="string">"zhang"</span>));</span><br><span class="line"><span class="comment">// 插入第二个键值对，自动排序，在第一个前面</span></span><br><span class="line">stuMap.insert(pair&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;(<span class="number">2</span>, <span class="string">"qian"</span>));</span><br><span class="line"><span class="comment">// 插入第三个键值对，这种方式由于key跟上面的相同，无法插入，map中还是只有两个</span></span><br><span class="line">stuMap.insert(pair&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;(<span class="number">2</span>, <span class="string">"yi"</span>));</span><br><span class="line"><span class="comment">// 使用value_type插入，key跟上面的相同，为2，插入之后会覆盖掉之前的键值对</span></span><br><span class="line">stuMap.insert(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;::value_type(<span class="number">2</span>, <span class="string">"yi"</span>));</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">string</span>&gt;::iterator it;</span><br><span class="line"><span class="keyword">for</span> (it = stuMap.begin(); it != stuMap.end(); ++it) &#123;</span><br><span class="line">    <span class="comment">// first表示key，second表示value</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">"-"</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2><ol>
+<li>用count函数来判定关键字是否出现，其缺点是无法定位数据出现位置，出现返回1。</li>
+<li>用find函数来定位数据出现位置，它返回的一个迭代器，当数据出现时，它返回数据所在位置的迭代器，否则返回end。</li>
+</ol>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>STL中默认是采用小于号来排序的，以上代码在排序上是不存在任何问题的，因为上面的关键字是int型，它本身支持小于号运算。<br>在一些特殊情况，比如关键字是一个结构体，涉及到排序就会出现问题，因为它没有小于号操作，insert等函数在编译的时候过不去，下面给出两个方法解决这个问题<br>第一种：重载小于号<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tagStudentInfo</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> nID;</span><br><span class="line">    <span class="built_in">string</span> strName;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (tagStudentInfo <span class="keyword">const</span>&amp; _A) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="comment">//这个函数指定排序策略，按nID排序，如果nID相等的话，按strName排序</span></span><br><span class="line">        <span class="keyword">if</span>(nID &lt; _A.nID)  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(nID == _A.nID) <span class="keyword">return</span> strName.compare(_A.strName) &lt; <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; StudentInfo, *PStudentInfo;  <span class="comment">//学生信息</span></span><br></pre></td></tr></table></figure></p>
+<p>第二种：使用仿函数<br><a href="http://blog.csdn.net/bat603/article/details/1456141" target="_blank" rel="noopener">参考</a></p>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> Key key_type;</span><br><span class="line"><span class="keyword">typedef</span> Key value_type;</span><br><span class="line"><span class="comment">// 键值和值域比较器是一样的,因为set存储的就是一个值,而不是键值对</span></span><br><span class="line"><span class="comment">// 使用的是std::less作为比较工具，所以存储元素是从小到大排序的</span></span><br><span class="line"><span class="keyword">typedef</span> Compare key_compare;</span><br><span class="line"><span class="keyword">typedef</span> Compare value_compare;</span><br><span class="line"><span class="keyword">typedef</span> rb_tree&lt;key_type, value_type, </span><br><span class="line">                   identity&lt;value_type&gt;, key_compare, Alloc&gt; rep_type;</span><br><span class="line">rep_type t;</span><br></pre></td></tr></table></figure>
+<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><p>使用reverse_iterator来反向遍历集合，能够从大到小输出元素<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;T&gt;::reverse_iterator it = s.rbegin()</span><br><span class="line"><span class="keyword">while</span> (it != s.rend()) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *it++ &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="交集、并集、差集"><a href="#交集、并集、差集" class="headerlink" title="交集、并集、差集"></a>交集、并集、差集</h2><p>交集：遍历两个集合（有序的），比较两个集合的每个元素是否相等，如果不相等小的指针向后移动，相等的表示是交集中的元素，存放到结果中。_Dest指向输出的容器，要预先分配好内存，返回值指向保存结果的容器的尾端的下一个位置<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> _<span class="title">InIt1</span>, <span class="title">class</span> _<span class="title">InIt2</span>, <span class="title">class</span> _<span class="title">outIt</span>&gt; <span class="title">inline</span></span></span><br><span class="line"><span class="class">_<span class="title">OutIt</span> <span class="title">set_intersection</span>(_<span class="title">InIt1</span> _<span class="title">First1</span>, _<span class="title">InIt1</span> _<span class="title">Last1</span>, _<span class="title">InIt2</span> _<span class="title">First2</span>, _<span class="title">InIt2</span> _<span class="title">Last2</span>, _<span class="title">OutIt</span> _<span class="title">Dest</span>) &#123;</span></span><br><span class="line">    <span class="comment">// 默认使用的是operator&lt;来进行大小的比较，如果需要自定义比较函数的话</span></span><br><span class="line">    <span class="comment">// 自己编写仿函数，然后作为第六个参数传入</span></span><br><span class="line">    <span class="keyword">for</span> (; _First1 != _Last1 &amp;&amp; _First2 != _Last2; ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (*_First1 &lt; *_First2) ++_First1;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (*_First2 &lt; *_First1) ++_First2;</span><br><span class="line">        <span class="keyword">else</span> *_Dest++ = *_First1++, ++_First2; <span class="comment">// 找到交集元素，存放下来，两个集合指针后移</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (_Dest);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">OutputIterator <span class="title">set_intersection</span><span class="params">(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (first1 != last1 &amp;&amp; first2 != last2) &#123;</span><br><span class="line">        <span class="keyword">if</span> (*first1 &lt; *first2) &#123;</span><br><span class="line">            ++first1;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (*first1 &gt; *first2) &#123;</span><br><span class="line">            ++first2;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            *result = *first1; <span class="comment">// 此时*first1和*first2相等</span></span><br><span class="line">            ++first1;</span><br><span class="line">            ++first2;</span><br><span class="line">            ++result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>并集：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">OutputIterator <span class="title">set_union</span><span class="params">(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (first1 != last1 &amp;&amp; first2 != last2) &#123;</span><br><span class="line">        <span class="keyword">if</span> (*first1 &lt; *first2) &#123;</span><br><span class="line">            *result = *first1;</span><br><span class="line">            ++first1;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (*first1 &gt; *first2) &#123;</span><br><span class="line">            *result = *first2;</span><br><span class="line">            ++first2;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            *result = *first1; <span class="comment">// 此时*first1和*first2相等</span></span><br><span class="line">            ++first1;</span><br><span class="line">            ++first2;</span><br><span class="line">        &#125;</span><br><span class="line">        ++result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> copy(first2, last2, copy(first1, last1, result));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>差集，返回的是在集合1中存在，而在集合2中不存在的元素。比如集合1为{1,2,3}，集合2为{2,3,4}，返回结果为{1}。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">OutputIterator <span class="title">set_difference</span><span class="params">(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2, OutputIterator result)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (first1 != last1 &amp;&amp; first2 != last2) &#123;</span><br><span class="line">        <span class="keyword">if</span> (*first1 &lt; *first2) &#123;</span><br><span class="line">            *result = *first1;</span><br><span class="line">            ++first1;</span><br><span class="line">            ++result;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (*first1 &gt; *first2) &#123;</span><br><span class="line">            ++first2;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ++first1;</span><br><span class="line">            ++first2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> copy(first1, last1, result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="unordered-map"><a href="#unordered-map" class="headerlink" title="unordered_map"></a>unordered_map</h2><p>unordered_map内部实现了一个哈希表，因此其元素的排列顺序是杂乱的，无序的。<br>上述介绍的二叉搜索树具有对数平均时间复杂度的表现，但是这样的表现需要输入的数据足够随机。hash table散列表这种数据结构在插入、删除、查找等操作上也具有“常数时间复杂度”的表现，而且这种表现不需要依赖输入元素的随机性。</p>
+<h2 id="hashtable概述"><a href="#hashtable概述" class="headerlink" title="hashtable概述"></a>hashtable概述</h2><p>哈希表，又名散列表，是根据关键字直接访问内存的数据结构。通过哈希函数，将键值映射转换成数组中的位置，就可以在O（1）的时间内访问到数据。<br>处理冲突方法：开发定址法、链地址法</p>
+<p>STL中使用链地址法来实现。每个哈希节点都有数据域和next指针<br>hashtable的结点定义<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Value</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">struct</span> __<span class="title">hashtable_node</span> &#123;</span></span><br><span class="line">    __hashtable_node* next;</span><br><span class="line">    Value val;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>hashtable表格中的元素为桶(bucket)，bucket中存放的结点就是__hashtable_node，而不是其他的list链表节点。buckets聚合体用vector完成，以便有动态扩充能力。<br><img src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/cpp/stl_rbtree_head.png" alt="bucket list"></p>
+<p>哈希表定义时要指定数组大小n，不过实际分配的数组长度是一个根据n计算而来的质数，<br>SGI STL用质数来设计表格大小，先将28个质数计算好，以备随时访问，同时提供一个函数，用来查询这28个质数之中，“最接近某数并大于某数”的质数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> _M_initialize_buckets(size_type __n)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> size_type __n_buckets = _M_next_size(__n);</span><br><span class="line">    _M_buckets.reserve(__n_buckets);</span><br><span class="line">    _M_buckets.insert(_M_buckets.end(), __n_buckets, (_Node*) <span class="number">0</span>);</span><br><span class="line">    _M_num_elements = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> __stl_next_prime(<span class="keyword">unsigned</span> <span class="keyword">long</span> __n)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">long</span>* __first = _Hashtable_prime_list&lt;<span class="keyword">unsigned</span> <span class="keyword">long</span>&gt;::_S_get_prime_list();</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">long</span>* __last = __first + (<span class="keyword">int</span>)_S_num_primes;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">long</span>* pos = <span class="built_in">std</span>::lower_bound(__first, __last, __n);</span><br><span class="line">    <span class="keyword">return</span> pos == __last ? *(__last - <span class="number">1</span>) : *pos;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _PrimeType&gt; </span><br><span class="line"><span class="keyword">const</span> _PrimeType _Hashtable_prime_list&lt;_PrimeType&gt;::__stl_prime_list[_S_num_primes] =</span><br><span class="line">&#123;</span><br><span class="line">      <span class="number">5u</span>l,          <span class="number">53u</span>l,         <span class="number">97u</span>l,         <span class="number">193u</span>l,       <span class="number">389u</span>l,</span><br><span class="line">      <span class="number">769u</span>l,        <span class="number">1543u</span>l,       <span class="number">3079u</span>l,       <span class="number">6151u</span>l,      <span class="number">12289u</span>l,</span><br><span class="line">      <span class="number">24593u</span>l,      <span class="number">49157u</span>l,      <span class="number">98317u</span>l,      <span class="number">196613u</span>l,    <span class="number">393241u</span>l,</span><br><span class="line">      <span class="number">786433u</span>l,     <span class="number">1572869u</span>l,    <span class="number">3145739u</span>l,    <span class="number">6291469u</span>l,   <span class="number">12582917u</span>l,</span><br><span class="line">      <span class="number">25165843u</span>l,   <span class="number">50331653u</span>l,   <span class="number">100663319u</span>l,  <span class="number">201326611u</span>l, <span class="number">402653189u</span>l,</span><br><span class="line">      <span class="number">805306457u</span>l,  <span class="number">1610612741u</span>l, <span class="number">3221225473u</span>l, <span class="number">4294967291u</span>l</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>比如指定哈系表长度为50，最后实际分配的是53，指定长度为100，最后实际分配的长度是193。可以发现__stl_prime_list数组中，后一个数总是大约等于前一个数的两倍，这不是巧合。当插入数据时，如果所有元素个数大于哈希表数组长度，为了使哈希表的负载因子永远小于1，就必须调用resize重新分配，增长速度跟vector差不多，每次分配数组长度差不多翻倍。</p>
+<h2 id="hashtable的构造和内存管理"><a href="#hashtable的构造和内存管理" class="headerlink" title="hashtable的构造和内存管理"></a>hashtable的构造和内存管理</h2><p>哈希函数用于计算元素在数组中的位置，与数组长度取余得到元素在数组中的位置。</p>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p>以有限的步骤，解决逻辑或数学上的问题，这一专门科目我们称为算法。<br>广义而言我们所写的每个程序、函数都是一个算法。但是唯有用来解决特定问题，并且获得数学上的效能分析和证明，这样的算法才具有可复用性。</p>
+<h2 id="STL算法的一般形式"><a href="#STL算法的一般形式" class="headerlink" title="STL算法的一般形式"></a>STL算法的一般形式</h2><p>所有泛型算法的前两个参数都是一对迭代器(iterators)，通常称为first和last，用来标示算法的操作区间。</p>
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><p>sort有三个参数，前两个参数如上所述，为操作区间，最后一个参数表示仿函数。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line"><span class="comment">// 默认升序排列：由小到大</span></span><br><span class="line">sort(vec.begin(), vec.end());</span><br><span class="line"><span class="comment">// 相当于调用</span></span><br><span class="line">sort(vec.begin(), vec.end(), less&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"><span class="comment">// 降序排列：由大到小</span></span><br><span class="line">sort(vec.begin(), vec.end(). greater&lt;<span class="keyword">int</span>&gt;());</span><br></pre></td></tr></table></figure></p>
+<p>有sort和stable_sort，还有 partition 和stable_partition，带有stable的函数可保证相等元素的原本相对次序在排序后保持不变。</p>
+<h1 id="仿函数"><a href="#仿函数" class="headerlink" title="仿函数"></a>仿函数</h1><p>仿函数(functor)又被称为函数对象(function object)，是指一种具有函数性质的类对象。换句话说就是让一个类的使用看上去像是一个函数。<br>其实现就是类中实现一个operator()，在C++中，函数调用操作符是指左右小括弧() ，该操作符是可以重载的。这个类就有了类似函数的行为，就是一个仿函数类了。</p>
+<p>总结一句就是：通过重载()运算符模拟函数行为的类。</p>
+<p>要注意两点：</p>
+<ol>
+<li>仿函数不是一个函数，而是一个类</li>
+<li>仿函数重载了operator ()运算符，使得调用形式好像是在调用函数</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cpp/" rel="tag"># cpp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/27/cpp/C++ Rule of Three和RAII/" rel="next" title="C++ Rule of Three和RAII">
+                <i class="fa fa-chevron-left"></i> C++ Rule of Three和RAII
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/29/algorithm/快排的几种实现方式/" rel="prev" title="背包问题刷题">
+                背包问题刷题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#STL概论"><span class="nav-number">1.</span> <span class="nav-text">STL概论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#STL六大组件"><span class="nav-number">1.1.</span> <span class="nav-text">STL六大组件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#空间配置器allocator"><span class="nav-number">2.</span> <span class="nav-text">空间配置器allocator</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#构造和析构"><span class="nav-number">2.1.</span> <span class="nav-text">构造和析构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理"><span class="nav-number">2.2.</span> <span class="nav-text">内存管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一级配置器"><span class="nav-number">2.3.</span> <span class="nav-text">第一级配置器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二级配置器"><span class="nav-number">2.4.</span> <span class="nav-text">第二级配置器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间配置"><span class="nav-number">2.5.</span> <span class="nav-text">空间配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存池管理机制"><span class="nav-number">2.6.</span> <span class="nav-text">内存池管理机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程环境下内存池的互斥访问"><span class="nav-number">2.7.</span> <span class="nav-text">多线程环境下内存池的互斥访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用配置器"><span class="nav-number">2.8.</span> <span class="nav-text">使用配置器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#迭代器概念与traits编程技法"><span class="nav-number">3.</span> <span class="nav-text">迭代器概念与traits编程技法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Traits编程技法——STL源代码门钥"><span class="nav-number">3.1.</span> <span class="nav-text">Traits编程技法——STL源代码门钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内嵌类型声明"><span class="nav-number">3.2.</span> <span class="nav-text">内嵌类型声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器萃取机——iterator-traits"><span class="nav-number">3.3.</span> <span class="nav-text">迭代器萃取机——iterator_traits</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#序列式容器"><span class="nav-number">4.</span> <span class="nav-text">序列式容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vector"><span class="nav-number">4.1.</span> <span class="nav-text">vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vector的构造和内存管理"><span class="nav-number">4.2.</span> <span class="nav-text">vector的构造和内存管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list"><span class="nav-number">4.3.</span> <span class="nav-text">list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list迭代器"><span class="nav-number">4.4.</span> <span class="nav-text">list迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list的构造和内存管理"><span class="nav-number">4.5.</span> <span class="nav-text">list的构造和内存管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list的几个函数"><span class="nav-number">4.6.</span> <span class="nav-text">list的几个函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transfer函数"><span class="nav-number">4.7.</span> <span class="nav-text">transfer函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-sort"><span class="nav-number">4.8.</span> <span class="nav-text">list.sort()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deque"><span class="nav-number">4.9.</span> <span class="nav-text">deque</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关联式容器"><span class="nav-number">5.</span> <span class="nav-text">关联式容器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑树原理"><span class="nav-number">5.1.</span> <span class="nav-text">红黑树原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#红黑树迭代器"><span class="nav-number">5.2.</span> <span class="nav-text">红黑树迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head结点"><span class="nav-number">5.3.</span> <span class="nav-text">head结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KeyOfValue"><span class="nav-number">5.4.</span> <span class="nav-text">KeyOfValue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map"><span class="nav-number">5.5.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入"><span class="nav-number">5.6.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-number">5.7.</span> <span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">5.8.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set"><span class="nav-number">5.9.</span> <span class="nav-text">set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历"><span class="nav-number">5.10.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交集、并集、差集"><span class="nav-number">5.11.</span> <span class="nav-text">交集、并集、差集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unordered-map"><span class="nav-number">5.12.</span> <span class="nav-text">unordered_map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashtable概述"><span class="nav-number">5.13.</span> <span class="nav-text">hashtable概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashtable的构造和内存管理"><span class="nav-number">5.14.</span> <span class="nav-text">hashtable的构造和内存管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法"><span class="nav-number">6.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#STL算法的一般形式"><span class="nav-number">6.1.</span> <span class="nav-text">STL算法的一般形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort"><span class="nav-number">6.2.</span> <span class="nav-text">sort</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#仿函数"><span class="nav-number">7.</span> <span class="nav-text">仿函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

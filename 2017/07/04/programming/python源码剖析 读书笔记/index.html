@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="python源码剖析 读书笔记">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python源码剖析 读书笔记">
+<meta property="og:url" content="http://yoursite.com/2017/07/04/programming/python源码剖析 读书笔记/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="python源码剖析 读书笔记">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/image/programming/python_overall_architecture.png">
+<meta property="og:image" content="http://yoursite.com/image/programming/PyObject.png">
+<meta property="og:image" content="http://yoursite.com/image/programming/PyIntObject_structure.png">
+<meta property="og:image" content="http://yoursite.com/image/programming/c_stack_frame.png">
+<meta property="og:updated_time" content="2018-07-26T16:48:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python源码剖析 读书笔记">
+<meta name="twitter:description" content="python源码剖析 读书笔记">
+<meta name="twitter:image" content="http://yoursite.com/image/programming/python_overall_architecture.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/04/programming/python源码剖析 读书笔记/">
+
+
+
+
+
+  <title>Python源码剖析 读书笔记 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/04/programming/python源码剖析 读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python源码剖析 读书笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-04T14:13:50+08:00">
+                2017-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>python源码剖析 读书笔记<br><a id="more"></a></p>
+<h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><p>在最高的层次上，Python的整体架构可以分为四个主要的部分，整个架构如下图1所示。<br><img src="/image/programming/python_overall_architecture.png" alt="python整体架构"><br>在左边，是Python提供的大量的模块，库以及用户自定义的模块；右边是Python的运行时环境，包括对象/类型系统(Object/Type structures)，内存分配器（Memory Allocator）和运行时状态（Current State of Python）。运行时状态维护了解释器在执行字节码时在不同的状态之间切换的动作，我们可以将它视为一个巨大而复杂的有穷状态机。内存分配器则全权负责Python中创建对象时对内存的申请工作，实际上它就是Python 运行时与C中malloc的一层接口。而对象/类型系统则包含了Python中存在的各种内建对象，比如整数、list和dict等等。<br>中间部分就是Python的核心：解释器（interpreter）。在解释器中，箭头的方向指示了Python运行时的数据流方向。其中Scanner对应词法分析，将文件输入的Python源代码或从命令行输入的一行行Python代码切分为一个一个的token；Parser对应语法分析部分，在Scanner的分析结果上进行语法分析，建立抽象语法树（AST）；Compiler是根据建立的AST生成指令集合——Python字节码（byte code），就像Java编译器和C#编译器所做的那样；最后由Code Evaluator来解释并执行这些字节码。因此Code Evaluator又可以被称为执行引擎。</p>
+<h1 id="对象机制"><a href="#对象机制" class="headerlink" title="对象机制"></a>对象机制</h1><h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>在Python的世界中，一切都是对象。整数、字符串、list都是对象，类型也是一个对象。<br>在计算机上，一个对象实际上就是一片被分配的内存空间，这些内存可能是连续的，也有可能是离散的，这都不重要，重要的是这片内存在更高的层次上可以作为一个整体来考虑，这个整体就是一个对象。在这片内存中，存储着一系列的数据以及可以对这些数据进行修改或读取的一系列操作的代码。<br>在Python中，对象就是在堆上申请的结构体，对象不能是被静态初始化的，并且也不能是在栈空间上生存的。唯一的例外就是类型对象(type object)，Python中所有的类型对象都是被静态初始化的。<br>在Python中，一个对象一旦被创建，它在内存中的大小就是不变的了。这就意味着那些需要容纳可变长度数据的对象只能在对象内维护一个指向一个可变大小的内存区域的指针。</p>
+<p>python对象在PyObject中定义，PyObject 是整个 Python 对象机制的核心。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// object.h</span></span><br><span class="line"><span class="comment">// PyObject不包含可变长度数据</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">object</span> &#123;</span></span><br><span class="line">    PyObject_HEAD</span><br><span class="line">&#125; PyObject;</span><br><span class="line"><span class="comment">// PyVarObject包含可变长度数据</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    PyObject_VAR_HEAD</span><br><span class="line">&#125; PyVarObject;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Define pointers to support a doubly-linked list of all live heap objects. */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _PyObject_HEAD_EXTRA \</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">object</span> *_<span class="title">ob_next</span>;</span> \</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">object</span> *_<span class="title">ob_prev</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _PyObject_EXTRA_INIT 0, 0,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* PyObject_HEAD defines the initial segment of every PyObject. */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PyObject_HEAD \</span></span><br><span class="line">    _PyObject_HEAD_EXTRA \</span><br><span class="line">    <span class="keyword">int</span> ob_refcnt; \</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">typeobject</span> *<span class="title">ob_type</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PyObject_VAR_HEAD \</span></span><br><span class="line">    PyObject_HEAD \</span><br><span class="line">    <span class="keyword">int</span> ob_size; <span class="comment">/* Number of items in variable part */</span></span><br></pre></td></tr></table></figure></p>
+<p>在<code>PyObject_HEAD</code>中定义了每一个 Python 对象都必须有的内容，这些内容将出现在每一个Python对象所占有的内存的最开始的字节中，从<code>PyObject_VAR_HEAD</code>的定义可以看出，即使对于拥有可变大小数据的对象，其最开始的字节也含有相同的内容，这就是说，在Python中，每一个对象都拥有相同的对象头部。这就使得在Python中，对对象的引用变得非常的统一，我们只需要用一个<code>PyObject*</code>就可以引用任意的一个对象，而不论该对象实际是一个什么对象.</p>
+<p>分析一下<code>PyObject_HEAD</code>的定义</p>
+<ul>
+<li><code>_PyObject_HEAD_EXTRA</code>双向链表，用于垃圾回收</li>
+<li><code>ob_refcnt</code>整形变量，这个变量的作用是实现引用计数机制。对于某一个对象A，当有一个新的<code>PyObject*</code>引用该对象时，A的引用计数应该增加；而当这个<code>PyObject*</code>被删除时，A的引用计数应该减少。当A的引用计数减少到0时，A就可以从堆上被删除，以释放出内存供别的对象使用。</li>
+<li><code>ob_type</code>指向类型对象的指针，是一个指向_typeobject结构体的指针，决定了这个对象的类型。<br>现在我们看到了，在Python中实际上对象机制的核心非常的简单，一个是引用计数，一个就是类型。<br><img src="/image/programming/PyObject.png" alt="PyObject结构"></li>
+</ul>
+<p>而对于拥有可变长度数据的对象，这样的对象通常都是容器，我们可以在<code>PyObject_VAR_HEAD</code>中看到<code>ob_size</code>这个变量，这个变量实际上就是指明了该对象中一共包含了多少个元素。注意，ob_size指明的是元素的个数，而不是字节的数目。</p>
+<h2 id="类型对象"><a href="#类型对象" class="headerlink" title="类型对象"></a>类型对象</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//object.h</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">typeobject</span> &#123;</span></span><br><span class="line">    PyObject_VAR_HEAD</span><br><span class="line">    <span class="keyword">char</span> *tp_name; <span class="comment">/* For printing, in format "&lt;module&gt;.&lt;name&gt;" */</span></span><br><span class="line">    <span class="keyword">int</span> tp_basicsize, tp_itemsize; <span class="comment">/* For allocation */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Methods to implement standard operations */</span></span><br><span class="line">    destructor tp_dealloc;</span><br><span class="line">    printfunc tp_print;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* More standard operations (here for binary compatibility) */</span></span><br><span class="line">    hashfunc tp_hash;</span><br><span class="line">    ternaryfunc tp_call;</span><br><span class="line"></span><br><span class="line">&#125; PyTypeObject;</span><br></pre></td></tr></table></figure>
+<p>在_typeobject 的定义中包含了许多的信息，主要可以分为四类：</p>
+<ol>
+<li>类型名tp_name，主要是Python内部以及调试的时候使用；</li>
+<li>创建该类型对象是分配内存空间的大小的信息，即<code>tp_basicsize</code>和<code>tp_itemsize</code>；</li>
+<li>与该类型对象相关联的操作信息，比如hashfunc，tp_hash就指明对于该类型的对象，如何生成其hash值。在Object.h中可以看到，hashfunc实际上是一个函数指针：<code>typedef long hashfunc)(PyObject *);</code>在_typeobject中，包含了大量的函数指针，这些函数指针将用来指定某个类型的操作信息。</li>
+<li>类型对象<code>PyObject_VAR_HEAD</code>，</li>
+</ol>
+<p>我们考虑一个int对象是如何生成的：<br>首先用PyTypeObject初始化得到一个对象<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PyTypeObject PyType_Type = &#123;</span><br><span class="line">    PyVarObject_HEAD_INIT(&amp;PyType_Type, <span class="number">0</span>)</span><br><span class="line">    <span class="string">"int"</span>,                   <span class="comment">/* tp_name */</span></span><br><span class="line">    <span class="keyword">sizeof</span>(PyIntObject),          <span class="comment">/* tp_basicsize */</span></span><br><span class="line">    <span class="number">0</span>,            <span class="comment">/* tp_itemsize */</span></span><br><span class="line">    (destructor)type_dealloc,          <span class="comment">/* tp_dealloc */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//int的方法和属性初始化值</span></span><br><span class="line">    (hashfunc)int_hash,             <span class="comment">/* tp_hash */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>然后PyObject中的PyObject_HEAD中的ob_type<br><code>*ob_type = &amp;PyType_Type</code><br><img src="/image/programming/PyIntObject_structure.png" alt="int对象的结构"></p>
+<h2 id="对象间的继承和多态"><a href="#对象间的继承和多态" class="headerlink" title="对象间的继承和多态"></a>对象间的继承和多态</h2><p>在Python中所有的内建对象（PyIntObject等）和内部使用对象（PyCodeObject等）的最开始的内存区域都拥有一个PyObject。实际上，这一点可以视为PyIntObject、PyCodeObject等对象都是从PyObject继承而来。<br>考虑下面的代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">(PyObject* object)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    object-&gt;ob_type-&gt;tp_print(object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果传给Print的指针实际是一个<code>PyIntObject*</code>，那么就会调用PyIntObject对象对应的类型对象中定义的输出操作，如果传给Print的指针实际是一个<code>PyStringObject*</code>，那么就会调用PyStringObject对象对应的类型对象中定义的输出操作。可以看到，这里同一个函数在不同情况下表现出了不同的行为，这正是多态的核心所在。</p>
+<h1 id="整数对象PyIntObject"><a href="#整数对象PyIntObject" class="headerlink" title="整数对象PyIntObject"></a>整数对象PyIntObject</h1><h2 id="PyIntObject"><a href="#PyIntObject" class="headerlink" title="PyIntObject"></a>PyIntObject</h2><p>PyIntObject的对象是一个不变(immutable)对象，也就是说，在创建了一个PyIntObject的对象之后，我们就再也不能改变该对象的值了。在Python中，除了整数对象之外，还有很多对象也是不变对象，比如字符串对象等。<br>首先，我们先来关注一下PyIntObject的定义：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//intobject.h</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    PyObject_HEAD</span><br><span class="line">    <span class="keyword">long</span> ob_ival;</span><br><span class="line">&#125; PyIntObject;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，Python中的PyIntObject实际上就是对C中long的一个简单包装。</p>
+<h2 id="PyIntObject对象的创建和维护"><a href="#PyIntObject对象的创建和维护" class="headerlink" title="PyIntObject对象的创建和维护"></a>PyIntObject对象的创建和维护</h2><p>在实际的编程中，对于数值比较小的整数，比如1，2，29等等，可能在程序中会非常频繁地使用。<br>在Python中，所有的对象都是存活在系统堆上。这就是说，如果没有特殊机制，对于这些频繁使用的小整数对象，Python将一次又一次地在使用malloc在堆上申请空间，并不厌其烦地一次次free。这样的操作不仅大大降低了运行效率（Python本来就以速度慢被人诟病），而且会在系统堆上造成内存碎片，严重影响Python的整体性能。</p>
+<p>于是在Python中，对小整数对象，使用了对象池技术。刚才我们说了，PyIntObject对象是Immutable对象，这带来了一个天大的喜讯，所以对象池里的PyIntObject对象能够被任意地共享。<br>小整数和大整数的分界线在哪里？Python的回答是“it’s all up on you”，你想它在哪里它就在哪里。<br>Python中提供了一种方法，通过这种方法，用户可以动态地调整小整数与大整数的分界线，从而动态确定对象池中到底应该有多少个对象。呃，但是，老实说，Python提供的这种方法比较原始，为了达到动态调整的目的，你只有自己修改源代码。<br>Python2.4中，将小整数集合的范围默认设定为[-5，100)。但是你完全可以修改intobject.c文件中的两个宏变量NSMALLPOSINTS和NSMALLNEGINTS，重新编译Python，从而将这个范围向两端伸展或收缩。</p>
+<p>对于小整数，完全地缓存其PyIntObject对象。而对其它整数，Python运行环境将提供一块内存空间，这些内存空间由这些大整数轮流使用，也就是说，谁需要的时候谁就使用。<br>在Python中，有一个PyIntBlock结构，在这个结构的基础上，实现了的一个单向列表。这个结构里维护了一块（block）内存，其中保存了一些PyIntObject对象。</p>
+<h1 id="字符串对象PyStringObject"><a href="#字符串对象PyStringObject" class="headerlink" title="字符串对象PyStringObject"></a>字符串对象PyStringObject</h1><h2 id="PyStringObject与PyString-Type"><a href="#PyStringObject与PyString-Type" class="headerlink" title="PyStringObject与PyString_Type"></a>PyStringObject与PyString_Type</h2><p>与定长对象不同，对于变长对象而言，对象维护的数据的长度在对象定义时是不知道的。对于PyIntObject来说，其维护的数据的长度在对象定义时就已经确定了，是一个long变量的长度；而可变对象维护的数据的长度只能在对象创建时才能确定。<br>在变长对象中，实际上还可分为可变对象(mutable)和不可变对象(immutable)，可变对象是在对象创建之后，其维护的数据的长度还能变化的对象，比如一个list被创建后，可以向其中添加元素或删除元素，这些操作都会改变其维护的数据的长度；而不可变对象所维护的数据在对象创建之后就不能再改变了，比如Python中的string和tuple，它们都不支持添加或删除的操作。</p>
+<p>PyStringObject 对象的声明如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[stringobject.h]</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    PyObject_VAR_HEAD</span><br><span class="line">    <span class="keyword">long</span> ob_shash;</span><br><span class="line">    <span class="keyword">int</span> ob_sstate;</span><br><span class="line">    <span class="keyword">char</span> ob_sval[<span class="number">1</span>]; <span class="comment">// 变长数组</span></span><br><span class="line">&#125; PyStringObject;</span><br></pre></td></tr></table></figure></p>
+<p>在PyStringObject的头部实际上是一个<code>PyObject_VAR_HEAD</code>，其中有一个<code>ob_size</code>变量保存着对象中维护的可变长度内存的长度。虽然在PyStringObject的定义中，<code>ob_sval</code>是一个字符的字符数组。但是<code>ob_sval</code>实际上是作为一个字符指针指向了一段内存，这段内存保存着这个字符串对象所维护的实际字符串，显然，这段内存不会只是一个字节。而这段内存的实际长度（字节），正是由<code>ob_size</code>来维护，这个机制是Python中所有拥有可变长度内存的对象的实现机制。<br>PyStringObject中的ob_shash变量其作用是缓存该对象的HASH值，这样可以避免每一次都重新计算该字符串对象的HASH值。</p>
+<p>下面看一下 PyStringObject 对应的类型对象：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[stringobject.c]</span><br><span class="line">PyTypeObject PyString_Type = &#123;</span><br><span class="line">    PyObject_HEAD_INIT(&amp;PyType_Type)</span><br><span class="line">    <span class="number">0</span>,</span><br><span class="line">    <span class="string">"str"</span>,</span><br><span class="line">    <span class="keyword">sizeof</span>(PyStringObject),</span><br><span class="line">    <span class="keyword">sizeof</span>(<span class="keyword">char</span>),</span><br><span class="line">    ……</span><br><span class="line">    (reprfunc)string_repr, <span class="comment">/* tp_repr */</span>&amp;string_as_number, <span class="comment">/* tp_as_number */</span></span><br><span class="line">    &amp;string_as_sequence, <span class="comment">/* tp_as_sequence */</span></span><br><span class="line">    &amp;string_as_mapping, <span class="comment">/* tp_as_mapping */</span></span><br><span class="line">    (hashfunc)string_hash, <span class="comment">/* tp_hash */</span></span><br><span class="line">    <span class="number">0</span>, <span class="comment">/* tp_call */</span></span><br><span class="line">    ……</span><br><span class="line">    string_new, <span class="comment">/* tp_new */</span></span><br><span class="line">    PyObject_Del, <span class="comment">/* tp_free */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，在PyStringObject的类型对象中，<code>tp_itemsize</code>被设置为sizeof(char)，即一个字节。对于Python中的任何一种变长对象，<code>tp_itemsize</code>这个域是必须设置的，<code>tp_itemsize</code>指明了由变长对象保存的元素的单位长度，所谓单位长度即是指一个对象在内存中的长度。这个<code>tp_itemsize</code>和<code>ob_size</code>共同决定了应该额外申请的内存的总大小是多少。</p>
+<h1 id="PyListObject对象"><a href="#PyListObject对象" class="headerlink" title="PyListObject对象"></a>PyListObject对象</h1><p>PyListObject是Python提供的对列表的抽象，熟悉C++的人可能会条件反射地将PyListObject与C++的list对应起来（至少它们名字是相同的）。而实际上，Python中的列表和C++的STL中的vector更为相似。你可以这样看待Python中的列表： <code>vector&lt;PyObject*&gt;</code></p>
+<p>下面看一看 PyListObject 的声明：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[listobject.h]</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    PyObject_VAR_HEAD</span><br><span class="line">    <span class="comment">/* Vector of pointers to list elements. list[0] is ob_item[0], etc. */</span></span><br><span class="line">    PyObject **ob_item;</span><br><span class="line">    <span class="keyword">int</span> allocated;</span><br><span class="line">&#125; PyListObject;</span><br></pre></td></tr></table></figure></p>
+<p>在PyListObject的头，赫然是一个<code>PyObject_VAR_HEAD</code>，随后是一个PyObject*<em>，这个指针正是维护了PyObject</em>列表的关键。<br>PyListObject所采用的内存管理策略和C++中vector采取的内存分配策略是一样的。它并不是存了多少东西就申请对应大小的内存，这样的申请策略显然是低效的，因为我们有理由相信，用户选用列表正是为了频繁地插入删除元素。因此，PyListObject在每一次需要申请内存的时候，会申请一大块内存，这是申请的总内存的大小记录在allocated中，而这些内存中实际被有效的PyObject*占用的内存大小被记录在了ob_size中。<br>这里ob_size和allocated的关系就像C++的vector中size和capacity的关系一样。</p>
+<h1 id="pyc文件解析"><a href="#pyc文件解析" class="headerlink" title="pyc文件解析"></a>pyc文件解析</h1><h2 id="PyCodeObject与pyc文件"><a href="#PyCodeObject与pyc文件" class="headerlink" title="PyCodeObject与pyc文件"></a>PyCodeObject与pyc文件</h2><p>通常认为，Python是一种解释性的语言，但是这种说法是不正确的，实际上，Python在执行时，首先会将.py文件中的源代码编译成Python的byte code（字节码），然后再由Python Virtual Machine来执行这些编译好的byte code。这种机制的基本思想跟Java，.NET是一致的。</p>
+<p>可以说，PyCodeObject就是Python源代码编译之后的关于程序的静态信息的集合。<br>在对Python源代码进行编译的时候，对于一段Code（Code Block），会创建一个PyCodeObject与这段Code对应。那么如何确定多少代码算是一个Code Block呢，事实上，当进入新的作用域时，就开始了新的一段Code。也就是说，对于下面的这一段 Python 源代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[CodeObject.py]</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Fun</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">a = A()</span><br><span class="line">Fun()</span><br></pre></td></tr></table></figure></p>
+<p>在Python编译完成后，一共会创建3个PyCodeObject对象，一个是对应CodeObject.py的，一个是对应class A这段Code（作用域），而最后一个是对应def Fun这段Code的。<br>每一个PyCodeObject对象中都包含了每一个代码块经过编译后得到的byte code。但是不幸的是，Python在执行完这些byte code后，会销毁PyCodeObject，所以下次再次执行这个.py文件时，Python需要重新编译源代码，创建三个PyCodeObject，然后执行byte code。<br>Python中的pyc文件正是保存PyCodeObject的关键所在。<br>pyc是一个二进制文件，要了解pyc文件的格式，首先我们必须要清楚PyCodeObject中每一个域都表示什么含义。</p>
+<h1 id="python执行引擎之框架"><a href="#python执行引擎之框架" class="headerlink" title="python执行引擎之框架"></a>python执行引擎之框架</h1><p>Python执行引擎是Python的核心，Python源代码在被编译为byte code之后，就将由Python的执行引擎接手整个工作，依次读入每一条byte code，在当前的上下文环境中执行这条byte code。</p>
+<p>考虑C代码运行的时候调用函数栈帧情况：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"a=%d, b=%d\n"</span>, a, b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    f(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    g();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/image/programming/c_stack_frame.png" alt="c函数调用栈帧"><br>绿色部分对应的是g的栈帧，而黄色部分对应的是f的栈帧。对于一个函数而言，其所有的局部变量和操作都在自己的栈帧中完成，而函数之间的调用则通过创建新的栈帧完成，当然，在函数调用发生时，系统会保存上一个栈帧的栈指针esp和帧指针ebp。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/04/programming/Python lambda介绍/" rel="next" title="Python lambda介绍">
+                <i class="fa fa-chevron-left"></i> Python lambda介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/06/cpp/C++设计模式/" rel="prev" title="C++设计模式">
+                C++设计模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#入门"><span class="nav-number">1.</span> <span class="nav-text">入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象机制"><span class="nav-number">2.</span> <span class="nav-text">对象机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象"><span class="nav-number">2.1.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型对象"><span class="nav-number">2.2.</span> <span class="nav-text">类型对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象间的继承和多态"><span class="nav-number">2.3.</span> <span class="nav-text">对象间的继承和多态</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#整数对象PyIntObject"><span class="nav-number">3.</span> <span class="nav-text">整数对象PyIntObject</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PyIntObject"><span class="nav-number">3.1.</span> <span class="nav-text">PyIntObject</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyIntObject对象的创建和维护"><span class="nav-number">3.2.</span> <span class="nav-text">PyIntObject对象的创建和维护</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串对象PyStringObject"><span class="nav-number">4.</span> <span class="nav-text">字符串对象PyStringObject</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PyStringObject与PyString-Type"><span class="nav-number">4.1.</span> <span class="nav-text">PyStringObject与PyString_Type</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyListObject对象"><span class="nav-number">5.</span> <span class="nav-text">PyListObject对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pyc文件解析"><span class="nav-number">6.</span> <span class="nav-text">pyc文件解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PyCodeObject与pyc文件"><span class="nav-number">6.1.</span> <span class="nav-text">PyCodeObject与pyc文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python执行引擎之框架"><span class="nav-number">7.</span> <span class="nav-text">python执行引擎之框架</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

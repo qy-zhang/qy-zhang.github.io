@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="Maven简介何为Maven Maven翻译为“行家、专家”，是一个优秀的构建工具构建：编译、运行单元测试、生成文档、打包和部署等  构建工具MakeMake通过一系列的目标和依赖将整个构建过程串联起来，接着利用系统的本地命令完成每个目标的实际行为。优点：可以使用所有系统的本地命令缺点：很难实现跨平台的构建，语法容易出错（一个空格或tab使用错误导致构建失败） AntAnother Neat To">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Maven实战》">
+<meta property="og:url" content="http://yoursite.com/2018/09/16/java/maven/《Maven实战》/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="Maven简介何为Maven Maven翻译为“行家、专家”，是一个优秀的构建工具构建：编译、运行单元测试、生成文档、打包和部署等  构建工具MakeMake通过一系列的目标和依赖将整个构建过程串联起来，接着利用系统的本地命令完成每个目标的实际行为。优点：可以使用所有系统的本地命令缺点：很难实现跨平台的构建，语法容易出错（一个空格或tab使用错误导致构建失败） AntAnother Neat To">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/09/16/java/maven/image/java/maven-dependency-scope.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/16/java/maven/image/java/maven-repository-types.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/16/java/maven/image/java/maven-default-plugin-lifecycle.png">
+<meta property="og:updated_time" content="2019-05-13T01:40:28.361Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Maven实战》">
+<meta name="twitter:description" content="Maven简介何为Maven Maven翻译为“行家、专家”，是一个优秀的构建工具构建：编译、运行单元测试、生成文档、打包和部署等  构建工具MakeMake通过一系列的目标和依赖将整个构建过程串联起来，接着利用系统的本地命令完成每个目标的实际行为。优点：可以使用所有系统的本地命令缺点：很难实现跨平台的构建，语法容易出错（一个空格或tab使用错误导致构建失败） AntAnother Neat To">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/16/java/maven/image/java/maven-dependency-scope.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/16/java/maven/《Maven实战》/">
+
+
+
+
+
+  <title>《Maven实战》 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/16/java/maven/《Maven实战》/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《Maven实战》</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T22:29:20+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Maven简介"><a href="#Maven简介" class="headerlink" title="Maven简介"></a>Maven简介</h2><h3 id="何为Maven"><a href="#何为Maven" class="headerlink" title="何为Maven"></a>何为Maven</h3><blockquote>
+<p>Maven翻译为“行家、专家”，是一个优秀的构建工具<br>构建：编译、运行单元测试、生成文档、打包和部署等</p>
+</blockquote>
+<h3 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h3><h4 id="Make"><a href="#Make" class="headerlink" title="Make"></a>Make</h4><p>Make通过一系列的目标和依赖将整个构建过程串联起来，接着利用系统的本地命令完成每个目标的实际行为。<br>优点：可以使用所有系统的本地命令<br>缺点：很难实现跨平台的构建，语法容易出错（一个空格或tab使用错误导致构建失败）</p>
+<h4 id="Ant"><a href="#Ant" class="headerlink" title="Ant"></a>Ant</h4><p>Another Neat Tools，另一个整洁的工具，Java版本的Make，因为是为Java服务，所以是跨平台的。<br>Ant没有依赖管理，得手工管理。</p>
+<p>Ant与Make都是过程式的，开发者显式的指定每一个目标，以及完成该目标所需要执行的任务，针对每一个项目，开发者都需要重新编写这一过程。</p>
+<p>Maven是<strong>声明式</strong>的，构建项目的过程和过程各个阶段所需要的工作都通过插件来实现，并且大部分插件都是现成的，开发者只需声明项目的基本元素，Maven就执行内置的、完整的构建过程。</p>
+<h3 id="Maven安装最佳实践"><a href="#Maven安装最佳实践" class="headerlink" title="Maven安装最佳实践"></a>Maven安装最佳实践</h3><h4 id="设置MAVEN-OPTS环境变量"><a href="#设置MAVEN-OPTS环境变量" class="headerlink" title="设置MAVEN_OPTS环境变量"></a>设置MAVEN_OPTS环境变量</h4><p>通过上面的构建工具介绍可以理解，运行mvn命令实际上是执行了Java命令，所以可以设置一些JVM参数<code>-Xms256m -Xmx512m</code>。<br>设置方式同<code>$M2_HOME</code>的设置方式：<br><code>export MAVEN_OPTS=&quot;$MAVEN_OPTS -Xms256m -Xmx512m -XX:MaxPermSize=128m -XX:ReservedCodeCacheSize=64m&quot;</code></p>
+<p>当项目较大时，使用Maven生成项目站点需要占用大量的内存，如果不配置JVM参数容易出现 java.lang.OutOfMemoryError。</p>
+<h4 id="配置用户范围-settings-xml"><a href="#配置用户范围-settings-xml" class="headerlink" title="配置用户范围 settings.xml"></a>配置用户范围 settings.xml</h4><p>Maven用户可以选择配置<code>$M2_HOME/conf/settings.xml</code>和<code>~/.m2/settings.xml</code>。<br>前者是全局范围的，整台机器的所有用户都会受到该配置的影响。推荐配置后者用户级别的，第一是不影响其他用户，第二是升级Maven不需要重新配置。</p>
+<h4 id="不要使用IDE内嵌的Maven"><a href="#不要使用IDE内嵌的Maven" class="headerlink" title="不要使用IDE内嵌的Maven"></a>不要使用IDE内嵌的Maven</h4><p>IDE中内嵌的Maven版本一般比较新，不稳定。</p>
+<h2 id="Maven使用"><a href="#Maven使用" class="headerlink" title="Maven使用"></a>Maven使用</h2><h3 id="项目骨架"><a href="#项目骨架" class="headerlink" title="项目骨架"></a>项目骨架</h3><blockquote>
+<p>Maven中的pom.xml对应于Make中的Makefile，Ant中的build.xml。</p>
+</blockquote>
+<p>Maven项目的一些约定：</p>
+<ul>
+<li><code>src/main/java</code>目录下放置项目的主代码</li>
+<li><code>src/test/java</code>目录下放置项目的测试代码<br>这些基本目录结构和pom.xml被称为项目的骨架。可以使用mvn archetype:generate快速生成项目的骨架。</li>
+</ul>
+<p><code>groudId=org.testng  artifactId=testng  version=5.8</code><br>formatAsDirectory()函数会把groudId中的句点分隔符转换成路径分隔符，后面再加上一个路径分隔符。<br><code>org/testng/</code></p>
+<h2 id="依赖相关"><a href="#依赖相关" class="headerlink" title="依赖相关"></a>依赖相关</h2><h3 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h3><p>依赖范围是用来控制依赖与三种classpath的关系</p>
+<ul>
+<li>编译classpath</li>
+<li>测试classpath</li>
+<li>运行classpath</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>范围</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>compile</td>
+<td>编译依赖范围，没有指定默认是这个范围。对于编译、测试、运行classpath都有效。例子：spring-core，都需要这个依赖</td>
+</tr>
+<tr>
+<td>test</td>
+<td>测试依赖范围。只对测试classpath有效，对编译、运行无效。例子：JUnit，只在测试的时候需要</td>
+</tr>
+<tr>
+<td>provided</td>
+<td>已提供依赖范围。对编译和测试classpath有效，对运行时无效。例子：servlet-api，运行项目时由于容易已经提供，就不需要重复地引入一遍</td>
+</tr>
+<tr>
+<td>runtime</td>
+<td>运行时依赖范围。对测试和运行classpath有效，对编译无效。例子：JDBC驱动实现，在编译的时候只需要JDK提供的JDBC接口，只有在测试或运行的时候才需要实现接口的具体JDBC驱动</td>
+</tr>
+<tr>
+<td>system</td>
+<td>系统依赖范围。对编译和测试classpath有效，对运行时无效。必须通过systemPath元素显式指定依赖文件路径。通常用于与本机系统绑定的相关配置，此类依赖不是通过maven仓库解析，会造成构建的不可移植性</td>
+</tr>
+<tr>
+<td>import</td>
+<td>导入依赖范围</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.sql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jdbc-stdext<span class="tag">&lt;/<span class="name">artifaceId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;java.home&#125;/lib/rt.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="../image/java/maven-dependency-scope.png" alt="Maven依赖范围"></p>
+<h3 id="传递依赖"><a href="#传递依赖" class="headerlink" title="传递依赖"></a>传递依赖</h3><ul>
+<li>最短路径优先</li>
+<li>第一声明优先</li>
+</ul>
+<h3 id="可选依赖"><a href="#可选依赖" class="headerlink" title="可选依赖"></a>可选依赖</h3><p>假设有这样一个依赖关系，项目A依赖于项目B，项目B依赖于项目X和Y，B对于X和Y的依赖都是可选依赖：A-&gt;B、B-&gt;X（可选）、B-&gt;Y（可选）。根据传递性依赖的定义，如果所有这三个依赖的范围都是compile，那么X、Y就是A的compile范围的传递性依赖。然而，由于这里X、Y是可选依赖，依赖将不会得以传递。换句话说，X、Y将不会对A有任何影响。</p>
+<p>为什么要使用可选依赖这一特性呢？可能是项目B实现了两个特性，其中的特性一依赖于X，特性二依赖于Y，而且这两个特性是互斥的，用户不可能同时使用这两个特性，比如B是一个持久层隔离工具包，它支持多种数据库包括：MySQL，PostgreSQL等，在构建这个工具包的使用，需要这两种数据库的驱动程序，但是在使用这个工具包的时候，只会依赖一种数据库。 </p>
+<p>在依赖中配置<code>&lt;optional&gt; true/false</code>是否向下传递，当配置为true时，别人依赖了本项目，在optional标签中的配置项不会在别人的项目中依赖到。</p>
+<h3 id="排除依赖"><a href="#排除依赖" class="headerlink" title="排除依赖"></a>排除依赖</h3><p>排除依赖包中所包含的依赖关系，不需要添加版本，直接根据groudId和artifactId排除<br>排除依赖可以设置当前依赖中是否使用间接依赖。注意和可选依赖区分，可以达到同样的效果。</p>
+<h3 id="归类依赖"><a href="#归类依赖" class="headerlink" title="归类依赖"></a>归类依赖</h3><p>在pom.xml中配置 springframework.version 元素，方便整体升级</p>
+<h3 id="优化依赖"><a href="#优化依赖" class="headerlink" title="优化依赖"></a>优化依赖</h3><p>Maven会自动解析所有项目的直接依赖和传递性依赖，并且根据规整正确判断每个依赖的范围，对于一些依赖冲突，也能进行调节，以确保任何一个构件只有唯一的版本在依赖中存在。在这些工作之后得到的哪些依赖被称为已解析依赖。</p>
+<h3 id="几个命令"><a href="#几个命令" class="headerlink" title="几个命令"></a>几个命令</h3><h4 id="mvn-dependency-list"><a href="#mvn-dependency-list" class="headerlink" title="mvn dependency:list"></a>mvn dependency:list</h4><p>查看当前项目的已解析依赖</p>
+<h4 id="mvn-dependency-tree"><a href="#mvn-dependency-tree" class="headerlink" title="mvn dependency:tree"></a>mvn dependency:tree</h4><p>查看当前项目的依赖树，可以很清楚的看到某个依赖是通过哪条路径引入的，以及范围是什么<br>`mvn dependency:tree -Doutput=tree.txt</p>
+<h4 id="mvn-dependency-analyze"><a href="#mvn-dependency-analyze" class="headerlink" title="mvn dependency:analyze"></a>mvn dependency:analyze</h4><p>分析依赖，分析结果分为两类：</p>
+<ul>
+<li>Used undeclared dependencies found<br>某些依赖的包在代码中有用到它的代码，但是它并不是直接的依赖，也没有在pom中声明，是通过传递引入的一类包。</li>
+<li>Unused declared dependencies found<br>在pom中声明依赖了，但是在实际代码中并没有用到的包！也就是多余的包。<br>实际代码没有用到，指的是在main/java和test里没有用的，但是并不是意味着别的地方没有用到，所以在删除依赖的时候，我们要小心，最好备份，例如我们在web.xml里面用到某些类，这个类依赖包A，这个maven是分析不出来的。还有运行时需要用到的也分析不出来！</li>
+</ul>
+<h2 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h2><h3 id="坐标"><a href="#坐标" class="headerlink" title="坐标"></a>坐标</h3><blockquote>
+<p>坐标定义GAV：GroupId、ArtifactId、Version</p>
+</blockquote>
+<p>Maven打出来的包存放路径和Maven坐标的对应关系：<br>| 包路径 | maven坐标 |<br>| — | — |<br>| log4j/log4j/1.2.15/log4j-1.2.15.jar | groupId/artifactId/version/artifactId-version.packaging |</p>
+<h3 id="仓库的分类"><a href="#仓库的分类" class="headerlink" title="仓库的分类"></a>仓库的分类</h3><p>对Maven来说，仓库只分为两类：本地仓库和远程仓库。<br>maven会先在本地仓库中寻找，找不到再去中远程仓库中寻找。</p>
+<ul>
+<li>本地仓库：默认是 ~/.m2/repository，可以通过修改<code>~/.m2/settings.xml</code>中的<code>&lt;localRepository&gt;</code>标签修改。（默认情况下<code>~/.m2/settings.xml</code>文件不存在，需要从<code>$M2_HOME/conf/settings.xml</code>拷贝）</li>
+<li>中央仓库：maven自带的核心仓库，包含了绝大部分开源的构件。<a href="http://repo1.maven.org/maven2" target="_blank" rel="noopener">http://repo1.maven.org/maven2</a></li>
+<li>私服：局域网假设的远程仓库<br><img src="../image/java/maven-repository-types.png" alt="maven仓库分类"></li>
+</ul>
+<h3 id="快照版本"><a href="#快照版本" class="headerlink" title="快照版本"></a>快照版本</h3><p>Maven为什么要区分快照版和正式版本？试想一下这样的情况，小张在开发模块A的2.1版本，该版本还未正式发布。小王同时开发模块B，B的功能依赖于A。在开发的过程中小王如何进行集成测试：</p>
+<ul>
+<li>方案一：小王每次都拉取模块A的最新代码进行构建。这种方式每次小王还需要去构建模块A，不仅多了些操作，而且如果构建失败还得去找小张</li>
+<li>方案二：小张发布一个更新后的模块A的2.1版本（还未开发完成，一直是2.1）。这种方式需要小王先手工清理删除掉本地的落后的模块A版本，然后在去下载最新的模块A，也不好。</li>
+<li>方案三：小张不停发布小版本，2.1.1到2.1.19，这样做每次小王都必须修改pom文件</li>
+</ul>
+<p>有了快照版本上面三种方案都可以抛弃了。<br>快照版本可以保证小王每次都能拿到最新的版本。小张将模块A的版本设置为<code>2.1-SNAPSHOT</code>，发布到私服之后maven会自动为构件打上时间戳，比如<code>2.1-20091214.221414-13</code>就表示2009年12月14日22点14分14秒第13次快照。<br>当小王构建模块B的时候，需要依赖模块A，Maven会自动从仓库中检查模块A的2.1-SNAPSHOT的最新构建，当发现有更新的时候就下载最新构建。用户可以指定<code>-U</code>参数强制更新。</p>
+<h2 id="Maven生命周期"><a href="#Maven生命周期" class="headerlink" title="Maven生命周期"></a>Maven生命周期</h2><p>Maven的生命周期是抽象的，其本身不做任务实际的工作，实际的任务（如编译源代码）都交由插件来完成。<br>这种思想与设计模式的模板方法（Template Method）非常相似。模板方法模式在父类中定义算法的整体结构，子类可以通过实现或者重写父类的方法来控制实际的行为，这样既保证了算法有足够的可扩展性，又能够严格控制算法的整体结构。</p>
+<h3 id="三套生命周期"><a href="#三套生命周期" class="headerlink" title="三套生命周期"></a>三套生命周期</h3><p>Maven拥有三套相互独立的生命周期，分别是clean、default和site。</p>
+<ul>
+<li>clean生命周期的目的是清理项目</li>
+<li>default生命周期的目的是构件项目</li>
+<li>site生命周期的目的是建立项目站点</li>
+</ul>
+<p>每个生命周期包含一些阶段（phase），这些阶段是有顺序的，并且后面的阶段依赖于前面的阶段。</p>
+<h4 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h4><p>clean生命周期的3个阶段：<br>1) pre-clean:执行一些清理前需要完成的动作<br>2) clean:清理上一次构建生成的文件<br>3) post-clean:执行一些清理后需要完成的动作</p>
+<h4 id="default"><a href="#default" class="headerlink" title="default"></a>default</h4><p>1）validate<br>2) initialize<br>3) generate-sources<br>4) process-sources 处理项目主资源文件，一般来说，是对src/main/resources目录的内容进行变量替换等工作，复制到项目输出的主classpath目录中。<br>5) generate-resources<br>6) process-resources<br>7) compile 编译项目的主源码到主classpath目录中。<br>8) process-classes<br>9) generate-test-sources<br>10) process-test-sources 处理项目测试资源文件，一般来说，是对src/test/resources目录的内容进行变量替换等工作，复制到项目输出的测试classpath目录中。<br>11)generate-test-resources<br>12)process-test-resources<br>13) test-compile编译项目的测试源码到测试classpath目录中。<br>14) process-test-classes<br>15)test使用单元测试框架进行测试，测试代码不会被打包或部署<br>16) prepare-package<br>17) package 将编译好的代码，打包成可发布的格式，如jar<br>18) pre-integration-test<br>19)integration-test<br>20) post-integration-test<br>21) verify<br>22)install 将包安装到Maven本地仓库，供本地其他Maven项目使用<br>23) deploy 将最终的包复制到远程仓库，供其他开发人员和Maven项目使用</p>
+<h4 id="site"><a href="#site" class="headerlink" title="site"></a>site</h4><p>site生命周期的目的是建立和发布项目站点，Maven能够基于POM所包含的信息，自动生成一个友好的站点，方便团队交流和发布项目信息，含如下阶段：<br>1)pre-site执行一些在生成项目站点之前需要完成的工作<br>2)site 生成项目站点文档<br>3) post-site执行一些在生成项目站点之后需要完成的工作<br>4) site-deploy 将生成的项目站点发布到服务器上</p>
+<h2 id="Maven插件"><a href="#Maven插件" class="headerlink" title="Maven插件"></a>Maven插件</h2><blockquote>
+<p>Maven实际上是一个依赖插件执行的框架，每个任务实际上是由插件完成。<br><code>~/.m2/repository/org/apache/maven/plugins</code>，可以看到一些下载好的插件。</p>
+</blockquote>
+<h3 id="插件的目标"><a href="#插件的目标" class="headerlink" title="插件的目标"></a>插件的目标</h3><p>对于一个插件，为了复用代码，它往往能够完成多个任务，例如maven-dependency-plugin，能够分析项目依赖、列出项目依赖树、列出项目已解析的依赖。<br>为这样每个功能独立编写一个插件，显然是不可取的，因为这些功能背后有相同的代码，因此将这些功能聚集在一个插件里，每个功能就是一个插件目标。</p>
+<p>用户可以通过两种方式调用Maven插件目标。</p>
+<h4 id="与生命周期绑定"><a href="#与生命周期绑定" class="headerlink" title="与生命周期绑定"></a>与生命周期绑定</h4><p>将插件目标与生命周期阶段（lifecycle phase）绑定，这样用户在命令行只是输入生命周期阶段而已。<br>例如Maven默认将<code>maven-compiler-plugin</code>的compile目标与compile生命周期阶段绑定，因此命令<code>mvn compile</code>实际上是先定位到compile这一生命周期阶段，然后再根据绑定关系调用maven-compiler-plugin的compile目标。</p>
+<p>项目的打包类型会影响构建的具体过程，因此default生命周期的阶段与插件目标的绑定关系由项目的打包类型所决定，下面以jar为示例：<br><img src="../image/java/maven-default-plugin-lifecycle.png" alt="default生命周期阶段与插件目标"></p>
+<p>除了内置绑定外，用户能够自己选择将某个插件目标绑定到生命周期的某个阶段上，以便在项目构建过程中执行更丰富的任务。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-source-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>attach-source<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>verify<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>jar-no-fork<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="直接在命令行指定要执行的插件目标。"><a href="#直接在命令行指定要执行的插件目标。" class="headerlink" title="直接在命令行指定要执行的插件目标。"></a>直接在命令行指定要执行的插件目标。</h4><p>例如<code>mvn archetype:generate</code>就表示调用<code>maven-archetype-plugin</code>的generate目标，这种带冒号的调用方式与生命周期无关。</p>
+<h3 id="插件解析机制"><a href="#插件解析机制" class="headerlink" title="插件解析机制"></a>插件解析机制</h3><p>为了方便用户使用和配置插件，Maven不需要用户提供完整的插件坐标信息，就可以解析得到正确的插件。<br>与依赖构件一样，插件构件同样基于坐标存储在Maven仓库中，但Maven会区别对待依赖的远程仓库与插件的远程仓库。<br>通过<repositories>及其子元素<repository>可以配置依赖的远程仓库，插件的远程仓库需要使用<pluginrepositories>和<pluginrepository>进行配置。</pluginrepository></pluginrepositories></repository></repositories></p>
+<p>默认情况下，如果该插件是Maven官方插件，则可以省略groupId(org.apache.maven.plugins)，Maven在解析该插件的时候，会自动将groupId补上。</p>
+<p>当插件没有添加版本号时，若该插件是核心插件，则在超级POM已经定义了版本号，若不是核心插件，Maven会遍历本地仓库和远程仓库，计算出release的值。</p>
+<h2 id="聚合与继承"><a href="#聚合与继承" class="headerlink" title="聚合与继承"></a>聚合与继承</h2><ul>
+<li>聚合：使用一条命令就构建多个模块，需要在pom.xml中配置<modules>标签，并且packaging设置为pom</modules></li>
+<li>继承：消除重复的配置，在子pom.xml中配置<parent>标签声明父pom模块</parent></li>
+</ul>
+<h3 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h3><h4 id="dependencyManagement"><a href="#dependencyManagement" class="headerlink" title="dependencyManagement"></a>dependencyManagement</h4><p>当多有模块中有相同的依赖时，我们可以将这些依赖提取出来，同意在父POM中声明，这样就可以简化子模块的配置了，但是这样还是存在问题，当想项目中加入一些，不需要这么多依赖的模块，如果让这个模块也依赖那些不需要的依赖，显然不合理。<br>Maven提供的dependencyManagement元素既能让子模块继承到父模块的依赖配置，又能保证子模块依赖使用的灵活度。在dependencyManagement元素下的依赖声明不会引入实际的依赖，不过他能够约束dependencies下的依赖使用。<br>使用了dependencyManagement声明的依赖既不会给父项目引入依赖，也不会给它的子模块引入依赖，不过这段配置是会被继承的。子模块只需要配置简单的groupId和artifactId就能获得对应的依赖信息，从而引入正确的依赖。</p>
+<h4 id="import"><a href="#import" class="headerlink" title="import"></a>import</h4><p>import依赖范围只有在dependencyManagement下才有效果，使用该范围的依赖通常指向一个POM，作用是将目标中的dependencyManagement配置导入到当前POM的dependencyManagement中配置，除了复制配置或者继承这两种方式之外，还可以使用import范围依赖将这一配置导入</p>
+<h4 id="pluginManagement"><a href="#pluginManagement" class="headerlink" title="pluginManagement"></a>pluginManagement</h4><p>与dependencyManagement用法相同，在子模块中声明才会引入依赖</p>
+<h2 id="约定优于配置"><a href="#约定优于配置" class="headerlink" title="约定优于配置"></a>约定优于配置</h2><p>Maven提倡约定优于配置（Convention Over Configuration）<br>在maven中只需要简单的配置pom文件，就可以实现 清除构建目录、创建目录、编译代码、复制依赖至目标目录，最后打包。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.qy.zhang<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>my-project<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>为了能够通过这么简介的配置达到我们想要的效果，需要付出一定代价：遵守maven项目的约定。maven会假设用户的项目是这样的：</p>
+<ul>
+<li>源码目录为 src/main/java</li>
+<li>编译输出目录为 target/classes</li>
+<li>打包方式为jar</li>
+<li>包输出目录为 target<br>当然也可以通过配置一些属性来自定义，不过没有必要添加烦恼。</li>
+</ul>
+<h2 id="反应堆"><a href="#反应堆" class="headerlink" title="反应堆"></a>反应堆</h2><p>在一个多模块的Maven项目中，反应堆（Reactor）是指所有模块组成的一个构建结构。对于单模块的项目，反应堆就是该模块本身，对于多模块来说，反应堆就包含了各模块之间继承与依赖的关系，从而能够自动计算出合理的模块构建顺序。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>account-email<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>account-persist<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>account-parent<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>反应堆的构建顺序首先按照顺序进行，但是遇到有依赖的有先构建依赖。</p>
+<h2 id="使用Maven进行测试"><a href="#使用Maven进行测试" class="headerlink" title="使用Maven进行测试"></a>使用Maven进行测试</h2><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>Maven的重要职责之一就是自动运行单元测试，它通过<code>maven-surefire-plugin</code>与主流的单元测试框架JUnit3、JUnit4以及TestNG集成，并且能够自动生成丰富的结果报告。<br>在默认情况下，maven-surefire-plugin的test目标会自动执行测试源码路径（默认为src/test/java/)下所有符合一组命名模式的测试类。这组模式为：</p>
+<ul>
+<li>*/Test.java</li>
+<li>*<em>/</em>Test.java</li>
+<li>*<em>/</em>TestCase.java<br>只要将测试类按上述模式命名，Maven就能自动运行它们，用户也就不再需要定义测试集合（TestSuite）来聚合测试用例了（TestCase）。</li>
+</ul>
+<h3 id="跳过测试"><a href="#跳过测试" class="headerlink" title="跳过测试"></a>跳过测试</h3><p>在命令行里加入参数：<code>mvn package -DskipTests</code>或者<code>mvn package -Dmaven.test.skip=true</code>。<br>参数<code>maven.test.skip</code>同时控制了<code>maven-compiler-plugin</code>和<code>maven-surefire-plugin</code>两个插件，测试代码编译跳过了，测试运行也跳过了。</p>
+<h4 id="配置POM让项目长时间跳过单元测试"><a href="#配置POM让项目长时间跳过单元测试" class="headerlink" title="配置POM让项目长时间跳过单元测试"></a>配置POM让项目长时间跳过单元测试</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">skipTests</span>&gt;</span>true<span class="tag">&lt;/<span class="name">skipTests</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="包含与排除测试用例"><a href="#包含与排除测试用例" class="headerlink" title="包含与排除测试用例"></a>包含与排除测试用例</h4><p>包含 include<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*Test.java<span class="tag">&lt;<span class="name">include</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>排除 exclude</p>
+<h3 id="测试报告"><a href="#测试报告" class="headerlink" title="测试报告"></a>测试报告</h3><p>测试覆盖率报告：<code>mvn cobertura:cobertura</code></p>
+<h2 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h2><blockquote>
+<p>持续集成就是快速且高频率的自动构建项目的所有源代码。<br>本地(一般是Windows平台)的构建，单元测试，集成测试成功了。但是目标平台（例如linux）可能会发生未知的错误。所以建议使用自动化持续集成工具。例如Hudson，在目标服务器上安装Hudson, 让其去取VCS(Version Control System)的最新代码，调用Maven进行构建</p>
+</blockquote>
+<h2 id="使用Maven构建Web项目"><a href="#使用Maven构建Web项目" class="headerlink" title="使用Maven构建Web项目"></a>使用Maven构建Web项目</h2><h3 id="Web项目的目录结构"><a href="#Web项目的目录结构" class="headerlink" title="Web项目的目录结构"></a>Web项目的目录结构</h3><p>基于Java的Web应用，其标准的打开方式是war。一个WAR包下至少包含两个子目录：<code>META-INF</code>和<code>WEB-INF</code>。</p>
+<h4 id="META-INF"><a href="#META-INF" class="headerlink" title="META-INF"></a>META-INF</h4><p>打包元数据信息。如果你将Jar中的META-INF文件夹删除，那么jar文件里边就没有MANIFEST.MF文件。那么<code>java -jar</code>就找不到main class，没有META-INF你仍然可以创建一个Jar文件。但是，当你想要执行jar文件的时候，这个jar是需要具备<code>META-INF/MANIFEST.MF</code>的。</p>
+<h4 id="WEB-INF"><a href="#WEB-INF" class="headerlink" title="WEB-INF"></a>WEB-INF</h4><p>必须包含一个Web资源表述文件web.xml，它的子目录classes包含所有Web项目的类，而另一个子目录lib则包含所有该Web项目的依赖JAR包，classes和lib目录都会在运行的时候加入到classpath中。</p>
+<p>除了META-INF和WEB-INF外，一般的WAR包都会包含很多web资源，例如你往往可以在WAR包的根目录下看到很多html或者JSP文件。此外，还能看到一些文件夹如img、css和js，它们会包含对应的文件供页面使用。</p>
+<h3 id="使用cargo自动化部署"><a href="#使用cargo自动化部署" class="headerlink" title="使用cargo自动化部署"></a>使用cargo自动化部署</h3><p>Cargo是一组帮助用户操作Web容器的工具，它能够帮助用户实现自动化部署。<br>Cargo支持两种本地部署的方式，分别为standalone模式和existing模式。</p>
+<h4 id="standalone模式"><a href="#standalone模式" class="headerlink" title="standalone模式"></a>standalone模式</h4><p>Cargo会从web容器的安装目录复制一份配置到用户指定的目录，然后在此基础上部署应用，每次重新构建的时候，这个目录都会被清空，所有配置被重新生成。</p>
+<h4 id="existing模式"><a href="#existing模式" class="headerlink" title="existing模式"></a>existing模式</h4><p>用户需要指定现有的Web容器配置目录，然后Cargo会直接使用这些配置并将应用部署到其对应的位置。</p>
+<p><code>mvn cargo:start</code>部署</p>
+<h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><ul>
+<li>版本管理：指项目整体版本的演变过程管理。</li>
+<li>版本控制：指借助版本控制工具追踪代码的每一个变更。</li>
+</ul>
+<h3 id="何为版本管理？"><a href="#何为版本管理？" class="headerlink" title="何为版本管理？"></a>何为版本管理？</h3><p>对内项目开发，应该使用快照版本；对外发布时，应该提供非常稳定的版本。</p>
+<h4 id="Maven版本号定义约定"><a href="#Maven版本号定义约定" class="headerlink" title="Maven版本号定义约定"></a>Maven版本号定义约定</h4><p>eg：1.3.4-beta-2</p>
+<ul>
+<li>【1】代表该版本是第一个重大版本</li>
+<li>【3】表示这是基于重大版本的第三个次要版本</li>
+<li>【4】表示该次要版本的第四个增量版本</li>
+<li>【beta-2】表示该增量的某一个里程碑。约定如下：<br>&lt;主版本&gt;.&lt;次版本&gt;.&lt;增量版本&gt;-&lt;里程碑版本&gt;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主版本</td>
+<td>标示项目的重大架构变更</td>
+</tr>
+<tr>
+<td>次版本</td>
+<td>表示较大范围的功能增加和变化</td>
+</tr>
+<tr>
+<td>增量版本</td>
+<td>一般标示重大Bug的修复。</td>
+</tr>
+<tr>
+<td>里程碑版本</td>
+<td>往往指某一个版本的里程碑</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/16/java/《Java并发编程实践》/" rel="next" title="《Java并发编程实践》">
+                <i class="fa fa-chevron-left"></i> 《Java并发编程实践》
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/17/java/maven/maven-enforcer-plugin介绍/" rel="prev" title="maven-enforcer-plugin介绍">
+                maven-enforcer-plugin介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven简介"><span class="nav-number">1.</span> <span class="nav-text">Maven简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#何为Maven"><span class="nav-number">1.1.</span> <span class="nav-text">何为Maven</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建工具"><span class="nav-number">1.2.</span> <span class="nav-text">构建工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Make"><span class="nav-number">1.2.1.</span> <span class="nav-text">Make</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ant"><span class="nav-number">1.2.2.</span> <span class="nav-text">Ant</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven安装最佳实践"><span class="nav-number">1.3.</span> <span class="nav-text">Maven安装最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置MAVEN-OPTS环境变量"><span class="nav-number">1.3.1.</span> <span class="nav-text">设置MAVEN_OPTS环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置用户范围-settings-xml"><span class="nav-number">1.3.2.</span> <span class="nav-text">配置用户范围 settings.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不要使用IDE内嵌的Maven"><span class="nav-number">1.3.3.</span> <span class="nav-text">不要使用IDE内嵌的Maven</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven使用"><span class="nav-number">2.</span> <span class="nav-text">Maven使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目骨架"><span class="nav-number">2.1.</span> <span class="nav-text">项目骨架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖相关"><span class="nav-number">3.</span> <span class="nav-text">依赖相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖范围"><span class="nav-number">3.1.</span> <span class="nav-text">依赖范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传递依赖"><span class="nav-number">3.2.</span> <span class="nav-text">传递依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可选依赖"><span class="nav-number">3.3.</span> <span class="nav-text">可选依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排除依赖"><span class="nav-number">3.4.</span> <span class="nav-text">排除依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归类依赖"><span class="nav-number">3.5.</span> <span class="nav-text">归类依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化依赖"><span class="nav-number">3.6.</span> <span class="nav-text">优化依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个命令"><span class="nav-number">3.7.</span> <span class="nav-text">几个命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mvn-dependency-list"><span class="nav-number">3.7.1.</span> <span class="nav-text">mvn dependency:list</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mvn-dependency-tree"><span class="nav-number">3.7.2.</span> <span class="nav-text">mvn dependency:tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mvn-dependency-analyze"><span class="nav-number">3.7.3.</span> <span class="nav-text">mvn dependency:analyze</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仓库"><span class="nav-number">4.</span> <span class="nav-text">仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#坐标"><span class="nav-number">4.1.</span> <span class="nav-text">坐标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#仓库的分类"><span class="nav-number">4.2.</span> <span class="nav-text">仓库的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快照版本"><span class="nav-number">4.3.</span> <span class="nav-text">快照版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven生命周期"><span class="nav-number">5.</span> <span class="nav-text">Maven生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三套生命周期"><span class="nav-number">5.1.</span> <span class="nav-text">三套生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#clean"><span class="nav-number">5.1.1.</span> <span class="nav-text">clean</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#default"><span class="nav-number">5.1.2.</span> <span class="nav-text">default</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#site"><span class="nav-number">5.1.3.</span> <span class="nav-text">site</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven插件"><span class="nav-number">6.</span> <span class="nav-text">Maven插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插件的目标"><span class="nav-number">6.1.</span> <span class="nav-text">插件的目标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#与生命周期绑定"><span class="nav-number">6.1.1.</span> <span class="nav-text">与生命周期绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接在命令行指定要执行的插件目标。"><span class="nav-number">6.1.2.</span> <span class="nav-text">直接在命令行指定要执行的插件目标。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件解析机制"><span class="nav-number">6.2.</span> <span class="nav-text">插件解析机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合与继承"><span class="nav-number">7.</span> <span class="nav-text">聚合与继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖管理"><span class="nav-number">7.1.</span> <span class="nav-text">依赖管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dependencyManagement"><span class="nav-number">7.1.1.</span> <span class="nav-text">dependencyManagement</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#import"><span class="nav-number">7.1.2.</span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pluginManagement"><span class="nav-number">7.1.3.</span> <span class="nav-text">pluginManagement</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#约定优于配置"><span class="nav-number">8.</span> <span class="nav-text">约定优于配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反应堆"><span class="nav-number">9.</span> <span class="nav-text">反应堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Maven进行测试"><span class="nav-number">10.</span> <span class="nav-text">使用Maven进行测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">10.1.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳过测试"><span class="nav-number">10.2.</span> <span class="nav-text">跳过测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置POM让项目长时间跳过单元测试"><span class="nav-number">10.2.1.</span> <span class="nav-text">配置POM让项目长时间跳过单元测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#包含与排除测试用例"><span class="nav-number">10.2.2.</span> <span class="nav-text">包含与排除测试用例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试报告"><span class="nav-number">10.3.</span> <span class="nav-text">测试报告</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#持续集成"><span class="nav-number">11.</span> <span class="nav-text">持续集成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Maven构建Web项目"><span class="nav-number">12.</span> <span class="nav-text">使用Maven构建Web项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web项目的目录结构"><span class="nav-number">12.1.</span> <span class="nav-text">Web项目的目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#META-INF"><span class="nav-number">12.1.1.</span> <span class="nav-text">META-INF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WEB-INF"><span class="nav-number">12.1.2.</span> <span class="nav-text">WEB-INF</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用cargo自动化部署"><span class="nav-number">12.2.</span> <span class="nav-text">使用cargo自动化部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#standalone模式"><span class="nav-number">12.2.1.</span> <span class="nav-text">standalone模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#existing模式"><span class="nav-number">12.2.2.</span> <span class="nav-text">existing模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本管理"><span class="nav-number">13.</span> <span class="nav-text">版本管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#何为版本管理？"><span class="nav-number">13.1.</span> <span class="nav-text">何为版本管理？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Maven版本号定义约定"><span class="nav-number">13.1.1.</span> <span class="nav-text">Maven版本号定义约定</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

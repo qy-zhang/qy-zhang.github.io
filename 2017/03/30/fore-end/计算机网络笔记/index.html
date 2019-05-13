@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="programming,front-end,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="计算机网络笔记">
+<meta name="keywords" content="programming,front-end">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络笔记">
+<meta property="og:url" content="http://yoursite.com/2017/03/30/fore-end/计算机网络笔记/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="计算机网络笔记">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/image/programming/OSI_NetGate.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/OSI_Switch.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/TCP_LayeringModel.png">
+<meta property="og:image" content="http://yoursite.com/image/programming/TCP_encapsulation.png">
+<meta property="og:image" content="http://yoursite.com/image/programming/TCP_peer_connect.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/TCP_status.png">
+<meta property="og:image" content="http://yoursite.com/image/programming/TCP_window.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/TCP_congestion.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/TCP_congestion2.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/TCP_head.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/UDP_head.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/IP_head.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/Ethernet_head.jpg">
+<meta property="og:image" content="http://yoursite.com/image/programming/TCP_encapsulation.png">
+<meta property="og:updated_time" content="2018-07-03T08:52:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络笔记">
+<meta name="twitter:description" content="计算机网络笔记">
+<meta name="twitter:image" content="http://yoursite.com/image/programming/OSI_NetGate.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/30/fore-end/计算机网络笔记/">
+
+
+
+
+
+  <title>计算机网络笔记 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/30/fore-end/计算机网络笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机网络笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T18:32:25+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>计算机网络笔记<br><a id="more"></a></p>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><h2 id="三种模型"><a href="#三种模型" class="headerlink" title="三种模型"></a>三种模型</h2><h3 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h3><p>物理层、数据链路层、网络层、运输层、会话层、表示层、应用层</p>
+<ul>
+<li><p>物理层<br><em>通过媒介传输比特，确定机械及电气规范（比特Bit）</em><br>协议有：RJ45<br>物理设备有：中继器（用于信号中继：将已衰减的信号再次放大），集线器（一对多，把一个端口的信息重复广播到其它端口上，CSMA/CD）</p>
+</li>
+<li><p>数据链路层<br><em>将比特组装成帧和点到点的传递（帧Frame）</em><br>协议有：PPP<br>物理设备有：网桥（隔离子网），交换机（在不同的链路层网络之间转发数据帧）<br><img src="/image/programming/OSI_NetGate.jpg" alt="网桥"><br>上图中把一个局域网一分为2，中间用网桥连接，这样A发给BCD的数据就不会再广播到EFGH了。<br>但是网桥有缺陷，只有两个端口，A和G通信的时候，B和F就没法通信了。为了实现多对多通信，产生了交换机。<br><img src="/image/programming/OSI_Switch.jpg" alt="交换机"><br>数据链路层实际上由两个独立的部分组成，MAC（Media Access Control介质存取控制）和LLC（Logical Link Control逻辑链路控制）。<br>MAC确保信息跨链路的可靠传输，对数据传输进行同步，识别错误和控制数据的流向。在MAC子层的诸多功能中，非常重要的一项功能是仲裁介质的使用权，即规定站点何时可以使用通信介质，实际上就是使用CSMA/CD。MAC子层的存在屏蔽了不同物理链路种类的差异性；<br>LLC层负责向其上层提供服务。<br>（小问题：为何只有局域网内链路层分成两个子层？因为广域网是专用的，不存在介质冲突的问题，就不用CSMA/CD了，没有MAC层，就只有一个LLC子层；而局域网是共享介质的，有MAC层，所以有两个子层）</p>
+</li>
+<li><p>网络层<br><em>负责数据包从源到宿的传递和网际互连（报Datagram）</em><br>协议有：IP ARP RARP IGRP<br>物理设备有：路由器（在不同的链路层接口之间转发数据包）。</p>
+</li>
+<li><p>传输层<br><em>提供端到端的可靠报文传递和错误恢复（段Segment）</em><br>协议有：TCP UDP</p>
+</li>
+<li><p>会话层</p>
+</li>
+<li>表示层</li>
+<li>应用层<br>HTTP、FTP、Telnet</li>
+</ul>
+<h3 id="TCP-IP四层模型"><a href="#TCP-IP四层模型" class="headerlink" title="TCP/IP四层模型"></a>TCP/IP四层模型</h3><p>链路层、网络层、传输层、应用层<br><img src="/image/programming/TCP_LayeringModel.png" alt="TCP/IP分层模型"></p>
+<h3 id="五层协议"><a href="#五层协议" class="headerlink" title="五层协议"></a>五层协议</h3><p>物理层、数据链路层、网络层、运输层、应用层</p>
+<h2 id="数据的封装"><a href="#数据的封装" class="headerlink" title="数据的封装"></a>数据的封装</h2><p>不同的协议层对数据包有不同的称谓，在传输层叫做段（segment），在网络层叫做数据报（datagram），在链路层叫做帧（frame）。数据封装成帧后发到传输介质上，到达目的主机后每层协议再剥掉相应的首部，最后将应用层数据交给应用程序处理。<br><img src="/image/programming/TCP_encapsulation.png" alt="TCP/IP数据包的封装"></p>
+<h3 id="帧格式"><a href="#帧格式" class="headerlink" title="帧格式"></a>帧格式</h3><p>数据链路层传输的是帧(Frame)<br>源地址和目的地址是指网卡的硬件地址（也叫MAC地址），长度是48位，是在网卡出厂时固化的。<br>以太网帧中的数据长度规定最小46字节，最大1500字节，ARP和RARP数据包的长度不够46字节，要在后面补填充位。最大值1500称为以太网的最大传输单元（MTU），不同的网络类型有不同的MTU，如果一个数据包从以太网路由到拨号链路上，数据包长度大于拨号链路的MTU了，则需要对数据包进行分片（fragmentation）。ifconfig命令的输出中也有“MTU:1500”。注意，MTU这个概念指数据帧中有效载荷的最大长度，不包括帧首部的长度。</p>
+<h2 id="几个协议"><a href="#几个协议" class="headerlink" title="几个协议"></a>几个协议</h2><h3 id="ARP地址解析协议"><a href="#ARP地址解析协议" class="headerlink" title="ARP地址解析协议"></a>ARP地址解析协议</h3><p>IP转换为MAC地址，建立IP地址和MAC地址之间的对应关系。<br>在同一局域网中，一台主机要与另一台主机通信，需要知道双方的MAC地址。由于在TCP/IP协议中，网络层和传输层只关心目标主机的IP地址，所以在IP报文中也只有目标主机的IP地址，所以要通过ARP协议将IP地址转换成MAC地址。<br>工作方式是维护一个arp表，每个主机首先在自己的arp表中查询目标主机ip地址，如果没有就向局域网内的所有主机发送一个数据包，如果有主机IP地址就是我们要查询的目标主机IP地址，就回复一个响应包，更新arp表；否则查询失败。</p>
+<h3 id="ICMP协议"><a href="#ICMP协议" class="headerlink" title="ICMP协议"></a>ICMP协议</h3><p>因特网控制报文协议。它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。</p>
+<h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><h2 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h2><p>主要学习IPv4地址，iPv4的IP地址长度为4字节，通常采用点分十进制表示法。<br>IP地址分类：<br>A类地址：以0开头，第一个字节范围：0~127(1.0.0.0 - 126.255.255.255)<br>B类地址：以10开头，第一个字节范围：128~191（128.0.0.0 - 191.255.255.255)<br>C类地址：以110开头，第一个字节范围：192~223（192.0.0.0 - 223.255.255.255)<br>D类地址：224.0.0.0 - 239.255.255.255（用于多播）<br>E类地址：240.0.0.0 - 247.255.255.255（保留未用）</p>
+<p>10.0.0.0—10.255.255.255、172.16.0.0—172.31.255.255、192.168.0.0—192.168.255.255(Internet上保留地址用于内部)<br>主机号全为0的地址只表示网络而不能表示某个主机，如192.168.10.0/24<br>目的地址的主机号为全1，表示广播至某个网络的所有主机，例如目的地址192.168.10.255/24表示广播至192.168.10.0网络。</p>
+<h2 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h2><p>Internet被各种路由器和网关设备分隔成很多网段，为了标识不同的网段，需要把32位的IP地址划分成网络号和主机号两部分，网络号相同的各主机位于同一网段，相互间可以直接通信，网络号不同的主机之间通信则需要通过路由器转发。<br>IP地址与子网掩码做与运算可以得到网络号，IP地址和子网掩码还有一种更简洁的表示方法，例如140.252.20.68/24，表示IP地址为140.252.20.68，子网掩码的高24位是1，也就是255.255.255.0。</p>
+<h1 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h1><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><h3 id="TCP、UDP比较"><a href="#TCP、UDP比较" class="headerlink" title="TCP、UDP比较"></a>TCP、UDP比较</h3><p>TCP面向连接，三次握手链接，四次挥手释放连接，可靠（确认和重传，数据校验，拥塞流量控制）、稳定、速度慢<br>UDP面向无连接，尽最大努力交付（不能保证它们能到达目的地），不可靠、不稳定、速度快</p>
+<p>TCP: HTTP, FTP, POP, SMTP, TELNET, SSH<br>UDP: DNS, 用于QQ</p>
+<h3 id="TCP三次握手，四次挥手"><a href="#TCP三次握手，四次挥手" class="headerlink" title="TCP三次握手，四次挥手"></a>TCP三次握手，四次挥手</h3><p>TCP/IP协议中，TCP协议提供可靠的连接服务，采用三次握手建立一个连接<br>1）第一次握手：建立连接时，客户端A发送SYN包（SYN=j）到服务器B，并进入SYN_SEND状态，等待服务器B确认。<br>2）第二次握手：服务器B收到SYN包，必须确认客户A的SYN（ACK=j+1），同时自己也发送一个SYN包（SYN=k），即SYN+ACK包，此时服务器B进入SYN_RECV状态。<br>3）第三次握手：客户端A收到服务器B的SYN＋ACK包，向服务器B发送确认包ACK（ACK=k+1），此包发送完毕，客户端A和服务器B进入ESTABLISHED状态，完成三次握手。<br>完成三次握手，客户端与服务器开始传送数据。</p>
+<p>由于TCP连接是全双工的，因此每个方向都必须单独进行关闭。这个原则是当一方完成它的数据发送任务后就能发送一个FIN来终止这个方向的连接。收到一个FIN只意味着这一方向上没有数据流动，一个TCP连接在收到一个FIN后仍能发送数据。首先进行关闭的一方将执行主动关闭，而另一方执行被动关闭。<br>CP的连接的拆除需要发送四个包，因此称为四次挥手(four-way handshake)。客户端或服务器均可主动发起挥手动作，在socket编程中，任何一方执行close()操作即可产生挥手操作。<br>1）客户端A发送一个FIN，用来关闭客户A到服务器B的数据传送。<br>2）服务器B收到这个FIN，它发回一个ACK，确认序号为收到的序号加1。和SYN一样，一个FIN将占用一个序号。<br>3）服务器B关闭与客户端A的连接，发送一个FIN给客户端A。<br>4）客户端A发回ACK报文确认，并将确认序号设置为收到序号加1。</p>
+<ul>
+<li>为什么连接的时候是三次握手，关闭的时候却是四次挥手？<br>三次握手目的：首先为什么要握手，要确认发送端发送过来的信息（据TCP协议规范，不对ACK进行ACK），三次握手是为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。<br>在第二次握手的过程中，实际上发送了两个数据，ACK应答包和SYN同步包，两个数据可以一起发送，节省了一步操作。</li>
+</ul>
+<p>四次挥手：FIN表示没有数据了，客户端先发送FIN，服务器收到后发送ACK告诉客户端我知道你发完了，但是TCP是全双工的，服务器还能发，所以要等到服务器发送完之后，再给客户端发送FIN，表示服务器也发完了，客户端收到之后发送ACK告诉服务端我也知道你发完了，现在我们都可以关闭连接了。</p>
+<p>实际上连接也会有四次握手的情况：假设两个peer两端同时发起SYN来建立连接，就会出现如下菱形握手情况了：<br><img src="/image/programming/TCP_peer_connect.jpg" alt="TCP两端同时连接"></p>
+<p><img src="/image/programming/TCP_status.png" alt="TCP连接状态变换"><br>我们以客户端主动关闭为例：<br>FIN_WAIT_1 表示客户端主动关闭，等待服务器确认。<br>FIN_WAIT_2 表示半关闭状态，等待服务器关闭，然后才最后关闭。<br>TIME_WAIT 表示收到了对方的FIN报文，并发送出了ACK报文，就等2MSL后即可回到CLOSED可用状态了。<br>CLOSE_WAIT 表示被动关闭，客户端关闭了，现在服务端要检查还有没有数据要发送。<br>LAST_ACK 表示客户端关闭了，服务端要发送完所有的数据。</p>
+<ul>
+<li><p>为什么TIME_WAIT状态还需要等2MSL后才能返回到CLOSED状态？<br>一个数据包在网络中的最长生存时间为MSL。<br>虽然双方都同意关闭连接了，而且握手的4个报文也都协调和发送完毕，按理可以直接回到CLOSED状态（就好比从SYN_SEND状态到ESTABLISH状态那样）；但是因为我们必须要假想网络是不可靠的，你无法保证你最后发送的ACK报文会一定被对方收到，因此对方处于LAST_ACK状态下的SOCKET可能会因为超时未收到ACK报文，而重发FIN报文，所以这个TIME_WAIT状态的作用就是用来重发可能丢失的ACK报文。</p>
+</li>
+<li><p>SYN Flood<br>在三次握手过程中，服务器发送 SYN-ACK 之后，收到客户端的 ACK 之前的 TCP 连接称为半连接(half-open connect)此时服务器处于 SYN_RCVD 状态。当收到 ACK 后，服务器才能转入 ESTABLISHED 状态.<br>SYN 攻击指的是，攻击客户端在短时间内伪造大量不存在的IP地址，向服务器不断地发送SYN包，服务器回复确认包，并等待客户的确认。由于源地址是不存在的，服务器需要不断的重发直至超时，这些伪造的SYN包将长时间占用未连接队列，正常的SYN请求被丢弃，导致目标系统运行缓慢，严重者会引起网络堵塞甚至系统瘫痪。SYN 攻击是一种典型的 DoS/DDoS 攻击。</p>
+</li>
+</ul>
+<p>检测 SYN 攻击非常的方便，当你在服务器上看到大量的半连接状态时，特别是源IP地址是随机的，基本上可以断定这是一次SYN攻击。在Linux/Unix上可以使用系统自带的netstats -nlp命令来检测SYN攻击<br>SYN攻击不能完全被阻止，除非将TCP协议重新设计。我们所做的是尽可能的减轻SYN攻击的危害，常见的防御 SYN 攻击的方法有如下几种：缩短超时（SYN Timeout）时间、增加最大半连接数、过滤网关保护、SYN cookies技术。</p>
+<ul>
+<li>TCP的peer两端同时断开连接<br>首先我们知道主动断开连接的状态：首先1发送FIN，进入FIN_WAIT_1，然后2收到1的FIN发送ACK，2进入CLOSE_WAIT，1收到2的ACK之后进入FIN_WAIT_2，2接着发送FIN，1收到2的FIN发送ACK，1进入TIME_WAIT，最后2收到ACK进入CLOSED<br>但是如果是同时断开连接，那么1在确认已经收到了对端Peer全部的Data数据包后，就响应一个ACK给对端Peer，然后自己进入CLOSE_WAIT状态，Peer在CLOSE_WAIT状态下收到自己的FIN包的ACK包的话，那么就进入TIME_WAIT状态。于是，TCP的Peer两端同时发起FIN包进行断开连接，那么两端Peer可能出现完全一样的状态转移 FIN_WAIT1 -&gt; CLOSE_WAIT -&gt; TIME_WAIT，也就会Client和Server最后同时进入TIME_WAIT状态。没有FIN_WAIT_2了。</li>
+</ul>
+<h3 id="超时重传和快速重传"><a href="#超时重传和快速重传" class="headerlink" title="超时重传和快速重传"></a>超时重传和快速重传</h3><p>超时重传：当超时时间到达时，发送方还未收到对端的ACK确认，就重传该数据包<br>快速重传：当后面的序号先到达，如接收方接收到了1、3、4，而2没有收到，就会立即向发送方重复发送三次ACK=2的确认请求重传。如果发送方连续收到3个相同序号的ACK，就重传该数据包而不用等待超时。</p>
+<h3 id="流量控制（滑动窗口机制）"><a href="#流量控制（滑动窗口机制）" class="headerlink" title="流量控制（滑动窗口机制）"></a>流量控制（滑动窗口机制）</h3><p>滑动窗口协议的基本原理就是在任意时刻，发送方都维持了一个连续的允许发送的帧的序号，称为发送窗口；同时，接收方也维持了一个连续的允许接收的帧的序号，称为接收窗口。</p>
+<p>TCP协议的两端分别为发送者A和接收者B，由于是全双工协议，因此A和B应该分别维护着一个独立的发送缓冲区和接收缓冲区，由于对等性（A发B收和B发A收），我们以A发送B接收的情况作为例子。<br><img src="/image/programming/TCP_window.jpg" alt="TCP滑动窗口"><br>发送和接受方都会维护一个数据帧的序列，这个序列被称作窗口。发送方的窗口大小由接受方确定，目的在于控制发送速度，以免接受方的缓存不够大，而导致溢出，同时控制流量也可以避免网络拥塞。下面图中的4,5,6号数据帧已经被发送出去，但是未收到关联的ACK，7,8,9帧则是等待发送。可以看出发送端的窗口大小为6，这是由接受端告知的。此时如果发送端收到4号ACK，则窗口的左边缘向右收缩，窗口的右边缘则向右扩展，此时窗口就向前“滑动了”，即数据帧10也可以被发送。</p>
+<p>停止等待协议：<br>接受方的窗口和发送方的窗口大小都是1，发送方这时自然发送每次只能发送一个，并且必须等待这个数据包的ACK，才能发送下一个。</p>
+<p>后退n协议：<br>首先发送方一口气发送10个数据帧，前面两个帧正确返回了，数据帧2出现了错误，这时发送方被迫重新发送2-8这7个帧，接受方也必须丢弃之前接受的3-8这几个帧。</p>
+<p>选择重传协议：<br>接收端总会缓存所有收到的帧，当某个帧出现错误时，只会要求重传这一个帧，只有当某个序号后的所有帧都正确收到后，才会一起提交给高层应用。</p>
+<h3 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h3><p>拥塞控制：防止过多的数据注入到网络中，这样可以使网络中的路由器或链路不致过载。拥塞控制所要做的都有一个前提：网络能够承受现有的网络负荷。拥塞控制是一个全局性的过程，涉及到所有的主机、路由器，以及与降低网络传输性能有关的所有因素。<br>几种拥塞控制方法：慢开始、拥塞避免、快重传和快恢复。</p>
+<p>发送方维持一个拥塞窗口 cwnd ( congestion window )的状态变量。拥塞窗口的大小取决于网络的拥塞程度，并且动态地在变化。发送方控制拥塞窗口的原则是：只要网络没有出现拥塞，拥塞窗口就再增大一些，以便把更多的分组发送出去。但只要网络出现拥塞，拥塞窗口就减小一些，以减少注入到网络中的分组数</p>
+<ul>
+<li>慢开始<br>当主机开始发送数据时，如果立即所大量数据字节注入到网络，那么就有可能引起网络拥塞，因为现在并不清楚网络的负荷情况。因此，较好的方法是先探测一下，即由小到大逐渐增大发送窗口（指数增长）。</li>
+</ul>
+<p>慢开始的“慢”并不是指cwnd的增长速率慢，而是指在TCP开始发送报文段时先设置cwnd=1，然后再逐渐增大cwnd。<br>为了防止拥塞窗口cwnd增长过大引起网络拥塞，还需要设置一个慢开始门限ssthresh状态变量（如何设置ssthresh）。慢开始门限ssthresh的用法如下： 当 cwnd &lt; ssthresh 时，使用上述的慢开始算法；当 cwnd &gt; ssthresh 时，停止使用慢开始算法而改用拥塞避免算法。</p>
+<ul>
+<li><p>拥塞避免<br>指数增长到一定的阈值之后，慢启动过程结束，接下来拥塞窗口cwnd按线性规律缓慢增长<br>无论在慢开始阶段还是在拥塞避免阶段，只要发送方判断网络出现拥塞（其根据就是没有收到确认），就要把慢开始门限ssthresh设置为出现拥塞时的发送方窗口值的一半（但不能小于2）。然后把拥塞窗口cwnd重新设置为1，执行慢开始算法。这样做的目的就是要迅速减少主机发送到网络中的分组数，使得发生拥塞的路由器有足够时间把队列中积压的分组处理完毕<br>流程如下图所示：<br><img src="/image/programming/TCP_congestion.jpg" alt="慢开始和拥塞避免算法"></p>
+</li>
+<li><p>快重传<br>快重传算法首先要求接收方每收到一个失序的报文段后就立即发出重复确认（为的是使发送方及早知道有报文段没有到达对方）而不要等到自己发送数据时才进行捎带确认。<br>快重传算法还规定，发送方只要一连收到三个重复确认就应当立即重传对方尚未收到的报文段，而不必继续等待重传计时器到期。</p>
+</li>
+<li><p>快速恢复<br>当发送方连续收到三个重复确认，就执行“乘法减小”算法，把慢开始门限ssthresh减半。这是为了预防网络发生拥塞。<br>与慢开始不同之处是塞窗口cwnd现在不设置为1，而是把cwnd值设置为慢开始门限ssthresh减半后的数值，然后开始执行拥塞避免算法。使拥塞窗口缓慢地线性增大。 下图给出了快重传和快恢复的示意图，并标明了“TCP Reno版本”。 区别：新的 TCP Reno 版本在快重传之后采用快恢复算法而不是采用慢开始算法。<br><img src="/image/programming/TCP_congestion2.jpg" alt="快恢复与慢开始的比较"></p>
+</li>
+</ul>
+<p>由于需要考虑拥塞控制和流量控制两个方面的内容，因此TCP的真正的发送窗口=min(rwnd, cwnd)。但是rwnd是由对端确定的，网络环境对其没有影响，所以在考虑拥塞的时候我们一般不考虑rwnd的值，我们暂时只讨论如何确定cwnd值的大小。</p>
+<h3 id="TCP通过如下方式提供可靠性"><a href="#TCP通过如下方式提供可靠性" class="headerlink" title="TCP通过如下方式提供可靠性"></a>TCP通过如下方式提供可靠性</h3><ol>
+<li>超时重传：发送端发出一个报文段后，它启动一个定时器，等待目的端确认收到这个报文段。如果发送端不能在规定时间收到确认，就重发这个报文段。</li>
+<li>首部校验和：保持TCP报文首部和数据的检验和，检测数据在传输过程中的任何变化如果收到报文段的检验和有差错，TCP将丢弃这个报文段和不确认收到这个报文段。</li>
+<li>序号：TCP报文段作为IP数据报来传输，而IP数据报的到达可能失序，因此TCP报文段的到达也可能失序。TCP对发送的数据进行编号，将收到的数据以正确的顺序交给应用层。</li>
+<li>流量控制：TCP连接的每一方都有固定大小的缓冲空间。TCP的接收端只允许另一端发送接收端缓冲区所能接纳的数据。这将防止较快主机致使较慢主机的缓冲区溢出。</li>
+</ol>
+<h3 id="TCP报文头"><a href="#TCP报文头" class="headerlink" title="TCP报文头"></a>TCP报文头</h3><p><img src="/image/programming/TCP_head.jpg" alt="TCP报文头"></p>
+<ul>
+<li>源、目标端口号字段：各占16比特。TCP协议通过使用”端口”来标识源端和目标端的应用进程。端口号可以使用0到65535之间的任何数字，但是这些端口号已经被分为公认端口、注册端口和动态/私有端口，这个划分详见下一篇博文。在收到服务请求时，操作系统动态地为客户端的应用程序分配端口号。在服务器端，每种服务在”众所周知的端口”（Well-Know Port）为用户提供服务。</li>
+<li>顺序号字段：占32比特。用于标识每个报文段，使目的主机可确认已收到指定报文段中的数据。当源主机用于多个报文段发送一个报文时，即使这些报文到达目的主机的顺序不一样，序列号也可以使目的主机按顺序排列它们。<br>在建立连接时发送的第一个报文段中，双方都提供一个初始序列号。TCP标准推荐使用以4ms间隔递增1的计数器值作为这个初始序列号的值。使用计数器可以防止连接关闭再重新连接时出现相同的序列号。<br>对于那些包含数据的报文段，报文段中第一个数据字节的数量就是初始序列号，其后数据字节按顺序编号。如果源主机使用同样的连接发送另一个报文段，那么这个报文段的序列号等于前一个报文段的序列号与前一个报文段中数据字节的数量之和。例如，假设源主机发送3个报文段，每个报文段有100字节的数据，且第一个报文段的序列号是1000，那么第二个报文段的序列号就是1100（1000＋100），第三个报文段的序列号就是1200（1100＋100）。如果序列号增大至最大值将复位为0。    </li>
+<li>确认号字段：占32比特。只有ACK标志为1时，确认号字段才有效。目的主机返回确认号，使源主机知道某个或几个报文段已被接收。如果ACK控制位被设置为1，则该字段有效。确认号等于顺序接收到的最后一个报文段的序号加1(建立连接时)或者加上一份数据的大小(数据传输时)，这也是目的主机希望下次接收的报文段的序号值。返回确认号后，计算机认为已接收到小于该确认号的所有数据。<br>　　例如，序列号等于前一个报文段的序列号与前一个报文段中数据字节的数量之和。例如，假设源主机发送3个报文段，每个报文段有100字节的数据，且第一个报文段的序列号是1000，那么接收到第一个报文段后，目的主机返回含确认号1100的报头。接收到第二个报文段（其序号为1100）后，目的主机返回确认号1200。接收到第三个报文段后，目的主机返回确认号1300。<br>　　目的主机不一定在每次接收到报文段后都返回确认号。在上面的例子中，目的主机可能等到所有3个报文段都收到后，再返回一个含确认号1300的报文段，表示已接收到全部1200字节的数据。但是如果目的主机再发回确认号之前等待时间过长，源主机会认为数据没有到达目的主机，并自动重发。<br>　　上面的例子中，如果目的主机接收到了报文段号为1000的第一个报文段以及报文段号为1200的最后一个报文段，则可返回确认号1100，但是再返回确认号1300之前，应该等待报文段号为1100的中间报文段。    </li>
+<li>头部长度字段：占4比特。给出头部占32比特的数目。由于TCP报头的长度随TCP选项字段内容的不同而变化，因此报头中包含一个指定报头字段的字段。该字段以32比特为单位，所以报头长度一定是32比特的整数倍，有时需要在报头末尾补0。如果报头没有TCP选项字段，则报头长度值为5，表示报头一个有160比特，即20字节。    </li>
+<li>标志位字段（U、A、P、R、S、F）：占6比特。各比特的含义如下：<br>URG：报文段紧急。<br>ACK：确认序号有效。<br>PSH：接收方应该尽快将这个报文段交给应用层。<br>RST：重建连接。<br>SYN：发起一个连接。在握手完成后SYN为1，表示TCP建立已连接。此后的所有报文段中，SYN都被置0。<br>FIN：释放一个连接。如果源主机数据发送完毕，将把该连接下要发送的最后一个报文段的报头中的FIN位置1，或将该报文段后面发送的报头中该位置1。    </li>
+<li>窗口大小字段：占16比特。此字段用来进行流量控制。单位为字节数，这个值是本机期望一次接收的字节数。接收计算机可接收的新数据字节的数量，根据接收缓冲区可用资源的大小，其值随计算机所发送的每个报文段而变化。源主机可以利用接收到的窗口值决定下一个报文段的大小。   </li>
+<li>TCP校验和字段：占16比特。对整个TCP报文段，即TCP头部和TCP数据进行校验和计算，并由目标端进行验证。    </li>
+<li>紧急指针字段：占16比特。它是一个偏移量，和序号字段中的值相加表示紧急数据最后一个字节的序号。如果URG为1，则紧急指针标志着紧急数据的结束。其值是紧急数据最后1字节的序号，表示报文段序号的偏移量。例如，如果报文段的序号是1000，前8个字节都是紧急数据，那么紧急指针就是8。紧急指针一般用途是使用户可中止进程。    </li>
+<li>选项字段：占32比特。可能包括”窗口扩大因子”、”时间戳”等选项。</li>
+<li>数据部分：报头后面是可选的报文段数据部分。IP协议标准要求株距能接收最长达576字节的数据报。无其他选项的IP报头是20字节，无其他选项的TCP报头也是20字节，所以IP选项和TCP选项且含有多达536字节数据的TCP报文段无须分片就可达到目的主机。</li>
+</ul>
+<h3 id="UDP数据段格式"><a href="#UDP数据段格式" class="headerlink" title="UDP数据段格式"></a>UDP数据段格式</h3><p><img src="/image/programming/UDP_head.jpg" alt="UDP报文头"></p>
+<ul>
+<li>源、目标端口号字段：占16比特。作用与TCP数据段中的端口号字段相同，用来标识源端和目标端的应用进程。    </li>
+<li>长度字段：占16比特。标明UDP头部和UDP数据的总长度字节。    </li>
+<li>校验和字段：占16比特。用来对UDP头部和UDP数据进行校验。和TCP不同的是，对UDP来说，此字段是可选项，而TCP数据段中的校验和字段是必须有的 </li>
+</ul>
+<h3 id="IP报文段格式"><a href="#IP报文段格式" class="headerlink" title="IP报文段格式"></a>IP报文段格式</h3><p><img src="/image/programming/IP_head.jpg" alt="IP报文头"><br>普通的IP头部长度为20个字节，不包含IP选项字段。</p>
+<h3 id="以太网帧格式"><a href="#以太网帧格式" class="headerlink" title="以太网帧格式"></a>以太网帧格式</h3><p><img src="/image/programming/Ethernet_head.jpg" alt="以太网封装"></p>
+<h3 id="数据封装过程"><a href="#数据封装过程" class="headerlink" title="数据封装过程"></a>数据封装过程</h3><p><img src="/image/programming/TCP_encapsulation.png" alt="数据封装"></p>
+<ol>
+<li>首先用户需要发送的数据为原始数据</li>
+<li>发送的应用封装一个应用的头部数据</li>
+<li>添加一个TCP首部信息20字节（源目的端口号、顺序号、确认号、窗长、首部校验和。。。）</li>
+<li>添加一个IP首部信息20字节（源目的IP地址、校验和。。。）</li>
+<li>添加一个以太网帧首部信息（源目的MAC地址）</li>
+</ol>
+<h2 id="socket网络编程"><a href="#socket网络编程" class="headerlink" title="socket网络编程"></a>socket网络编程</h2><p>socket起源于Unix，而Unix/Linux基本哲学之一就是“一切皆文件”，都可以用“打开open –&gt; 读写write/read –&gt; 关闭close”模式来操作。可以把socket理解成一种特殊的文件，socket的一些函数就是对其进行的操作（读/写IO、打开、关闭）</p>
+<p>一个完整的连接过程如下：</p>
+<ul>
+<li>调用socket函数创建一个socket描述符<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> domain, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>socket()用于创建一个socket描述符（相当于文件打开操作）<br>domain表示协议域，比如AF_INET表示用ipv4地址和16位端口号的组合<br>type表示socket类型<br>protocol表示使用什么协议，TCP、UDP等</p>
+<ul>
+<li>绑定socket描述符到一个ip地址端口号上<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>bind函数把一个地址族中的特定地址赋给socket（例如使用AF_INET表示把一个ipv4地址和端口号赋给socket）<br>sockfd为上面的socket函数返回的描述符<br>addr表示地址族中的地址结构<br>addrlen表示地址的长度</p>
+<ul>
+<li>服务器监听这个socket，如果客户端之后调用connect函数，服务器就会接收到这个请求<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> backlog)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>listen()用来等待参数sockfd的socket连接。<br>参数backlog指定同时能处理的最大连接要求，如果连接数目达此上限则client端将收到ECONNREFUSED的错误。<br>backlog参数的含义：listening socket，kernel维护者两个队列：一个未完成连接的队列，此队列维护着那些已收到了客户端SYN分节信息，等待完成三路握手的连接，socket的状态是SYN_RCVD；一个已完成的连接的队列，此队列包含了那些已经完成三路握手的连接，socket的状态是ESTABLISHED。backlog参数被定义为上面两个队列的大小之和。</p>
+<ul>
+<li>客户端调用connect函数请求连接<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>connect函数的第一个参数即为客户端的socket描述字，第二参数为服务器的socket地址，第三个参数为socket地址的长度。客户端通过调用connect函数来建立与TCP服务器的连接。</p>
+<ul>
+<li>服务器允许连接<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> sockfd, struct sockaddr *addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>accept()用来接受客户端的连接请求，调用之后连接建立完成，可以开始网络I/O操作了。<br>如果accept函数成功，返回值是由内核自动生成的一个全新的描述字，代表与返回客户的TCP连接。</p>
+<ul>
+<li><p>开始网络I/O操作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> send(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags);</span><br><span class="line"><span class="keyword">ssize_t</span> recv(<span class="keyword">int</span> sockfd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> len, <span class="keyword">int</span> flags);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭连接</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>close操作只是使相应socket描述字的引用计数-1，只有当引用计数为0的时候，才会触发TCP客户端向服务器发送终止连接请求。</p>
+<h1 id="应用层HTTP协议"><a href="#应用层HTTP协议" class="headerlink" title="应用层HTTP协议"></a>应用层HTTP协议</h1><p>HTTP协议工作在应用层，端口号是80。HTTP协议被用于网络中两台计算机间的通信，相比于TCP/IP这些底层协议，HTTP协议更像是高层标记型语言，浏览器根据从服务器得到的HTTP响应体中分别得到报文头，响应头和信息体（HTML正文等），之后将HTML文件解析并呈现在浏览器上。同样，我们在浏览器地址栏输入网址之后，浏览器相当于用户代理帮助我们组织好报文头，请求头和信息体（可选），之后通过网络发送到服务器，服务器根据请求的内容准备数据。</p>
+<p>HTTP报文分为请求报文和响应报文两种：<br>请求报文的报文头：method uri version<br>第一个参数method表示交互方法，HTTP定义了与服务器交互的不同方法，最基本的方法有4种，分别是GET,POST,PUT,DELETE，表示查、增、改、删操作。</p>
+<ol>
+<li>GET，用于信息获取，有安全性和幂等性，安全性是指只获取信息而不修改信息；幂等性是指对同一个URL的多个请求应该返回同样的结果。</li>
+<li>POST，表示可能修改服务器上的资源请求<br>第二个参数为网络上的资源地址<br>第三个参数表示HTTP协议的版本</li>
+</ol>
+<p>响应报文的报文头：version status_code status_message<br>第一个参数表示HTTP协议的版本<br>第二个参数表示状态码，指明对请求处理的状态，常见的如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">200：成功</span><br><span class="line">301：内容已经移动</span><br><span class="line">400：请求不能被服务器理解</span><br><span class="line">403：无权访问该文件</span><br><span class="line">404：不能找到请求文件</span><br><span class="line">500：服务器内部错误</span><br><span class="line">501：服务器不支持请求的方法</span><br><span class="line">505：服务器不支持请求的版本</span><br></pre></td></tr></table></figure></p>
+<h1 id="在浏览器中输入www-baidu-com后执行的全部过程"><a href="#在浏览器中输入www-baidu-com后执行的全部过程" class="headerlink" title="在浏览器中输入www.baidu.com后执行的全部过程"></a>在浏览器中输入<a href="http://www.baidu.com后执行的全部过程" target="_blank" rel="noopener">www.baidu.com后执行的全部过程</a></h1><p>1、客户端浏览器通过DNS解析到<a href="http://www.baidu.com的IP地址220.181.27.48，通过这个IP地址找到客户端到服务器的路径。客户端浏览器发起一个HTTP会话到220.161.27.48，然后通过TCP进行封装数据包，输入到网络层。" target="_blank" rel="noopener">www.baidu.com的IP地址220.181.27.48，通过这个IP地址找到客户端到服务器的路径。客户端浏览器发起一个HTTP会话到220.161.27.48，然后通过TCP进行封装数据包，输入到网络层。</a><br>2、在客户端的传输层，把HTTP会话请求分成报文段，添加源和目的端口，如服务器使用80端口监听客户端的请求，客户端由系统随机选择一个端口如5000，与服务器进行交换，服务器把相应的请求返回给客户端的5000端口。然后使用IP层的IP地址查找目的端。<br>3、客户端的网络层不用关系应用层或者传输层的东西，主要做的是通过查找路由表确定如何到达服务器，期间可能经过多个路由器，这些都是由路由器来完成的工作，我不作过多的描述，无非就是通过查找路由表决定通过那个路径到达服务器。<br>4、客户端的链路层，包通过链路层发送到路由器，通过邻居协议查找给定IP地址的MAC地址，然后发送ARP请求查找目的地址，如果得到回应后就可以使用ARP的请求应答交换的IP数据包现在就可以传输了，然后发送IP数据包到达服务器的地址。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/programming/" rel="tag"># programming</a>
+          
+            <a href="/tags/front-end/" rel="tag"># front-end</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/30/cpp/C++语法总结/" rel="next" title="C++语法总结">
+                <i class="fa fa-chevron-left"></i> C++语法总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/31/programming/Brainfuck语言/" rel="prev" title="Brainfuck语言">
+                Brainfuck语言 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三种模型"><span class="nav-number">1.1.</span> <span class="nav-text">三种模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OSI七层模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">OSI七层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP四层模型"><span class="nav-number">1.1.2.</span> <span class="nav-text">TCP/IP四层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五层协议"><span class="nav-number">1.1.3.</span> <span class="nav-text">五层协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的封装"><span class="nav-number">1.2.</span> <span class="nav-text">数据的封装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#帧格式"><span class="nav-number">1.2.1.</span> <span class="nav-text">帧格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个协议"><span class="nav-number">1.3.</span> <span class="nav-text">几个协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP地址解析协议"><span class="nav-number">1.3.1.</span> <span class="nav-text">ARP地址解析协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICMP协议"><span class="nav-number">1.3.2.</span> <span class="nav-text">ICMP协议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络层"><span class="nav-number">2.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IP地址"><span class="nav-number">2.1.</span> <span class="nav-text">IP地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子网掩码"><span class="nav-number">2.2.</span> <span class="nav-text">子网掩码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运输层"><span class="nav-number">3.</span> <span class="nav-text">运输层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP"><span class="nav-number">3.1.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP、UDP比较"><span class="nav-number">3.1.1.</span> <span class="nav-text">TCP、UDP比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP三次握手，四次挥手"><span class="nav-number">3.1.2.</span> <span class="nav-text">TCP三次握手，四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超时重传和快速重传"><span class="nav-number">3.1.3.</span> <span class="nav-text">超时重传和快速重传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流量控制（滑动窗口机制）"><span class="nav-number">3.1.4.</span> <span class="nav-text">流量控制（滑动窗口机制）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拥塞控制"><span class="nav-number">3.1.5.</span> <span class="nav-text">拥塞控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP通过如下方式提供可靠性"><span class="nav-number">3.1.6.</span> <span class="nav-text">TCP通过如下方式提供可靠性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP报文头"><span class="nav-number">3.1.7.</span> <span class="nav-text">TCP报文头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP数据段格式"><span class="nav-number">3.1.8.</span> <span class="nav-text">UDP数据段格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP报文段格式"><span class="nav-number">3.1.9.</span> <span class="nav-text">IP报文段格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#以太网帧格式"><span class="nav-number">3.1.10.</span> <span class="nav-text">以太网帧格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据封装过程"><span class="nav-number">3.1.11.</span> <span class="nav-text">数据封装过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#socket网络编程"><span class="nav-number">3.2.</span> <span class="nav-text">socket网络编程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用层HTTP协议"><span class="nav-number">4.</span> <span class="nav-text">应用层HTTP协议</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在浏览器中输入www-baidu-com后执行的全部过程"><span class="nav-number">5.</span> <span class="nav-text">在浏览器中输入www.baidu.com后执行的全部过程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
