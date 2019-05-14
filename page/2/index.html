@@ -307,6 +307,490 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/configuration/Mac控制台配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/07/configuration/Mac控制台配置/" itemprop="url">控制台配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-07T20:00:16+08:00">
+                2018-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="zsh"><a href="#zsh" class="headerlink" title="zsh"></a>zsh</h1><p>个人用配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PROMPT=&apos;%&#123;$fg[yellow]%&#125;%~ $(git_prompt_info)%&#123;$fg[yellow]%&#125;$ %&#123;$reset_color%&#125;&apos;</span><br><span class="line"></span><br><span class="line">ZSH_THEME_GIT_PROMPT_PREFIX=&quot;%&#123;$fg_bold[blue]%&#125;@ %&#123;$fg[red]%&#125;&quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_SUFFIX=&quot;%&#123;$reset_color%&#125; &quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_DIRTY=&quot;%&#123;$fg[blue]%&#125; %&#123;$fg[yellow]%&#125;✗&quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_CLEAN=&quot;%&#123;$fg[blue]%&#125;&quot;</span><br></pre></td></tr></table></figure></p>
+<p><code>%{$fg[yellow]%}</code> 设置后面的内容颜色为黄色<br><code>%~</code> 显示相对于 ~ 目录的当前路径<br><code>$(git_prompt_info)</code> 后面添加上git分支名<br><code>@</code> 中间加上一个 @ 符号<br><code>$</code><br><code>%{reset_color%}</code> 清除所有颜色</p>
+<p>控制台前缀配置<br><a href="https://github.com/bolasblack/BlogPosts/blob/master/2011-04-20-%E5%AE%9A%E5%88%B6%E4%BD%A0%E7%9A%84_zsh_%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6.md" target="_blank" rel="noopener">https://github.com/bolasblack/BlogPosts/blob/master/2011-04-20-%E5%AE%9A%E5%88%B6%E4%BD%A0%E7%9A%84_zsh_%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6.md</a><br><a href="https://code.tutsplus.com/tutorials/how-to-customize-your-command-prompt--net-24083" target="_blank" rel="noopener">https://code.tutsplus.com/tutorials/how-to-customize-your-command-prompt--net-24083</a></p>
+<h1 id="控制台使用"><a href="#控制台使用" class="headerlink" title="控制台使用"></a>控制台使用</h1><p>bg、fg命令失效</p>
+<p>参考 <a href="https://stackoverflow.com/questions/32614648/weird-jobs-behavior-within-zsh" target="_blank" rel="noopener">https://stackoverflow.com/questions/32614648/weird-jobs-behavior-within-zsh</a><br>使用以下两种方式<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">job %1</span><br><span class="line">%1</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/configuration/Vim配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/07/configuration/Vim配置/" itemprop="url">vim配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-07T18:37:51+08:00">
+                2018-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="编辑操作"><a href="#编辑操作" class="headerlink" title="编辑操作"></a>编辑操作</h1><h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="mac多窗口复制粘贴"><a href="#mac多窗口复制粘贴" class="headerlink" title="mac多窗口复制粘贴"></a>mac多窗口复制粘贴</h2><p>参考<a href="https://www.douban.com/note/202175976/" target="_blank" rel="noopener">网络博客</a><br>在 ~/.vimrc 文件中添加如下配置，可以实现多窗口复制粘贴<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vmap y :w !pbcopy&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nmap yy :.w !pbcopy&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nmap p :r !pbpaste&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">vmap <span class="string">"+y :w !pbcopy&lt;CR&gt;&lt;CR&gt; </span></span><br><span class="line"><span class="string">nmap "</span>+p :r !pbpaste&lt;CR&gt;&lt;CR&gt;</span><br></pre></td></tr></table></figure></p>
+<p>mac下两条命令：pbcopy、pbpaste<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat foo.txt | pbcopy <span class="comment"># 将foo.txt的内容复制到系统剪贴板</span></span><br><span class="line">pbpaste &gt; foo.txt <span class="comment"># 将系统剪贴板的内容写到foo.txt</span></span><br></pre></td></tr></table></figure></p>
+<p><code>w !</code>和<code>r !</code>（注意中间的空格）可以负责把某一段文字写入或从某一个命令读出，有点类似linux的管道功能。<br>这里把vim默认的y和p功能改掉，让y直接复制到系统剪贴板，让p从系统剪贴板直接粘贴；故实现了多个terminal之间的剪贴板共享。<br>而且由于操作的是系统剪贴板，同时也实现了terminal的vim与其他应用程序之间的剪贴板共享。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/database/《MySQL必知必会》/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/07/database/《MySQL必知必会》/" itemprop="url">《MySQL必知必会》</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-07T18:37:51+08:00">
+                2018-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show databases; <span class="comment"># 返回可用数据库的一个列表</span></span></span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| dev                |</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show tables; <span class="comment"># 返回当前选择的数据库内可用表的列表</span></span></span><br><span class="line">+----------------------+</span><br><span class="line">| Tables_in_dev        |</span><br><span class="line">+----------------------+</span><br><span class="line">| employee_info_record |</span><br><span class="line">| tbl_dept             |</span><br><span class="line">| tbl_emp              |</span><br><span class="line">+----------------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show columns from tbl_dept; <span class="comment"># </span></span></span><br><span class="line">+-----------+------------------+------+-----+---------+----------------+</span><br><span class="line">| Field     | Type             | Null | Key | Default | Extra          |</span><br><span class="line">+-----------+------------------+------+-----+---------+----------------+</span><br><span class="line">| dept_id   | int(11) unsigned | NO   | PRI | NULL    | auto_increment |</span><br><span class="line">| dept_name | varchar(255)     | NO   |     |         |                |</span><br><span class="line">+-----------+------------------+------+-----+---------+----------------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/21/programming/Git撤销修改/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/21/programming/Git撤销修改/" itemprop="url">git撤销修改</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T22:21:09+08:00">
+                2018-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><a href="#回退到git-pull刚拉取代码的样子">回退到git pull刚拉取代码的样子</a><ul>
+<li><a href="#已修改未add">已修改未add</a></li>
+<li><a href="#已add未commit">已add未commit</a></li>
+<li><a href="#已commit未提交">已commit未提交</a><ul>
+<li><a href="#git-reset---hard-commit_id">git reset –hard commit_id</a></li>
+<li><a href="#git-revert-commit_id">git revert commit_id</a></li>
+</ul>
+</li>
+<li><a href="#已提交">已提交</a><ul>
+<li><a href="#soft-mixed-hard">soft mixed hard</a></li>
+</ul>
+</li>
+<li><a href="#恢复分支">恢复分支</a><h1 id="回退到git-pull刚拉取代码的样子"><a href="#回退到git-pull刚拉取代码的样子" class="headerlink" title="回退到git pull刚拉取代码的样子"></a>回退到git pull刚拉取代码的样子</h1>通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改</li>
+</ul>
+</li>
+</ul>
+<h2 id="已修改未add"><a href="#已修改未add" class="headerlink" title="已修改未add"></a>已修改未add</h2><p>当修改了文件，还没有通过<code>git add</code>命令将修改内容</p>
+<p>此时可以直接通过编辑器的快捷键（一般是ctrl+z或者cmd+z）撤销修改直至文件颜色显示为无变化。<br>也可以通过命令直接修改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout src/com/spring/<span class="built_in">test</span>/SpringTest.java      <span class="comment"># 撤销文件所有修改，回到git pull刚拉取下来的样子</span></span><br><span class="line">git checkout -- src/com/spring/<span class="built_in">test</span>/SpringTest.java   <span class="comment"># 与上一条命令作用相同，注意 -- 后面还有空格</span></span><br><span class="line">git checkout .                                        <span class="comment"># 撤销整个文件夹的修改</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="已add未commit"><a href="#已add未commit" class="headerlink" title="已add未commit"></a>已add未commit</h2><p>当修改了文件，并通过git add命令将文件添加到stage了<br>此时需要通过<code>git reset</code>命令撤回修改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD^   <span class="comment"># 撤销已经提交的全部文件到暂存区</span></span><br></pre></td></tr></table></figure></p>
+<p>git reset会丢弃提交记录，HEAD^代表HEAD的父提交记录，此参数可以替换为任意commit id。</p>
+<h2 id="已commit未提交"><a href="#已commit未提交" class="headerlink" title="已commit未提交"></a>已commit未提交</h2><h3 id="git-reset-–hard-commit-id"><a href="#git-reset-–hard-commit-id" class="headerlink" title="git reset –hard commit_id"></a>git reset –hard commit_id</h3><p><code>git reset --hard HEAD^</code><br>会直接撤销已经提交的全部文件到编辑之前版本，并且不会有任何操作记录，最好不要使用。</p>
+<h3 id="git-revert-commit-id"><a href="#git-revert-commit-id" class="headerlink" title="git revert commit_id"></a>git revert commit_id</h3><p>git revert命令会生成一个新的版本并提交，通过git log可以查看得到，推荐使用。</p>
+<h2 id="已提交"><a href="#已提交" class="headerlink" title="已提交"></a>已提交</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout commit_id file   <span class="comment"># 还原file到commit_id中的版本</span></span><br><span class="line">git checkout branchXX file    <span class="comment"># 还原file到其他分支（branchXX）中的版本</span></span><br></pre></td></tr></table></figure>
+<p>一篇<a href="https://www.cnblogs.com/kidsitcn/p/4513297.html" target="_blank" rel="noopener">网络博客</a>介绍git reset的三个参数使用</p>
+<h3 id="soft-mixed-hard"><a href="#soft-mixed-hard" class="headerlink" title="soft mixed hard"></a>soft mixed hard</h3><p>–soft 、–mixed以及–hard是三个恢复等级。</p>
+<ul>
+<li>使用–soft就仅仅将头指针恢复，已经add的缓存以及工作空间的所有东西都不变。</li>
+<li>如果使用–mixed，就将头指针恢复掉，已经add的缓存也会丢失掉，工作空间的代码什么的是不变的。</li>
+<li>如果使用–hard，那么一切就全都恢复了，头指针add的缓存消失，代码也恢复到以前状态。</li>
+</ul>
+<h2 id="恢复分支"><a href="#恢复分支" class="headerlink" title="恢复分支"></a>恢复分支</h2><p><code>git branch -D &lt;branch_name&gt;</code> 删除分支（-d 不能删除当前正在打开的分支）当删除分支时，git只是删除了指向相关提交的指针，但该提交对象依然会留在版本库中。可以通过删除分支时的散列值来恢复被删除的分支，散列值通过git reflog命令获取<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Qians-Mac:MavenTest zhangqianyi$ git reflog</span><br><span class="line">6bca3d0 (HEAD -&gt; master, origin/master) HEAD@&#123;0&#125;: checkout: moving from <span class="built_in">test</span> to master</span><br><span class="line">68794b6 HEAD@&#123;1&#125;: commit: update</span><br><span class="line">ef6209e HEAD@&#123;2&#125;: commit: add readme</span><br><span class="line">6bca3d0 (HEAD -&gt; master, origin/master) HEAD@&#123;3&#125;: checkout: moving from master to <span class="built_in">test</span></span><br><span class="line">6bca3d0 (HEAD -&gt; master, origin/master) HEAD@&#123;4&#125;: commit (initial): first commit</span><br><span class="line">Qians-Mac:MavenTest zhangqianyi$ git branch <span class="built_in">test</span> HEAD@&#123;1&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/17/java/maven/maven-enforcer-plugin介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -934,6 +1418,172 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/java/注解处理器学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/04/java/注解处理器学习/" itemprop="url">注解处理器学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T17:02:41+08:00">
+                2018-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/" itemprop="url" rel="index">
+                    <span itemprop="name">note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>@AutoService<br><a href="https://github.com/google/auto/tree/master/service" target="_blank" rel="noopener">https://github.com/google/auto/tree/master/service</a></p>
+<p>继承 AbstractProcessor 实现 process 方法</p>
+<h1 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mvn clean compile -U -DskipTests</span><br><span class="line">mvn clean install</span><br></pre></td></tr></table></figure>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>在需要使用的项目中：</p>
+<ol>
+<li><p>引入pom依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.meituan.trip<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>swagger2servicedoc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置编译时使用注解处理器</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">id</span>&gt;</span>default-compile<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">phase</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goal</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">annotationProcessors</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">annotationProcessor</span>&gt;</span>com.meituan.trip.swagger2servicedoc.processor.ApiProcessor<span class="tag">&lt;/<span class="name">annotationProcessor</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">annotationProcessors</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行maven编译</p>
+</li>
+</ol>
+<p>张千一的空间/…/IDEA/注解处理器</p>
+<p>系统已自动将该文档密级设置为默认密级“C-3 机密级”，确认使用该密级？确认调整<br>注解处理器</p>
+<p>C-3创建:张千一, 最后修改: 张千一2018-09-04 17:02</p>
+<p>实现<br>@AutoService</p>
+<p><a href="https://github.com/google/auto/tree/master/service" target="_blank" rel="noopener">https://github.com/google/auto/tree/master/service</a></p>
+<p>继承 AbstractProcessor 实现 process 方法</p>
+<p>发布<br>代码块<br>Shell<br>mvn clean compile -U -DskipTests<br>mvn clean install<br>使用<br>在需要使用的项目中：</p>
+<p>1 . 引入pom依赖</p>
+<p>代码块<br>XML</p>
+<p><dependency><br>    <groupid>com.meituan.trip</groupid><br>    <artifactid>swagger2servicedoc</artifactid><br>    <version>1.0-SNAPSHOT</version><br></dependency></p>
+<ol start="2">
+<li>配置编译时使用注解处理器</li>
+</ol>
+<p>代码块<br>XML</p>
+<p><build><br>    <plugins><br>        <plugin><br>            <artifactid>maven-compiler-plugin</artifactid><br>            <version>3.1</version><br>            <executions><br>                <execution><br>                    <id>default-compile</id><br>                    <phase>compile</phase><br>                    <goals><br>                        <goal>compile</goal><br>                    </goals><br>                    <configuration><br>                        <source>1.8<br>                        <target>1.8</target><br>                        <annotationprocessors><br>                            <annotationprocessor>com.meituan.trip.swagger2servicedoc.processor.ApiProcessor</annotationprocessor><br>                        </annotationprocessors><br>                    </configuration><br>                </execution><br>            </executions><br>        </plugin><br>    </plugins><br></build><br>​</p>
+<ol start="3">
+<li>执行maven编译<br>mvn clean compile -U -DskipTests</li>
+</ol>
+<p><a href="https://www.jianshu.com/p/28edf5352b63" target="_blank" rel="noopener">https://www.jianshu.com/p/28edf5352b63</a><br><a href="https://www.race604.com/annotation-processing/" target="_blank" rel="noopener">https://www.race604.com/annotation-processing/</a><br><a href="https://blog.csdn.net/github_35180164/article/details/52055994" target="_blank" rel="noopener">https://blog.csdn.net/github_35180164/article/details/52055994</a><br><a href="https://stackoverflow.com/questions/22494596/eclipse-annotation-processor-get-project-path" target="_blank" rel="noopener">https://stackoverflow.com/questions/22494596/eclipse-annotation-processor-get-project-path</a><br><a href="http://www.javatronic.fr/articles/2014/10/08/how_does_annotation_processing_work_in_java.html" target="_blank" rel="noopener">http://www.javatronic.fr/articles/2014/10/08/how_does_annotation_processing_work_in_java.html</a><br><a href="https://www.javacodegeeks.com/2015/09/java-annotation-processors.html" target="_blank" rel="noopener">https://www.javacodegeeks.com/2015/09/java-annotation-processors.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/programming/Git常用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1343,697 +1993,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/java/Intellij插件开发入门/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="千导">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="千导">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/java/Intellij插件开发入门/" itemprop="url">Intellij插件开发入门</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T17:04:50+08:00">
-                2018-08-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Note/" itemprop="url" rel="index">
-                    <span itemprop="name">Note</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Intellij插件开发入门</p>
-<p><a href="https://blog.csdn.net/excellentyuxiao/article/details/80273448" target="_blank" rel="noopener">https://blog.csdn.net/excellentyuxiao/article/details/80273448</a><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/05/java/Intellij插件开发入门/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/java/阿里巴巴Java开发手册 读书笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="千导">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="千导">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/11/java/阿里巴巴Java开发手册 读书笔记/" itemprop="url">阿里巴巴Java开发手册 读书笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-11T16:09:50+08:00">
-                2018-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Note/" itemprop="url" rel="index">
-                    <span itemprop="name">Note</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>阿里巴巴Java开发手册 读书笔记<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/11/java/阿里巴巴Java开发手册 读书笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/临时保存文档/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="千导">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="千导">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/04/临时保存文档/" itemprop="url">临时保存文档</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-04T11:38:05+08:00">
-                2018-07-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Blog/" itemprop="url" rel="index">
-                    <span itemprop="name">Blog</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>临时编写的一些内容，后期有空再进行整理<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/04/临时保存文档/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/programming/Vim常用命令记录/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="千导">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="千导">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/29/programming/Vim常用命令记录/" itemprop="url">Vim常用命令记录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T16:00:08+08:00">
-                2018-05-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Note/" itemprop="url" rel="index">
-                    <span itemprop="name">Note</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Vim中的一些常用命令记录<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/29/programming/Vim常用命令记录/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/07/algorithm/MD5算法学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="千导">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="千导">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/07/algorithm/MD5算法学习/" itemprop="url">MD5算法学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-07T15:22:09+08:00">
-                2018-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Note/" itemprop="url" rel="index">
-                    <span itemprop="name">Note</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>转载一篇<a href="https://blog.csdn.net/hbtj_1216/article/details/52241318" target="_blank" rel="noopener">博客</a>学习MD5算法。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/07/algorithm/MD5算法学习/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2082,7 +2041,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-count">178</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2093,7 +2052,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

@@ -676,6 +676,140 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/03/java/spring/BeanWrapper学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/03/java/spring/BeanWrapper学习/" itemprop="url">BeanWrapper学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T17:55:41+08:00">
+                2019-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/" itemprop="url" rel="index">
+                    <span itemprop="name">note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>BeanWrapper是Spring提供的一个用来操作bean属性的工具，使用它可以直接修改一个对象的属性<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User user = <span class="keyword">new</span> User();</span><br><span class="line">BeanWrapper beanWrapper = PropertyAccessorFactory.forBeanPropertyAccess(user);</span><br><span class="line"></span><br><span class="line">beanWrapper.setPropertyValue(<span class="string">"name"</span>, <span class="string">"zhangqianyi"</span>);</span><br><span class="line">System.out.println(user.getName());</span><br><span class="line"></span><br><span class="line">beanWrapper.setPropertyValue(<span class="string">"name"</span>, <span class="string">"zhangqianyi02"</span>);</span><br><span class="line">System.out.println(user.getName());</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/fore-end/HTTP 406 not acceptable错误学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -767,6 +901,145 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 处理返回值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerMethodReturnValueHandler</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 方法返回值是否被处理程序支持</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">supportsReturnType</span><span class="params">(MethodParameter returnType)</span></span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过向模型添加属性并设置视图或设置视图来处理给定的返回值</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@link</span> ModelAndViewContainer#setRequestHandled&#125;标志到&#123;<span class="doctag">@code</span> true&#125;，表明响应已被直接处理。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">handleReturnValue</span><span class="params">(Object returnValue, MethodParameter returnType,</span></span></span><br><span class="line"><span class="function"><span class="params">            ModelAndViewContainer mavContainer, NativeWebRequest webRequest)</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 解析请求中的参数值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerMethodArgumentResolver</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否能支持解析&#123;<span class="doctag">@linkplain</span> MethodParameter参数&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">supportsParameter</span><span class="params">(MethodParameter parameter)</span></span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将方法参数解析为来自给定请求的参数值。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Object <span class="title">resolveArgument</span><span class="params">(MethodParameter parameter, ModelAndViewContainer mavContainer,</span></span></span><br><span class="line"><span class="function"><span class="params">            NativeWebRequest webRequest, WebDataBinderFactory binderFactory)</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>handleReturnValue()</code>方法获取inputMessage,outMessage对象，调用<code>writeWithMessageConverters()</code>方法，让消息转换器对消息进行下一步处理<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleReturnValue</span><span class="params">(Object returnValue, MethodParameter returnType,</span></span></span><br><span class="line"><span class="function"><span class="params">        ModelAndViewContainer mavContainer, NativeWebRequest webRequest)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> IOException, HttpMediaTypeNotAcceptableException, HttpMessageNotWritableException </span>&#123;</span><br><span class="line"></span><br><span class="line">    mavContainer.setRequestHandled(<span class="keyword">true</span>);</span><br><span class="line">    ServletServerHttpRequest inputMessage = createInputMessage(webRequest);</span><br><span class="line">    ServletServerHttpResponse outputMessage = createOutputMessage(webRequest);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Try even with null return value. ResponseBodyAdvice could get involved.</span></span><br><span class="line">    writeWithMessageConverters(returnValue, returnType, inputMessage, outputMessage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="相关文档"><a href="#相关文档" class="headerlink" title="相关文档"></a>相关文档</h2><p><a href="https://www.jianshu.com/p/0aaeb4144489" target="_blank" rel="noopener">https://www.jianshu.com/p/0aaeb4144489</a><br><a href="https://segmentfault.com/a/1190000012659486" target="_blank" rel="noopener">https://segmentfault.com/a/1190000012659486</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/16/java/spring/POST请求参数解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/16/java/spring/POST请求参数解析/" itemprop="url">post请求参数解析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-16T23:30:41+08:00">
+                2019-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Blog/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>pangu调mermaid-app的一个post接口，测试了一下给post请求VO中的一个boolean 类型字段传了2，得到的返回结果是：<br><code>can not cast to boolean, value : 2</code></p>
+<p>相关异常堆栈如下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">2019-01-16 21:33:10.981 - - [WARN] qtp348132918-46 ApiJsonHandlerExceptionResolver <span class="comment">#XMDT#&#123;__traceId__=8417844945673433437&#125;#XMDT#</span></span><br><span class="line">com.alibaba.fastjson.JSONException: can not cast to boolean, value : 2</span><br><span class="line">	at com.alibaba.fastjson.util.TypeUtils.castToBoolean(TypeUtils.java:621) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.serializer.BooleanCodec.deserialze(BooleanCodec.java:78) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.DefaultFieldDeserializer.parseField(DefaultFieldDeserializer.java:71) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.parseField(JavaBeanDeserializer.java:791) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.deserialze(JavaBeanDeserializer.java:596) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.parseRest(JavaBeanDeserializer.java:949) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.FastjsonASMDeserializer_35_RecallConfigDetailVO.deserialze(Unknown Source) ~[?:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.deserialze(JavaBeanDeserializer.java:184) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:642) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.JSON.parseObject(JSON.java:350) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.JSON.parseObject(JSON.java:318) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.JSON.parseObject(JSON.java:281) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.JSON.parseObject(JSON.java:381) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.JSON.parseObject(JSON.java:463) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter.read(FastJsonHttpMessageConverter.java:211) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:201) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:150) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:128) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:121) ~[spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:158) ~[spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:128) ~[spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967) [spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901) [spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970) [spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872) [spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:707) [javax.servlet-api-3.1.0.jar:3.1.0]</span><br><span class="line">	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846) [spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790) [javax.servlet-api-3.1.0.jar:3.1.0]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:808) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1669) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at com.sankuai.it.sso.sdk.oauth.AbstractSSOAuthFilter.doFilter(AbstractSSOAuthFilter.java:46) [sso-java-sdk-2.1.23.jar:?]</span><br><span class="line">	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:347) [spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:263) [spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at com.meituan.lvyou.mermaid.filter.CORSFilter.doFilter(CORSFilter.java:58) [classes/:?]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at com.meituan.jmonitor.collector.http.HttpMonitorFilter.doFilter(HttpMonitorFilter.java:75) [jmonitor-1.5.8.jar:1.5.8]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197) [spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at com.meituan.lvyou.mermaid.filter.XssFilter.doFilter(XssFilter.java:65) [classes/:?]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577) [jetty-security-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:110) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.Server.handle(Server.java:497) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.io.AbstractConnection<span class="variable">$2</span>.run(AbstractConnection.java:540) [jetty-io-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635) [jetty-util-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.util.thread.QueuedThreadPool<span class="variable">$3</span>.run(QueuedThreadPool.java:555) [jetty-util-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]</span><br></pre></td></tr></table></figure></p>
+<p>看mermaid-app错误日志可以看出，是使用fastjson将请求体中的内容转成boolean类型的时候遇到了问题<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/AbstractMessageConverterMethodArgumentResolver.java <span class="number">201</span></span><br><span class="line">body = genericConverter.read(targetType, contextClass, inputMessage);</span><br></pre></td></tr></table></figure></p>
+<p>read方法有多个实现，其中我们主要关注使用到的<code>FastJsonHttpMessageConverter</code>中实现的</p>
+<p>查看源码 最后使用的是FastJson转换的一个TypeUtils<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">castToBoolean</span><span class="params">(Object value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> Boolean) &#123;</span><br><span class="line">        <span class="keyword">return</span> (Boolean) value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> Number) &#123;</span><br><span class="line">        <span class="keyword">return</span> ((Number) value).intValue() == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">        String strVal = (String) value;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (strVal.length() == <span class="number">0</span> <span class="comment">//</span></span><br><span class="line">            || <span class="string">"null"</span>.equals(strVal) <span class="comment">//</span></span><br><span class="line">            || <span class="string">"NULL"</span>.equals(strVal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"true"</span>.equalsIgnoreCase(strVal) <span class="comment">//</span></span><br><span class="line">            || <span class="string">"1"</span>.equals(strVal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> Boolean.TRUE;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"false"</span>.equalsIgnoreCase(strVal) <span class="comment">//</span></span><br><span class="line">            || <span class="string">"0"</span>.equals(strVal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> Boolean.FALSE;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"Y"</span>.equalsIgnoreCase(strVal) <span class="comment">//</span></span><br><span class="line">                || <span class="string">"T"</span>.equals(strVal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> Boolean.TRUE;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"F"</span>.equalsIgnoreCase(strVal) <span class="comment">//</span></span><br><span class="line">                || <span class="string">"N"</span>.equals(strVal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> Boolean.FALSE;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> JSONException(<span class="string">"can not cast to boolean, value : "</span> + value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输入是String类型，所以 “2” 匹配不上，走到最后抛出异常</p>
 
           
         
@@ -951,6 +1224,186 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/programming/《重构 改善既有代码的设计》/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/17/programming/《重构 改善既有代码的设计》/" itemprop="url">《重构 改善既有代码的设计》</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-17T10:18:53+08:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="重构原则"><a href="#重构原则" class="headerlink" title="重构原则"></a>重构原则</h1><h2 id="重构的定义"><a href="#重构的定义" class="headerlink" title="重构的定义"></a>重构的定义</h2><blockquote>
+<p>重构：对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其理解性，降低其修改成本。</p>
+</blockquote>
+<p>根据定义可以看出，准备动手修改前需要考虑清楚，修改的结果是 提高了程序可读性？还是降低了程序的修改成本（提升可扩展性）？</p>
+<p>目标是：<strong>可读、可扩展</strong></p>
+<p>一定要与<strong>性能优化</strong>区分开来，两者目标不一致，采取的手法和遵循的原则会有些不一致。</p>
+<h2 id="两顶帽子"><a href="#两顶帽子" class="headerlink" title="两顶帽子"></a>两顶帽子</h2><p>使用重构技术开发软件时，会有两种状态：</p>
+<ul>
+<li>添加新功能：尽可能不修改既有代码，只管添加功能。针对新功能可能会对测试用例进行调整。</li>
+<li>重构：不能添加新功能，不能修改测试用例。</li>
+</ul>
+<p>这两个状态会在开发过程中不断切换。</p>
+<h2 id="为何重构"><a href="#为何重构" class="headerlink" title="为何重构"></a>为何重构</h2><ul>
+<li><p>代码结构的流失是累积性的</p>
+<p>越难看出代码所代表的设计意图，代码的结构就会腐烂的越快。定期重构首先可以加深开发者对代码的理解，其次可以为代码结构保鲜</p>
+<p>以mermaid服务的货架模板为例，长久未被修改过的代码只会让维护者更加不想去看，代码的设计者也无法保证能够完整的阐述出之前的设计意图。</p>
+</li>
+<li><p>重构提升编程速度<br>良好的设计是快速开发的根本</p>
+</li>
+</ul>
+<blockquote>
+<p>程序具有两面价值：今天可以为你做什么、明天可以为你做什么。修复错误、添加新特性只是在关注今天的价值，还需着眼明天。</p>
+</blockquote>
+<h2 id="何时重构"><a href="#何时重构" class="headerlink" title="何时重构"></a>何时重构</h2><ul>
+<li><p>三次法则</p>
+<p>事不过三，三则重构</p>
+</li>
+<li><p>添加功能时重构</p>
+<p>添加功能时为了帮助自己理解需要修改的代码。在开发的过程中不断理清代码的结构</p>
+</li>
+<li><p>修补错误时重构</p>
+<p>代码不够清晰，不能快速发现bug，</p>
+</li>
+<li><p>code review后重构</p>
+</li>
+</ul>
+<h2 id="间接层与重构"><a href="#间接层与重构" class="headerlink" title="间接层与重构"></a>间接层与重构</h2><blockquote>
+<p>计算机科学是这样一门学科：它相信所有问题都可以通过增加一个间接层来解决</p>
+</blockquote>
+<p>间接层的价值：</p>
+<ul>
+<li>允许逻辑共享</li>
+<li>分开解释意图和实现</li>
+<li>隔离变换</li>
+<li>封装条件逻辑：多态消息，降低代码重复度并提高弹性</li>
+</ul>
+<h2 id="重构的难题"><a href="#重构的难题" class="headerlink" title="重构的难题"></a>重构的难题</h2><ul>
+<li>数据库</li>
+<li>修改接口：已发布的接口重构后打上 Deprecated，为整个包定义一个异常基类。</li>
+</ul>
+<h2 id="何时不该重构"><a href="#何时不该重构" class="headerlink" title="何时不该重构"></a>何时不该重构</h2><ul>
+<li>代码不能正常运作时重写</li>
+<li>项目已近最后期限</li>
+</ul>
+<h1 id="代码的坏味道"><a href="#代码的坏味道" class="headerlink" title="代码的坏味道"></a>代码的坏味道</h1><blockquote>
+<p>决定何时重构、何时停止和知道重构机制如何运转一样重要。</p>
+</blockquote>
+<p>受到刚出生的女儿的气味影响，Kent Beck提出用味道来形容重构时机。</p>
+<h1 id="构筑测试体系"><a href="#构筑测试体系" class="headerlink" title="构筑测试体系"></a>构筑测试体系</h1><blockquote>
+<p>重构的基本技巧：小步前进、频繁测试</p>
+</blockquote>
+<h1 id="重构列表"><a href="#重构列表" class="headerlink" title="重构列表"></a>重构列表</h1><h2 id="重构的记录格式"><a href="#重构的记录格式" class="headerlink" title="重构的记录格式"></a>重构的记录格式</h2><p>按照标准划分，每个重构手法都有如下五个部分：</p>
+<ol>
+<li>名称：</li>
+<li>简短概要：简单介绍此重构手法的适用场景，以及他所做的事情。这部分可以帮助你更快速的找到所需要的重构手法</li>
+<li>动机：为什么需要这个重构？什么情况下不应该使用这个重构？</li>
+<li>做法：简明扼要地一步一步介绍此重构</li>
+<li>范例：以一个十分简单的例子来说明此重构手法如何运作</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/10/programming/Git问题记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1089,7 +1542,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/configuration/Mac控制台配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/15/programming/Git合并commit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="千导">
@@ -1108,7 +1561,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/07/configuration/Mac控制台配置/" itemprop="url">控制台配置</a></h1>
+                <a class="post-title-link" href="/2018/11/15/programming/Git合并commit/" itemprop="url">Git合并commit</a></h1>
         
 
         <div class="post-meta">
@@ -1120,8 +1573,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-07T20:00:16+08:00">
-                2018-11-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-15T21:49:41+08:00">
+                2018-11-15
               </time>
             
 
@@ -1130,6 +1583,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Blog/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1157,377 +1632,54 @@
       
         
           
-            <h1 id="zsh"><a href="#zsh" class="headerlink" title="zsh"></a>zsh</h1><p>个人用配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PROMPT=&apos;%&#123;$fg[yellow]%&#125;%~ $(git_prompt_info)%&#123;$fg[yellow]%&#125;$ %&#123;$reset_color%&#125;&apos;</span><br><span class="line"></span><br><span class="line">ZSH_THEME_GIT_PROMPT_PREFIX=&quot;%&#123;$fg_bold[blue]%&#125;@ %&#123;$fg[red]%&#125;&quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_SUFFIX=&quot;%&#123;$reset_color%&#125; &quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_DIRTY=&quot;%&#123;$fg[blue]%&#125; %&#123;$fg[yellow]%&#125;✗&quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_CLEAN=&quot;%&#123;$fg[blue]%&#125;&quot;</span><br></pre></td></tr></table></figure></p>
-<p><code>%{$fg[yellow]%}</code> 设置后面的内容颜色为黄色<br><code>%~</code> 显示相对于 ~ 目录的当前路径<br><code>$(git_prompt_info)</code> 后面添加上git分支名<br><code>@</code> 中间加上一个 @ 符号<br><code>$</code><br><code>%{reset_color%}</code> 清除所有颜色</p>
-<p>控制台前缀配置<br><a href="https://github.com/bolasblack/BlogPosts/blob/master/2011-04-20-%E5%AE%9A%E5%88%B6%E4%BD%A0%E7%9A%84_zsh_%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6.md" target="_blank" rel="noopener">https://github.com/bolasblack/BlogPosts/blob/master/2011-04-20-%E5%AE%9A%E5%88%B6%E4%BD%A0%E7%9A%84_zsh_%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6.md</a><br><a href="https://code.tutsplus.com/tutorials/how-to-customize-your-command-prompt--net-24083" target="_blank" rel="noopener">https://code.tutsplus.com/tutorials/how-to-customize-your-command-prompt--net-24083</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/configuration/Vim配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="千导">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="千导">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/07/configuration/Vim配置/" itemprop="url">vim配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-07T18:37:51+08:00">
-                2018-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="编辑操作"><a href="#编辑操作" class="headerlink" title="编辑操作"></a>编辑操作</h1><h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="mac多窗口复制粘贴"><a href="#mac多窗口复制粘贴" class="headerlink" title="mac多窗口复制粘贴"></a>mac多窗口复制粘贴</h2><p>参考<a href="https://www.douban.com/note/202175976/" target="_blank" rel="noopener">网络博客</a><br>在 ~/.vimrc 文件中添加如下配置，可以实现多窗口复制粘贴<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vmap y :w !pbcopy&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nmap yy :.w !pbcopy&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nmap p :r !pbpaste&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">vmap <span class="string">"+y :w !pbcopy&lt;CR&gt;&lt;CR&gt; </span></span><br><span class="line"><span class="string">nmap "</span>+p :r !pbpaste&lt;CR&gt;&lt;CR&gt;</span><br></pre></td></tr></table></figure></p>
-<p>mac下两条命令：pbcopy、pbpaste<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat foo.txt | pbcopy <span class="comment"># 将foo.txt的内容复制到系统剪贴板</span></span><br><span class="line">pbpaste &gt; foo.txt <span class="comment"># 将系统剪贴板的内容写到foo.txt</span></span><br></pre></td></tr></table></figure></p>
-<p><code>w !</code>和<code>r !</code>（注意中间的空格）可以负责把某一段文字写入或从某一个命令读出，有点类似linux的管道功能。<br>这里把vim默认的y和p功能改掉，让y直接复制到系统剪贴板，让p从系统剪贴板直接粘贴；故实现了多个terminal之间的剪贴板共享。<br>而且由于操作的是系统剪贴板，同时也实现了terminal的vim与其他应用程序之间的剪贴板共享。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/database/《MySQL必知必会》/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="千导">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="千导">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/07/database/《MySQL必知必会》/" itemprop="url">《MySQL必知必会》</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-07T18:37:51+08:00">
-                2018-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show databases; <span class="comment"># 返回可用数据库的一个列表</span></span></span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| dev                |</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show tables; <span class="comment"># 返回当前选择的数据库内可用表的列表</span></span></span><br><span class="line">+----------------------+</span><br><span class="line">| Tables_in_dev        |</span><br><span class="line">+----------------------+</span><br><span class="line">| employee_info_record |</span><br><span class="line">| tbl_dept             |</span><br><span class="line">| tbl_emp              |</span><br><span class="line">+----------------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> show columns from tbl_dept; <span class="comment"># </span></span></span><br><span class="line">+-----------+------------------+------+-----+---------+----------------+</span><br><span class="line">| Field     | Type             | Null | Key | Default | Extra          |</span><br><span class="line">+-----------+------------------+------+-----+---------+----------------+</span><br><span class="line">| dept_id   | int(11) unsigned | NO   | PRI | NULL    | auto_increment |</span><br><span class="line">| dept_name | varchar(255)     | NO   |     |         |                |</span><br><span class="line">+-----------+------------------+------+-----+---------+----------------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/21/programming/Git撤销修改/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="千导">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="千导">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/21/programming/Git撤销修改/" itemprop="url">git撤销修改</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T22:21:09+08:00">
-                2018-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><a href="#回退到git-pull刚拉取代码的样子">回退到git pull刚拉取代码的样子</a><ul>
-<li><a href="#已修改未add">已修改未add</a></li>
-<li><a href="#已add未commit">已add未commit</a></li>
-<li><a href="#已commit未提交">已commit未提交</a><ul>
-<li><a href="#git-reset---hard-commit_id">git reset –hard commit_id</a></li>
-<li><a href="#git-revert-commit_id">git revert commit_id</a></li>
-</ul>
-</li>
-<li><a href="#已提交">已提交</a><ul>
-<li><a href="#soft-mixed-hard">soft mixed hard</a></li>
-</ul>
-</li>
-<li><a href="#恢复分支">恢复分支</a><h1 id="回退到git-pull刚拉取代码的样子"><a href="#回退到git-pull刚拉取代码的样子" class="headerlink" title="回退到git pull刚拉取代码的样子"></a>回退到git pull刚拉取代码的样子</h1>通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改</li>
-</ul>
-</li>
-</ul>
-<h2 id="已修改未add"><a href="#已修改未add" class="headerlink" title="已修改未add"></a>已修改未add</h2><p>当修改了文件，还没有通过<code>git add</code>命令将修改内容</p>
-<p>此时可以直接通过编辑器的快捷键（一般是ctrl+z或者cmd+z）撤销修改直至文件颜色显示为无变化。<br>也可以通过命令直接修改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout src/com/spring/<span class="built_in">test</span>/SpringTest.java      <span class="comment"># 撤销文件所有修改，回到git pull刚拉取下来的样子</span></span><br><span class="line">git checkout -- src/com/spring/<span class="built_in">test</span>/SpringTest.java   <span class="comment"># 与上一条命令作用相同，注意 -- 后面还有空格</span></span><br><span class="line">git checkout .                                        <span class="comment"># 撤销整个文件夹的修改</span></span><br></pre></td></tr></table></figure></p>
-<h2 id="已add未commit"><a href="#已add未commit" class="headerlink" title="已add未commit"></a>已add未commit</h2><p>当修改了文件，并通过git add命令将文件添加到stage了<br>此时需要通过<code>git reset</code>命令撤回修改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD^   <span class="comment"># 撤销已经提交的全部文件到暂存区</span></span><br></pre></td></tr></table></figure></p>
-<p>git reset会丢弃提交记录，HEAD^代表HEAD的父提交记录，此参数可以替换为任意commit id。</p>
-<h2 id="已commit未提交"><a href="#已commit未提交" class="headerlink" title="已commit未提交"></a>已commit未提交</h2><h3 id="git-reset-–hard-commit-id"><a href="#git-reset-–hard-commit-id" class="headerlink" title="git reset –hard commit_id"></a>git reset –hard commit_id</h3><p><code>git reset --hard HEAD^</code><br>会直接撤销已经提交的全部文件到编辑之前版本，并且不会有任何操作记录，最好不要使用。</p>
-<h3 id="git-revert-commit-id"><a href="#git-revert-commit-id" class="headerlink" title="git revert commit_id"></a>git revert commit_id</h3><p>git revert命令会生成一个新的版本并提交，通过git log可以查看得到，推荐使用。</p>
-<h2 id="已提交"><a href="#已提交" class="headerlink" title="已提交"></a>已提交</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout commit_id file   <span class="comment"># 还原file到commit_id中的版本</span></span><br><span class="line">git checkout branchXX file    <span class="comment"># 还原file到其他分支（branchXX）中的版本</span></span><br></pre></td></tr></table></figure>
-<p>一篇<a href="https://www.cnblogs.com/kidsitcn/p/4513297.html" target="_blank" rel="noopener">网络博客</a>介绍git reset的三个参数使用</p>
-<h3 id="soft-mixed-hard"><a href="#soft-mixed-hard" class="headerlink" title="soft mixed hard"></a>soft mixed hard</h3><p>–soft 、–mixed以及–hard是三个恢复等级。</p>
+            <h1 id="为什么需要合并commit"><a href="#为什么需要合并commit" class="headerlink" title="为什么需要合并commit"></a>为什么需要合并commit</h1><blockquote>
+<p>在本地开发分支，推荐多使用交互式rebase整理commit。这样别的开发者只会看到你整理之后的结果，保证干净、清洁。</p>
+</blockquote>
+<p>在一次功能开发中多次提交了代码，但是很多commit是重复、无用的，在合并到master之前建议合并一些commit</p>
+<p>比如在一次开发过程中想要整理一下代码。</p>
 <ul>
-<li>使用–soft就仅仅将头指针恢复，已经add的缓存以及工作空间的所有东西都不变。</li>
-<li>如果使用–mixed，就将头指针恢复掉，已经add的缓存也会丢失掉，工作空间的代码什么的是不变的。</li>
-<li>如果使用–hard，那么一切就全都恢复了，头指针add的缓存消失，代码也恢复到以前状态。</li>
+<li>第一次提交 9ba7300 中删掉了一些注释代码</li>
+<li>第二次提交 4300cdb 中发现仍然有一些注释代码，接着又修改代码进行了一次提交，commit偷懒写了update</li>
+<li>第三次提交 e5a1c8b 中删掉了一些无用的xml配置</li>
 </ul>
-<h2 id="恢复分支"><a href="#恢复分支" class="headerlink" title="恢复分支"></a>恢复分支</h2><p><code>git branch -D &lt;branch_name&gt;</code> 删除分支（-d 不能删除当前正在打开的分支）当删除分支时，git只是删除了指向相关提交的指针，但该提交对象依然会留在版本库中。可以通过删除分支时的散列值来恢复被删除的分支，散列值通过git reflog命令获取<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Qians-Mac:MavenTest zhangqianyi$ git reflog</span><br><span class="line">6bca3d0 (HEAD -&gt; master, origin/master) HEAD@&#123;0&#125;: checkout: moving from <span class="built_in">test</span> to master</span><br><span class="line">68794b6 HEAD@&#123;1&#125;: commit: update</span><br><span class="line">ef6209e HEAD@&#123;2&#125;: commit: add readme</span><br><span class="line">6bca3d0 (HEAD -&gt; master, origin/master) HEAD@&#123;3&#125;: checkout: moving from master to <span class="built_in">test</span></span><br><span class="line">6bca3d0 (HEAD -&gt; master, origin/master) HEAD@&#123;4&#125;: commit (initial): first commit</span><br><span class="line">Qians-Mac:MavenTest zhangqianyi$ git branch <span class="built_in">test</span> HEAD@&#123;1&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/image/proramming/git_commit_rebase1.png" alt="git commit"></p>
+<p>在后续的代码开发过程中如果想要找回删除的xml配置，可能需要逐一查看这三条commit记录，来找到有用的信息。<br>实际上这三条commit可以被合并成一条，这一次commit的内容就是删除一些代码和配置。</p>
+<h1 id="如何合并"><a href="#如何合并" class="headerlink" title="如何合并"></a>如何合并</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --oneline --graph</span><br><span class="line"><span class="comment">#找到想要rebase的最早一条commit哈希值</span></span><br><span class="line">git rebase -i 9ba7300</span><br><span class="line"></span><br><span class="line"><span class="comment">#对最近两次提交进行rebase</span></span><br><span class="line">git rebase -i HEAD~10</span><br></pre></td></tr></table></figure>
+<p>进入vim界面后主要关注两条命令：</p>
+<ul>
+<li>pick 会执行这个commit</li>
+<li>squash  这个commit会被合并到前一个commit</li>
+</ul>
+<h1 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h1><p>vim command mode下通过 p 快捷键可以将commit状态修改为pick（默认状态），通过 s 快捷键可以将commit状态改成 squash<br>但是在vim command mode中按下 s 键的效果是删除当前字符并进入 Insert mode</p>
+<p>在 .vimrc 中配置键绑定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#将 第二行至最后一行 中 开头为 pick 的行中将 pick 替换成 squash</span><br><span class="line">map s :2,$s/^pick/squash/&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">#将当前行开头为 pick 替换成 squash</span><br><span class="line">map s :s/^pick/squash/&lt;CR&gt;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/image/proramming/git_commit_rebase2.png" alt="git commit"></p>
+<h1 id="扩展配置"><a href="#扩展配置" class="headerlink" title="扩展配置"></a>扩展配置</h1><table>
+<thead>
+<tr>
+<th>代码段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:s/vivian/sky/</td>
+<td>替换当前行第一个 vivian 为 sky</td>
+</tr>
+<tr>
+<td>:s/vivian/sky/g</td>
+<td>替换当前行所有 vivian 为 sky</td>
+</tr>
+<tr>
+<td>:n,$s/vivian/sky/</td>
+<td>替换第 n 行开始到最后一行中每一行的第一个 vivian 为 sky</td>
+</tr>
+<tr>
+<td>:n,$s/vivian/sky/g</td>
+<td>替换第 n 行开始到最后一行中每一行的所有 vivian 为 sky</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://gitbook.tw/chapters/rewrite-history/split-one-commit-to-many-commits.html" target="_blank" rel="noopener">一个commit拆分成多个</a></p>
 
           
         
@@ -1610,7 +1762,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">172</span>
+                <span class="site-state-item-count">178</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1621,7 +1773,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

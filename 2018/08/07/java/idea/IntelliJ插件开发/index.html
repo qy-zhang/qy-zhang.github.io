@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="环境搭建 IDEA版本   新建工程 工程结构 plugin.xml 插件信息 change-notes idea-version     actions action标签介绍 常用的Action配置     插件开发 基本概念 public actionPerformed(AnAction e) AnActionEvent Psi PsiElementFactory PersistentSta">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IntelliJ插件开发">
+<meta property="og:url" content="http://yoursite.com/2018/08/07/java/idea/IntelliJ插件开发/index.html">
+<meta property="og:site_name" content="千导">
+<meta property="og:description" content="环境搭建 IDEA版本   新建工程 工程结构 plugin.xml 插件信息 change-notes idea-version     actions action标签介绍 常用的Action配置     插件开发 基本概念 public actionPerformed(AnAction e) AnActionEvent Psi PsiElementFactory PersistentSta">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-14T05:48:47.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IntelliJ插件开发">
+<meta name="twitter:description" content="环境搭建 IDEA版本   新建工程 工程结构 plugin.xml 插件信息 change-notes idea-version     actions action标签介绍 常用的Action配置     插件开发 基本概念 public actionPerformed(AnAction e) AnActionEvent Psi PsiElementFactory PersistentSta">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/07/java/idea/IntelliJ插件开发/">
+
+
+
+
+
+  <title>IntelliJ插件开发 | 千导</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">千导</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/07/java/idea/IntelliJ插件开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="千导">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="千导">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IntelliJ插件开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-07T19:57:50+08:00">
+                2018-08-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Blog/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><a href="#环境搭建">环境搭建</a><ul>
+<li><a href="#idea版本">IDEA版本</a></li>
+</ul>
+</li>
+<li><a href="#新建工程">新建工程</a><ul>
+<li><a href="#工程结构">工程结构</a></li>
+<li><a href="#pluginxml">plugin.xml</a><ul>
+<li><a href="#插件信息">插件信息</a><ul>
+<li><a href="#change-notes">change-notes</a></li>
+<li><a href="#idea-version">idea-version</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#actions">actions</a><ul>
+<li><a href="#action标签介绍">action标签介绍</a></li>
+<li><a href="#常用的action配置">常用的Action配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#插件开发">插件开发</a><ul>
+<li><a href="#基本概念">基本概念</a><ul>
+<li><a href="#public-actionperformedanaction-e">public actionPerformed(AnAction e)</a></li>
+<li><a href="#anactionevent">AnActionEvent</a></li>
+<li><a href="#psi">Psi</a></li>
+<li><a href="#psielementfactory">PsiElementFactory</a></li>
+<li><a href="#persistentstatecomponent">PersistentStateComponent</a></li>
+</ul>
+</li>
+<li><a href="#格式化代码">格式化代码</a></li>
+<li><a href="#插件打包">插件打包</a></li>
+</ul>
+</li>
+<li><a href="#参考链接">参考链接</a></li>
+</ul>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="IDEA版本"><a href="#IDEA版本" class="headerlink" title="IDEA版本"></a>IDEA版本</h2><p>IDEA分为社区版(Community Edition)和旗舰版(Ultimate Edition)</p>
+<ul>
+<li>社区版：完全免费，代码开源，但是缺少一些旗舰版中的高级特性。</li>
+<li>旗舰版：30天免费，支持全部功能，代码不开源。</li>
+</ul>
+<p><strong>开发IDEA的插件推荐使用社区版而不是旗舰版，因为社区版是开源的，在开发插件的时候，有源代码调试会比较方便。</strong></p>
+<h1 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h1><h2 id="工程结构"><a href="#工程结构" class="headerlink" title="工程结构"></a>工程结构</h2><p><code>./src</code>编写插件的功能<br><code>./resources/META-INF/plugin.xml</code>中配置插件的一些信息和显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">|-IdeaPluginDemo</span><br><span class="line">    |</span><br><span class="line">    |--- src</span><br><span class="line">    |</span><br><span class="line">    |--- resources</span><br><span class="line">            |</span><br><span class="line">            |--- META—INF</span><br><span class="line">                    |</span><br><span class="line">                    |--- plugin.xml</span><br></pre></td></tr></table></figure>
+<h2 id="plugin-xml"><a href="#plugin-xml" class="headerlink" title="plugin.xml"></a>plugin.xml</h2><p>在<code>./resources/META-INF/plugin.xml</code>中配置插件的一些信息和插件执行的actions</p>
+<blockquote>
+<p>actions的配置类似于Spring中bean的配置</p>
+</blockquote>
+<h3 id="插件信息"><a href="#插件信息" class="headerlink" title="插件信息"></a>插件信息</h3><h4 id="change-notes"><a href="#change-notes" class="headerlink" title="change-notes"></a>change-notes</h4><p>版本更新记录，在标签里面可以插入html文档<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">change-notes</span>&gt;</span>&lt;![CDATA[</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &lt;li&gt; 0.0.2 为整个文件夹生成注解. &lt;/li&gt;</span><br><span class="line">        &lt;li&gt; 0.0.1 为Service服务类和Struct VO类自动生成servicecatalog注解 &lt;/li&gt;</span><br><span class="line">      &lt;/ul&gt;</span><br><span class="line">    ]]&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">change-notes</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="idea-version"><a href="#idea-version" class="headerlink" title="idea-version"></a>idea-version</h4><p>设置支持的idea版本</p>
+<h2 id="actions"><a href="#actions" class="headerlink" title="actions"></a>actions</h2><p><a href="http://www.jetbrains.org/intellij/sdk/docs/basics/action_system.html" target="_blank" rel="noopener">官方介绍</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The system of actions allows plugins to add their own items to IDEA menus and toolbars. An action is a class, derived from the AnAction class, whose actionPerformed method is called when the menu item or toolbar button is selected. For example, one of the action classes is responsible for the File | Open File… menu item and for the Open File toolbar button.</span><br></pre></td></tr></table></figure></p>
+<p>plugin.xml中最重要的配置，配置插件如何使用。</p>
+<h3 id="action标签介绍"><a href="#action标签介绍" class="headerlink" title="action标签介绍"></a>action标签介绍</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Actions --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">actions</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- The &lt;action&gt; element defines an action to register.</span></span><br><span class="line"><span class="comment">       The mandatory "id" attribute specifies an unique </span></span><br><span class="line"><span class="comment">       identifier for the action.</span></span><br><span class="line"><span class="comment">       The mandatory "class" attribute specifies the</span></span><br><span class="line"><span class="comment">       full-qualified name of the class implementing the action.</span></span><br><span class="line"><span class="comment">       The mandatory "text" attribute specifies the text of the</span></span><br><span class="line"><span class="comment">       action (tooltip for toolbar button or text for menu item).</span></span><br><span class="line"><span class="comment">       The optional "use-shortcut-of" attribute specifies the ID</span></span><br><span class="line"><span class="comment">       of the action whose keyboard shortcut this action will use.</span></span><br><span class="line"><span class="comment">       The optional "description" attribute specifies the text</span></span><br><span class="line"><span class="comment">       which is displayed in the status bar when the action is focused.</span></span><br><span class="line"><span class="comment">       The optional "icon" attribute specifies the icon which is</span></span><br><span class="line"><span class="comment">       displayed on the toolbar button or next to the menu item. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">action</span> <span class="attr">id</span>=<span class="string">"VssIntegration.GarbageCollection"</span> <span class="attr">class</span>=<span class="string">"com.foo.impl.CollectGarbage"</span> <span class="attr">text</span>=<span class="string">"Collect _Garbage"</span> <span class="attr">description</span>=<span class="string">"Run garbage collector"</span> <span class="attr">icon</span>=<span class="string">"icons/garbage.png"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- The &lt;add-to-group&gt; node specifies that the action should be added</span></span><br><span class="line"><span class="comment">         to an existing group. An action can be added to several groups.</span></span><br><span class="line"><span class="comment">         The mandatory "group-id" attribute specifies the ID of the group</span></span><br><span class="line"><span class="comment">         to which the action is added.</span></span><br><span class="line"><span class="comment">         The group must be implemented by an instance of the DefaultActionGroup class.</span></span><br><span class="line"><span class="comment">         The mandatory "anchor" attribute specifies the position of the</span></span><br><span class="line"><span class="comment">         action in the group relative to other actions. It can have the values</span></span><br><span class="line"><span class="comment">         "first", "last", "before" and "after".</span></span><br><span class="line"><span class="comment">         The "relative-to-action" attribute is mandatory if the anchor</span></span><br><span class="line"><span class="comment">         is set to "before" and "after", and specifies the action before or after which</span></span><br><span class="line"><span class="comment">         the current action is inserted. --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">add-to-group</span> <span class="attr">group-id</span>=<span class="string">"ToolsMenu"</span> <span class="attr">relative-to-action</span>=<span class="string">"GenerateJavadoc"</span> <span class="attr">anchor</span>=<span class="string">"after"</span>/&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- The &lt;keyboard-shortcut&gt; node specifies the keyboard shortcut</span></span><br><span class="line"><span class="comment">           for the action. An action can have several keyboard shortcuts.</span></span><br><span class="line"><span class="comment">           The mandatory "first-keystroke" attribute specifies the first</span></span><br><span class="line"><span class="comment">           keystroke of the action. The key strokes are specified according</span></span><br><span class="line"><span class="comment">           to the regular Swing rules.</span></span><br><span class="line"><span class="comment">           The optional "second-keystroke" attribute specifies the second</span></span><br><span class="line"><span class="comment">           keystroke of the action.</span></span><br><span class="line"><span class="comment">           The mandatory "keymap" attribute specifies the keymap for which</span></span><br><span class="line"><span class="comment">           the action is active. IDs of the standard keymaps are defined as</span></span><br><span class="line"><span class="comment">           constants in the com.intellij.openapi.keymap.KeymapManager class. --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">keyboard-shortcut</span> <span class="attr">first-keystroke</span>=<span class="string">"control alt G"</span> <span class="attr">second-keystroke</span>=<span class="string">"C"</span> <span class="attr">keymap</span>=<span class="string">"$default"</span>/&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- The &lt;mouse-shortcut&gt; node specifies the mouse shortcut for the</span></span><br><span class="line"><span class="comment">           action. An action can have several mouse shortcuts.</span></span><br><span class="line"><span class="comment">           The mandatory "keystroke" attribute specifies the clicks and</span></span><br><span class="line"><span class="comment">           modifiers for the action. It is defined as a sequence of words</span></span><br><span class="line"><span class="comment">           separated by spaces: </span></span><br><span class="line"><span class="comment">           "button1", "button2", "button3" for the mouse buttons;</span></span><br><span class="line"><span class="comment">           "shift", "control", "meta", "alt", "altGraph" for the modifier keys;</span></span><br><span class="line"><span class="comment">           "doubleClick" if the action is activated by a double-click of the button.</span></span><br><span class="line"><span class="comment">           The mandatory "keymap" attribute specifies the keymap for which</span></span><br><span class="line"><span class="comment">           the action is active. IDs of the standard keymaps are defined as</span></span><br><span class="line"><span class="comment">           constants in the com.intellij.openapi.keymap.KeymapManager class. --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mouse-shortcut</span> <span class="attr">keystroke</span>=<span class="string">"control button3 doubleClick"</span> <span class="attr">keymap</span>=<span class="string">"$default"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- The &lt;group&gt; element defines an action group. &lt;action&gt;, &lt;group&gt; and </span></span><br><span class="line"><span class="comment">       &lt;separator&gt; elements defined within it are automatically included in the group.</span></span><br><span class="line"><span class="comment">       The mandatory "id" attribute specifies an unique identifier for the action.</span></span><br><span class="line"><span class="comment">       The optional "class" attribute specifies the full-qualified name of</span></span><br><span class="line"><span class="comment">       the class implementing the group. If not specified,</span></span><br><span class="line"><span class="comment">       com.intellij.openapi.actionSystem.DefaultActionGroup is used.</span></span><br><span class="line"><span class="comment">       The optional "text" attribute specifies the text of the group (text</span></span><br><span class="line"><span class="comment">       for the menu item showing the submenu).</span></span><br><span class="line"><span class="comment">       The optional "description" attribute specifies the text which is displayed</span></span><br><span class="line"><span class="comment">       in the status bar when the group is focused.</span></span><br><span class="line"><span class="comment">       The optional "icon" attribute specifies the icon which is displayed on</span></span><br><span class="line"><span class="comment">       the toolbar button or next to the group.</span></span><br><span class="line"><span class="comment">       The optional "popup" attribute specifies how the group is presented in</span></span><br><span class="line"><span class="comment">       the menu. If a group has popup="true", actions in it are placed in a</span></span><br><span class="line"><span class="comment">       submenu; for popup="false", actions are displayed as a section of the</span></span><br><span class="line"><span class="comment">       same menu delimited by separators. --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">group</span> <span class="attr">class</span>=<span class="string">"com.foo.impl.MyActionGroup"</span> <span class="attr">id</span>=<span class="string">"TestActionGroup"</span> <span class="attr">text</span>=<span class="string">"Test Group"</span> <span class="attr">description</span>=<span class="string">"Group with test actions"</span> <span class="attr">icon</span>=<span class="string">"icons/testgroup.png"</span> <span class="attr">popup</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">id</span>=<span class="string">"VssIntegration.TestAction"</span> <span class="attr">class</span>=<span class="string">"com.foo.impl.TestAction"</span> <span class="attr">text</span>=<span class="string">"My Test Action"</span> <span class="attr">description</span>=<span class="string">"My test action"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- The &lt;separator&gt; element defines a separator between actions.</span></span><br><span class="line"><span class="comment">         It can also have an &lt;add-to-group&gt; child element. --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">separator</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span> <span class="attr">id</span>=<span class="string">"TestActionSubGroup"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- The &lt;reference&gt; element allows to add an existing action to the group.</span></span><br><span class="line"><span class="comment">         The mandatory "ref" attribute specifies the ID of the action to add. --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">reference</span> <span class="attr">ref</span>=<span class="string">"EditorCopy"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">add-to-group</span> <span class="attr">group-id</span>=<span class="string">"MainMenu"</span> <span class="attr">relative-to-action</span>=<span class="string">"HelpMenu"</span> <span class="attr">anchor</span>=<span class="string">"before"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">actions</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="常用的Action配置"><a href="#常用的Action配置" class="headerlink" title="常用的Action配置"></a>常用的Action配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 在Project窗口中右键文件夹弹出选项中添加action --&gt;</span><br><span class="line">&lt;action id=&quot;processThriftStruct&quot; class=&quot;com.meituan.trip.javadoc2servicecatalog.action.ProcessThriftStructAction&quot;</span><br><span class="line">        text=&quot;processThriftStruct&quot;&gt;</span><br><span class="line">  &lt;add-to-group group-id=&quot;ProjectViewPopupMenu&quot; anchor=&quot;last&quot;/&gt;</span><br><span class="line">&lt;/action&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="插件开发"><a href="#插件开发" class="headerlink" title="插件开发"></a>插件开发</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="public-actionPerformed-AnAction-e"><a href="#public-actionPerformed-AnAction-e" class="headerlink" title="public actionPerformed(AnAction e)"></a>public actionPerformed(AnAction e)</h3><p>添加在<code>plugin.xml</code>中的action类都需要实现这个方法，IntelliJ Plugin启动会执行这个方法中的内容<br>在actionPerformed方法中通过如下方式调用其他方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">WriteCommandAction.runWriteCommandAction(event.getProject(), <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 已废弃，不建议使用</span></span><br><span class="line"><span class="keyword">new</span> WriteCommandAction.Simple(event.getProject(), psiFile) &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;.execute();</span><br></pre></td></tr></table></figure>
+<h3 id="AnActionEvent"><a href="#AnActionEvent" class="headerlink" title="AnActionEvent"></a>AnActionEvent</h3><p>通过AnActionEvent来获取Psi类对象、项目project对象等</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取当前编辑的文件, 通过PsiFile可获得PsiClass, PsiField等对象</span></span><br><span class="line">PsiFile psiFile = e.getData(LangDataKeys.PSI_FILE);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 获取当前的project对象</span></span><br><span class="line">Project project = e.getProject();</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 获取数据上下文</span></span><br><span class="line">DataContext dataContext = e.getDataContext();</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 获取到数据上下文后，通过CommonDataKeys对象可以获得该File的所有信息</span></span><br><span class="line">Editor editor = CommonDataKeys.EDITOR.getData(dataContext);</span><br><span class="line">PsiFile psiFile = CommonDataKeys.PSI_FILE.getData(dataContext);</span><br><span class="line">VirtualFile virtualFile = CommonDataKeys.VIRTUAL_FILE.getData(dataContext);</span><br></pre></td></tr></table></figure>
+<h3 id="Psi"><a href="#Psi" class="headerlink" title="Psi"></a>Psi</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过给定名称（不包含具体路径）搜索对应文件, 传入3个参数 Project, FileName, GlobalSearchScope; </span></span><br><span class="line"><span class="comment">// GlobalSearchScope中有Project域，Moudule域，File域等等</span></span><br><span class="line">PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, name, GlobalSearchScope);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 类似于IDE中的Find Usages操作，重载方法较多，具体不再一一列出</span></span><br><span class="line">Query&lt;PsiReference&gt; search = ReferencesSearch.search(PsiElement);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 重命名</span></span><br><span class="line">RenameRefactoring newName = RefactoringFactory.getInstance(Project).createRename(PsiElement, <span class="string">"newName"</span>);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 搜索一个类的所有子类，重载方法较多，具体不再一一列出</span></span><br><span class="line">Query&lt;PsiClass&gt; search = ClassInheritorsSearch.search(PsiClass);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 根据类的全限定名查询PsiClass，下面这个方法是查询Project域</span></span><br><span class="line">PsiClass psiClass = JavaPsiFacade.getInstance(project).findClass(classQualifiedName, GlobalSearchScope.projectScope(project));</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 根据类的SiampleName查询PsiClass，下面这个方法是查询Project域</span></span><br><span class="line">PsiClass[] psiClasses = PsiShortNamesCache.getInstance(Project).getClassesByName(classSimpleName, GlobalSearchScope.projectScope(Project));</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 获取Java类所在的Package</span></span><br><span class="line">PsiPackage psiPackage = JavaPsiFacade.getInstance(Project).findPackage(classQualifiedName);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 查找被特定方法重写的方法</span></span><br><span class="line">Query&lt;PsiMethod&gt; search = OverridingMethodsSearch.search(PsiMethod);</span><br></pre></td></tr></table></figure>
+<p>至于PsiClass， PsiMethod，PsiFiled中的相关方法这里不再一一列出；具体的查看相应的接口即可。</p>
+<h3 id="PsiElementFactory"><a href="#PsiElementFactory" class="headerlink" title="PsiElementFactory"></a>PsiElementFactory</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过获取到PsiElementFactory来创建相应的Element，包括字段，方法，注解，类，内部类等等</span></span><br><span class="line">PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(Project);</span><br><span class="line"><span class="comment">// 创建类</span></span><br><span class="line">PsiClass aClass = elementFactory.createClass(className);</span><br><span class="line"><span class="comment">// 创建注解</span></span><br><span class="line">elementFactory.createAnnotationFromText(annotationName, PsiElement);</span><br><span class="line"><span class="comment">// 创建字段 所有的PsiElement创建后都可以获得其ModifierList，用于设置其修饰符</span></span><br><span class="line">PsiField field = elementFactory.createField(fieldName, PsiType);</span><br><span class="line">field.getModifierList().setModifierProperty(PsiModifier.PUBLIC, <span class="keyword">true</span>);</span><br><span class="line"><span class="comment">// 创建方法 这个PsiType是void，也就是说方法返回类型为void</span></span><br><span class="line">PsiMethod method = elementFactory.createMethod(methodName, PsiType.VOID);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 添加PsiElement, 有add, addBefore, addAfter, addBetween</span></span><br><span class="line">PsiElement.add(PsiElement);</span><br><span class="line">​</span><br><span class="line"><span class="comment">// 由于PsiModifierList是PsiElement的子类，所以一般也这样调用</span></span><br><span class="line">PsiModifierList modifierList = targetElement.getModifierList();</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">null</span> != modifierList) &#123;</span><br><span class="line">  modifierList.addAfter(newPsiElement, <span class="keyword">null</span>); <span class="comment">// 在targetElement上添加newPsiElement</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在插件中可能需要向PsiFile中写入一些字段或者方法（这里是写入后需要展示，而不是类似PsiAugmentProvider生成的快照），这里需要注意的是，我们拿到新生成的psiClass以后，不能使用psiClass.add(field)添加代码，要调用WriteCommandAction.runWriteCommandAction写代码，否则会抛出异常：Must not change PSI outside command or undo-transparent action.这时因为Intellij Platform不允许在主线程中进行实时的文件写入，而需要通过一个异步任务来进行。这时需要调用WriteCommandAction来写相关的内容，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WriteCommandAction.runWriteCommandAction(Project, <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//do something</span></span><br><span class="line">      &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="PersistentStateComponent"><a href="#PersistentStateComponent" class="headerlink" title="PersistentStateComponent"></a>PersistentStateComponent</h3><p>当插件有一些用户定制的配置参数信息时，需要插件具备记忆功能，在IDEA重启后，任然能够生效，这就需要用到插件配置信息持久化接口。需要实现接口PersistentStateComponent</p>
+<h2 id="格式化代码"><a href="#格式化代码" class="headerlink" title="格式化代码"></a>格式化代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CodeStyleManager.getInstance(project).reformat(psiClass);</span><br></pre></td></tr></table></figure>
+<h2 id="插件打包"><a href="#插件打包" class="headerlink" title="插件打包"></a>插件打包</h2><p>插件开发完成打包生成jar供安装使用<code>Build -&gt; Prepare Plugin Module &#39;&#39; for Deployment</code></p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="https://blog.csdn.net/excellentyuxiao/article/details/80273448" target="_blank" rel="noopener">https://blog.csdn.net/excellentyuxiao/article/details/80273448</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/05/java/Intellij插件开发入门/" rel="next" title="Intellij插件开发入门">
+                <i class="fa fa-chevron-left"></i> Intellij插件开发入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/19/java/spring/Spring实战 读书笔记/" rel="prev" title="《Spring实战》">
+                《Spring实战》 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
+          <p class="site-author-name" itemprop="name">千导</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">178</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IDEA版本"><span class="nav-number">1.1.</span> <span class="nav-text">IDEA版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新建工程"><span class="nav-number">2.</span> <span class="nav-text">新建工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工程结构"><span class="nav-number">2.1.</span> <span class="nav-text">工程结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugin-xml"><span class="nav-number">2.2.</span> <span class="nav-text">plugin.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插件信息"><span class="nav-number">2.2.1.</span> <span class="nav-text">插件信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#change-notes"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">change-notes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#idea-version"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">idea-version</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#actions"><span class="nav-number">2.3.</span> <span class="nav-text">actions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#action标签介绍"><span class="nav-number">2.3.1.</span> <span class="nav-text">action标签介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的Action配置"><span class="nav-number">2.3.2.</span> <span class="nav-text">常用的Action配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#插件开发"><span class="nav-number">3.</span> <span class="nav-text">插件开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#public-actionPerformed-AnAction-e"><span class="nav-number">3.1.1.</span> <span class="nav-text">public actionPerformed(AnAction e)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AnActionEvent"><span class="nav-number">3.1.2.</span> <span class="nav-text">AnActionEvent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Psi"><span class="nav-number">3.1.3.</span> <span class="nav-text">Psi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PsiElementFactory"><span class="nav-number">3.1.4.</span> <span class="nav-text">PsiElementFactory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PersistentStateComponent"><span class="nav-number">3.1.5.</span> <span class="nav-text">PersistentStateComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化代码"><span class="nav-number">3.2.</span> <span class="nav-text">格式化代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件打包"><span class="nav-number">3.3.</span> <span class="nav-text">插件打包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">千导</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
