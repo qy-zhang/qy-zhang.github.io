@@ -3,7 +3,7 @@
 
 
 
-<html class="theme-next mist" lang="zh-Hans">
+<html class="theme-next mist" lang>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -91,18 +91,18 @@
 
 
 
-<meta name="description" content="回退到git pull刚拉取代码的样子 已修改未add 已add未commit 已commit未提交 git reset –hard commit_id git revert commit_id   已提交 soft mixed hard   恢复分支回退到git pull刚拉取代码的样子通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改    已修改未add当修改了文件，还没">
+<meta name="description" content="回退到git pull刚拉取代码的样子 已修改未add 已add未commit 已commit未提交 git reset –hard commit_id git revert commit_id   已提交 soft mixed hard   恢复分支    回退到git pull刚拉取代码的样子通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改 已修改未add当修改了文件，还">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git撤销修改">
 <meta property="og:url" content="http://yoursite.com/2018/10/21/programming/Git撤销修改/index.html">
-<meta property="og:site_name" content="千导">
-<meta property="og:description" content="回退到git pull刚拉取代码的样子 已修改未add 已add未commit 已commit未提交 git reset –hard commit_id git revert commit_id   已提交 soft mixed hard   恢复分支回退到git pull刚拉取代码的样子通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改    已修改未add当修改了文件，还没">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-13T01:38:43.545Z">
+<meta property="og:site_name" content="Fitzwilliam&#39;s Blog">
+<meta property="og:description" content="回退到git pull刚拉取代码的样子 已修改未add 已add未commit 已commit未提交 git reset –hard commit_id git revert commit_id   已提交 soft mixed hard   恢复分支    回退到git pull刚拉取代码的样子通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改 已修改未add当修改了文件，还">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-14T16:39:07.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git撤销修改">
-<meta name="twitter:description" content="回退到git pull刚拉取代码的样子 已修改未add 已add未commit 已commit未提交 git reset –hard commit_id git revert commit_id   已提交 soft mixed hard   恢复分支回退到git pull刚拉取代码的样子通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改    已修改未add当修改了文件，还没">
+<meta name="twitter:description" content="回退到git pull刚拉取代码的样子 已修改未add 已add未commit 已commit未提交 git reset –hard commit_id git revert commit_id   已提交 soft mixed hard   恢复分支    回退到git pull刚拉取代码的样子通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改 已修改未add当修改了文件，还">
 
 
 
@@ -116,7 +116,7 @@
     motion: false,
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -136,7 +136,7 @@
 
 
 
-  <title>git撤销修改 | 千导</title>
+  <title>git撤销修改 | Fitzwilliam's Blog</title>
   
 
 
@@ -154,7 +154,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
 
   
   
@@ -172,12 +172,12 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">千导</span>
+        <span class="site-title">Fitzwilliam's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">Personal Blog for recording</p>
       
   </div>
 
@@ -202,7 +202,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            首页
+            Home
           </a>
         </li>
       
@@ -212,7 +212,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            归档
+            Archives
           </a>
         </li>
       
@@ -222,7 +222,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            标签
+            Tags
           </a>
         </li>
       
@@ -232,7 +232,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            分类
+            Categories
           </a>
         </li>
       
@@ -242,7 +242,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            关于
+            About
           </a>
         </li>
       
@@ -255,7 +255,7 @@
             
               <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
-            搜索
+            Search
           </a>
         </li>
       
@@ -274,7 +274,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -310,13 +310,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/21/programming/Git撤销修改/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="千导">
+      <meta itemprop="name" content="Fitzwilliam">
       <meta itemprop="description" content>
       <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="千导">
+      <meta itemprop="name" content="Fitzwilliam's Blog">
     </span>
 
     
@@ -334,9 +334,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T22:21:09+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-21T22:21:09+08:00">
                 2018-10-21
               </time>
             
@@ -384,10 +384,11 @@
 <li><a href="#soft-mixed-hard">soft mixed hard</a></li>
 </ul>
 </li>
-<li><a href="#恢复分支">恢复分支</a><h1 id="回退到git-pull刚拉取代码的样子"><a href="#回退到git-pull刚拉取代码的样子" class="headerlink" title="回退到git pull刚拉取代码的样子"></a>回退到git pull刚拉取代码的样子</h1>通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改</li>
+<li><a href="#恢复分支">恢复分支</a></li>
 </ul>
 </li>
 </ul>
+<h1 id="回退到git-pull刚拉取代码的样子"><a href="#回退到git-pull刚拉取代码的样子" class="headerlink" title="回退到git pull刚拉取代码的样子"></a>回退到git pull刚拉取代码的样子</h1><p>通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改</p>
 <h2 id="已修改未add"><a href="#已修改未add" class="headerlink" title="已修改未add"></a>已修改未add</h2><p>当修改了文件，还没有通过<code>git add</code>命令将修改内容</p>
 <p>此时可以直接通过编辑器的快捷键（一般是ctrl+z或者cmd+z）撤销修改直至文件颜色显示为无变化。<br>也可以通过命令直接修改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout src/com/spring/<span class="built_in">test</span>/SpringTest.java      <span class="comment"># 撤销文件所有修改，回到git pull刚拉取下来的样子</span></span><br><span class="line">git checkout -- src/com/spring/<span class="built_in">test</span>/SpringTest.java   <span class="comment"># 与上一条命令作用相同，注意 -- 后面还有空格</span></span><br><span class="line">git checkout .                                        <span class="comment"># 撤销整个文件夹的修改</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="已add未commit"><a href="#已add未commit" class="headerlink" title="已add未commit"></a>已add未commit</h2><p>当修改了文件，并通过git add命令将文件添加到stage了<br>此时需要通过<code>git reset</code>命令撤回修改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD^   <span class="comment"># 撤销已经提交的全部文件到暂存区</span></span><br></pre></td></tr></table></figure></p>
@@ -507,18 +508,18 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+            Overview
           </li>
         </ul>
       
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="千导">
-          <p class="site-author-name" itemprop="name">千导</p>
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="Fitzwilliam">
+          <p class="site-author-name" itemprop="name">Fitzwilliam</p>
            
               <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
           
@@ -529,7 +530,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
                 <span class="site-state-item-count">178</span>
-                <span class="site-state-item-name">日志</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -540,7 +541,7 @@
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
                 <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">分类</span>
+                <span class="site-state-item-name">categories</span>
               </a>
             </div>
           
@@ -551,7 +552,7 @@
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">18</span>
-                <span class="site-state-item-name">标签</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           
@@ -632,16 +633,16 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">千导</span>
+  <span class="author" itemprop="copyrightHolder">Fitzwilliam</span>
 </div>
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
-  主题 -
+  Theme -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
