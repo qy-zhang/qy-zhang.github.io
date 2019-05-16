@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="可变性String创建的字符串是不可变的，而StringBuilder通过创建的字符串可变。 String对象内容String对象s在创建的时候先查看常量池中是否有”hello”，有则指向它，没有就创建一个”hello”，再指向它，但当重新对s赋值为”world”时，常量池中的”hello”并没有改变，java会重新开辟一个内存存储新值”world”，并令s指向”world”； 12345publ">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String和StringBuilder">
+<meta property="og:url" content="http://yoursite.com/2018/07/25/java/basic/String和StringBuilder/index.html">
+<meta property="og:site_name" content="Fitzwilliam&#39;s Blog">
+<meta property="og:description" content="可变性String创建的字符串是不可变的，而StringBuilder通过创建的字符串可变。 String对象内容String对象s在创建的时候先查看常量池中是否有”hello”，有则指向它，没有就创建一个”hello”，再指向它，但当重新对s赋值为”world”时，常量池中的”hello”并没有改变，java会重新开辟一个内存存储新值”world”，并令s指向”world”； 12345publ">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-16T00:39:00.095Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="String和StringBuilder">
+<meta name="twitter:description" content="可变性String创建的字符串是不可变的，而StringBuilder通过创建的字符串可变。 String对象内容String对象s在创建的时候先查看常量池中是否有”hello”，有则指向它，没有就创建一个”hello”，再指向它，但当重新对s赋值为”world”时，常量池中的”hello”并没有改变，java会重新开辟一个内存存储新值”world”，并令s指向”world”； 12345publ">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/25/java/basic/String和StringBuilder/">
+
+
+
+
+
+  <title>String和StringBuilder | Fitzwilliam's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Fitzwilliam's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Personal Blog for recording</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/java/basic/String和StringBuilder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitzwilliam">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fitzwilliam's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">String和StringBuilder</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-25T22:35:48+08:00">
+                2018-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="可变性"><a href="#可变性" class="headerlink" title="可变性"></a>可变性</h2><p>String创建的字符串是不可变的，而StringBuilder通过创建的字符串可变。</p>
+<h3 id="String对象内容"><a href="#String对象内容" class="headerlink" title="String对象内容"></a>String对象内容</h3><p>String对象s在创建的时候先查看常量池中是否有”hello”，有则指向它，没有就创建一个”hello”，再指向它，但当重新对s赋值为”world”时，常量池中的”hello”并没有改变，java会重新开辟一个内存存储新值”world”，并令s指向”world”；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span></span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span> value[]; <span class="comment">//final使之初始化后不可改变（其实也可以通过反射来改变）</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.javaspecialists.eu/talks/oslo09/ReflectionMadness.pdf" target="_blank" rel="noopener">https://www.javaspecialists.eu/talks/oslo09/ReflectionMadness.pdf</a></p>
+<h2 id="StringBuilder对象内容"><a href="#StringBuilder对象内容" class="headerlink" title="StringBuilder对象内容"></a>StringBuilder对象内容</h2><p>在创建StringBuilder对象时，java实际上在堆中创建了字符类型数组char[]，存储完”hello”后通过append方法在增加”world”，并未开辟新的内存区，形参和实参指向同一区域，因此形参对对象内容进行变化，实参也会跟着变化；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBuilder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(<span class="number">16</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">char</span>[] value;</span><br><span class="line">AbstractStringBuilder(<span class="keyword">int</span> capacity) &#123;</span><br><span class="line">    value = <span class="keyword">new</span> <span class="keyword">char</span>[capacity];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>StringBuilder实际创建了一个默认16字符长的char型数组(亦可指定长度)：<code>char[] value</code></p>
+<p>若为对象赋值时，所存储的字符串长度未超过所定义的char数组长度，则按顺序存储相应字符，若超过所定义的数组长度，则自动扩充其长度，因此说StringBuffer是可变的；</p>
+<h3 id="StringBuilder自动扩容"><a href="#StringBuilder自动扩容" class="headerlink" title="StringBuilder自动扩容"></a>StringBuilder自动扩容</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> AbstractStringBuilder <span class="title">append</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (str == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> appendNull();</span><br><span class="line">    <span class="keyword">int</span> len = str.length();</span><br><span class="line">    ensureCapacityInternal(count + len); <span class="comment">// 判断append字符串之后的长度是否超过预设长度</span></span><br><span class="line">    str.getChars(<span class="number">0</span>, len, value, count);</span><br><span class="line">    count += len;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (minimumCapacity - value.length &gt; <span class="number">0</span>)</span><br><span class="line">        expandCapacity(minimumCapacity);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">expandCapacity</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> newCapacity = value.length * <span class="number">2</span> + <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minimumCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = minimumCapacity;</span><br><span class="line">    <span class="keyword">if</span> (newCapacity &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (minimumCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">        newCapacity = Integer.MAX_VALUE;</span><br><span class="line">    &#125;</span><br><span class="line">    value = Arrays.copyOf(value, newCapacity);</span><br><span class="line">&#125;</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<p>当为StringBuilder对象增加内容时，会先计算所需最小空间：<code>minimumCapacity=count+len;</code>并与原数组长度的2倍+2即newCapacity进行比较，取较大值并为数组value重新赋值，赋值采用的是数组复制的方式进行；</p>
+<p>常见的数组复制有两种方法：一为：<code>Arrays.copyOf()</code>，另一为：<code>System.arraycopy()</code>，差别在于后者可能存在下标越界的问题，其实前者也是通过调用后者的方法来实现的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">char</span>[] copyOf(<span class="keyword">char</span>[] original, <span class="keyword">int</span> newLength) &#123;</span><br><span class="line">    <span class="keyword">char</span>[] copy = <span class="keyword">new</span> <span class="keyword">char</span>[newLength];</span><br><span class="line">    System.arraycopy(original, <span class="number">0</span>, copy, <span class="number">0</span>,</span><br><span class="line">                     Math.min(original.length, newLength));</span><br><span class="line">    <span class="keyword">return</span> copy;</span><br><span class="line">&#125;</span><br><span class="line">​</span><br></pre></td></tr></table></figure></p>
+<h2 id="String-“-”-运算符"><a href="#String-“-”-运算符" class="headerlink" title="String “+” 运算符"></a>String “+” 运算符</h2><p>编译器在解析String”+”运算时，会转换成StringBuilder，调用append()方法，再通过toString()赋值，因此循环运算时，就不断发生创建对象和产生垃圾，这过程消耗了资源，造成了效率的下降；</p>
+<p>如果直接把String的”+”运算写成形如：<code>s=&quot;&quot;+1+1+1……</code>，而不是通过循环来不断调用变量，则编译器会直接求出其字面量，运行时不会再转换为StringBuilder</p>
+<h2 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a>hashCode</h2><p>String和StringBuilder的hashCode表现不同<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">"hello"</span>;</span><br><span class="line">System.out.println(s.hashCode()); <span class="comment">// 99162322</span></span><br><span class="line">s = <span class="string">"world"</span>;</span><br><span class="line">System.out.println(s.hashCode()); <span class="comment">// 113318802</span></span><br><span class="line">String s2 = <span class="string">"hello"</span>;</span><br><span class="line">System.out.println(s2.hashCode()); <span class="comment">// 99162322</span></span><br><span class="line">​</span><br><span class="line">StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder(<span class="string">"hello"</span>);</span><br><span class="line">System.out.println(stringBuilder.hashCode()); <span class="comment">// 1173230247</span></span><br><span class="line">stringBuilder.append(<span class="string">"world"</span>);</span><br><span class="line">System.out.println(stringBuilder.hashCode()); <span class="comment">// 1173230247</span></span><br><span class="line">StringBuilder stringBuilder2 = <span class="keyword">new</span> StringBuilder(<span class="string">"hello"</span>);</span><br><span class="line">System.out.println(stringBuilder2.hashCode()); <span class="comment">// 856419764</span></span><br></pre></td></tr></table></figure></p>
+<p>通过hashCode函数可以看出来两个内容相同的String对象s和s2的hashCode值相同，而同一个String对象经过赋值之后的hashCode值不同了。</p>
+<p>分别介绍他们的hashCode函数的实现：</p>
+<h3 id="StringBuilder-hashCode"><a href="#StringBuilder-hashCode" class="headerlink" title="StringBuilder.hashCode()"></a>StringBuilder.hashCode()</h3><p>StringBuilder没有重载Object类的hashCode()函数，所以对StringBuilder的hashCode分析较为简单<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns a hash code value for the object. This method is</span></span><br><span class="line"><span class="comment"> * supported for the benefit of hash tables such as those provided by</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> java.util.HashMap&#125;.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * The general contract of &#123;<span class="doctag">@code</span> hashCode&#125; is:</span></span><br><span class="line"><span class="comment"> * &lt;ul&gt;</span></span><br><span class="line"><span class="comment"> * &lt;li&gt;Whenever it is invoked on the same object more than once during</span></span><br><span class="line"><span class="comment"> *     an execution of a Java application, the &#123;<span class="doctag">@code</span> hashCode&#125; method</span></span><br><span class="line"><span class="comment"> *     must consistently return the same integer, provided no information</span></span><br><span class="line"><span class="comment"> *     used in &#123;<span class="doctag">@code</span> equals&#125; comparisons on the object is modified.</span></span><br><span class="line"><span class="comment"> *     This integer need not remain consistent from one execution of an</span></span><br><span class="line"><span class="comment"> *     application to another execution of the same application.</span></span><br><span class="line"><span class="comment"> * &lt;li&gt;If two objects are equal according to the &#123;<span class="doctag">@code</span> equals(Object)&#125;</span></span><br><span class="line"><span class="comment"> *     method, then calling the &#123;<span class="doctag">@code</span> hashCode&#125; method on each of</span></span><br><span class="line"><span class="comment"> *     the two objects must produce the same integer result.</span></span><br><span class="line"><span class="comment"> * &lt;li&gt;It is &lt;em&gt;not&lt;/em&gt; required that if two objects are unequal</span></span><br><span class="line"><span class="comment"> *     according to the &#123;<span class="doctag">@link</span> java.lang.Object#equals(java.lang.Object)&#125;</span></span><br><span class="line"><span class="comment"> *     method, then calling the &#123;<span class="doctag">@code</span> hashCode&#125; method on each of the</span></span><br><span class="line"><span class="comment"> *     two objects must produce distinct integer results.  However, the</span></span><br><span class="line"><span class="comment"> *     programmer should be aware that producing distinct integer results</span></span><br><span class="line"><span class="comment"> *     for unequal objects may improve the performance of hash tables.</span></span><br><span class="line"><span class="comment"> * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * As much as is reasonably practical, the hashCode method defined by</span></span><br><span class="line"><span class="comment"> * class &#123;<span class="doctag">@code</span> Object&#125; does return distinct integers for distinct</span></span><br><span class="line"><span class="comment"> * objects. (This is typically implemented by converting the internal</span></span><br><span class="line"><span class="comment"> * address of the object into an integer, but this implementation</span></span><br><span class="line"><span class="comment"> * technique is not required by the</span></span><br><span class="line"><span class="comment"> * Java&amp;trade; programming language.)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span>  a hash code value for this object.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span>     java.lang.Object#equals(java.lang.Object)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span>     java.lang.System#identityHashCode</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>Object.hashCode是一个native方法，看不到源码。</p>
+<p>在<a href="https://blog.csdn.net/xusiwei1236/article/details/45152201/" target="_blank" rel="noopener">博客</a>中给出了使用jni来通过获取java对象和指针的内存地址。</p>
+<h3 id="String-hashCode"><a href="#String-hashCode" class="headerlink" title="String.hashCode()"></a>String.hashCode()</h3><p>String的hashCode函数进行了重载<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns a hash code for this string. The hash code for a</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> String&#125; object is computed as</span></span><br><span class="line"><span class="comment"> * &lt;blockquote&gt;&lt;pre&gt;</span></span><br><span class="line"><span class="comment"> * s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]</span></span><br><span class="line"><span class="comment"> * &lt;/pre&gt;&lt;/blockquote&gt;</span></span><br><span class="line"><span class="comment"> * using &#123;<span class="doctag">@code</span> int&#125; arithmetic, where &#123;<span class="doctag">@code</span> s[i]&#125; is the</span></span><br><span class="line"><span class="comment"> * &lt;i&gt;i&lt;/i&gt;th character of the string, &#123;<span class="doctag">@code</span> n&#125; is the length of</span></span><br><span class="line"><span class="comment"> * the string, and &#123;<span class="doctag">@code</span> ^&#125; indicates exponentiation.</span></span><br><span class="line"><span class="comment"> * (The hash value of the empty string is zero.)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span>  a hash code value for this object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h = hash;</span><br><span class="line">    <span class="keyword">if</span> (h == <span class="number">0</span> &amp;&amp; value.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">char</span> val[] = value;</span><br><span class="line">​</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value.length; i++) &#123;</span><br><span class="line">            h = <span class="number">31</span> * h + val[i];</span><br><span class="line">        &#125;</span><br><span class="line">        hash = h;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> h;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>String类的hashCode的计算过程在注释中已有体现：<code>hash = s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]</code></p>
+<p>转一篇<a href="https://segmentfault.com/a/1190000010799123" target="_blank" rel="noopener">博客</a>来解释为什么出现 31 这个常量</p>
+<p>结论是：</p>
+<ol>
+<li>31作为一个不大不小的质数能够有效的降低哈希算法的冲突率，同时不会因为指数爆炸导致的整数溢出</li>
+<li>31有一个很好的特性，即乘法运算可以被移位和减法运算取代，来获取更好的性能：31 * i == (i &lt;&lt; 5) - i，现代的 Java 虚拟机可以自动的完成这个优化。</li>
+</ol>
+<h3 id="hashCode与对象的内存地址"><a href="#hashCode与对象的内存地址" class="headerlink" title="hashCode与对象的内存地址"></a>hashCode与对象的内存地址</h3><p>通过Object.hashCode()上面的注释可以看出来，这个方法的典型实现是通过把对象的内部地址转为为整数。但是实际上hashCode是一个辅助作用的数值，而不是实际的内存地址。<br>hash值是根据一个哈希算法得到的，理论上来说哈希算法会有冲突，所以会存在两个不一样的对象的哈希值相等。</p>
+<p>如果要获取Java对象的内存地址，可以有如下方式：</p>
+<ul>
+<li>通过上面的介绍我们知道了<code>Object.hashCode()</code>是一个native方法，所以可以通过jni来使用C++获取对象的内存地址</li>
+<li>使用<code>sun.misc.Unsafe</code>类来直接操作Java内存空间</li>
+</ul>
+<p><a href="https://bijian1013.iteye.com/blog/2300961" target="_blank" rel="noopener">如何获得java对象的内存地址</a><br><a href="https://bijian1013.iteye.com/blog/2232847" target="_blank" rel="noopener">Java直接内存读写</a></p>
+<h2 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h2><p>String重载了equals方法，比较的是内容是否相等</p>
+<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><p>public boolean equals(Object anObject) {<br>    if (this == anObject) {<br>        return true;<br>    }<br>    if (anObject instanceof String) {<br>        String anotherString = (String)anObject;<br>        int n = value.length;<br>        if (n == anotherString.value.length) {<br>          char v1[] = value;<br>          char v2[] = anotherString.value;<br>          int i = 0;<br>          while ((n–) != 0) {<br>              if (v1[i] != v2[i])<br>                  return false;<br>              i++;<br>          }<br>          return true;<br>        }<br>    }<br>    return false;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">StringBuilder继承了Object的equals方法，比较的是内存地址是否相等</span><br><span class="line">```Java</span><br><span class="line">public boolean equals(Object obj) &#123;</span><br><span class="line">    return (this == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果想要比较两个StringBuilder对象的内容是否相同，可以调用toString()方法将它转换成String对象在调用equals方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder stringBuilder1 = <span class="keyword">new</span> StringBuilder(<span class="string">"hello"</span>);</span><br><span class="line">StringBuilder stringBuilder2 = <span class="keyword">new</span> StringBuilder(<span class="string">"hello"</span>);</span><br><span class="line">System.out.println(stringBuilder1.toString().equals(stringBuilder2.toString())); <span class="comment">// true</span></span><br><span class="line">​</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Create a copy, don't share the array</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(value, <span class="number">0</span>, count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/16/java/spring/Spring AOP学习/" rel="next" title="Spring AOP学习">
+                <i class="fa fa-chevron-left"></i> Spring AOP学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/01/java/basic/ThreadLocal学习/" rel="prev" title="ThreadLocal学习">
+                ThreadLocal学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="Fitzwilliam">
+          <p class="site-author-name" itemprop="name">Fitzwilliam</p>
+           
+              <p class="site-description motion-element" itemprop="description">Got to look successful to be successful.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">188</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qy-zhang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/daqiandao" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#可变性"><span class="nav-number">1.</span> <span class="nav-text">可变性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String对象内容"><span class="nav-number">1.1.</span> <span class="nav-text">String对象内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringBuilder对象内容"><span class="nav-number">2.</span> <span class="nav-text">StringBuilder对象内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#StringBuilder自动扩容"><span class="nav-number">2.1.</span> <span class="nav-text">StringBuilder自动扩容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String-“-”-运算符"><span class="nav-number">3.</span> <span class="nav-text">String “+” 运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashCode"><span class="nav-number">4.</span> <span class="nav-text">hashCode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#StringBuilder-hashCode"><span class="nav-number">4.1.</span> <span class="nav-text">StringBuilder.hashCode()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String-hashCode"><span class="nav-number">4.2.</span> <span class="nav-text">String.hashCode()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashCode与对象的内存地址"><span class="nav-number">4.3.</span> <span class="nav-text">hashCode与对象的内存地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals"><span class="nav-number">5.</span> <span class="nav-text">equals</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">5.1.</span> <span class="nav-text">Java</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fitzwilliam</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

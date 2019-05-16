@@ -91,18 +91,18 @@
 
 
 
-<meta name="description" content="fatal: unable to connect to github.com在新创建的云主机上使用git命令，拉取远程仓库代码的时候无响应。 1234$ git clone git://github.com/angular/angular-phonecat.git  Cloning into &apos;angular-phonecat&apos;...  fatal: unable to connect to gi">
+<meta name="description" content="git分支命名问题问题描述：mermaid不能使用feature/开头命名的分支，新建这种分支push到远程会报错  fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exists; cannot create ‘refs/heads/master/test’  经过检查发现远程（或者本地）已经有了一个分支fe">
 <meta name="keywords" content="programming">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git使用">
 <meta property="og:url" content="http://yoursite.com/2018/12/10/programming/Git问题记录/index.html">
 <meta property="og:site_name" content="Fitzwilliam&#39;s Blog">
-<meta property="og:description" content="fatal: unable to connect to github.com在新创建的云主机上使用git命令，拉取远程仓库代码的时候无响应。 1234$ git clone git://github.com/angular/angular-phonecat.git  Cloning into &apos;angular-phonecat&apos;...  fatal: unable to connect to gi">
+<meta property="og:description" content="git分支命名问题问题描述：mermaid不能使用feature/开头命名的分支，新建这种分支push到远程会报错  fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exists; cannot create ‘refs/heads/master/test’  经过检查发现远程（或者本地）已经有了一个分支fe">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-14T01:05:38.992Z">
+<meta property="og:updated_time" content="2019-05-15T05:43:48.306Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git使用">
-<meta name="twitter:description" content="fatal: unable to connect to github.com在新创建的云主机上使用git命令，拉取远程仓库代码的时候无响应。 1234$ git clone git://github.com/angular/angular-phonecat.git  Cloning into &apos;angular-phonecat&apos;...  fatal: unable to connect to gi">
+<meta name="twitter:description" content="git分支命名问题问题描述：mermaid不能使用feature/开头命名的分支，新建这种分支push到远程会报错  fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exists; cannot create ‘refs/heads/master/test’  经过检查发现远程（或者本地）已经有了一个分支fe">
 
 
 
@@ -393,7 +393,15 @@
       
 
       
-        <h2 id="fatal-unable-to-connect-to-github-com"><a href="#fatal-unable-to-connect-to-github-com" class="headerlink" title="fatal: unable to connect to github.com"></a>fatal: unable to connect to github.com</h2><p>在新创建的云主机上使用git命令，拉取远程仓库代码的时候无响应。</p>
+        <h2 id="git分支命名问题"><a href="#git分支命名问题" class="headerlink" title="git分支命名问题"></a>git分支命名问题</h2><p>问题描述：mermaid不能使用<code>feature/</code>开头命名的分支，新建这种分支push到远程会报错</p>
+<blockquote>
+<p>fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exists; cannot create ‘refs/heads/master/test’</p>
+</blockquote>
+<p>经过检查发现远程（或者本地）已经有了一个分支<code>feature</code><br><a href="https://stackoverflow.com/questions/22630404/git-push-refs-heads-my-subbranch-exists-cannot-create" target="_blank" rel="noopener">Stack Overflow</a></p>
+<blockquote>
+<p>If branch b exists, no branch named b/anything can be created.</p>
+</blockquote>
+<h2 id="fatal-unable-to-connect-to-github-com"><a href="#fatal-unable-to-connect-to-github-com" class="headerlink" title="fatal: unable to connect to github.com"></a>fatal: unable to connect to github.com</h2><p>在新创建的云主机上使用git命令，拉取远程仓库代码的时候无响应。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git://github.com/angular/angular-phonecat.git  </span><br><span class="line">Cloning into <span class="string">'angular-phonecat'</span>...  </span><br><span class="line">fatal: unable to connect to github.com:  </span><br><span class="line">github.com[0: 204.232.175.90]: errno=No error</span><br></pre></td></tr></table></figure>
 <p>ping github.com 也无响应</p>
 <p>查看网上的<a href="https://stackoverflow.com/questions/16298986/unable-to-connect-to-github-com-for-cloning" target="_blank" rel="noopener">介绍</a><br>可能是被防火墙拦截了，改为使用 https 的url链接。</p>
@@ -523,7 +531,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">183</span>
+                <span class="site-state-item-count">188</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -600,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#fatal-unable-to-connect-to-github-com"><span class="nav-number">1.</span> <span class="nav-text">fatal: unable to connect to github.com</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git分支命名问题"><span class="nav-number">1.</span> <span class="nav-text">git分支命名问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fatal-unable-to-connect-to-github-com"><span class="nav-number">2.</span> <span class="nav-text">fatal: unable to connect to github.com</span></a></li></ol></div>
             
 
           </div>
