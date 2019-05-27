@@ -307,6 +307,327 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/database/MySQL锁学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitzwilliam">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fitzwilliam's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/08/database/MySQL锁学习/" itemprop="url">MySQL锁学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T23:37:02+08:00">
+                2019-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><a href="#锁分类">锁分类</a><ul>
+<li><a href="#死锁判断-wait-for-graph">死锁判断 wait for graph</a></li>
+<li><a href="#死锁产生举例">死锁产生举例</a></li>
+<li><a href="#参考文档">参考文档</a><h3 id="锁分类"><a href="#锁分类" class="headerlink" title="锁分类"></a>锁分类</h3>MySQL有三种锁的级别：页级、表级、行级</li>
+</ul>
+</li>
+<li>表级锁：开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高,并发度最低。</li>
+<li>行级锁：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低,并发度也最高。</li>
+<li>页级锁：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般</li>
+</ul>
+<p>mysql的事务支持与存储引擎有关，MyISAM不支持事务，INNODB支持事务<br>行级锁并不是直接锁记录，而是锁索引，如果一条SQL语句用到了主键索引，mysql会锁住主键索引；如果一条语句操作了非主键索引，mysql会先锁住非主键索引，再锁定主键索引。</p>
+<h4 id="死锁判断-wait-for-graph"><a href="#死锁判断-wait-for-graph" class="headerlink" title="死锁判断 wait for graph"></a>死锁判断 wait for graph</h4><p>参考进程死锁的四个条件</p>
+<ol>
+<li>互斥：一个资源只能被一个进程使用</li>
+<li>请求和保持：一个进程因请求资源而阻塞时，对已获得的资源保持不放</li>
+<li>不可剥夺：不能抢占其他进程的资源</li>
+<li>循环等待：</li>
+</ol>
+<p>innodb将各个事务看为一个个节点，资源就是各个事务占用的锁，当事务1需要等待事务2的锁时，就生成一条有向边从1指向2，最后行成一个有向图。</p>
+<p>innodb在两个事务相互等待时，当一个等待时间超过设置的某一阀值时，对其中一个事务进行回滚，另一个事务就能继续执行。</p>
+<h4 id="死锁产生举例"><a href="#死锁产生举例" class="headerlink" title="死锁产生举例"></a>死锁产生举例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `user_item` (</span><br><span class="line">  `id` BIGINT(20) NOT NULL,</span><br><span class="line">  `user_id` BIGINT(20) NOT NULL,</span><br><span class="line">  `item_id` BIGINT(20) NOT NULL,</span><br><span class="line">  `status` TINYINT(4) NOT NULL,</span><br><span class="line">  PRIMARY KEY (`id`),</span><br><span class="line">  KEY `idx_1` (`user_id`,`item_id`,`status`)</span><br><span class="line">) ENGINE=INNODB DEFAULT CHARSET=utf-8</span><br><span class="line"></span><br><span class="line">update user_item set status=1 where user_id=? and item_id=?</span><br></pre></td></tr></table></figure>
+<p>这个update语句会执行以下步骤：</p>
+<ol>
+<li>由于用到了非主键索引，首先需要获取idx_1上的行级锁</li>
+<li>紧接着根据主键进行更新，所以需要获取主键上的行级锁</li>
+<li>更新完毕后，提交，并释放所有锁。</li>
+</ol>
+<p>如果在步骤1和2之间突然插入一条语句：<code>update user_item .....where id=? and user_id=?</code><br>这条语句会先锁住主键索引，然后锁住idx_1。此时一条语句获取了idx_1上的锁，等待主键索引上的锁；另一条语句获取了主键上的锁，等待idx_1上的锁，这样就出现了死锁。</p>
+<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><p><a href="https://www.cnblogs.com/zejin2008/p/5262751.html" target="_blank" rel="noopener">https://www.cnblogs.com/zejin2008/p/5262751.html</a><br><a href="https://blog.csdn.net/aesop_wubo/article/details/8286215" target="_blank" rel="noopener">https://blog.csdn.net/aesop_wubo/article/details/8286215</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/programming/《重构 改善既有代码的设计》/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitzwilliam">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fitzwilliam's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/17/programming/《重构 改善既有代码的设计》/" itemprop="url">《重构 改善既有代码的设计》</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-17T10:18:53+08:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="重构原则"><a href="#重构原则" class="headerlink" title="重构原则"></a>重构原则</h1><h2 id="重构的定义"><a href="#重构的定义" class="headerlink" title="重构的定义"></a>重构的定义</h2><blockquote>
+<p>重构：对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其理解性，降低其修改成本。</p>
+</blockquote>
+<p>根据定义可以看出，准备动手修改前需要考虑清楚，修改的结果是 提高了程序可读性？还是降低了程序的修改成本（提升可扩展性）？</p>
+<p>目标是：<strong>可读、可扩展</strong></p>
+<p>一定要与<strong>性能优化</strong>区分开来，两者目标不一致，采取的手法和遵循的原则会有些不一致。</p>
+<h2 id="两顶帽子"><a href="#两顶帽子" class="headerlink" title="两顶帽子"></a>两顶帽子</h2><p>使用重构技术开发软件时，会有两种状态：</p>
+<ul>
+<li>添加新功能：尽可能不修改既有代码，只管添加功能。针对新功能可能会对测试用例进行调整。</li>
+<li>重构：不能添加新功能，不能修改测试用例。</li>
+</ul>
+<p>这两个状态会在开发过程中不断切换。</p>
+<h2 id="为何重构"><a href="#为何重构" class="headerlink" title="为何重构"></a>为何重构</h2><ul>
+<li><p>代码结构的流失是累积性的</p>
+<p>越难看出代码所代表的设计意图，代码的结构就会腐烂的越快。定期重构首先可以加深开发者对代码的理解，其次可以为代码结构保鲜</p>
+<p>以mermaid服务的货架模板为例，长久未被修改过的代码只会让维护者更加不想去看，代码的设计者也无法保证能够完整的阐述出之前的设计意图。</p>
+</li>
+<li><p>重构提升编程速度<br>良好的设计是快速开发的根本</p>
+</li>
+</ul>
+<blockquote>
+<p>程序具有两面价值：今天可以为你做什么、明天可以为你做什么。修复错误、添加新特性只是在关注今天的价值，还需着眼明天。</p>
+</blockquote>
+<h2 id="何时重构"><a href="#何时重构" class="headerlink" title="何时重构"></a>何时重构</h2><ul>
+<li><p>三次法则</p>
+<p>事不过三，三则重构</p>
+</li>
+<li><p>添加功能时重构</p>
+<p>添加功能时为了帮助自己理解需要修改的代码。在开发的过程中不断理清代码的结构</p>
+</li>
+<li><p>修补错误时重构</p>
+<p>代码不够清晰，不能快速发现bug，</p>
+</li>
+<li><p>code review后重构</p>
+</li>
+</ul>
+<h2 id="间接层与重构"><a href="#间接层与重构" class="headerlink" title="间接层与重构"></a>间接层与重构</h2><blockquote>
+<p>计算机科学是这样一门学科：它相信所有问题都可以通过增加一个间接层来解决</p>
+</blockquote>
+<p>间接层的价值：</p>
+<ul>
+<li>允许逻辑共享</li>
+<li>分开解释意图和实现</li>
+<li>隔离变换</li>
+<li>封装条件逻辑：多态消息，降低代码重复度并提高弹性</li>
+</ul>
+<h2 id="重构的难题"><a href="#重构的难题" class="headerlink" title="重构的难题"></a>重构的难题</h2><ul>
+<li>数据库</li>
+<li>修改接口：已发布的接口重构后打上 Deprecated，为整个包定义一个异常基类。</li>
+</ul>
+<h2 id="何时不该重构"><a href="#何时不该重构" class="headerlink" title="何时不该重构"></a>何时不该重构</h2><ul>
+<li>代码不能正常运作时重写</li>
+<li>项目已近最后期限</li>
+</ul>
+<h1 id="代码的坏味道"><a href="#代码的坏味道" class="headerlink" title="代码的坏味道"></a>代码的坏味道</h1><blockquote>
+<p>决定何时重构、何时停止和知道重构机制如何运转一样重要。</p>
+</blockquote>
+<p>受到刚出生的女儿的气味影响，Kent Beck提出用味道来形容重构时机。</p>
+<h1 id="构筑测试体系"><a href="#构筑测试体系" class="headerlink" title="构筑测试体系"></a>构筑测试体系</h1><blockquote>
+<p>重构的基本技巧：小步前进、频繁测试</p>
+</blockquote>
+<h1 id="重构列表"><a href="#重构列表" class="headerlink" title="重构列表"></a>重构列表</h1><h2 id="重构的记录格式"><a href="#重构的记录格式" class="headerlink" title="重构的记录格式"></a>重构的记录格式</h2><p>按照标准划分，每个重构手法都有如下五个部分：</p>
+<ol>
+<li>名称：</li>
+<li>简短概要：简单介绍此重构手法的适用场景，以及他所做的事情。这部分可以帮助你更快速的找到所需要的重构手法</li>
+<li>动机：为什么需要这个重构？什么情况下不应该使用这个重构？</li>
+<li>做法：简明扼要地一步一步介绍此重构</li>
+<li>范例：以一个十分简单的例子来说明此重构手法如何运作</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/10/programming/Git问题记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -397,17 +718,21 @@
       
         
           
-          git分支命名问题问题描述：mermaid不能使用feature/开头命名的分支，新建这种分支push到远程会报错
+            <h2 id="git分支命名问题"><a href="#git分支命名问题" class="headerlink" title="git分支命名问题"></a>git分支命名问题</h2><p>问题描述：mermaid不能使用<code>feature/</code>开头命名的分支，新建这种分支push到远程会报错</p>
+<blockquote>
+<p>fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exists; cannot create ‘refs/heads/master/test’</p>
+</blockquote>
+<p>经过检查发现远程（或者本地）已经有了一个分支<code>feature</code><br><a href="https://stackoverflow.com/questions/22630404/git-push-refs-heads-my-subbranch-exists-cannot-create" target="_blank" rel="noopener">Stack Overflow</a></p>
+<blockquote>
+<p>If branch b exists, no branch named b/anything can be created.</p>
+</blockquote>
+<h2 id="fatal-unable-to-connect-to-github-com"><a href="#fatal-unable-to-connect-to-github-com" class="headerlink" title="fatal: unable to connect to github.com"></a>fatal: unable to connect to github.com</h2><p>在新创建的云主机上使用git命令，拉取远程仓库代码的时候无响应。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git://github.com/angular/angular-phonecat.git  </span><br><span class="line">Cloning into <span class="string">'angular-phonecat'</span>...  </span><br><span class="line">fatal: unable to connect to github.com:  </span><br><span class="line">github.com[0: 204.232.175.90]: errno=No error</span><br></pre></td></tr></table></figure>
+<p>ping github.com 也无响应</p>
+<p>查看网上的<a href="https://stackoverflow.com/questions/16298986/unable-to-connect-to-github-com-for-cloning" target="_blank" rel="noopener">介绍</a><br>可能是被防火墙拦截了，改为使用 https 的url链接。</p>
+<p>设置如下：控制台中输入<br><code>git config --global url.&quot;https://&quot;.insteadOf git://</code><br>或者直接在.gitconfig文件中修改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[url <span class="string">"https://"</span>]</span><br><span class="line">        insteadOf = git://</span><br></pre></td></tr></table></figure></p>
 
-fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exists; cannot create 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/10/programming/Git问题记录/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -539,20 +864,30 @@ fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exi
       
         
           
-          在Spring配置文件中使用XML文件进行配置，实际上是让Spring执行了相应的代码，例如：
+            <p>在Spring配置文件中使用XML文件进行配置，实际上是让Spring执行了相应的代码，例如：</p>
+<ul>
+<li>使用<code>&lt;bean&gt;</code>元素，实际上是让Spring执行无参或有参构造器</li>
+<li>使用<code>&lt;property&gt;</code>元素，实际上是让Spring执行一次setter方法</li>
+</ul>
+<p>但Java程序还可能有其他类型的语句：调用getter方法、调用普通方法、访问类或对象的Field等，而Spring也为这种语句提供了对应的配置语法：</p>
+<ul>
+<li>调用getter方法：使用<code>PropertyPathFactoryBean</code></li>
+<li>调用类或对象的Filed值：使用<code>FiledRetrievingFactoryBean</code></li>
+<li>调用普通方法：使用<code>MethodInvokingFactoryBean</code></li>
+</ul>
+<h3 id="PropertyPathFactoryBean"><a href="#PropertyPathFactoryBean" class="headerlink" title="PropertyPathFactoryBean"></a>PropertyPathFactoryBean</h3><p><code>PropertyPathFactoryBean</code>用来获得目标Bean的属性值（实际上就是调用getter方法返回的值），获得的值可以注入给其他的Bean，也可以直接定义新的Bean</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"person"</span> <span class="attr">class</span>=<span class="string">"com.abc.Person"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">value</span>=<span class="string">"30"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"son"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 使用嵌套Bean定义属性值 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.abc.service.Son"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">value</span>=<span class="string">"11"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"son2"</span> <span class="attr">class</span>=<span class="string">"com.abc.service.Son"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- age属性不是直接注入，而是将person中的son的age属性赋值给son2的age属性 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 使用PropertyPathFactoryBean --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"person.son.age"</span> </span></span><br><span class="line"><span class="tag">            <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertyPathFactoryBean"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Bean实例的属性值，不仅可以注入另一个Bean，还可将Bean实例的属性值直接定义成Bean实例，这也是通过PropertyPathFactoryBean完成的。对上面的配置文件增加这样一段：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"son1"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.PropertyPathFactoryBean"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 确定目标Bean，表明son1来自哪个Bean的组件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"targetBeanName"</span> <span class="attr">value</span>=<span class="string">"person"</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 确定属性，表明son1来自目标Bean的哪个属性 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"propertyPath"</span> <span class="attr">value</span>=<span class="string">"son"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="FieldRetrievingFactoryBean"><a href="#FieldRetrievingFactoryBean" class="headerlink" title="FieldRetrievingFactoryBean"></a>FieldRetrievingFactoryBean</h3><p>通过FieldRetrievingFactoryBean类，可以将其他Bean的Field值注入给其他Bean，或者直接定义新的Bean。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"son"</span> <span class="attr">class</span>=<span class="string">"com.abc.service.Son"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"java.sql.connection.TRANSACTION_SERIALIZABLE"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.FieldRetrievingFactoryBean"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在这个配置中，son对象的age的值，等于java.sql.Connection.TRANSACTION_SERIALIZABLE的值。</p>
+<h3 id="MethodInvokingFactoryBean"><a href="#MethodInvokingFactoryBean" class="headerlink" title="MethodInvokingFactoryBean"></a>MethodInvokingFactoryBean</h3><p>通过MethodInvokingFactoryBean工厂Bean，可将目标方法的返回值注入为Bean的属性值。<br>这个工厂Bean用来获取指定方法的返回值，该方法既可以是静态方法，也可以是实例方法；这个值既可以被注入到指定Bean实例的指定属性，也可以直接定义成Bean实例。</p>
+<p>举例说明：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"valueGenerator"</span> <span class="attr">class</span>=<span class="string">"com.abc.util.ValueGenerator"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"son1"</span> <span class="attr">class</span>=<span class="string">"com.abc.service.Son"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"age"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 获取方法返回值：调用valueGenerator的getValue方法 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.beans.factory.config.MethodInvokingFactoryBean"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"targetObject"</span> <span class="attr">ref</span>=<span class="string">"valueGenerator"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"targetMethod"</span> <span class="attr">value</span>=<span class="string">"getValue"</span> /&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 这里配置参数 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"arguments"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 使用list元素列出调用方法的多个参数 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">value</span>&gt;</span>java.version<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>ValueGenerator 类定义如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValueGenerator</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123; <span class="keyword">return</span> <span class="number">2</span> * i; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getStaticValue</span> <span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="number">3</span>;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ValueGenerator.getValue() 方法返回值为2，set给 son1 对象的age字段<br>son1.age = 2</p>
+<p><a href="https://yq.aliyun.com/articles/40270" target="_blank" rel="noopener">https://yq.aliyun.com/articles/40270</a></p>
 
-使用&lt;bean&gt;元素，实际上是让Spring执行无参或有参构造器
-使用&lt;property&gt;元素，实际上是让Spring执行一次setter方法
-
-但Java程序还可能有其他类型的
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/22/java/spring/Spring XML文件注入方式/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -684,19 +1019,56 @@ fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exi
       
         
           
-          为什么需要合并commit
-在本地开发分支，推荐多使用交互式rebase整理commit。这样别的开发者只会看到你整理之后的结果，保证干净、清洁。
+            <h1 id="为什么需要合并commit"><a href="#为什么需要合并commit" class="headerlink" title="为什么需要合并commit"></a>为什么需要合并commit</h1><blockquote>
+<p>在本地开发分支，推荐多使用交互式rebase整理commit。这样别的开发者只会看到你整理之后的结果，保证干净、清洁。</p>
+</blockquote>
+<p>在一次功能开发中多次提交了代码，但是很多commit是重复、无用的，在合并到master之前建议合并一些commit</p>
+<p>比如在一次开发过程中想要整理一下代码。</p>
+<ul>
+<li>第一次提交 9ba7300 中删掉了一些注释代码</li>
+<li>第二次提交 4300cdb 中发现仍然有一些注释代码，接着又修改代码进行了一次提交，commit偷懒写了update</li>
+<li>第三次提交 e5a1c8b 中删掉了一些无用的xml配置</li>
+</ul>
+<p><img src="/image/programming/git_commit_rebase1.png" alt="git commit"></p>
+<p>在后续的代码开发过程中如果想要找回删除的xml配置，可能需要逐一查看这三条commit记录，来找到有用的信息。<br>实际上这三条commit可以被合并成一条，这一次commit的内容就是删除一些代码和配置。</p>
+<h1 id="如何合并"><a href="#如何合并" class="headerlink" title="如何合并"></a>如何合并</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> --oneline --graph</span><br><span class="line"><span class="comment">#找到想要rebase的最早一条commit哈希值</span></span><br><span class="line">git rebase -i 9ba7300</span><br><span class="line"></span><br><span class="line"><span class="comment">#对最近两次提交进行rebase</span></span><br><span class="line">git rebase -i HEAD~10</span><br></pre></td></tr></table></figure>
+<p>进入vim界面后主要关注两条命令：</p>
+<ul>
+<li>pick 会执行这个commit</li>
+<li>squash  这个commit会被合并到前一个commit</li>
+</ul>
+<h1 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h1><p>vim command mode下通过 p 快捷键可以将commit状态修改为pick（默认状态），通过 s 快捷键可以将commit状态改成 squash<br>但是在vim command mode中按下 s 键的效果是删除当前字符并进入 Insert mode</p>
+<p>在 .vimrc 中配置键绑定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#将 第二行至最后一行 中 开头为 pick 的行中将 pick 替换成 squash</span><br><span class="line">map s :2,$s/^pick/squash/&lt;CR&gt;</span><br><span class="line"></span><br><span class="line">#将当前行开头为 pick 替换成 squash</span><br><span class="line">map s :s/^pick/squash/&lt;CR&gt;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/image/programming/git_commit_rebase2.png" alt="git commit"></p>
+<h1 id="扩展配置"><a href="#扩展配置" class="headerlink" title="扩展配置"></a>扩展配置</h1><table>
+<thead>
+<tr>
+<th>代码段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:s/vivian/sky/</td>
+<td>替换当前行第一个 vivian 为 sky</td>
+</tr>
+<tr>
+<td>:s/vivian/sky/g</td>
+<td>替换当前行所有 vivian 为 sky</td>
+</tr>
+<tr>
+<td>:n,$s/vivian/sky/</td>
+<td>替换第 n 行开始到最后一行中每一行的第一个 vivian 为 sky</td>
+</tr>
+<tr>
+<td>:n,$s/vivian/sky/g</td>
+<td>替换第 n 行开始到最后一行中每一行的所有 vivian 为 sky</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://gitbook.tw/chapters/rewrite-history/split-one-commit-to-many-commits.html" target="_blank" rel="noopener">一个commit拆分成多个</a></p>
 
-在一次功能开发中多次提交了代码，但是很多commit是重复、无用的，在合并到master之前建议合并一些commit
-比如在一次开发过程中想要整理一下
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/15/programming/Git合并commit/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -806,15 +1178,13 @@ fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exi
       
         
           
-          zsh个人用配置：123456PROMPT=&apos;%&#123;$fg[yellow]%&#125;%~ $(git_prompt_info)%&#123;$fg[yellow]%&#125;$ %&#123;$reset_color%&#125;&apos;ZSH_THEME_GIT_PRO
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/07/configuration/Mac控制台配置/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="zsh"><a href="#zsh" class="headerlink" title="zsh"></a>zsh</h1><p>个人用配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PROMPT=&apos;%&#123;$fg[yellow]%&#125;%~ $(git_prompt_info)%&#123;$fg[yellow]%&#125;$ %&#123;$reset_color%&#125;&apos;</span><br><span class="line"></span><br><span class="line">ZSH_THEME_GIT_PROMPT_PREFIX=&quot;%&#123;$fg_bold[blue]%&#125;@ %&#123;$fg[red]%&#125;&quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_SUFFIX=&quot;%&#123;$reset_color%&#125; &quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_DIRTY=&quot;%&#123;$fg[blue]%&#125; %&#123;$fg[yellow]%&#125;✗&quot;</span><br><span class="line">ZSH_THEME_GIT_PROMPT_CLEAN=&quot;%&#123;$fg[blue]%&#125;&quot;</span><br></pre></td></tr></table></figure></p>
+<p><code>%{$fg[yellow]%}</code> 设置后面的内容颜色为黄色<br><code>%~</code> 显示相对于 ~ 目录的当前路径<br><code>$(git_prompt_info)</code> 后面添加上git分支名<br><code>@</code> 中间加上一个 @ 符号<br><code>$</code><br><code>%{reset_color%}</code> 清除所有颜色</p>
+<p>控制台前缀配置<br><a href="https://github.com/bolasblack/BlogPosts/blob/master/2011-04-20-%E5%AE%9A%E5%88%B6%E4%BD%A0%E7%9A%84_zsh_%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6.md" target="_blank" rel="noopener">https://github.com/bolasblack/BlogPosts/blob/master/2011-04-20-%E5%AE%9A%E5%88%B6%E4%BD%A0%E7%9A%84_zsh_%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6.md</a><br><a href="https://code.tutsplus.com/tutorials/how-to-customize-your-command-prompt--net-24083" target="_blank" rel="noopener">https://code.tutsplus.com/tutorials/how-to-customize-your-command-prompt--net-24083</a></p>
+<h1 id="控制台使用"><a href="#控制台使用" class="headerlink" title="控制台使用"></a>控制台使用</h1><p>bg、fg命令失效</p>
+<p>参考 <a href="https://stackoverflow.com/questions/32614648/weird-jobs-behavior-within-zsh" target="_blank" rel="noopener">https://stackoverflow.com/questions/32614648/weird-jobs-behavior-within-zsh</a><br>使用以下两种方式<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">job %1</span><br><span class="line">%1</span><br></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -924,133 +1294,11 @@ fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exi
       
         
           
-          编辑操作配置mac多窗口复制粘贴参考网络博客在 ~/.vimrc 文件中添加如下配置，可以实现多窗口复制粘贴12345vmap y :w !pbcopy&lt;CR&gt;&lt;CR&gt;nmap yy :.w !pbcopy&lt;CR&gt;&lt;CR&gt;nmap p :r !pbpa
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/07/configuration/Vim配置/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/database/《MySQL必知必会》/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fitzwilliam">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fitzwilliam's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/07/database/《MySQL必知必会》/" itemprop="url">《MySQL必知必会》</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-07T18:37:51+08:00">
-                2018-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
+            <h1 id="编辑操作"><a href="#编辑操作" class="headerlink" title="编辑操作"></a>编辑操作</h1><h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="mac多窗口复制粘贴"><a href="#mac多窗口复制粘贴" class="headerlink" title="mac多窗口复制粘贴"></a>mac多窗口复制粘贴</h2><p>参考<a href="https://www.douban.com/note/202175976/" target="_blank" rel="noopener">网络博客</a><br>在 ~/.vimrc 文件中添加如下配置，可以实现多窗口复制粘贴<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vmap y :w !pbcopy&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nmap yy :.w !pbcopy&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">nmap p :r !pbpaste&lt;CR&gt;&lt;CR&gt;</span><br><span class="line">vmap <span class="string">"+y :w !pbcopy&lt;CR&gt;&lt;CR&gt; </span></span><br><span class="line"><span class="string">nmap "</span>+p :r !pbpaste&lt;CR&gt;&lt;CR&gt;</span><br></pre></td></tr></table></figure></p>
+<p>mac下两条命令：pbcopy、pbpaste<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat foo.txt | pbcopy <span class="comment"># 将foo.txt的内容复制到系统剪贴板</span></span><br><span class="line">pbpaste &gt; foo.txt <span class="comment"># 将系统剪贴板的内容写到foo.txt</span></span><br></pre></td></tr></table></figure></p>
+<p><code>w !</code>和<code>r !</code>（注意中间的空格）可以负责把某一段文字写入或从某一个命令读出，有点类似linux的管道功能。<br>这里把vim默认的y和p功能改掉，让y直接复制到系统剪贴板，让p从系统剪贴板直接粘贴；故实现了多个terminal之间的剪贴板共享。<br>而且由于操作的是系统剪贴板，同时也实现了terminal的vim与其他应用程序之间的剪贴板共享。</p>
 
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1234567891011121314151617181920212223242526272829303132mysql&gt; show databases; # 返回可用数据库的一个列表+--------------------+| Database           |+----------
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/07/database/《MySQL必知必会》/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1182,15 +1430,23 @@ fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exi
       
         
           
-          四种匹配规则精确匹配123456&lt;servlet-mapping&gt;    &lt;servlet-name&gt;MyServlet&lt;/servlet-name&gt;    &lt;url-pattern&gt;/user/users.html&lt;/url-pattern&g
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/24/java/spring/web.xml中servlet url配置/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="四种匹配规则"><a href="#四种匹配规则" class="headerlink" title="四种匹配规则"></a>四种匹配规则</h1><h2 id="精确匹配"><a href="#精确匹配" class="headerlink" title="精确匹配"></a>精确匹配</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>MyServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/user/users.html<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/index.html<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/user/addUser.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>url与设置的url-pattern完全匹配</p>
+<p>比如servletA 的url-pattern为<code>/test</code>，servletB的url-pattern为<code>/*</code>，这个时候，如果我访问的url为 <a href="http://localhost/test" target="_blank" rel="noopener">http://localhost/test</a> ，这个时候容器就会先进行精确路径匹配，发现<code>/test</code>正好被servletA精确匹配，那么就去调用servletA，也不会去理会其他的 servlet了。</p>
+<h2 id="路径匹配"><a href="#路径匹配" class="headerlink" title="路径匹配"></a>路径匹配</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>MyServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/user/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>以<code>/*</code>结束，匹配所有满足路径的 url</p>
+<p>先最长路径，再最短路径</p>
+<p>servletA的url-pattern为<code>/test/*</code>，而servletB的url-pattern为<code>/test/a/*</code>，此 时访问 <a href="http://localhost/test/a" target="_blank" rel="noopener">http://localhost/test/a</a> 时，容器会选择路径最长的servlet来匹配，也就是这里的servletB。</p>
+<h2 id="扩展名匹配"><a href="#扩展名匹配" class="headerlink" title="扩展名匹配"></a>扩展名匹配</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>MyServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.jsp<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.action<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>匹配固定后缀名的url</p>
+<h2 id="默认匹配"><a href="#默认匹配" class="headerlink" title="默认匹配"></a>默认匹配</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>MyServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>匹配顺序由上至下，url匹配上一个规则就不会往下走</p>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><h2 id="路径匹配与默认匹配"><a href="#路径匹配与默认匹配" class="headerlink" title="路径匹配与默认匹配"></a>路径匹配与默认匹配</h2><p><code>/</code>和<code>/*</code>的区别：<br><code>&lt;url-pattern&gt;/&lt;/url-pattern&gt;</code> 不会匹配到<code>*.jsp</code>，即：<code>*.jsp</code>不会进入spring的DispatcherServlet类。<br><code>&lt;url-pattern&gt;/*&lt;/url-pattern&gt;</code> 会匹配<code>*.jsp</code>，会出现返回jsp视图时<strong>再次进入</strong>spring的DispatcherServlet类，导致找不到对应的controller所以报404错。</p>
+<p><img src="/image/java/spring_servlet_dispatch.jpg" alt="spring servlet dispatch"></p>
+<p>从上图可以看出返回ModelAndView会再次进入DispatchServlet，所以当<code>/*</code>匹配到<code>/home</code>这种路径时，返回了<code>/META-INF/view/home.jsp</code>，又命中了扩展名匹配，还是会被DispatchServlet转发，此时就找不到对应的controller了。</p>
+<p><a href="https://blog.csdn.net/wxh820767125/article/details/79513716" target="_blank" rel="noopener">https://blog.csdn.net/wxh820767125/article/details/79513716</a><br><a href="https://www.cnblogs.com/canger/p/6084846.html" target="_blank" rel="noopener">https://www.cnblogs.com/canger/p/6084846.html</a></p>
+
+          
         
       
     </div>
@@ -1322,15 +1578,12 @@ fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exi
       
         
           
-          Listlist to map123tripDealModels.stream().filter(Objects::nonNull).collect(Collectors.toMap(TripDealModel::getId, tripDealModel -&gt; tripDealModel));
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/24/java/basic/集合操作/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="List"><a href="#List" class="headerlink" title="List"></a>List</h1><h2 id="list-to-map"><a href="#list-to-map" class="headerlink" title="list to map"></a>list to map</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tripDealModels.stream().filter(Objects::nonNull).collect(Collectors.toMap(TripDealModel::getId, tripDealModel -&gt; tripDealModel));</span><br><span class="line"></span><br><span class="line">tripDealModels.stream().filter(Objects::nonNull).collect(Collectors.toMap(TripDealModel::getId, Function.identity());</span><br></pre></td></tr></table></figure>
+<p>可能会报错 java.lang.IllegalStateException: Duplicate key，因为map的key是有可能重复的，用后出现的覆盖前面的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tripDealModels.stream().filter(Objects::nonNull).collect(Collectors.toMap(TripDealModel::getId, Function.identity(), (k1, k2) -&gt; k2));</span><br></pre></td></tr></table></figure></p>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>HashMap中获取第一个元素<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; m = Maps.newTreeMap();</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 会有提示 'Optional.get()' without 'isPresent()' check</span></span><br><span class="line">String firstValue = m.entrySet().stream().map(Map.Entry::getValue).findFirst().get();</span><br><span class="line"></span><br><span class="line">String firstValue = m.entrySet().stream().map(Map.Entry::getValue).findFirst().orElse(<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://stackoverflow.com/questions/26230225/hashmap-getting-first-key-value" target="_blank" rel="noopener">Stack Overflow</a></p>
+
+          
         
       
     </div>
@@ -1440,153 +1693,41 @@ fatal: cannot lock ref ‘refs/heads/master/test’: ‘refs/heads/master’ exi
       
         
           
-          
-回退到git pull刚拉取代码的样子
-已修改未add
-已add未commit
-已commit未提交
-git reset –hard commit_id
-git revert commit_id
-
-
-已提交
-soft mixed hard
-
-
-恢复分支
-
-
-
-回退到git pull刚拉取代码的样子
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/21/programming/Git撤销修改/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/17/java/maven/maven-enforcer-plugin介绍/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fitzwilliam">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fitzwilliam's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/17/java/maven/maven-enforcer-plugin介绍/" itemprop="url">maven-enforcer-plugin介绍</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-17T00:24:08+08:00">
-                2018-09-17
-              </time>
-            
-
-            
-
-            
-          </span>
+            <ul>
+<li><a href="#回退到git-pull刚拉取代码的样子">回退到git pull刚拉取代码的样子</a><ul>
+<li><a href="#已修改未add">已修改未add</a></li>
+<li><a href="#已add未commit">已add未commit</a></li>
+<li><a href="#已commit未提交">已commit未提交</a><ul>
+<li><a href="#git-reset---hard-commit_id">git reset –hard commit_id</a></li>
+<li><a href="#git-revert-commit_id">git revert commit_id</a></li>
+</ul>
+</li>
+<li><a href="#已提交">已提交</a><ul>
+<li><a href="#soft-mixed-hard">soft mixed hard</a></li>
+</ul>
+</li>
+<li><a href="#恢复分支">恢复分支</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="回退到git-pull刚拉取代码的样子"><a href="#回退到git-pull刚拉取代码的样子" class="headerlink" title="回退到git pull刚拉取代码的样子"></a>回退到git pull刚拉取代码的样子</h1><p>通常会有想要找到文件原始的样子的需求。在这里分情况介绍Git撤销修改</p>
+<h2 id="已修改未add"><a href="#已修改未add" class="headerlink" title="已修改未add"></a>已修改未add</h2><p>当修改了文件，还没有通过<code>git add</code>命令将修改内容</p>
+<p>此时可以直接通过编辑器的快捷键（一般是ctrl+z或者cmd+z）撤销修改直至文件颜色显示为无变化。<br>也可以通过命令直接修改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout src/com/spring/<span class="built_in">test</span>/SpringTest.java      <span class="comment"># 撤销文件所有修改，回到git pull刚拉取下来的样子</span></span><br><span class="line">git checkout -- src/com/spring/<span class="built_in">test</span>/SpringTest.java   <span class="comment"># 与上一条命令作用相同，注意 -- 后面还有空格</span></span><br><span class="line">git checkout .                                        <span class="comment"># 撤销整个文件夹的修改</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="已add未commit"><a href="#已add未commit" class="headerlink" title="已add未commit"></a>已add未commit</h2><p>当修改了文件，并通过git add命令将文件添加到stage了<br>此时需要通过<code>git reset</code>命令撤回修改<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD^   <span class="comment"># 撤销已经提交的全部文件到暂存区</span></span><br></pre></td></tr></table></figure></p>
+<p>git reset会丢弃提交记录，HEAD^代表HEAD的父提交记录，此参数可以替换为任意commit id。</p>
+<h2 id="已commit未提交"><a href="#已commit未提交" class="headerlink" title="已commit未提交"></a>已commit未提交</h2><h3 id="git-reset-–hard-commit-id"><a href="#git-reset-–hard-commit-id" class="headerlink" title="git reset –hard commit_id"></a>git reset –hard commit_id</h3><p><code>git reset --hard HEAD^</code><br>会直接撤销已经提交的全部文件到编辑之前版本，并且不会有任何操作记录，最好不要使用。</p>
+<h3 id="git-revert-commit-id"><a href="#git-revert-commit-id" class="headerlink" title="git revert commit_id"></a>git revert commit_id</h3><p>git revert命令会生成一个新的版本并提交，通过git log可以查看得到，推荐使用。</p>
+<h2 id="已提交"><a href="#已提交" class="headerlink" title="已提交"></a>已提交</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout commit_id file   <span class="comment"># 还原file到commit_id中的版本</span></span><br><span class="line">git checkout branchXX file    <span class="comment"># 还原file到其他分支（branchXX）中的版本</span></span><br></pre></td></tr></table></figure>
+<p>一篇<a href="https://www.cnblogs.com/kidsitcn/p/4513297.html" target="_blank" rel="noopener">网络博客</a>介绍git reset的三个参数使用</p>
+<h3 id="soft-mixed-hard"><a href="#soft-mixed-hard" class="headerlink" title="soft mixed hard"></a>soft mixed hard</h3><p>–soft 、–mixed以及–hard是三个恢复等级。</p>
+<ul>
+<li>使用–soft就仅仅将头指针恢复，已经add的缓存以及工作空间的所有东西都不变。</li>
+<li>如果使用–mixed，就将头指针恢复掉，已经add的缓存也会丢失掉，工作空间的代码什么的是不变的。</li>
+<li>如果使用–hard，那么一切就全都恢复了，头指针add的缓存消失，代码也恢复到以前状态。</li>
+</ul>
+<h2 id="恢复分支"><a href="#恢复分支" class="headerlink" title="恢复分支"></a>恢复分支</h2><p><code>git branch -D &lt;branch_name&gt;</code> 删除分支（-d 不能删除当前正在打开的分支）当删除分支时，git只是删除了指向相关提交的指针，但该提交对象依然会留在版本库中。可以通过删除分支时的散列值来恢复被删除的分支，散列值通过git reflog命令获取<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Qians-Mac:MavenTest zhangqianyi$ git reflog</span><br><span class="line">6bca3d0 (HEAD -&gt; master, origin/master) HEAD@&#123;0&#125;: checkout: moving from <span class="built_in">test</span> to master</span><br><span class="line">68794b6 HEAD@&#123;1&#125;: commit: update</span><br><span class="line">ef6209e HEAD@&#123;2&#125;: commit: add readme</span><br><span class="line">6bca3d0 (HEAD -&gt; master, origin/master) HEAD@&#123;3&#125;: checkout: moving from master to <span class="built_in">test</span></span><br><span class="line">6bca3d0 (HEAD -&gt; master, origin/master) HEAD@&#123;4&#125;: commit (initial): first commit</span><br><span class="line">Qians-Mac:MavenTest zhangqianyi$ git branch <span class="built_in">test</span> HEAD@&#123;1&#125;</span><br></pre></td></tr></table></figure></p>
 
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-Maven Enforcer Plugin - The Loving Iron Fist of Maven
-
-介绍约定优于配置对于项目中使用的程序、工具、开发环境，很多时候新手会遇到一些诡异的问题，很大一部分原因是因为环境不对，或者软件版本不符。所以进入项目组进行开发前，最好先统一环境。比如要求所
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/17/java/maven/maven-enforcer-plugin介绍/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1667,7 +1808,7 @@ Maven Enforcer Plugin - The Loving Iron Fist of Maven
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">188</span>
+                <span class="site-state-item-count">189</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

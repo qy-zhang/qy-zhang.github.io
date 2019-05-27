@@ -307,6 +307,144 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/02/programming/Git使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitzwilliam">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fitzwilliam's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/02/programming/Git使用/" itemprop="url">Git使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-02T20:02:41+08:00">
+                2017-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Blog/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>恰当的使用git，对团队开发和项目管理起着至关重要的作用。<br>首先团队中使用Git同步要正确地使用分支、其次每次提交git commit的时候要有规范的注释<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/02/programming/Git使用/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/cpp/C++枚举类型使用总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -673,17 +811,26 @@
       
         
           
-          快速排序介绍快速排序是基于分治的一种排序算法。通过一趟排序将待排记录分割成独立的两部分，其中一部分记录的关键字均比另一部分记录的关键字小，则可分别对这两部分记录继续排序，以达到整个序列有序。
-快速排序基本特征时间复杂度：O(nlgn)。最快情况下O(N^2)空间复杂度：O(nlgn)不稳定
-part
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/29/algorithm/快排的几种实现方式/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="快速排序介绍"><a href="#快速排序介绍" class="headerlink" title="快速排序介绍"></a>快速排序介绍</h1><p>快速排序是基于分治的一种排序算法。<br>通过一趟排序将待排记录分割成独立的两部分，其中一部分记录的关键字均比另一部分记录的关键字小，则可分别对这两部分记录继续排序，以达到整个序列有序。</p>
+<h1 id="快速排序基本特征"><a href="#快速排序基本特征" class="headerlink" title="快速排序基本特征"></a>快速排序基本特征</h1><p>时间复杂度：O(nlgn)。最快情况下O(N^2)<br>空间复杂度：O(nlgn)<br>不稳定</p>
+<h1 id="partition"><a href="#partition" class="headerlink" title="partition"></a>partition</h1><p>快排最重要的是一趟快排的实现，最常用有以下两种写法：</p>
+<h2 id="填坑法"><a href="#填坑法" class="headerlink" title="填坑法"></a>填坑法</h2><p>这种实现方式是从两头到中间，每次从一边拿一个数来填充另一边的坑。<br>开始记录下a[low]，作为pivotkey枢纽值</p>
+<ol>
+<li>从最右边开始找到第一个比pivotkey小的数（如果是逆序的话就是大的数，调整判断符号即可），说明这个数应该被放到枢纽值左边去。</li>
+<li>把上面的那个小的数放到a[low]这个位置</li>
+<li>从最左边开始找到第一个比pivotkey大的数，说明这个数应该被放到枢纽值右边去。</li>
+<li>把上面的那个大的数放到a[high]这个位置<br>上面四步相当于放好了两个数的位置。<br>while循环从两头走到中间，每次放好两个数，直到全部走完，有时候放好一个数之后low &lt; high已经不满足了，就退出了。</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivotkey = a[low]; <span class="comment">//选第一个元素作为枢纽元</span></span><br><span class="line">    <span class="keyword">while</span> (low &lt; high) &#123;</span><br><span class="line">        <span class="keyword">while</span> (low &lt; high &amp;&amp; a[high] &gt; pivotkey) --high;</span><br><span class="line">        a[low] = a[high]; <span class="comment">//从后面开始找到第一个小于pivot的元素，放到low位置</span></span><br><span class="line">        <span class="keyword">while</span> (low &lt; high &amp;&amp; a[low] &lt; pivotkey) ++low;</span><br><span class="line">        a[high] = a[low]; <span class="comment">//从前面开始找到第一个大于pivot的元素，放到high位置</span></span><br><span class="line">    &#125;</span><br><span class="line">    a[low] = pivotkey; <span class="comment">//最后枢纽元放到low的位置</span></span><br><span class="line">    <span class="keyword">return</span> low; <span class="comment">//返回枢纽所在的位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>举例说明算法流程<br>数组a{3,5,1,2,4}<br>开始pivotkey为3，loc为0，low为0，high为4<br>第一次while循环high减到3，a[3] = 2 &lt; pivotkey，把a[high]放到a[low]处；low加到1，a[1] = 5 &gt; pivotkey，把a[low]放到a[high]处。此时a为{2,5,1,5,4}<br>第二次while循环high减到2，a[2] = 1 &lt; pivotkey，把a[high]放到a[low]处；low不再小于high，退出循环。此时a为{2,1,1,5,4}<br>最后将pivotkey枢纽值放到a[low]处，a变为{2,1,3,5,4}</p>
+<h2 id="遍历交换"><a href="#遍历交换" class="headerlink" title="遍历交换"></a>遍历交换</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivotkey = a[low]; <span class="comment">//选第一个元素作为枢纽元</span></span><br><span class="line">    <span class="keyword">int</span> loc = low; <span class="comment">//loc指向比pivot小的元素段的尾部</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = low + <span class="number">1</span>; i &lt;= high; ++i) &#123; <span class="comment">//比枢纽元小的元素依次放在前半部分</span></span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; pivotkey) &#123;</span><br><span class="line">            swap(a[i], a[++loc]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(a[low], a[loc]);</span><br><span class="line">    <span class="keyword">return</span> loc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>举例说明算法流程<br>数组a{3,5,1,2,4}<br>开始pivotkey为3，loc为0，low为0，high为4<br>开始i为1，a[1] = 5 &gt; pivotkey = 3，所以继续<br>接着i为2，a[2] = 1 &lt; pivotkey，首先loc加1，表示比pivotkey小的元素有一个了，交换a[i]和a[loc]，把这个元素放到左边去，此时数组a为{3,1,5,2,4}<br>接着i为3，a[3] = 2 &lt; pivotkey，loc加1，比pivotkey小的元素又多了一个，交换a[i]和a[loc]，把这个元素放到左边去，此时数组a为{3,1,2,5,4}<br>最后i为4，a[4] = 4 &gt; pivotkey，结束if循环<br>交换枢纽元素和最终loc所在的位置，此时loc左边的所有元素都比a[loc]小了。数组变为{2,1,3,5,4}</p>
+<p>从结果可见，两个写法等价。</p>
+<p>当然，这种方法也可以选择最后一个元素作为枢纽。但是通过统计得出，三分区中这种方式的效率最高。就是说a[low]，a[high]，a[mid]这三个值取中间大的值作为枢纽最好。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">midOfThree</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123; <span class="keyword">return</span> min(max(a, b), max(min(a, b), c)); &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivotkey = midOfThree(a[low], a[(low+high)/<span class="number">2</span>], a[high]);</span><br><span class="line">    <span class="keyword">int</span> index = low;</span><br><span class="line">    <span class="keyword">if</span> (a[low] == pivotkey) index = low;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (a[(low + high) / <span class="number">2</span>] == pivotkey) index = (low + high) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">else</span> index = high;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//先将枢纽值与a[low]交换，然后按照以a[low]为枢纽值的方式做就行了</span></span><br><span class="line">    swap(a[index], a[low]);</span><br><span class="line">    <span class="keyword">int</span> loc = low;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = low + <span class="number">1</span>; i &lt;= high; ++i) &#123; <span class="comment">//比枢纽元小的元素依次放在前半部分</span></span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; pivotkey) &#123;</span><br><span class="line">            swap(a[i], a[++loc]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(a[low], a[loc]);</span><br><span class="line">    <span class="keyword">return</span> loc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h1><p>快排主函数就是一个分治的过程<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (low &lt; high) &#123;</span><br><span class="line">        <span class="keyword">int</span> pivotloc = partition3(a, low, high);</span><br><span class="line">        QSort(a, low, pivotloc<span class="number">-1</span>); <span class="comment">//左边排一趟</span></span><br><span class="line">        QSort(a, pivotloc+<span class="number">1</span>, high); <span class="comment">//右边排一趟</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="非递归快排"><a href="#非递归快排" class="headerlink" title="非递归快排"></a>非递归快排</h1><p>还是要使用上面的一趟快排函数partition<br>使用栈辅助实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">void QSort(vector&lt;int&gt;&amp; a, int low, int high) &#123;</span><br><span class="line">    stack&lt;int&gt; s;</span><br><span class="line">    if (low &lt; high) &#123;</span><br><span class="line">        int pivotloc = partition(a, low, high);</span><br><span class="line">        if (low &lt; pivotloc - 1) &#123;</span><br><span class="line">            st.push(low);</span><br><span class="line">            st.push(pivotloc - 1);</span><br><span class="line">        &#125;</span><br><span class="line">        if (high &gt; pivotloc + 1) &#123;</span><br><span class="line">            st.push(pivotloc + 1);</span><br><span class="line">            st.push(high);</span><br><span class="line">        &#125;</span><br><span class="line">        while (!s.empty()) &#123;</span><br><span class="line">            int start = s.top(); s.pop();</span><br><span class="line">            int end = s.top(); s.pop();</span><br><span class="line">            int pivotloc2 = partition(a, start, end);</span><br><span class="line">            if (low &lt; pivotloc2 - 1) &#123;</span><br><span class="line">                st.push(low);</span><br><span class="line">                st.push(pivotloc2 - 1);</span><br><span class="line">            &#125;</span><br><span class="line">            if (high &gt; pivotloc2 + 1) &#123;</span><br><span class="line">                st.push(pivotloc2 + 1);</span><br><span class="line">                st.push(high);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -1544,144 +1691,6 @@ part
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/17/cpp/字符串拷贝/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fitzwilliam">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fitzwilliam's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/17/cpp/字符串拷贝/" itemprop="url">字符串拷贝</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-17T16:22:41+08:00">
-                2017-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Blog/" itemprop="url" rel="index">
-                    <span itemprop="name">Blog</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>字符串拷贝函数strcpy的实现也是面试中经常会考的问题。<br>函数声明为<br><code>char* strcpy(char* dst, const char* src);</code><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/17/cpp/字符串拷贝/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1730,7 +1739,7 @@ part
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">188</span>
+                <span class="site-state-item-count">189</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

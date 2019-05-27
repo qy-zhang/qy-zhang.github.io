@@ -307,6 +307,144 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/06/cpp/Effective Modern C++ 读书笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitzwilliam">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fitzwilliam's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/06/cpp/Effective Modern C++ 读书笔记/" itemprop="url">Effective Modern C++ 读书笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-06T10:12:50+08:00">
+                2017-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>《Effective modern c++》读书笔记<br><a href="https://www.kancloud.cn/kangdandan/book/169969" target="_blank" rel="noopener">网络资源</a><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/06/cpp/Effective Modern C++ 读书笔记/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/05/programming/编译器与解释器的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1225,17 +1363,66 @@
       
         
           
+            <a id="more"></a>
+<h1 id="进程相关"><a href="#进程相关" class="headerlink" title="进程相关"></a>进程相关</h1><h2 id="ps命令"><a href="#ps命令" class="headerlink" title="ps命令"></a>ps命令</h2><p>ps(process status)命令用来列出系统中当前运行的进程，列出的是当前系统中进程的快照，就是执行ps命令的那个时刻的那些进程。<br>通过ps命令可以确认有哪些程序正在运行、运行的状态、进程是否结束等信息。</p>
+<p>使用实例：<br>ps -A   显示所有进程信息<br>ps -u root  显示root用户进程信息<br>ps -ef  显示所有进程信息，包括命令行<br>ps aux  列出目前所有的正在内存中的程序</p>
+<p>重点最常用的：<br>ps -ef | grep ssh   查找ssh进程，ps与grep组合用法</p>
+<h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a>top命令</h2><p>top命令用来实时显示系统中各个进程的资源占用情况，类似于windows的任务管理器。</p>
+<h2 id="kill命令"><a href="#kill命令" class="headerlink" title="kill命令"></a>kill命令</h2><p>kill命令用来终止指定进程的运行。通常终止一个前台进程可以直接使用Ctrl+C，终止一个后台程序就需要使用kill命令了。</p>
+<p>使用实例：<br>找到vim进程杀掉<br>先通过ps命令得到进程id号pid   ps -ef | grep vim<br>kill pid</p>
+<p>kill -9 pid 彻底杀死进程，-9表示信号，如果没有带这个信号号码选项，默认是发出15这个信号，表示终止</p>
+<p>init进程是不可杀的，init进程是第一个进程，进程编号始终为1，其他所有的进程都是init进程的子孙。</p>
+<p>killall命令相当于ps和kill的综合，直接杀死进程名，不需要进程id<br>vi &amp;    后台挂载运行一个vi进程<br>killall -9 vi   直接杀掉所有vi进程</p>
+<h1 id="文件处理相关"><a href="#文件处理相关" class="headerlink" title="文件处理相关"></a>文件处理相关</h1><h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><p>cat命令用来连接文件或标准输出并打印。常用来显示文件内容，或者将几个文件连接起来显示。</p>
+<p>使用实例：<br>cat -n test1.txt test2.txt<br>将test1.txt和test2.txt文件内容加上行号后输入到控制台中。可以输出n个文件内容拼接在一起，不会影响原文件内容。</p>
+<p>cat -n test1.txt &gt; test2.txt<br>将test1.txt文件内容添加行号输入到test2.txt文件中，test2.txt文件内容被替换掉，控制台不输出信息。</p>
+<p>cat &gt; test.txt<br>创建一个文件，在控制台中输入文件内容，按下Ctrl+C来结束输入，输入的内容保存到文件中。</p>
+<h2 id="wc命令"><a href="#wc命令" class="headerlink" title="wc命令"></a>wc命令</h2><p>wc(word count)命令用来统计指定文件中的字节数、字数、行数，并将统计结果输出显示。</p>
+<p>使用实例：<br>假设有如下test.txt文件存在<br>hnlinux<br>peida.cnblogs.com<br>ubuntu<br>ubuntu linux<br>redhat<br>Redhat<br>linuxmint</p>
+<p>wc test.txt 输出文件行数、字数、字节数和文件名，结果为 7 8 70 test.txt<br>wc -l test.txt  输出文件行数和文件名，结果为 7 test.txt<br>wc -c test.txt  输出文件字节数和文件名，结果为 70 test.txt<br>wc -w test.txt  输出文件字数和文件名，结果为 8 test.txt</p>
+<p>通常wc命令会与ls、cat命令一起使用<br>cat test.txt | wc -l    输出文件行数<br>分析一下命名组成，首先通过cat命令将test.txt文件内容提取出来，然后通过wc命令来统计文件内容中的信息，所以最后只是输出文件的行数，没有文件，就不输出文件名了。</p>
+<p>ls -l | wc -l   输出当前目录下的文件数</p>
+<h2 id="grep命令"><a href="#grep命令" class="headerlink" title="grep命令"></a>grep命令</h2><p>grep(Global Regular Expression Print)命令是一种文本搜索工具，能够使用正则表达式搜索文本，并把匹配的行打印出来。<br>常用正则表达式：<br>a+表示a至少出现一次，a*表示a可以出现n次（0到n），a?表示a最多出现一次，a.表示a后面添加任意一个字符（除了换行）<br>[]表示一组字符，[^]表示不再[]中的字符，a{n}表示连续出现3个a</p>
+<p>使用实例：<br>ps -ef | grep svn   查找指定进程，输出所有结果到控制台<br>ps -ef | grep -c svn    查找指定进程个数，输出个数到控制台<br>grep ‘linux’ test.txt   在test.txt文件中查找与linux匹配的行，输出。可以在后面添加多个文件<br>cat test.txt | grep -f test2.txt    在文件test.txt中匹配test2.txt中的所有行，输出匹配结果</p>
+<h2 id="find命令"><a href="#find命令" class="headerlink" title="find命令"></a>find命令</h2><p>find /home -name “*.txt”    在/home目录下查找以.txt结尾的文件名</p>
+<p>linux下查找名字包含cvte的文件，再查找出的文件中找出包含abc的文件<br>find /home -name ‘<em>cvte</em>‘ | xargs grep “abc”</p>
+<p>find命令把匹配到的文件传递给xargs命令</p>
+<h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>Linux的文件权限可以分成三段，用户权限，组权限，其他权限。使用10个字符表示。<br>drwxr-xr-x<br>d表示是目录<br>第二到第四位表示<em>文件所有者</em>权限，读、写、执行<br>第五到第七位表示<em>文件所有者所在的组</em>权限，读、执行<br>第八到第十位表示<em>其他用户</em>权限，读、执行<br>r用4表示，w用2表示，x用1表示<br>所以上述drwxr-xr-x用数字表示就是755</p>
+<p>一般使用chmod命令修改文件权限<br>另外还有一种比较方便的针对某一类的用户的操作：<br>先介绍2个操作符. “+” 表示增加权限. “-“ 表示消减权限。<br>文件所有者可以用字母u表示；用户所在的组可以用字母g来表示；其他人可以用字母o来表示；所有人可以用字母a来表示。（其实就是单词ser、group、other、all的第一个字母）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod 644 readme.txt   # 修改readme.txt权限</span><br><span class="line">sudo chmod o+w readme.txt   # 为其他用户添加写权限</span><br><span class="line">sudo chmod g-w readme.txt   # 将组用户写权限去掉</span><br><span class="line">sudo chmod a+rwx readme.txt # 为所有用户添加读写执行权限</span><br><span class="line">sudo chmod -R 644 test      # 将test目录下所有文件修改为644权限</span><br><span class="line">sudo chown -R Qian test     # 将test目录下所有文件所有者修改为Qian</span><br></pre></td></tr></table></figure></p>
+<p>-R进行递归( recursive )的持续更改，即连同子目录下的所有文件、目录</p>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>首先几下几个内置变量</p>
+<p>| - | - |<br>| $0 | 当前记录（这个变量中存放着整个行的内容）|<br>| $1~$n| 当前记录的第n个字段，字段间由FS分隔|<br>| FS | 输入字段分隔符 默认是空格或Tab|<br>|NF|    当前记录中的字段个数，就是有多少列|<br>|NR    |已经读出的记录数，就是行号，从1开始，如果有多个文件话，这个值也是不断累加中。|<br>|FNR|    当前记录数，与NR不同的是，这个值会是各个文件自己的行号|<br>|RS|    输入的记录分隔符， 默认为换行符|<br>|OFS|    输出字段分隔符， 默认也是空格|<br>|ORS|    输出的记录分隔符，默认为换行符|<br>|FILENAME|    当前输入文件的名字| </p>
+<p>几个实例：<br>awk ‘$3==0 &amp;&amp; $6==”LISTEN” ‘ netstat.txt    #文件中第三列为0，第6列为LISTEN</p>
+<p><a href="https://coolshell.cn/articles/9070.html" target="_blank" rel="noopener">深入学习</a></p>
+<h1 id="网络相关"><a href="#网络相关" class="headerlink" title="网络相关"></a>网络相关</h1><h2 id="ifconfig命令"><a href="#ifconfig命令" class="headerlink" title="ifconfig命令"></a>ifconfig命令</h2><p>ifconfig    显示已激活的网络设备信息<br>ifconfig eth0 192.168.1.1   前一个参数为具体网卡，后一个为配置的IP地址</p>
+<h2 id="netstat命令"><a href="#netstat命令" class="headerlink" title="netstat命令"></a>netstat命令</h2><p>netstat命令用来显示与IP、TCP、UDP和ICMP协议相关的统计数据，一般用于检验本机各端口的网络连接情况。</p>
+<p>使用实例：<br>netstat -a  显示所有的有效连接信息，包括ESTABLISHED和LISTENING状态<br>netstat -nu 显示UDP连接状态，-n表示直接使用数字（IP地址）而不是使用域名，-u表示UDP</p>
+<h2 id="traceroute命令"><a href="#traceroute命令" class="headerlink" title="traceroute命令"></a>traceroute命令</h2><p>traceroute命令用来追踪网络数据包的路由途径。<br>底层是应用ICMP协议和TTL<br>使用实例：<br>traceroute <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>    </p>
+<h2 id="ping命令"><a href="#ping命令" class="headerlink" title="ping命令"></a>ping命令</h2><p>ping命名用来测试与目标主机的连通性。<br>linux下ping不会自动终止，需要按Ctrl+C终止或者用参数-c指定要求完成的回应次数。</p>
+<p>ping -c 10 192.168.120.206  指定ping次数</p>
+<h1 id="开发及调试"><a href="#开发及调试" class="headerlink" title="开发及调试"></a>开发及调试</h1><h2 id="gcc"><a href="#gcc" class="headerlink" title="gcc"></a>gcc</h2><p>gcc/g++在执行编译工作的时候，总共需要4步   </p>
+<ol>
+<li>预处理，生成.i的文件，预处理器cpp.exe</li>
+<li>将预处理后的文件不转换成汇编语言，生成文件.s，编译器egcs</li>
+<li>有汇编变为目标代码(机器代码)生成.o的文件，汇编器as.exe</li>
+<li>连接目标代码,生成可执行程序，连接器ld.exe</li>
+</ol>
+<p>gcc选项主要有如下几种：</p>
+<ul>
+<li><p>总体选项<br>-S激活预处理和编译，把文件编译成汇编代码<br>-c激活预处理、编译和汇编，将文件编译成obj</p>
+</li>
+<li><p>目录选项<br>-ldir添加include目录<br>-llibrary添加编译时使用的库</p>
+</li>
+<li><p>调试选项<br>-g产生调试信息</p>
+</li>
+<li><p>错误与警告选项<br>-w关闭警告<br>-Wall显示所有警告</p>
+</li>
+<li><p>优化选项<br>-O0表示没有优化，-O1为默认值，-O3优化级别最高</p>
+</li>
+</ul>
+<h2 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h2><p>启动gdb后，进入到交互模式，通过以下命令完成对程序的调试：<br>b设置断点；l查看源码；r运行程序；c继续执行；n表示step over；s表示step into；finish执行完当前函数；until直到退出循环体（后面可以加上行号）；q退出<br>p打印表达式；display单步时每次输出观察值；watch当监视的值改变暂停；whatis查询变量、函数<br>bt显示当前调用堆栈，up/down改变堆栈显示的深度；</p>
+
           
-进程相关ps命令ps(process status)命令用来列出系统中当前运行的进程，列出的是当前系统中进程的快照，就是执行ps命令的那个时刻的那些进程。通过ps命令可以确认有哪些程序正在运行、运行的状态、进程是否结束等信息。
-使用实例：ps -A   显示所有进程信息ps -u root  显示
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/24/back-end/Linux开发常用命令/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1544,145 +1731,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/cpp/C++ STL中map排序/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fitzwilliam">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fitzwilliam's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/18/cpp/C++ STL中map排序/" itemprop="url">C++ STL中map排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T16:18:37+08:00">
-                2017-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Note/" itemprop="url" rel="index">
-                    <span itemprop="name">Note</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>map是用来存放(key, value)键值对的数据结构，可以很方便快速的根据key查到相应的value。<br>假如存储学生姓名（假设不会重复）和其成绩，就可以定义map&lt;string, int&gt;来存储，map会自动根据map-&gt;first进行排序，所以最后如果使用iterator来遍历输出会是按照string排序输出。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; m;</span><br><span class="line">m[<span class="string">"Tom"</span>] = <span class="number">90</span>;</span><br><span class="line">m[<span class="string">"Bob"</span>] = <span class="number">70</span>;</span><br><span class="line">m[<span class="string">"Mary"</span>] = <span class="number">80</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;::iterator it = m.begin(); it != m.end(); ++it) &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="string">"\t"</span> &lt;&lt; it-&gt; second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出结果</span></span><br><span class="line">Bob     <span class="number">70</span></span><br><span class="line">Mary    <span class="number">80</span></span><br><span class="line">Tom     <span class="number">90</span></span><br></pre></td></tr></table></figure></p>
-<p>如果我们想要按照名字顺序倒序输出呢？或者是按照成绩map-&gt;second排序输出呢？<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/18/cpp/C++ STL中map排序/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1731,7 +1779,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">188</span>
+                <span class="site-state-item-count">189</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

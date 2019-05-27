@@ -75,7 +75,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="front-end,">
+  <meta name="keywords" content="db,">
 
 
 
@@ -91,18 +91,18 @@
 
 
 
-<meta name="description" content="Got to look successful to be successful.">
-<meta name="keywords" content="front-end">
+<meta name="description" content="介绍我们知道使用 WHERE 来执行匹配是不区分大小写的，同时在使用 LIKE 谓词来进行模糊匹配的时候也没有区分大小写解决此问题有两种方式：BINARY 和 COLLATE  在查询的字符串前面加上BINARY运算符 建表的时候对相应列加上BINARY 在查询时指定collation 在建表时指定collation  BINARYBINARY 不是函数，而是一个类型转换运算符，用来强制将它后面的">
+<meta name="keywords" content="db">
 <meta property="og:type" content="article">
-<meta property="og:title" content="fastjson配置">
-<meta property="og:url" content="http://yoursite.com/2019/05/13/fore-end/fastjson配置/index.html">
+<meta property="og:title" content="MySQL查询区分大小写">
+<meta property="og:url" content="http://yoursite.com/2019/05/21/database/MySQL查询区分大小写/index.html">
 <meta property="og:site_name" content="Fitzwilliam&#39;s Blog">
-<meta property="og:description" content="Got to look successful to be successful.">
+<meta property="og:description" content="介绍我们知道使用 WHERE 来执行匹配是不区分大小写的，同时在使用 LIKE 谓词来进行模糊匹配的时候也没有区分大小写解决此问题有两种方式：BINARY 和 COLLATE  在查询的字符串前面加上BINARY运算符 建表的时候对相应列加上BINARY 在查询时指定collation 在建表时指定collation  BINARYBINARY 不是函数，而是一个类型转换运算符，用来强制将它后面的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-13T03:14:02.363Z">
+<meta property="og:updated_time" content="2019-05-20T16:52:58.121Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fastjson配置">
-<meta name="twitter:description" content="Got to look successful to be successful.">
+<meta name="twitter:title" content="MySQL查询区分大小写">
+<meta name="twitter:description" content="介绍我们知道使用 WHERE 来执行匹配是不区分大小写的，同时在使用 LIKE 谓词来进行模糊匹配的时候也没有区分大小写解决此问题有两种方式：BINARY 和 COLLATE  在查询的字符串前面加上BINARY运算符 建表的时候对相应列加上BINARY 在查询时指定collation 在建表时指定collation  BINARYBINARY 不是函数，而是一个类型转换运算符，用来强制将它后面的">
 
 
 
@@ -130,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/13/fore-end/fastjson配置/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/21/database/MySQL查询区分大小写/">
 
 
 
 
 
-  <title>fastjson配置 | Fitzwilliam's Blog</title>
+  <title>MySQL查询区分大小写 | Fitzwilliam's Blog</title>
   
 
 
@@ -307,7 +307,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/fore-end/fastjson配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/21/database/MySQL查询区分大小写/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fitzwilliam">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">fastjson配置</h1>
+          <h1 class="post-title" itemprop="name headline">MySQL查询区分大小写</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-13T11:14:01+08:00">
-                2019-05-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-21T00:28:03+08:00">
+                2019-05-21
               </time>
             
 
@@ -371,7 +371,16 @@
       
 
       
-        
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>我们知道使用 WHERE 来执行匹配是不区分大小写的，同时在使用 LIKE 谓词来进行模糊匹配的时候也没有区分大小写<br>解决此问题有两种方式：BINARY 和 COLLATE</p>
+<ol>
+<li>在查询的字符串前面加上<code>BINARY</code>运算符</li>
+<li>建表的时候对相应列加上<code>BINARY</code></li>
+<li>在查询时指定collation</li>
+<li>在建表时指定collation</li>
+</ol>
+<h1 id="BINARY"><a href="#BINARY" class="headerlink" title="BINARY"></a>BINARY</h1><p>BINARY 不是函数，而是一个类型转换运算符，用来强制将它后面的字符串修改为<strong>二进制字符串</strong>，这样在进行字符串的比较的时候就会区分大小写了<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from employee_info_record;</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">| id | emp_id | emp_name    | emp_gender | emp_age | emp_email               | department_id | is_delete | create_time         | update_time         |</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">|  1 |      1 | ZH          | M          |       0 | zhang@meituan.com       |             1 |         0 | 2019-03-11 00:11:26 | 2019-05-21 00:34:51 |</span><br><span class="line">|  2 |      2 | qian        | f          |       0 | qian@meituan.com        |             1 |         0 | 2019-03-11 00:14:28 | 2019-03-11 00:41:24 |</span><br><span class="line">|  3 |      3 | qian        | f          |       0 | yi@meituan.com          |             1 |         0 | 2019-03-11 00:15:36 | 2019-03-11 00:41:37 |</span><br><span class="line">|  4 |      4 | zhangqianyi | m          |       0 | zhangqianyi@meituan.com |             1 |         1 | 2019-03-11 00:19:08 | 2019-03-11 00:29:43 |</span><br><span class="line">|  5 |    123 | zhangqianyi | m          |       0 | zhangqianyi@meituan.com |             1 |         0 | 2019-03-11 00:23:01 | 2019-03-11 00:23:01 |</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee_info_record <span class="built_in">where</span> emp_name like <span class="string">"ZH%"</span>;</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">| id | emp_id | emp_name    | emp_gender | emp_age | emp_email               | department_id | is_delete | create_time         | update_time         |</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">|  1 |      1 | ZH          | M          |       0 | zhang@meituan.com       |             1 |         0 | 2019-03-11 00:11:26 | 2019-05-21 00:34:51 |</span><br><span class="line">|  4 |      4 | zhangqianyi | m          |       0 | zhangqianyi@meituan.com |             1 |         1 | 2019-03-11 00:19:08 | 2019-03-11 00:29:43 |</span><br><span class="line">|  5 |    123 | zhangqianyi | m          |       0 | zhangqianyi@meituan.com |             1 |         0 | 2019-03-11 00:23:01 | 2019-03-11 00:23:01 |</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee_info_record <span class="built_in">where</span> emp_name like binary <span class="string">"ZH%"</span>;</span><br><span class="line">+----+--------+----------+------------+---------+-------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">| id | emp_id | emp_name | emp_gender | emp_age | emp_email         | department_id | is_delete | create_time         | update_time         |</span><br><span class="line">+----+--------+----------+------------+---------+-------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">|  1 |      1 | ZH       | M          |       0 | zhang@meituan.com |             1 |         0 | 2019-03-11 00:11:26 | 2019-05-21 00:34:51 |</span><br><span class="line">+----+--------+----------+------------+---------+-------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h1 id="collate"><a href="#collate" class="headerlink" title="collate"></a>collate</h1><p>在MySQL中，对于Column Collate其约定的命名方法如下：<br>| 命名方式 | 介绍 |<br>| - | - |<br>| <em>_bin | 表示的是binary case sensitive collation，也就是说是区分大小写的 |<br>| </em>_cs | case sensitive collation，区分大小写 |<br>| *_ci | case insensitive collation，不区分大小写 |</p>
+
       
     </div>
 
@@ -400,7 +409,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/front-end/" rel="tag"># front-end</a>
+            <a href="/tags/db/" rel="tag"># db</a>
           
         </div>
       
@@ -422,6 +431,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/27/java/spring/Spring框架核心概念学习/" rel="prev" title="Spring框架核心概念学习">
+                Spring框架核心概念学习 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -469,8 +482,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg" alt="Fitzwilliam">
           <p class="site-author-name" itemprop="name">Fitzwilliam</p>
@@ -483,7 +505,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">188</span>
+                <span class="site-state-item-count">189</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -550,6 +572,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BINARY"><span class="nav-number">2.</span> <span class="nav-text">BINARY</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#collate"><span class="nav-number">3.</span> <span class="nav-text">collate</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

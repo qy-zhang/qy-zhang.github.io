@@ -307,6 +307,162 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/java/basic/ThreadLocal学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitzwilliam">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fitzwilliam's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/01/java/basic/ThreadLocal学习/" itemprop="url">ThreadLocal学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-01T11:53:48+08:00">
+                2018-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="对比理解"><a href="#对比理解" class="headerlink" title="对比理解"></a>对比理解</h1><h2 id="ThreadLocal与类的普通成员变量"><a href="#ThreadLocal与类的普通成员变量" class="headerlink" title="ThreadLocal与类的普通成员变量"></a>ThreadLocal与类的普通成员变量</h2><p>类的普通成员变量是<strong>线程共享</strong>的，而ThreadLocal是<strong>线程私有</strong>的。<br>也就是说对于一个类对象来说，当线程结束的时候ThreadLocal中的数据需要重新设置，而普通成员变量要等到类对象生命周期结束才被释放。</p>
+<p>所以ThreadLocal中保存的数据作用域在线程中，类的普通成员变量作用域在类对象生命周期中，类的静态成员变量生命周期在类被加载释放过程中。</p>
+<h2 id="ThreadLocal与Synchronized"><a href="#ThreadLocal与Synchronized" class="headerlink" title="ThreadLocal与Synchronized"></a>ThreadLocal与Synchronized</h2><p>这两个都是为了解决变量在多线程中访问冲突的问题。但是两者处理方式不同。</p>
+<ul>
+<li>Synchronized同步机制采用了“以时间换空间”的方式，为该变量加上锁，让不同的线程排队访问；</li>
+<li>ThreadLocal采用了“以空间换时间”的方式，为每一个线程都提供了一份变量，因此可以同时访问而互不影响。</li>
+</ul>
+<p>Synchronized直接为变量加锁，一次只允许一个线程进入临界区读写变量，这样保证了没有读写冲突。<br>ThreadLocal通过initialValue方法存了一份变量的拷贝到map中，访问变量的时候通过get从map中查询保存的副本即可，但是如果需要设置值的话调用set方法</p>
+<h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><h2 id="ThreadLocalMap"><a href="#ThreadLocalMap" class="headerlink" title="ThreadLocalMap"></a>ThreadLocalMap</h2><p>每一个Thread对象都有一个ThreadLocalMap对象，这个ThreadLocalMap持有对象的<strong>弱引用</strong>（方便GC回收）。<br>ThreadLocalMap以当前的threadlocal对象为key，以真正的存储对象为value。get时通过threadlocal实例就可以找到绑定在当前线程上的对象。</p>
+<h3 id="ThreadLocalMap中的节点"><a href="#ThreadLocalMap中的节点" class="headerlink" title="ThreadLocalMap中的节点"></a>ThreadLocalMap中的节点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>&#123;</span><br><span class="line">    <span class="comment">// 存入ThreadLocal中的值</span></span><br><span class="line">    Object value;</span><br><span class="line">    Entry(java.lang.ThreadLocal&lt;?&gt; k, Object v) &#123;</span><br><span class="line">        <span class="keyword">super</span>(k);</span><br><span class="line">        value = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Entry便是ThreadLocalMap里定义的节点，如果这里使用普通的key-value形式来定义存储结构，实质上就会造成节点的生命周期与线程强绑定，只要线程没有销毁，那么节点在GC分析中一直处于可达状态，没办法被回收。（摘自<a href="https://www.cnblogs.com/micrari/p/6790229.html" target="_blank" rel="noopener">博客</a>）</p>
+<h2 id="ThreadLocalMap的存储结构"><a href="#ThreadLocalMap的存储结构" class="headerlink" title="ThreadLocalMap的存储结构"></a>ThreadLocalMap的存储结构</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INITIAL_CAPACITY = <span class="number">16</span>; <span class="comment">// 初始容量，必须为2的幂</span></span><br><span class="line"><span class="keyword">private</span> Entry[] table;                          <span class="comment">// 节点表</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;                           <span class="comment">// 节点个数</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> threshold;                          <span class="comment">// 重新分配表大小的阈值，默认为0</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setThreshold</span><span class="params">(<span class="keyword">int</span> len)</span> </span>&#123;            <span class="comment">// 节点数到达2/3容量的时候重新分配表</span></span><br><span class="line">    threshold = len * <span class="number">2</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nextIndex</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> len)</span> </span>&#123;  <span class="comment">// 环形结构查找下一个节点</span></span><br><span class="line">    <span class="keyword">return</span> ((i + <span class="number">1</span> &lt; len) ? i + <span class="number">1</span> : <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ThreadLocal需要维持一个最坏2/3的负载因子。由于ThreadLocalMap使用<strong>线性探测法</strong>来解决散列冲突，所以实际上Entry节点数组在程序逻辑上是作为一个环形存在的。</p>
+<p>ThreadLocalMap的内部存储结构如下所示，虚线代表弱引用，实线代表强引用<br><img src="/image/java/thread_local_map.png" alt="ThreadLocalMap"></p>
+<h2 id="ThreadLocalMap构造"><a href="#ThreadLocalMap构造" class="headerlink" title="ThreadLocalMap构造"></a>ThreadLocalMap构造</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocalMap(ThreadLocal&lt;?&gt; firstKey, Object firstValue) &#123;</span><br><span class="line">    table = <span class="keyword">new</span> Entry[INITIAL_CAPACITY];  <span class="comment">// </span></span><br><span class="line">    <span class="keyword">int</span> i = firstKey.threadLocalHashCode &amp; (INITIAL_CAPACITY - <span class="number">1</span>);  <span class="comment">// 哈希函数</span></span><br><span class="line">    table[i] = <span class="keyword">new</span> Entry(firstKey, firstValue); <span class="comment">// 添加一个新节点</span></span><br><span class="line">    size = <span class="number">1</span>; <span class="comment">// 设置节点数目</span></span><br><span class="line">    setThreshold(INITIAL_CAPACITY); <span class="comment">// 设置扩容阈值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重点分析一下哈希函数。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> threadLocalHashCode = nextHashCode();</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HASH_INCREMENT = <span class="number">0x61c88647</span>; <span class="comment">// 通过理论与实践，当我们用0x61c88647作为魔数累加为每个ThreadLocal分配各自的ID也就是threadLocalHashCode再与2的幂取模，得到的结果分布很均匀。</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">nextHashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> nextHashCode.getAndAdd(HASH_INCREMENT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">​</span><br><span class="line"><span class="function"><span class="keyword">private</span> Entry <span class="title">getEntry</span><span class="params">(ThreadLocal&lt;?&gt; key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = key.threadLocalHashCode &amp; (table.length - <span class="number">1</span>); <span class="comment">// 获取线threadlocal的哈希值</span></span><br><span class="line">    Entry e = table[i];</span><br><span class="line">    <span class="keyword">if</span> (e != <span class="keyword">null</span> &amp;&amp; e.get() == key)  <span class="comment">// 从表中查找到了直接返回</span></span><br><span class="line">        <span class="keyword">return</span> e;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> getEntryAfterMiss(key, i, e);  <span class="comment">// 没有找到继续线性探测（其实就是调用while循环判断nextIndex是否匹配）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>get方法线性探测时扫描环形map顺便做了<strong>清理工作</strong>，如果弱引用的对象被回收，清理节点，然后对非空的节点做rehash</p>
+<h4 id="remove方法"><a href="#remove方法" class="headerlink" title="remove方法"></a>remove方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(ThreadLocal&lt;?&gt; key)</span> </span>&#123;</span><br><span class="line">    Entry[] tab = table;</span><br><span class="line">    <span class="keyword">int</span> len = tab.length;</span><br><span class="line">    <span class="keyword">int</span> i = key.threadLocalHashCode &amp; (len - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (Entry e = tab[i];</span><br><span class="line">         e != <span class="keyword">null</span>;</span><br><span class="line">         e = tab[i = nextIndex(i, len)]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (e.get() == key) &#123;</span><br><span class="line">            e.clear(); <span class="comment">// 显式断开弱引用</span></span><br><span class="line">            expungeStaleEntry(i); <span class="comment">// 进行段清理，清理节点和rehash</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="set方法"><a href="#set方法" class="headerlink" title="set方法"></a>set方法</h4><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.peidasoft.dateformat;</span><br><span class="line">​</span><br><span class="line"><span class="keyword">import</span> java.text.DateFormat;</span><br><span class="line"><span class="keyword">import</span> java.text.ParseException;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line">​</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcurrentDateUtil</span> </span>&#123;</span><br><span class="line">​</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;DateFormat&gt; threadLocal = <span class="keyword">new</span> ThreadLocal&lt;DateFormat&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> DateFormat <span class="title">initialValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">​</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Date <span class="title">parse</span><span class="params">(String dateStr)</span> <span class="keyword">throws</span> ParseException </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> threadLocal.get().parse(dateStr);</span><br><span class="line">    &#125;</span><br><span class="line">​</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">format</span><span class="params">(Date date)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> threadLocal.get().format(date);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为什么要用static ThreadLocal<br>通过学习<a href="https://blog.csdn.net/zxh87/article/details/19414885" target="_blank" rel="noopener">链接</a>中的SimpleDateFormat线程安全分析可以看出来，static ThreadLocal能够做到线程独享，比方法独享在并发环境中能减少不少创建对象的开销。</p>
+<p>在一个读取数据库数据导出到excel文件的例子当中，每次处理一个时间信息的时候，就需要创建一个SimpleDateFormat实例对象，然后再丢弃这个对象。大量的对象就这样被创建出来，占用大量的内存和jvm空间。所以可以考虑定义static对象，这样就不会重复创建销毁对象。<br>但是SimpleDateFormat不是线程安全的，在format函数中调用了<code>calendar.setTime(date)</code>来修改calendar状态，在多线程环境下会引发线程安全问题。如果通过<code>synchronized</code>为对象加锁，会导致其他线程阻塞等待，对多线程性能有影响。</p>
+<p>综合考虑使用<code>static ThreadLocal</code>，ThreadLocal将SimpleDateFormat的对象变为线程独享（而不用在线程中定义线程变量），static保证不会重复创建销毁对象。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/java/basic/String和StringBuilder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -397,16 +553,44 @@
       
         
           
-          可变性String创建的字符串是不可变的，而StringBuilder通过创建的字符串可变。
-String对象内容String对象s在创建的时候先查看常量池中是否有”hello”，有则指向它，没有就创建一个”hello”，再指向它，但当重新对s赋值为”world”时，常量池中的”hello”并没有改
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/25/java/basic/String和StringBuilder/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="可变性"><a href="#可变性" class="headerlink" title="可变性"></a>可变性</h2><p>String创建的字符串是不可变的，而StringBuilder通过创建的字符串可变。</p>
+<h3 id="String对象内容"><a href="#String对象内容" class="headerlink" title="String对象内容"></a>String对象内容</h3><p>String对象s在创建的时候先查看常量池中是否有”hello”，有则指向它，没有就创建一个”hello”，再指向它，但当重新对s赋值为”world”时，常量池中的”hello”并没有改变，java会重新开辟一个内存存储新值”world”，并令s指向”world”；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span></span></span><br><span class="line"><span class="class">    <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">char</span> value[]; <span class="comment">//final使之初始化后不可改变（其实也可以通过反射来改变）</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.javaspecialists.eu/talks/oslo09/ReflectionMadness.pdf" target="_blank" rel="noopener">https://www.javaspecialists.eu/talks/oslo09/ReflectionMadness.pdf</a></p>
+<h2 id="StringBuilder对象内容"><a href="#StringBuilder对象内容" class="headerlink" title="StringBuilder对象内容"></a>StringBuilder对象内容</h2><p>在创建StringBuilder对象时，java实际上在堆中创建了字符类型数组char[]，存储完”hello”后通过append方法在增加”world”，并未开辟新的内存区，形参和实参指向同一区域，因此形参对对象内容进行变化，实参也会跟着变化；<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBuilder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(<span class="number">16</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">char</span>[] value;</span><br><span class="line">AbstractStringBuilder(<span class="keyword">int</span> capacity) &#123;</span><br><span class="line">    value = <span class="keyword">new</span> <span class="keyword">char</span>[capacity];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>StringBuilder实际创建了一个默认16字符长的char型数组(亦可指定长度)：<code>char[] value</code></p>
+<p>若为对象赋值时，所存储的字符串长度未超过所定义的char数组长度，则按顺序存储相应字符，若超过所定义的数组长度，则自动扩充其长度，因此说StringBuffer是可变的；</p>
+<h3 id="StringBuilder自动扩容"><a href="#StringBuilder自动扩容" class="headerlink" title="StringBuilder自动扩容"></a>StringBuilder自动扩容</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> AbstractStringBuilder <span class="title">append</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (str == <span class="keyword">null</span>)</span><br><span class="line">        <span class="keyword">return</span> appendNull();</span><br><span class="line">    <span class="keyword">int</span> len = str.length();</span><br><span class="line">    ensureCapacityInternal(count + len); <span class="comment">// 判断append字符串之后的长度是否超过预设长度</span></span><br><span class="line">    str.getChars(<span class="number">0</span>, len, value, count);</span><br><span class="line">    count += len;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (minimumCapacity - value.length &gt; <span class="number">0</span>)</span><br><span class="line">        expandCapacity(minimumCapacity);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">expandCapacity</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> newCapacity = value.length * <span class="number">2</span> + <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minimumCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = minimumCapacity;</span><br><span class="line">    <span class="keyword">if</span> (newCapacity &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (minimumCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</span><br><span class="line">        newCapacity = Integer.MAX_VALUE;</span><br><span class="line">    &#125;</span><br><span class="line">    value = Arrays.copyOf(value, newCapacity);</span><br><span class="line">&#125;</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<p>当为StringBuilder对象增加内容时，会先计算所需最小空间：<code>minimumCapacity=count+len;</code>并与原数组长度的2倍+2即newCapacity进行比较，取较大值并为数组value重新赋值，赋值采用的是数组复制的方式进行；</p>
+<p>常见的数组复制有两种方法：一为：<code>Arrays.copyOf()</code>，另一为：<code>System.arraycopy()</code>，差别在于后者可能存在下标越界的问题，其实前者也是通过调用后者的方法来实现的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">char</span>[] copyOf(<span class="keyword">char</span>[] original, <span class="keyword">int</span> newLength) &#123;</span><br><span class="line">    <span class="keyword">char</span>[] copy = <span class="keyword">new</span> <span class="keyword">char</span>[newLength];</span><br><span class="line">    System.arraycopy(original, <span class="number">0</span>, copy, <span class="number">0</span>,</span><br><span class="line">                     Math.min(original.length, newLength));</span><br><span class="line">    <span class="keyword">return</span> copy;</span><br><span class="line">&#125;</span><br><span class="line">​</span><br></pre></td></tr></table></figure></p>
+<h2 id="String-“-”-运算符"><a href="#String-“-”-运算符" class="headerlink" title="String “+” 运算符"></a>String “+” 运算符</h2><p>编译器在解析String”+”运算时，会转换成StringBuilder，调用append()方法，再通过toString()赋值，因此循环运算时，就不断发生创建对象和产生垃圾，这过程消耗了资源，造成了效率的下降；</p>
+<p>如果直接把String的”+”运算写成形如：<code>s=&quot;&quot;+1+1+1……</code>，而不是通过循环来不断调用变量，则编译器会直接求出其字面量，运行时不会再转换为StringBuilder</p>
+<h2 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode"></a>hashCode</h2><p>String和StringBuilder的hashCode表现不同<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">"hello"</span>;</span><br><span class="line">System.out.println(s.hashCode()); <span class="comment">// 99162322</span></span><br><span class="line">s = <span class="string">"world"</span>;</span><br><span class="line">System.out.println(s.hashCode()); <span class="comment">// 113318802</span></span><br><span class="line">String s2 = <span class="string">"hello"</span>;</span><br><span class="line">System.out.println(s2.hashCode()); <span class="comment">// 99162322</span></span><br><span class="line">​</span><br><span class="line">StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder(<span class="string">"hello"</span>);</span><br><span class="line">System.out.println(stringBuilder.hashCode()); <span class="comment">// 1173230247</span></span><br><span class="line">stringBuilder.append(<span class="string">"world"</span>);</span><br><span class="line">System.out.println(stringBuilder.hashCode()); <span class="comment">// 1173230247</span></span><br><span class="line">StringBuilder stringBuilder2 = <span class="keyword">new</span> StringBuilder(<span class="string">"hello"</span>);</span><br><span class="line">System.out.println(stringBuilder2.hashCode()); <span class="comment">// 856419764</span></span><br></pre></td></tr></table></figure></p>
+<p>通过hashCode函数可以看出来两个内容相同的String对象s和s2的hashCode值相同，而同一个String对象经过赋值之后的hashCode值不同了。</p>
+<p>分别介绍他们的hashCode函数的实现：</p>
+<h3 id="StringBuilder-hashCode"><a href="#StringBuilder-hashCode" class="headerlink" title="StringBuilder.hashCode()"></a>StringBuilder.hashCode()</h3><p>StringBuilder没有重载Object类的hashCode()函数，所以对StringBuilder的hashCode分析较为简单<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns a hash code value for the object. This method is</span></span><br><span class="line"><span class="comment"> * supported for the benefit of hash tables such as those provided by</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> java.util.HashMap&#125;.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * The general contract of &#123;<span class="doctag">@code</span> hashCode&#125; is:</span></span><br><span class="line"><span class="comment"> * &lt;ul&gt;</span></span><br><span class="line"><span class="comment"> * &lt;li&gt;Whenever it is invoked on the same object more than once during</span></span><br><span class="line"><span class="comment"> *     an execution of a Java application, the &#123;<span class="doctag">@code</span> hashCode&#125; method</span></span><br><span class="line"><span class="comment"> *     must consistently return the same integer, provided no information</span></span><br><span class="line"><span class="comment"> *     used in &#123;<span class="doctag">@code</span> equals&#125; comparisons on the object is modified.</span></span><br><span class="line"><span class="comment"> *     This integer need not remain consistent from one execution of an</span></span><br><span class="line"><span class="comment"> *     application to another execution of the same application.</span></span><br><span class="line"><span class="comment"> * &lt;li&gt;If two objects are equal according to the &#123;<span class="doctag">@code</span> equals(Object)&#125;</span></span><br><span class="line"><span class="comment"> *     method, then calling the &#123;<span class="doctag">@code</span> hashCode&#125; method on each of</span></span><br><span class="line"><span class="comment"> *     the two objects must produce the same integer result.</span></span><br><span class="line"><span class="comment"> * &lt;li&gt;It is &lt;em&gt;not&lt;/em&gt; required that if two objects are unequal</span></span><br><span class="line"><span class="comment"> *     according to the &#123;<span class="doctag">@link</span> java.lang.Object#equals(java.lang.Object)&#125;</span></span><br><span class="line"><span class="comment"> *     method, then calling the &#123;<span class="doctag">@code</span> hashCode&#125; method on each of the</span></span><br><span class="line"><span class="comment"> *     two objects must produce distinct integer results.  However, the</span></span><br><span class="line"><span class="comment"> *     programmer should be aware that producing distinct integer results</span></span><br><span class="line"><span class="comment"> *     for unequal objects may improve the performance of hash tables.</span></span><br><span class="line"><span class="comment"> * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * As much as is reasonably practical, the hashCode method defined by</span></span><br><span class="line"><span class="comment"> * class &#123;<span class="doctag">@code</span> Object&#125; does return distinct integers for distinct</span></span><br><span class="line"><span class="comment"> * objects. (This is typically implemented by converting the internal</span></span><br><span class="line"><span class="comment"> * address of the object into an integer, but this implementation</span></span><br><span class="line"><span class="comment"> * technique is not required by the</span></span><br><span class="line"><span class="comment"> * Java&amp;trade; programming language.)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span>  a hash code value for this object.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span>     java.lang.Object#equals(java.lang.Object)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@see</span>     java.lang.System#identityHashCode</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>Object.hashCode是一个native方法，看不到源码。</p>
+<p>在<a href="https://blog.csdn.net/xusiwei1236/article/details/45152201/" target="_blank" rel="noopener">博客</a>中给出了使用jni来通过获取java对象和指针的内存地址。</p>
+<h3 id="String-hashCode"><a href="#String-hashCode" class="headerlink" title="String.hashCode()"></a>String.hashCode()</h3><p>String的hashCode函数进行了重载<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Returns a hash code for this string. The hash code for a</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@code</span> String&#125; object is computed as</span></span><br><span class="line"><span class="comment"> * &lt;blockquote&gt;&lt;pre&gt;</span></span><br><span class="line"><span class="comment"> * s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]</span></span><br><span class="line"><span class="comment"> * &lt;/pre&gt;&lt;/blockquote&gt;</span></span><br><span class="line"><span class="comment"> * using &#123;<span class="doctag">@code</span> int&#125; arithmetic, where &#123;<span class="doctag">@code</span> s[i]&#125; is the</span></span><br><span class="line"><span class="comment"> * &lt;i&gt;i&lt;/i&gt;th character of the string, &#123;<span class="doctag">@code</span> n&#125; is the length of</span></span><br><span class="line"><span class="comment"> * the string, and &#123;<span class="doctag">@code</span> ^&#125; indicates exponentiation.</span></span><br><span class="line"><span class="comment"> * (The hash value of the empty string is zero.)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span>  a hash code value for this object.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h = hash;</span><br><span class="line">    <span class="keyword">if</span> (h == <span class="number">0</span> &amp;&amp; value.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">char</span> val[] = value;</span><br><span class="line">​</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; value.length; i++) &#123;</span><br><span class="line">            h = <span class="number">31</span> * h + val[i];</span><br><span class="line">        &#125;</span><br><span class="line">        hash = h;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> h;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>String类的hashCode的计算过程在注释中已有体现：<code>hash = s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1]</code></p>
+<p>转一篇<a href="https://segmentfault.com/a/1190000010799123" target="_blank" rel="noopener">博客</a>来解释为什么出现 31 这个常量</p>
+<p>结论是：</p>
+<ol>
+<li>31作为一个不大不小的质数能够有效的降低哈希算法的冲突率，同时不会因为指数爆炸导致的整数溢出</li>
+<li>31有一个很好的特性，即乘法运算可以被移位和减法运算取代，来获取更好的性能：31 * i == (i &lt;&lt; 5) - i，现代的 Java 虚拟机可以自动的完成这个优化。</li>
+</ol>
+<h3 id="hashCode与对象的内存地址"><a href="#hashCode与对象的内存地址" class="headerlink" title="hashCode与对象的内存地址"></a>hashCode与对象的内存地址</h3><p>通过Object.hashCode()上面的注释可以看出来，这个方法的典型实现是通过把对象的内部地址转为为整数。但是实际上hashCode是一个辅助作用的数值，而不是实际的内存地址。<br>hash值是根据一个哈希算法得到的，理论上来说哈希算法会有冲突，所以会存在两个不一样的对象的哈希值相等。</p>
+<p>如果要获取Java对象的内存地址，可以有如下方式：</p>
+<ul>
+<li>通过上面的介绍我们知道了<code>Object.hashCode()</code>是一个native方法，所以可以通过jni来使用C++获取对象的内存地址</li>
+<li>使用<code>sun.misc.Unsafe</code>类来直接操作Java内存空间</li>
+</ul>
+<p><a href="https://bijian1013.iteye.com/blog/2300961" target="_blank" rel="noopener">如何获得java对象的内存地址</a><br><a href="https://bijian1013.iteye.com/blog/2232847" target="_blank" rel="noopener">Java直接内存读写</a></p>
+<h2 id="equals"><a href="#equals" class="headerlink" title="equals"></a>equals</h2><p>String重载了equals方法，比较的是内容是否相等</p>
+<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><p>public boolean equals(Object anObject) {<br>    if (this == anObject) {<br>        return true;<br>    }<br>    if (anObject instanceof String) {<br>        String anotherString = (String)anObject;<br>        int n = value.length;<br>        if (n == anotherString.value.length) {<br>          char v1[] = value;<br>          char v2[] = anotherString.value;<br>          int i = 0;<br>          while ((n–) != 0) {<br>              if (v1[i] != v2[i])<br>                  return false;<br>              i++;<br>          }<br>          return true;<br>        }<br>    }<br>    return false;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">StringBuilder继承了Object的equals方法，比较的是内存地址是否相等</span><br><span class="line">```Java</span><br><span class="line">public boolean equals(Object obj) &#123;</span><br><span class="line">    return (this == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果想要比较两个StringBuilder对象的内容是否相同，可以调用toString()方法将它转换成String对象在调用equals方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder stringBuilder1 = <span class="keyword">new</span> StringBuilder(<span class="string">"hello"</span>);</span><br><span class="line">StringBuilder stringBuilder2 = <span class="keyword">new</span> StringBuilder(<span class="string">"hello"</span>);</span><br><span class="line">System.out.println(stringBuilder1.toString().equals(stringBuilder2.toString())); <span class="comment">// true</span></span><br><span class="line">​</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Create a copy, don't share the array</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(value, <span class="number">0</span>, count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -538,16 +722,20 @@ String对象内容String对象s在创建的时候先查看常量池中是否有�
       
         
           
-          基本概念AOP 框架其实可以将它理解为一个拦截器框架，如果它拦截了一个类，那么它就拦截了这个类中所有的方法。在项目中往往只需要拦截特定的方法就行了，为了解决所有方法被拦截这个问题，引入了切面的概念。
-| 概念 | 作用 || 切点（PointCut） | 在哪个地方进行切入,它可以指定某一个点，也可
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/16/java/spring/Spring AOP学习/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>AOP 框架其实可以将它理解为一个<strong>拦截器</strong>框架，如果它拦截了一个类，那么它就拦截了这个类中所有的方法。在项目中往往只需要拦截特定的方法就行了，为了解决所有方法被拦截这个问题，引入了<strong>切面</strong>的概念。</p>
+<p>| 概念 | 作用 |<br>| 切点（PointCut） | 在哪个地方进行切入,它可以指定某一个点，也可以指定多个点 |<br>| 通知（advice） | 在切入点干什么，切面的实际实现，打日志、执行缓存、处理异常等等 |<br>| 切面（aspect） | PointCut + Advice 形成了切面Aspect要实现的交叉功能，是系统模块化的一个切面或者领域，如日志记录 |<br>| 代理 | 将通知用到目标对象后创建的对象，应用系统的其他部分不用为支持代理对象而改变 |<br>| 目标对象（target） | 被通知的对象 |<br>| 织入 | 将切面应用到目标对象从而创建一个新代理对象的过程，织入发生在目标对象生命周期的多个点上。在配置interceptionForNames时发生 |<br>| 引入 | 为类添加新方法和属性 |</p>
+<p>当通过代理对象去实现aop时，获取的ProxyFacotoryBean是什么类型？<br>返回的是一个代理对象，如果目标对象<strong>实现了接口</strong>，则spring使用<strong>jdk动态代理</strong>技术；如果没有实现接口，则使用<strong>CGLib</strong>技术。</p>
+<h1 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h1><p>静态和动态是由<strong>代理产生的时间段</strong>来决定的。静态代理产生于<strong>代码编译</strong>阶段，动态代理产生于<strong>运行</strong>阶段。</p>
+<p>我们以一个例子来理解代理：打日志</p>
+<h2 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPerson</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">IPerson</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123; <span class="comment">// 实现接口中的方法</span></span><br><span class="line">        System.out.println(<span class="string">"Person.doSomething"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonProxy</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> IPerson iPerson;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Logger logger = LoggerFactory.getLogger(PersonProxy.class);</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PersonProxy</span><span class="params">(IPerson iPerson)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.iPerson = iPerson;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"Before Proxy"</span>); <span class="comment">// 在方法调用前后添加通知</span></span><br><span class="line">        iPerson.doSomething();</span><br><span class="line">        logger.info(<span class="string">"After Proxy"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        PersonProxy personProxy = <span class="keyword">new</span> PersonProxy(<span class="keyword">new</span> Person());</span><br><span class="line">        personProxy.doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种代理方式需要编写固定的接口，并且需要实现接口中的每一个方法。</p>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><p>我们不想实现接口中的每一个方法，希望能够编写代理作用于所有的函数上。这样可以通过运行期的反射机制实现。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object delegate;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(<span class="keyword">this</span>.getClass();</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">bind</span><span class="params">(Object delegate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.delegate = delegate;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(delegate.getClass().getClassLoader(), delegate.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        Object result = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            logger.info(<span class="string">"Before Proxy"</span>);</span><br><span class="line">            result = method.invoke(delegate, args);</span><br><span class="line">            logger.info(<span class="string">"After Proxy"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        PersonProxy personProxy = <span class="keyword">new</span> PersonProxy();</span><br><span class="line">        IPerson iperson = (IPerson) personProxy.bind(<span class="keyword">new</span> Person());</span><br><span class="line">        iperson.doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种做法有一个局限，只有实现了接口的类才能为其实现代理。</p>
+<h2 id="CGLib"><a href="#CGLib" class="headerlink" title="CGLib"></a>CGLib</h2><p>CGLib在<strong>运行</strong>时期（非编译时期）生成被代理对象的子类，并<strong>重写了被代理对象的所有方法</strong>，从而作为代理对象。<br>相当于CGLib帮我们完成了静态代理。<br>（注意：final类无法生成子类，所以无法使用CGLib）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonProxy</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object delegate;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(<span class="keyword">this</span>.getClass());</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object proxy, Method method, Object[] args,  MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"Before Proxy"</span>);</span><br><span class="line">        Object result = methodProxy.invokeSuper(method, args);</span><br><span class="line">        logger.info(<span class="string">"After Proxy"</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Person <span class="title">getProxyInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Enhancer enhancer = <span class="keyword">new</span> Enhancer();</span><br><span class="line">        enhancer.setSuperclass(Person.class);</span><br><span class="line">         </span><br><span class="line">        enhancer.setCallback(<span class="keyword">new</span> PersonProxy());</span><br><span class="line">        <span class="keyword">return</span> (Person) enhancer.create();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="切面"><a href="#切面" class="headerlink" title="切面"></a>切面</h2><p>Advisor（切面）封装了 Advice（增强）与 Pointcut（切点 ）</p>
+
+          
         
       
     </div>
@@ -1141,7 +1329,7 @@ String对象内容String对象s在创建的时候先查看常量池中是否有�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/19/java/spring/Spring技术内幕 深入解析Spring架构与设计原理 读书笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/19/java/spring/《Spring技术内幕 深入解析Spring架构与设计原理》/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fitzwilliam">
@@ -1160,7 +1348,7 @@ String对象内容String对象s在创建的时候先查看常量池中是否有�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/03/19/java/spring/Spring技术内幕 深入解析Spring架构与设计原理 读书笔记/" itemprop="url">Spring技术内幕 深入解析Spring架构与设计原理 读书笔记</a></h1>
+                <a class="post-title-link" href="/2018/03/19/java/spring/《Spring技术内幕 深入解析Spring架构与设计原理》/" itemprop="url">《Spring技术内幕 深入解析Spring架构与设计原理》</a></h1>
         
 
         <div class="post-meta">
@@ -1233,7 +1421,7 @@ String对象内容String对象s在创建的时候先查看常量池中是否有�
           <p>Spring关心的是，如何为开发者集中管理在Java企业应用和Web应用中涉及的数据持久化、事务处理、消息中间件、分布式计算等抽象资源，并在此基础上，为应用提供了一个基于POJO（Plain Ordinary Java Object）的开发环境。<br>Spring通过微应用基于POJO的开发模式提供支持，从而使应用开发和复杂的Java EE服务实现解耦，并由此通过提高单元测试覆盖率来有效地提高整个Spring应用的开发质量。<br>本书把Spring框架划分为核心、组件和应用三个基本的层次。在这样的层次划分中，首先对IoC容器（Inversion of Control）和AOP（Aspect Oriented Programming）这两个核心模块的工作原理进行分析；其次介绍Spring的一些组件：事务处理、Web MVC、JDBC、O/R映射、远端调用等。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/03/19/java/spring/Spring技术内幕 深入解析Spring架构与设计原理 读书笔记/#more" rel="contents">
+            <a class="btn" href="/2018/03/19/java/spring/《Spring技术内幕 深入解析Spring架构与设计原理》/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1546,144 +1734,6 @@ String对象内容String对象s在创建的时候先查看常量池中是否有�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/28/back-end/Linux uname命令学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fitzwilliam">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fitzwilliam's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/28/back-end/Linux uname命令学习/" itemprop="url">Linux uname命令学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-28T10:55:20+08:00">
-                2018-02-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Note/" itemprop="url" rel="index">
-                    <span itemprop="name">Note</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>uname命令显示系统相关信息，一般使用<code>-a</code>选项输出全部信息。通常用来查看系统名称、系统位数和系统版本。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/28/back-end/Linux uname命令学习/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1732,7 +1782,7 @@ String对象内容String对象s在创建的时候先查看常量池中是否有�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">188</span>
+                <span class="site-state-item-count">189</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

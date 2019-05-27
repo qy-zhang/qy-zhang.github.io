@@ -307,7 +307,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/13/fore-end/fastjson配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/java/spring/Spring框架核心概念学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Fitzwilliam">
@@ -326,7 +326,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/13/fore-end/fastjson配置/" itemprop="url">fastjson配置</a></h1>
+                <a class="post-title-link" href="/2019/05/27/java/spring/Spring框架核心概念学习/" itemprop="url">Spring框架核心概念学习</a></h1>
         
 
         <div class="post-meta">
@@ -338,8 +338,141 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-13T11:14:01+08:00">
-                2019-05-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-27T10:10:01+08:00">
+                2019-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/21/database/MySQL查询区分大小写/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitzwilliam">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fitzwilliam's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/21/database/MySQL查询区分大小写/" itemprop="url">MySQL查询区分大小写</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-21T00:28:03+08:00">
+                2019-05-21
               </time>
             
 
@@ -375,15 +508,17 @@
       
         
           
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>我们知道使用 WHERE 来执行匹配是不区分大小写的，同时在使用 LIKE 谓词来进行模糊匹配的时候也没有区分大小写<br>解决此问题有两种方式：BINARY 和 COLLATE</p>
+<ol>
+<li>在查询的字符串前面加上<code>BINARY</code>运算符</li>
+<li>建表的时候对相应列加上<code>BINARY</code></li>
+<li>在查询时指定collation</li>
+<li>在建表时指定collation</li>
+</ol>
+<h1 id="BINARY"><a href="#BINARY" class="headerlink" title="BINARY"></a>BINARY</h1><p>BINARY 不是函数，而是一个类型转换运算符，用来强制将它后面的字符串修改为<strong>二进制字符串</strong>，这样在进行字符串的比较的时候就会区分大小写了<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from employee_info_record;</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">| id | emp_id | emp_name    | emp_gender | emp_age | emp_email               | department_id | is_delete | create_time         | update_time         |</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">|  1 |      1 | ZH          | M          |       0 | zhang@meituan.com       |             1 |         0 | 2019-03-11 00:11:26 | 2019-05-21 00:34:51 |</span><br><span class="line">|  2 |      2 | qian        | f          |       0 | qian@meituan.com        |             1 |         0 | 2019-03-11 00:14:28 | 2019-03-11 00:41:24 |</span><br><span class="line">|  3 |      3 | qian        | f          |       0 | yi@meituan.com          |             1 |         0 | 2019-03-11 00:15:36 | 2019-03-11 00:41:37 |</span><br><span class="line">|  4 |      4 | zhangqianyi | m          |       0 | zhangqianyi@meituan.com |             1 |         1 | 2019-03-11 00:19:08 | 2019-03-11 00:29:43 |</span><br><span class="line">|  5 |    123 | zhangqianyi | m          |       0 | zhangqianyi@meituan.com |             1 |         0 | 2019-03-11 00:23:01 | 2019-03-11 00:23:01 |</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">5 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee_info_record <span class="built_in">where</span> emp_name like <span class="string">"ZH%"</span>;</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">| id | emp_id | emp_name    | emp_gender | emp_age | emp_email               | department_id | is_delete | create_time         | update_time         |</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">|  1 |      1 | ZH          | M          |       0 | zhang@meituan.com       |             1 |         0 | 2019-03-11 00:11:26 | 2019-05-21 00:34:51 |</span><br><span class="line">|  4 |      4 | zhangqianyi | m          |       0 | zhangqianyi@meituan.com |             1 |         1 | 2019-03-11 00:19:08 | 2019-03-11 00:29:43 |</span><br><span class="line">|  5 |    123 | zhangqianyi | m          |       0 | zhangqianyi@meituan.com |             1 |         0 | 2019-03-11 00:23:01 | 2019-03-11 00:23:01 |</span><br><span class="line">+----+--------+-------------+------------+---------+-------------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">3 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee_info_record <span class="built_in">where</span> emp_name like binary <span class="string">"ZH%"</span>;</span><br><span class="line">+----+--------+----------+------------+---------+-------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">| id | emp_id | emp_name | emp_gender | emp_age | emp_email         | department_id | is_delete | create_time         | update_time         |</span><br><span class="line">+----+--------+----------+------------+---------+-------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">|  1 |      1 | ZH       | M          |       0 | zhang@meituan.com |             1 |         0 | 2019-03-11 00:11:26 | 2019-05-21 00:34:51 |</span><br><span class="line">+----+--------+----------+------------+---------+-------------------+---------------+-----------+---------------------+---------------------+</span><br><span class="line">1 row <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h1 id="collate"><a href="#collate" class="headerlink" title="collate"></a>collate</h1><p>在MySQL中，对于Column Collate其约定的命名方法如下：<br>| 命名方式 | 介绍 |<br>| - | - |<br>| <em>_bin | 表示的是binary case sensitive collation，也就是说是区分大小写的 |<br>| </em>_cs | case sensitive collation，区分大小写 |<br>| *_ci | case insensitive collation，不区分大小写 |</p>
+
           
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/13/fore-end/fastjson配置/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -493,15 +628,8 @@
       
         
           
+            
           
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/13/java/《图解设计模式》/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -611,34 +739,44 @@
       
         
           
+            <ul>
+<li><a href="#问题描述">问题描述</a></li>
+<li><a href="#http请求中的长度限制">http请求中的长度限制</a><ul>
+<li><a href="#url长度限制">URL长度限制</a></li>
+<li><a href="#ng对于请求大小的限制">ng对于请求大小的限制</a></li>
+<li><a href="#jetty的限制">jetty的限制</a></li>
+<li><a href="#相关资料">相关资料</a></li>
+</ul>
+</li>
+<li><a href="#jetty请求头大小配置">jetty请求头大小配置</a><ul>
+<li><a href="#调整表单限制">调整表单限制</a><ul>
+<li><a href="#方法一针对单web生效">方法一：针对单web生效</a></li>
+<li><a href="#方法二server全局生效">方法二：server全局生效</a></li>
+<li><a href="#方法三java进程启动全局生效">方法三：java进程启动全局生效</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>背景：一个thrift服务提供的接口比较核心但是排查问题比较困难，希望能够有一个http接口方便查询。<br>方案：通过json串来mock出thrift请求参数，然后通过json反序列化成一个thrift model，这样就可以实现http接口查询了<br>但是在为http接口传入json串的时候遇到了400报错</p>
+<p>鉴于此学习了一下http的400相关返回状态码。</p>
+<blockquote>
+<p>400错误码一般是请求参数错误，可能是请求头太大，如果是使用的jetty容器，可以设置jetty请求表单内容大小。</p>
+</blockquote>
+<h1 id="http请求中的长度限制"><a href="#http请求中的长度限制" class="headerlink" title="http请求中的长度限制"></a>http请求中的长度限制</h1><h2 id="URL长度限制"><a href="#URL长度限制" class="headerlink" title="URL长度限制"></a>URL长度限制</h2><p><strong>在Http1.1协议中并没有提出针对URL的长度进行限制</strong><br>但是在ng和servlet容器中一般都会配置默认的url长度限制</p>
+<p><code>nginx</code>的配置参数为<code>client_header_buffer_size</code>和<code>large_client_header_buffers</code><br><code>jetty</code>的请求配置参数为<code>requestHeaderSize</code><br><code>tomcat</code>的请求配置参数为<code>maxHttpHeaderSize</code></p>
+<p>对于get请求，在url的长度限制范围之内，（GET）请求的参数个数<strong>没有限制</strong><br>Post数据的长度限制与url长度限制类似，也是在Http协议中没有规定长度限制，长度限制可以在服务器端配置</p>
+<h2 id="ng对于请求大小的限制"><a href="#ng对于请求大小的限制" class="headerlink" title="ng对于请求大小的限制"></a>ng对于请求大小的限制</h2><p>请求行不能超过一个缓冲区（默认8k）的大小，否则会将<code>414(Request-URI Too Large)</code>错误返回给客户端。<br>请求头字段也不能超过一个缓冲区的大小，或者<code>400(Bad Request)</code>错误返回给客户端<br>请求体不能超过默认的1M，否则返回<code>413 (Request Entity Too Large))</code></p>
+<h2 id="jetty的限制"><a href="#jetty的限制" class="headerlink" title="jetty的限制"></a>jetty的限制</h2><p>jetty对于请求头大小也有限制，默认8k（or 6k），超过限制则会返回413</p>
+<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h2><p><a href="https://unixso.com/NetWork/http-config.html" target="_blank" rel="noopener">https://unixso.com/NetWork/http-config.html</a><br><a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#large_client_header_buffers" target="_blank" rel="noopener">http://nginx.org/en/docs/http/ngx_http_core_module.html#large_client_header_buffers</a></p>
+<h1 id="jetty请求头大小配置"><a href="#jetty请求头大小配置" class="headerlink" title="jetty请求头大小配置"></a>jetty请求头大小配置</h1><p>在http协议中post默认提交方式<code>Content-Type: application/x-www-form-urlencoded</code>方式提交时会将键值对拼接成字符串，作为content发送到server端</p>
+<p>使用的容器是jetty容器，查看jetty相关处理逻辑<code>org.eclipse.jetty.server.Request</code>，jetty会从系统中获取post表单的长度进行检查，当post表单过大是便会抛出异常导致请求失败。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//org.eclipse.jetty.server.Request</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">extractFormParameters</span><span class="params">(MultiMap&lt;String&gt; params)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> maxFormContentSize = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> maxFormKeys = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (_context != <span class="keyword">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            maxFormContentSize = _context.getContextHandler().getMaxFormContentSize();</span><br><span class="line">            maxFormKeys = _context.getContextHandler().getMaxFormKeys();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (maxFormContentSize &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Object obj = _channel.getServer().getAttribute(<span class="string">"org.eclipse.jetty.server.Request.maxFormContentSize"</span>);</span><br><span class="line">            <span class="keyword">if</span> (obj == <span class="keyword">null</span>)</span><br><span class="line">                maxFormContentSize = <span class="number">200000</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Number)</span><br><span class="line">            &#123;</span><br><span class="line">                Number size = (Number)obj;</span><br><span class="line">                maxFormContentSize = size.intValue();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> String)</span><br><span class="line">            &#123;</span><br><span class="line">                maxFormContentSize = Integer.valueOf((String)obj);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (maxFormKeys &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Object obj = _channel.getServer().getAttribute(<span class="string">"org.eclipse.jetty.server.Request.maxFormKeys"</span>);</span><br><span class="line">            <span class="keyword">if</span> (obj == <span class="keyword">null</span>)</span><br><span class="line">                maxFormKeys = <span class="number">1000</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Number)</span><br><span class="line">            &#123;</span><br><span class="line">                Number keys = (Number)obj;</span><br><span class="line">                maxFormKeys = keys.intValue();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> String)</span><br><span class="line">            &#123;</span><br><span class="line">                maxFormKeys = Integer.valueOf((String)obj);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> contentLength = getContentLength();</span><br><span class="line">        <span class="keyword">if</span> (contentLength &gt; maxFormContentSize &amp;&amp; maxFormContentSize &gt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Form too large: "</span> + contentLength + <span class="string">" &gt; "</span> + maxFormContentSize);</span><br><span class="line">        &#125;</span><br><span class="line">        InputStream in = getInputStream();</span><br><span class="line">        <span class="keyword">if</span> (_input.isAsync())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Cannot extract parameters with async IO"</span>);</span><br><span class="line"></span><br><span class="line">        UrlEncoded.decodeTo(in,params,getCharacterEncoding(),contentLength&lt;<span class="number">0</span>?maxFormContentSize:-<span class="number">1</span>,maxFormKeys);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException e)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (LOG.isDebugEnabled())</span><br><span class="line">            LOG.warn(e);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            LOG.warn(e.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="调整表单限制"><a href="#调整表单限制" class="headerlink" title="调整表单限制"></a>调整表单限制</h2><p><a href="https://wiki.eclipse.org/Jetty/Howto/Configure_Form_Size" target="_blank" rel="noopener">官方文档</a>关于文档长度限制的说明给出了三个方案<br>可以通过设置调大表单的限制，配置content长度限制为200000 约一次表单200k数据限制</p>
+<h3 id="方法一：针对单web生效"><a href="#方法一：针对单web生效" class="headerlink" title="方法一：针对单web生效"></a>方法一：针对单web生效</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Configure</span> <span class="attr">class</span>=<span class="string">"org.eclipse.jetty.webapp.WebAppContext"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- Max Form Size                                                   --&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Set</span> <span class="attr">name</span>=<span class="string">"maxFormContentSize"</span>&gt;</span>200000<span class="tag">&lt;/<span class="name">Set</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configure</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="方法二：server全局生效"><a href="#方法二：server全局生效" class="headerlink" title="方法二：server全局生效"></a>方法二：server全局生效</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configure</span> <span class="attr">class</span>=<span class="string">"org.eclipse.jetty.server.Server"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Call</span> <span class="attr">name</span>=<span class="string">"setAttribute"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Arg</span>&gt;</span>org.eclipse.jetty.server.Request.maxFormContentSize<span class="tag">&lt;/<span class="name">Arg</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Arg</span>&gt;</span>200000<span class="tag">&lt;/<span class="name">Arg</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Call</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configure</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="方法三：java进程启动全局生效"><a href="#方法三：java进程启动全局生效" class="headerlink" title="方法三：java进程启动全局生效"></a>方法三：java进程启动全局生效</h3><p>java启动参数添加<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dorg.eclipse.jetty.server.Request.maxFormContentSize=2000000</span><br></pre></td></tr></table></figure></p>
+
           
-问题描述
-http请求中的长度限制
-URL长度限制
-ng对于请求大小的限制
-jetty的限制
-相关资料
-
-
-jetty请求头大小配置
-调整表单限制
-方法一：针对单web生效
-方法二：server全局生效
-方法三：java进程启动全局生效
-
-
-
-
-
-问题描述背景：一个thrift服务提供的接口比较核
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/08/fore-end/HTTP 400 413 414 错误学习/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -770,15 +908,291 @@ jetty请求头大小配置
       
         
           
-          BeanWrapper是Spring提供的一个用来操作bean属性的工具，使用它可以直接修改一个对象的属性123456789101112131415161718class User &#123;  private String name;  public String getName() &#123
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/03/java/spring/BeanWrapper学习/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>BeanWrapper是Spring提供的一个用来操作bean属性的工具，使用它可以直接修改一个对象的属性<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User user = <span class="keyword">new</span> User();</span><br><span class="line">BeanWrapper beanWrapper = PropertyAccessorFactory.forBeanPropertyAccess(user);</span><br><span class="line"></span><br><span class="line">beanWrapper.setPropertyValue(<span class="string">"name"</span>, <span class="string">"zhangqianyi"</span>);</span><br><span class="line">System.out.println(user.getName());</span><br><span class="line"></span><br><span class="line">beanWrapper.setPropertyValue(<span class="string">"name"</span>, <span class="string">"zhangqianyi02"</span>);</span><br><span class="line">System.out.println(user.getName());</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/18/database/《MySQL必知必会》/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitzwilliam">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fitzwilliam's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/18/database/《MySQL必知必会》/" itemprop="url">《MySQL必知必会》</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-18T18:37:51+08:00">
+                2019-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="SQL基础"><a href="#SQL基础" class="headerlink" title="SQL基础"></a>SQL基础</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><ul>
+<li>多条SQL语句必须分号分隔</li>
+<li>SQL语句不区分大小写，建议对所有SQL关键字使用大写，而对所有列和表名使用小写，这样做会使代码更易于阅读和调试</li>
+<li>在处理SQL语句时，其中的所有空格都被忽略。SQL语句可以在一行上给出，也可以分成许多行便于阅读和调试</li>
+</ul>
+<h2 id="主键"><a href="#主键" class="headerlink" title="主键"></a>主键</h2><blockquote>
+<p>主键（primary key）一列（或一组列），其值能够唯一区分表中每一行</p>
+</blockquote>
+<p>唯一标识表中每行的这一列（或这组列）成为主键。虽然并不总是都需要主键，但是建议每个表都具备一个主键，以便于以后的数据操纵和管理。</p>
+<h3 id="主键值规则"><a href="#主键值规则" class="headerlink" title="主键值规则"></a>主键值规则</h3><p>MySQL本身强制规定：</p>
+<ul>
+<li>任意两行都不具有相同的主键值</li>
+<li>每个行都必须具有一个主键值（主键列不允许NULL值）</li>
+</ul>
+<h3 id="主键的最好习惯"><a href="#主键的最好习惯" class="headerlink" title="主键的最好习惯"></a>主键的最好习惯</h3><ul>
+<li>不更新主键列中的值</li>
+<li>不重用主键列的值</li>
+<li>不在主键列中使用可能会更改的值。（例如如果使用供应商名字作为主键以标识某个供应商，当该供应商合并和更改其名字时，必须更改这个主键）</li>
+</ul>
+<h1 id="show命令"><a href="#show命令" class="headerlink" title="show命令"></a>show命令</h1><h2 id="查看数据库名和表名"><a href="#查看数据库名和表名" class="headerlink" title="查看数据库名和表名"></a>查看数据库名和表名</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show databases; # 返回可用数据库的一个列表</span><br><span class="line">+<span class="comment">--------------------+</span></span><br><span class="line">| Database           |</span><br><span class="line">+<span class="comment">--------------------+</span></span><br><span class="line">| dev                |</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+<span class="comment">--------------------+</span></span><br><span class="line">5 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">show</span> <span class="keyword">tables</span>; <span class="comment"># 返回当前选择的数据库内可用表的列表</span></span><br><span class="line">+<span class="comment">----------------------+</span></span><br><span class="line">| Tables_in_dev        |</span><br><span class="line">+<span class="comment">----------------------+</span></span><br><span class="line">| employee_info_record |</span><br><span class="line">| tbl_dept             |</span><br><span class="line">| tbl_emp              |</span><br><span class="line">+<span class="comment">----------------------+</span></span><br><span class="line">3 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+<h2 id="查看表中的列信息"><a href="#查看表中的列信息" class="headerlink" title="查看表中的列信息"></a>查看表中的列信息</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show columns from tbl_dept; # 返回表中每个字段的 字段名、数据类型、是否允许NULL、键信息、默认值以及其他信息</span><br><span class="line">+<span class="comment">-----------+------------------+------+-----+---------+----------------+</span></span><br><span class="line">| Field     | Type             | Null | Key | Default | Extra          |</span><br><span class="line">+<span class="comment">-----------+------------------+------+-----+---------+----------------+</span></span><br><span class="line">| dept_id   | int(11) unsigned | NO   | PRI | NULL    | auto_increment |</span><br><span class="line">| dept_name | varchar(255)     | NO   |     |         |                |</span><br><span class="line">+<span class="comment">-----------+------------------+------+-----+---------+----------------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+<h2 id="其他show语句"><a href="#其他show语句" class="headerlink" title="其他show语句"></a>其他show语句</h2><table>
+<thead>
+<tr>
+<th>语句</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>show status</td>
+<td>显示广泛的服务器状态信息</td>
+</tr>
+<tr>
+<td>show create database/table</td>
+<td>显示创建特定数据库或表的语句</td>
+</tr>
+<tr>
+<td>show grants</td>
+<td>显示授予用户（所有用户或者特定用户）的安全权限</td>
+</tr>
+<tr>
+<td>show errrors/warnings</td>
+<td>显示服务器错误或警告信息</td>
+</tr>
+</tbody>
+</table>
+<h1 id="检索数据"><a href="#检索数据" class="headerlink" title="检索数据"></a>检索数据</h1><h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检索单列，结果未排序</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> products;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检索多个列，注意列名之间用逗号隔开，且最后一个列名后面不能加逗号</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> products;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检索所有列</span></span><br><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> products;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检索去重（唯一）行，位置必须直接放在列名前面</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> vend_id</span><br><span class="line"><span class="keyword">FROM</span> products;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不能部分使用DISTNCT，DISTNCT关键字应用于所有列而不仅是前置它的列</span></span><br><span class="line"><span class="comment"># 如下SQL检索出来 vend_id和prod_price两个组合完全不同的列，比如 00，01，10，11</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> vend_id, prod_price</span><br><span class="line"><span class="keyword">FROM</span> products;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 限制结果，只返回指定行</span></span><br><span class="line"><span class="comment"># 检索结果不超过5行</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检索从行3开始的4行</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">3</span>, <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下检索语句同上，MySQL5支持的语法，从行3开始取4行</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">4</span> <span class="keyword">OFFSET</span> <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># LIMIT检索的第一行为行是行0而不是行1，以下语句检索出的是第二行而不是第一行</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">1</span>, <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 完全限定表名</span></span><br><span class="line"><span class="keyword">SELECT</span> products.prod_name</span><br><span class="line"><span class="keyword">FROM</span> crashcourse.products;</span><br></pre></td></tr></table></figure>
+<h2 id="排序检索数据"><a href="#排序检索数据" class="headerlink" title="排序检索数据"></a>排序检索数据</h2><p>直接通过SELECT检索出来的数据一般是无序的。</p>
+<blockquote>
+<p>这个顺序首先是按照数据最初添加到表中的数据。但是，如果后续进行过数据的更新和删除，则此顺序将会受到MySQL重用存储空间的影响。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按照单个列进行排序</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照多个列进行排序，按照列的顺序来，比如如下示例，价格相同的情况下才去比名称</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price, prod_name;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 降序排序DESC，升序排序 ASC（默认值）</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price <span class="keyword">DESC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 降序排序是针对每个列进行的，多个列时可以指定某一列升序，另一列降序</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_price, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_price <span class="keyword">DESC</span>, prod_name;</span><br></pre></td></tr></table></figure>
+<h1 id="过滤数据"><a href="#过滤数据" class="headerlink" title="过滤数据"></a>过滤数据</h1><h2 id="where子语句操作符说明"><a href="#where子语句操作符说明" class="headerlink" title="where子语句操作符说明"></a>where子语句操作符说明</h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt;</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>BETWEEN AND</td>
+<td>在指定的两个值之间</td>
+</tr>
+<tr>
+<td>IS NULL</td>
+<td>判断字段是否为null</td>
+</tr>
+<tr>
+<td>IS NOT NULL</td>
+<td>判断字段是否为非null</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>MySQL在执行匹配时默认不区分大小写</p>
+</blockquote>
+<h2 id="组合过滤"><a href="#组合过滤" class="headerlink" title="组合过滤"></a>组合过滤</h2><h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><p>AND 且操作，OR 或操作<br><strong>注意</strong>：AND优先级比OR优先级高，会存在运算符优先级问题，使用多个逻辑运算符需要使用圆括号</p>
+<h3 id="IN"><a href="#IN" class="headerlink" title="IN"></a>IN</h3><p>在集合中，可以实现与 OR 操作符类似的功能<br>可以包含其他 SELECT 语句，使得能够更动态的创建WHERE子句。</p>
+<h3 id="NOT"><a href="#NOT" class="headerlink" title="NOT"></a>NOT</h3><p>NOT IN<br>NOT BETWEEN<br>NOT EXISTS</p>
+<h2 id="通配符过滤"><a href="#通配符过滤" class="headerlink" title="通配符过滤"></a>通配符过滤</h2><blockquote>
+<p>通配符（wildcard）：用来匹配值得一部分特殊字符<br>搜索模式（search pattern）由字面值、通配符或两者组合构成的搜索条件</p>
+</blockquote>
+<p>为了在搜索子句中使用通配符，必须使用LIKE操作符，LIKE指示MySQL，后跟的搜索模式利用通配符匹配而不是直接相等匹配进行比较</p>
+<blockquote>
+<p>谓词（predicate）：判断是否存在满足某种条件的记录，如果存在返回TRUE，不存在返回FALSE。主要有：LIKE、BETWEEN、IS NULL、IS NOT NULL、IN、EXISTS</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># %通配符表示任何字符（除了NULL）出现的任意次数，0次、1次、多次</span></span><br><span class="line"><span class="comment"># 找出所有 名字以jet开头 的产品</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name <span class="keyword">LIKE</span> <span class="string">'jet%'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询不区分大小写，使用 BINARY 可以区分</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># _ 下划线匹配单个字符</span></span><br></pre></td></tr></table></figure>
+<p>通配符搜索的处理一般要比前面讨论的其他搜索所花时间更长。</p>
+<ul>
+<li>不要过度使用通配符，如果其他操作符能够达到相同的目的，应该使用其他操作符</li>
+<li>尽量不要把通配符放到搜索的开始处，这样搜索起来最慢</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 过滤出 名字为 JetPack 1000</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name REGEXP <span class="string">'1000'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤出两列 名字为 JetPack 1000 和 JetPack 2000</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name REGEXP <span class="string">'.000'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤出两列 名字为 JetPack 1000 和 JetPack 2000</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name REGEXP <span class="string">'1000|2000'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤出两列 名字为 1Ton 和 2Ton 和 3Ton</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name REGEXP <span class="string">'[123]Ton'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤出10列 名字为 1Ton 和 2Ton 和 3Ton</span></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name REGEXP <span class="string">'[0~9]Ton'</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="数据处理——函数"><a href="#数据处理——函数" class="headerlink" title="数据处理——函数"></a>数据处理——函数</h1><p>SQL主要支持以下几种函数：</p>
+<ol>
+<li>处理字符串（删除、填充、大小写转换）的文本函数</li>
+<li>算术操作（绝对值、代数运算）的数值函数</li>
+<li>日期和时间函数</li>
+<li>DBMS的系统函数</li>
+</ol>
+<h2 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># AVG() 函数返回某列的平均值，忽略值为NULL的行</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">AVG</span>(prod_price) <span class="keyword">AS</span> avg_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># COUNT() 函数计数，如果参数是*也统计值为NULL的行，如果参数是列名不统计</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(prod_price) <span class="keyword">AS</span> avg_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># MAX()、MIN()、SUM() 字面意思</span></span><br></pre></td></tr></table></figure>
+<h2 id="分组数据"><a href="#分组数据" class="headerlink" title="分组数据"></a>分组数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 GROUP BY 来进行分组</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_id, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> num_prods</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> vend_id;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 HAVING 过滤分组，在数据分组后，只能通过HAVING进行过滤</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_id, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> num_prods</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> vend_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(*) &gt;= <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分组前使用 WHERE，分组后使用 HAVING</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_id, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> num_prods</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price &gt;= <span class="number">10</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> vend_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(*) &gt;= <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><p>在SEELECT语句中，子查询总是从内向外处理。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下面的语句其实MySQL是拆分成两个子语句执行</span></span><br><span class="line"><span class="keyword">SELECT</span> cust_id</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">WHERE</span> order_num <span class="keyword">IN</span> (<span class="keyword">SELECT</span> order_num</span><br><span class="line">                    <span class="keyword">FROM</span> order_items</span><br><span class="line">                    <span class="keyword">WHERE</span> prod_id=<span class="string">'TNT2'</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> cust_name,</span><br><span class="line">       cust_state,</span><br><span class="line">       (<span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*)</span><br><span class="line">        <span class="keyword">FROM</span> orders</span><br><span class="line">        <span class="keyword">WHERE</span> orders.cust_id=customers.cust_id)</span><br></pre></td></tr></table></figure></p>
+<h2 id="联结表"><a href="#联结表" class="headerlink" title="联结表"></a>联结表</h2><p>外部联结：可以检索出相关表中没有关联的行，比如：计算所有产品以及订购数量，包括没有人订购的产品。必须指定是右关联还是左关联</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 等值联结，基于两个表之间的相等测试</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_name, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> vendors, products</span><br><span class="line"><span class="keyword">WHERE</span> vendors.vend_id =  products.vend_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name, prod_name;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 内部联结相当于上面的结果，首选使用</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_name, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> vendors <span class="keyword">INNER</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> vendors.vend_id = products.vend_id</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> vend_name, prod_name;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 外部联结</span></span><br><span class="line"><span class="keyword">SELECT</span> customers.cust_id, orders.order_num</span><br><span class="line"><span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> orders</span><br><span class="line"><span class="keyword">ON</span> customers.cust_id = orders.cust_id;</span><br></pre></td></tr></table></figure>
+<h1 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> customers(cust_name,</span><br><span class="line">        cust_address,</span><br><span class="line">        cust_city,</span><br><span class="line">        cust_state,</span><br><span class="line">        cust_zip,</span><br><span class="line">        cust_country)</span><br><span class="line"><span class="keyword">VALUES</span>(</span><br><span class="line">        <span class="string">'Pep E. LaPew'</span>,</span><br><span class="line">        <span class="string">'100 Main Streed'</span>,</span><br><span class="line">        <span class="string">'Los Angeles'</span>,</span><br><span class="line">        <span class="string">'CA'</span></span><br><span class="line">        <span class="string">'90046'</span>,</span><br><span class="line">        <span class="string">'USA'</span></span><br><span class="line">), (</span><br><span class="line">        <span class="string">'M. Martian'</span>,</span><br><span class="line">        <span class="string">'42 Galaxy Way'</span>,</span><br><span class="line">        <span class="string">'New York'</span>,</span><br><span class="line">        <span class="string">'NY'</span></span><br><span class="line">        <span class="string">'11213'</span>,</span><br><span class="line">        <span class="string">'USA'</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h1 id="更新和删除数据"><a href="#更新和删除数据" class="headerlink" title="更新和删除数据"></a>更新和删除数据</h1><h2 id="更新UPDATE"><a href="#更新UPDATE" class="headerlink" title="更新UPDATE"></a>更新UPDATE</h2><p>UPDATE语句由三个部分组成：要更新的表、列名和他们的新值、确定要更新行的过滤条件。</p>
+<p>UPDATE语句以WEHRE子句结束，它告诉MySQL更新哪一行。<strong>如果没有WHERE子句，MySQL将更新表中的所有行！</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> customers</span><br><span class="line"><span class="keyword">SET</span> cust_email = <span class="string">'elmer@fudd.com'</span></span><br><span class="line"><span class="keyword">WHERE</span> cust_id = <span class="number">10005</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">WHERE</span> cust_id = <span class="number">10006</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DELETE 不需要列名或者通配符，他删除的是整行，如果需要删除指定的列中的内容，请考虑使用UPDATE语句</li>
+<li>不加WHERE子句将删除所有的行</li>
+<li>如果想从表中删除所有行，可以使用<code>TRRUNCATE TABLE</code>语句，他的速度更快（删除原来的表并重新创建一个表，而不是逐行删除）</li>
+</ul>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><blockquote>
+<p>视图是虚拟的表。与包含数据的表不一样，视图只包含使用时动态检索数据的查询。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检索订购了某个特定产品的客户，需要复杂的联结多个表查询，且任何需要使用这个数据的人都必须了解各个表的结构</span></span><br><span class="line"><span class="keyword">SELECT</span> cust_name, cust_contact</span><br><span class="line"><span class="keyword">FROM</span> customers, orders, orderitems</span><br><span class="line"><span class="keyword">WHERE</span> custmers.cust_id = orders.cust_id</span><br><span class="line">    <span class="keyword">AND</span> orderitems.order_num = orders.order_num</span><br><span class="line">    <span class="keyword">AND</span> prod_id = <span class="string">'TNT2'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用视图，将整个查询包装成一个名为 productcustomers 的虚拟表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> productcustomers <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> cust_name, cust_contact, prod_id</span><br><span class="line"><span class="keyword">FROM</span> customers, orders, orderitems</span><br><span class="line"><span class="keyword">WHERE</span> custmers.cust_id = orders.cust_id</span><br><span class="line">    <span class="keyword">AND</span> orderitems.order_num = orders.order_num;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 就可以轻松的检索出相同的数据了</span></span><br><span class="line"><span class="keyword">SELECT</span> cust_name, cust_contact</span><br><span class="line"><span class="keyword">FROM</span> productcustomers</span><br><span class="line"><span class="keyword">WHERE</span> prod_id = <span class="string">'TNT2'</span>;</span><br></pre></td></tr></table></figure>
+<p>使用时需要注意性能</p>
+<h1 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h1><blockquote>
+<p>为以后的使用而保存的一条或多条MySQL语句的集合。可将其视为批文件。</p>
+</blockquote>
+<h1 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h1><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事务(trancsaction)</td>
+<td>一组SQL语句</td>
+</tr>
+<tr>
+<td>回退(rollback)</td>
+<td>撤销指定SQL语句的过程</td>
+</tr>
+<tr>
+<td>提交(commit)</td>
+<td>将未存储的SQL语句结果写入数据库表</td>
+</tr>
+<tr>
+<td>保留点(savepoint)</td>
+<td>事务处理中设置的临时占位符，可以对他发布回退</td>
+</tr>
+</tbody>
+</table>
+
+          
         
       
     </div>
@@ -888,15 +1302,31 @@ jetty请求头大小配置
       
         
           
-          从问题入门问题描述想为一个thrift服务添加http接口，实际上这个服务已经通过bootstrap程序启动了jetty容器，jetty端口也起来了，所以只用配置一些spring mvc相关内容就可以了。但是在添加了一个controller后，发现调用接口前端显示 HTTP 406 not acce
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/13/fore-end/HTTP 406 not acceptable错误学习/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="从问题入门"><a href="#从问题入门" class="headerlink" title="从问题入门"></a>从问题入门</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>想为一个thrift服务添加http接口，实际上这个服务已经通过bootstrap程序启动了jetty容器，jetty端口也起来了，所以只用配置一些spring mvc相关内容就可以了。但是在添加了一个controller后，发现调用接口前端显示 HTTP 406 not acceptable</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><blockquote>
+<p>406一般原因是客户端请求的数据类型和从服务端接收来的数据的类型不一致</p>
+</blockquote>
+<p><img src="/image/fore-end/http406error.png" alt="http406"><br>从上图可以看出，状态码406<br>请求头（Request Headers）中的请求信息是json格式<br>响应头（Response Hraders）中却发现返回信息的格式是“text/html”</p>
+<p>请求信息与响应信息不符合，前端无法解析，需将结果转换成json格式返回给前台。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>使用fastjson，引入jar包后配置，在<code>spring-servlet.xml</code>中加上配置即可<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mvc:message-converters</span> <span class="attr">register-defaults</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"supportedMediaTypes"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json;charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"fastJsonConfig"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.alibaba.fastjson.support.config.FastJsonConfig"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"charset"</span> <span class="attr">value</span>=<span class="string">"UTF-8"</span>/&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- SerializerFeature --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"serializerFeatures"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">value</span>&gt;</span>QuoteFieldNames<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">value</span>&gt;</span>WriteNonStringKeyAsString<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">value</span>&gt;</span>SkipTransientField<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">value</span>&gt;</span>DisableCircularReferenceDetect<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mvc:message-converters</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mvc:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="jackson加载简介"><a href="#jackson加载简介" class="headerlink" title="jackson加载简介"></a>jackson加载简介</h2><p><code>spring mvc</code>配置了<code>&lt;mvc:annotation-driver/&gt;</code>后 ，如果 classpath 里面包含 jackson 包，则自动注册<code>MappingJackson2HttpMessageConverter</code>，从而支持json 输出。</p>
+<p>Spring中是在<code>AnnotationDrivenBeanDefinitionParser</code>中解析<code>&lt;mvc:annotation-driver/&gt;</code></p>
+<p>通过源码可以看出，通过判断jackson包的<code>ObjectMapper</code>和<code>JsonGenerator</code>是否存在来确定jackson包被引入，被引入了就添加一个<code>HttpMessageConverter</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">boolean</span> jackson2Present =</span><br><span class="line">    ClassUtils.isPresent(<span class="string">"com.fasterxml.jackson.databind.ObjectMapper"</span>,</span><br><span class="line">        AnnotationDrivenBeanDefinitionParser.class.getClassLoader()) &amp;&amp;</span><br><span class="line">    ClassUtils.isPresent(<span class="string">"com.fasterxml.jackson.core.JsonGenerator"</span>,</span><br><span class="line">        AnnotationDrivenBeanDefinitionParser.class.getClassLoader());</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> ManagedList&lt;?&gt; getMessageConverters(Element element, Object source, ParserContext parserContext) &#123;</span><br><span class="line">  Element convertersElement = DomUtils.getChildElementByTagName(element, <span class="string">"message-converters"</span>);</span><br><span class="line">  ManagedList&lt;? <span class="keyword">super</span> Object&gt; messageConverters = <span class="keyword">new</span> ManagedList&lt;Object&gt;();</span><br><span class="line">  <span class="keyword">if</span> (convertersElement != <span class="keyword">null</span>) &#123;</span><br><span class="line">    messageConverters.setSource(source);</span><br><span class="line">    <span class="keyword">for</span> (Element beanElement : DomUtils.getChildElementsByTagName(convertersElement, <span class="string">"bean"</span>, <span class="string">"ref"</span>)) &#123;</span><br><span class="line">      Object object = parserContext.getDelegate().parsePropertySubElement(beanElement, <span class="keyword">null</span>);</span><br><span class="line">      messageConverters.add(object);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (convertersElement == <span class="keyword">null</span> || Boolean.valueOf(convertersElement.getAttribute(<span class="string">"register-defaults"</span>))) &#123;</span><br><span class="line">    messageConverters.setSource(source);</span><br><span class="line">    messageConverters.add(createConverterDefinition(ByteArrayHttpMessageConverter.class, source));</span><br><span class="line"></span><br><span class="line">    RootBeanDefinition stringConverterDef = createConverterDefinition(StringHttpMessageConverter.class, source);</span><br><span class="line">    stringConverterDef.getPropertyValues().add(<span class="string">"writeAcceptCharset"</span>, <span class="keyword">false</span>);</span><br><span class="line">    messageConverters.add(stringConverterDef);</span><br><span class="line"></span><br><span class="line">    messageConverters.add(createConverterDefinition(ResourceHttpMessageConverter.class, source));</span><br><span class="line">    messageConverters.add(createConverterDefinition(SourceHttpMessageConverter.class, source));</span><br><span class="line">    messageConverters.add(createConverterDefinition(AllEncompassingFormHttpMessageConverter.class, source));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (romePresent) &#123;</span><br><span class="line">      messageConverters.add(createConverterDefinition(AtomFeedHttpMessageConverter.class, source));</span><br><span class="line">      messageConverters.add(createConverterDefinition(RssChannelHttpMessageConverter.class, source));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (jackson2XmlPresent) &#123;</span><br><span class="line">      Class&lt;?&gt; type = MappingJackson2XmlHttpMessageConverter.class;</span><br><span class="line">      RootBeanDefinition jacksonConverterDef = createConverterDefinition(type, source);</span><br><span class="line">      GenericBeanDefinition jacksonFactoryDef = createObjectMapperFactoryDefinition(source);</span><br><span class="line">      jacksonFactoryDef.getPropertyValues().add(<span class="string">"createXmlMapper"</span>, <span class="keyword">true</span>);</span><br><span class="line">      jacksonConverterDef.getConstructorArgumentValues().addIndexedArgumentValue(<span class="number">0</span>, jacksonFactoryDef);</span><br><span class="line">      messageConverters.add(jacksonConverterDef);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (jaxb2Present) &#123;</span><br><span class="line">      messageConverters.add(createConverterDefinition(Jaxb2RootElementHttpMessageConverter.class, source));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (jackson2Present) &#123;</span><br><span class="line">      Class&lt;?&gt; type = MappingJackson2HttpMessageConverter.class;</span><br><span class="line">      RootBeanDefinition jacksonConverterDef = createConverterDefinition(type, source);</span><br><span class="line">      GenericBeanDefinition jacksonFactoryDef = createObjectMapperFactoryDefinition(source);</span><br><span class="line">      jacksonConverterDef.getConstructorArgumentValues().addIndexedArgumentValue(<span class="number">0</span>, jacksonFactoryDef);</span><br><span class="line">      messageConverters.add(jacksonConverterDef);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (gsonPresent) &#123;</span><br><span class="line">      messageConverters.add(createConverterDefinition(GsonHttpMessageConverter.class, source));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> messageConverters;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>解析完成之后，在mvc启动时默认会加载下面的几种HttpMessageConverter，相关代码在 <code>org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport</code>中的<code>addDefaultHttpMessageConverters</code>方法中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">addDefaultHttpMessageConverters</span><span class="params">(List&lt;HttpMessageConverter&lt;?&gt;&gt; messageConverters)</span> </span>&#123;</span><br><span class="line">    StringHttpMessageConverter stringConverter = <span class="keyword">new</span> StringHttpMessageConverter();</span><br><span class="line">    stringConverter.setWriteAcceptCharset(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">    messageConverters.add(<span class="keyword">new</span> ByteArrayHttpMessageConverter());</span><br><span class="line">    messageConverters.add(stringConverter);</span><br><span class="line">    messageConverters.add(<span class="keyword">new</span> ResourceHttpMessageConverter());</span><br><span class="line">    messageConverters.add(<span class="keyword">new</span> SourceHttpMessageConverter&lt;Source&gt;());</span><br><span class="line">    messageConverters.add(<span class="keyword">new</span> AllEncompassingFormHttpMessageConverter());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (romePresent) &#123;</span><br><span class="line">        messageConverters.add(<span class="keyword">new</span> AtomFeedHttpMessageConverter());</span><br><span class="line">        messageConverters.add(<span class="keyword">new</span> RssChannelHttpMessageConverter());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (jackson2XmlPresent) &#123;</span><br><span class="line">        messageConverters.add(<span class="keyword">new</span> MappingJackson2XmlHttpMessageConverter(</span><br><span class="line">                Jackson2ObjectMapperBuilder.xml().applicationContext(<span class="keyword">this</span>.applicationContext).build()));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (jaxb2Present) &#123;</span><br><span class="line">        messageConverters.add(<span class="keyword">new</span> Jaxb2RootElementHttpMessageConverter());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (jackson2Present) &#123;</span><br><span class="line">        messageConverters.add(<span class="keyword">new</span> MappingJackson2HttpMessageConverter(</span><br><span class="line">                Jackson2ObjectMapperBuilder.json().applicationContext(<span class="keyword">this</span>.applicationContext).build()));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (gsonPresent) &#123;</span><br><span class="line">        messageConverters.add(<span class="keyword">new</span> GsonHttpMessageConverter());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="如何影响前端展示"><a href="#如何影响前端展示" class="headerlink" title="如何影响前端展示"></a>如何影响前端展示</h2><h3 id="http的基础约定"><a href="#http的基础约定" class="headerlink" title="http的基础约定"></a>http的基础约定</h3><p>SpringMVC启动时会自动配置一些HttpMessageConverter，接收到http请求时，从这些Converters中选择一个符合条件的来进行Http序列化/反序列化。</p>
+<ol>
+<li>决定resp.body的Content-Type的第一要素是对应的req.headers.Accept属性的值，又叫做MediaType。如果服务端支持这个Accept，那么应该按照这个Accept来确定返回resp.body对应的格式，同时把resp.headers.Content-Type设置成自己支持的符合那个Accept的MediaType。服务端不支持Accept指定的任何MediaType时，应该返回错误406 Not Acceptable.<br>例如：req.headers.Accept = text/html，服务端支持的话应该让resp.headers.Content-Type = text/html，并且resp.body按照html格式返回。<br>例如：req.headers.Accept = text/asdfg，服务端不支持这种MediaType，应该返回406 Not Acceptable。</li>
+<li>如果Accept指定了多个MediaType，并且服务端也支持多个MediaType，那么Accept应该同时指定各个MediaType的QualityValue，也就是q值，服务端根据q值的大小来决定这几个MediaType类型的优先级，一般是大的优先。q值不指定时，默认视为q=1.<br>Chrome的默认请求的Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,<em>/</em>;q=0.8，表示服务端在支持的情况下应该优先返回text/html，其次是application/xhtml+xml.<br>前面几个都不支持时，服务器可以自行处理 <em>/</em>，返回一种服务器自己支持的格式。</li>
+<li>一个HTTP请求没有指定Accept，默认视为指定 Accept: <em>/</em>；没有指定Content-Type，默认视为 null，就是没有。当然，服务端可以根据自己的需要改变默认值。</li>
+<li>Content-Type必须是具体确定的类型，不能包含 *.</li>
+</ol>
+<p><img src="/image/fore-end/spring-http-response.png" alt="spring-http-response"></p>
+<p><code>RequestResponseBodyProcessor</code>实现了<code>HandlerMethodReturnValueHandler</code>、<code>HandlerMethodAgumentResolver</code>接口，<br>所以具备了处理参数、处理返回值的能力。<code>RequestResponseBodyProcessor</code>能够解析用<code>@RequestBody</code>注解的参数和通过使用<code>HttpMessageConverter</code>读取并写入请求体或响应来处理用<code>@ResponseBody</code>注解的方法的返回值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 处理返回值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerMethodReturnValueHandler</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 方法返回值是否被处理程序支持</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">supportsReturnType</span><span class="params">(MethodParameter returnType)</span></span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过向模型添加属性并设置视图或设置视图来处理给定的返回值</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@link</span> ModelAndViewContainer#setRequestHandled&#125;标志到&#123;<span class="doctag">@code</span> true&#125;，表明响应已被直接处理。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">handleReturnValue</span><span class="params">(Object returnValue, MethodParameter returnType,</span></span></span><br><span class="line"><span class="function"><span class="params">            ModelAndViewContainer mavContainer, NativeWebRequest webRequest)</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 解析请求中的参数值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HandlerMethodArgumentResolver</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否能支持解析&#123;<span class="doctag">@linkplain</span> MethodParameter参数&#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">supportsParameter</span><span class="params">(MethodParameter parameter)</span></span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将方法参数解析为来自给定请求的参数值。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Object <span class="title">resolveArgument</span><span class="params">(MethodParameter parameter, ModelAndViewContainer mavContainer,</span></span></span><br><span class="line"><span class="function"><span class="params">            NativeWebRequest webRequest, WebDataBinderFactory binderFactory)</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>handleReturnValue()</code>方法获取inputMessage,outMessage对象，调用<code>writeWithMessageConverters()</code>方法，让消息转换器对消息进行下一步处理<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleReturnValue</span><span class="params">(Object returnValue, MethodParameter returnType,</span></span></span><br><span class="line"><span class="function"><span class="params">        ModelAndViewContainer mavContainer, NativeWebRequest webRequest)</span></span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span> IOException, HttpMediaTypeNotAcceptableException, HttpMessageNotWritableException </span>&#123;</span><br><span class="line"></span><br><span class="line">    mavContainer.setRequestHandled(<span class="keyword">true</span>);</span><br><span class="line">    ServletServerHttpRequest inputMessage = createInputMessage(webRequest);</span><br><span class="line">    ServletServerHttpResponse outputMessage = createOutputMessage(webRequest);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Try even with null return value. ResponseBodyAdvice could get involved.</span></span><br><span class="line">    writeWithMessageConverters(returnValue, returnType, inputMessage, outputMessage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="相关文档"><a href="#相关文档" class="headerlink" title="相关文档"></a>相关文档</h2><p><a href="https://www.jianshu.com/p/0aaeb4144489" target="_blank" rel="noopener">https://www.jianshu.com/p/0aaeb4144489</a><br><a href="https://segmentfault.com/a/1190000012659486" target="_blank" rel="noopener">https://segmentfault.com/a/1190000012659486</a></p>
+
+          
         
       
     </div>
@@ -1028,17 +1458,39 @@ jetty请求头大小配置
       
         
           
-          问题描述commonapi项目中TestController中访问private方法会抛空指针，public方法就正常
-结论TestController被cglib动态代理，cglib实现是继承被代理类，所以cglib代理生成的对象中不会有private方法
-而@RequestMapping是可以将
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/02/01/java/spring/private方法导致CGLib空指针/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>commonapi项目中<code>TestController</code>中访问private方法会抛空指针，public方法就正常<br><img src="/image/java/spring_aop_cglib.png" alt="cglib"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>TestController被cglib动态代理，cglib实现是继承被代理类，所以cglib代理生成的对象中不会有private方法</p>
+<p>而<code>@RequestMapping</code>是可以将访问的url映射到private方法上的，当访问public方法时，spring容器中的通过cglib动态代理生成的TestController对象中可以继承public方法，所以可以正常访问</p>
+<p>当访问private方法时，在cglib动态代理生成的TestController对象中没有这个方法，会使用原生的未被代理的对象，此时这个对象里的属性 redisDealCacheClient 等都没有被spring容器管理，所以是null</p>
+<h3 id="印证"><a href="#印证" class="headerlink" title="印证"></a>印证</h3><p>实际到代码中确认：</p>
+<ol>
+<li>断点打到 <code>AbstractClassGenerator.generate(AbstractClassGenerator.ClassLoaderData data)</code> 方法，找到<strong>字节数组</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Class <span class="title">generate</span><span class="params">(AbstractClassGenerator.ClassLoaderData data)</span> </span>&#123;</span><br><span class="line">    Object save = CURRENT.get();</span><br><span class="line">    CURRENT.set(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    Class var8;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ClassLoader classLoader = data.getClassLoader();</span><br><span class="line">        <span class="keyword">if</span> (classLoader == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"ClassLoader is null while trying to define class "</span> + <span class="keyword">this</span>.getClassName() + <span class="string">". It seems that the loader has been expired from a weak reference somehow. Please file an issue at cglib's issue tracker."</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        String className;</span><br><span class="line">        <span class="keyword">synchronized</span>(classLoader) &#123;</span><br><span class="line">            className = <span class="keyword">this</span>.generateClassName(data.getUniqueNamePredicate());</span><br><span class="line">            data.reserveName(className);</span><br><span class="line">            <span class="keyword">this</span>.setClassName(className);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Class gen;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.attemptLoad) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                gen = classLoader.loadClass(<span class="keyword">this</span>.getClassName());</span><br><span class="line">                Class var25 = gen;</span><br><span class="line">                <span class="keyword">return</span> var25;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException var20) &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">this</span>.strategy.generate(<span class="keyword">this</span>);</span><br><span class="line">        className = ClassNameReader.getClassName(<span class="keyword">new</span> ClassReader(b));</span><br><span class="line">        ProtectionDomain protectionDomain = <span class="keyword">this</span>.getProtectionDomain();</span><br><span class="line">        <span class="keyword">synchronized</span>(classLoader) &#123;</span><br><span class="line">            <span class="keyword">if</span> (protectionDomain == <span class="keyword">null</span>) &#123;</span><br><span class="line">                gen = ReflectUtils.defineClass(className, b, classLoader);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                gen = ReflectUtils.defineClass(className, b, classLoader, protectionDomain);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        var8 = gen;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (RuntimeException var21) &#123;</span><br><span class="line">        <span class="keyword">throw</span> var21;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Error var22) &#123;</span><br><span class="line">        <span class="keyword">throw</span> var22;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception var23) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> CodeGenerationException(var23);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        CURRENT.set(save);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> var8;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>主要关注 <code>byte[] b = this.strategy.generate(this);</code> 这一句，断点打到这儿</p>
+<ol start="2">
+<li>在服务启动的时候打断点，spring容器在启动的时候需要实例化bean，断点设置当遇到<code>TestController</code>这个bean时停止</li>
+<li><p>将字节数组转换输出</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//要使用 com.sun.org.apache.xml.internal.security.utils.Base64</span></span><br><span class="line">Base64.encode(b);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后将encode出来的value值拷贝出来，再通过程序解码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> io.dev;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.common.io.Files;</span><br><span class="line"><span class="keyword">import</span> com.sun.org.apache.xml.internal.security.utils.Base64;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       <span class="keyword">byte</span>[] decode = Base64.decode(<span class="string">"拷贝出来的内容"</span>);</span><br><span class="line">       Files.write(decode, <span class="keyword">new</span> File(<span class="string">"/Users/zhangqianyi/Desktop/cc.class"</span>));</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后将cc.class放到IntelliJ中即可查看通过Cglib动态代理生成的类对象所包含的内容了。<br>里面是没有private方法的</p>
+</li>
+</ol>
+<h2 id="几点疑问"><a href="#几点疑问" class="headerlink" title="几点疑问"></a>几点疑问</h2><ol>
+<li>为什么controller类会被cglib代理</li>
+<li>aggregation代码中同样在TestController写private方法，可以正常访问，不报空指针</li>
+</ol>
+<p>正常情况下Controller类被Spring容器初始化之后，是不会被cglib动态代理的，所以写private方法一样可以正常访问，不会有空指针问题<br>一定是commonapi项目中使用了什么组件，使得所有的Controller都被cglib动态代理，而aggregation项目中没有使用到</p>
+<p>通过查看commonapi中的调用堆栈，确定是<code>ControllerLogCollector</code>这个切面进行了处理，这个切面是<code>mdp-boot-starter-log</code>组件中的。</p>
+<p>为了印证这个想法，在c-aggregation项目中也配置上<code>mdp-boot-starter-log</code><br>首先同commonapi一样，在c-aggregation的 spring-servlet.xml 中加上了下面两个bean，然后添加了文件<code>mdplog.properties</code><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mdp-trace --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.meituan.mdp.boot.starter.log.bootstap.MdpLogAutoConfiguration"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.meituan.mdp.boot.starter.log.bootstap.HttpAutoConfiguration"</span>/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>查看bean的类<code>HttpAutoConfiguration</code> ，发现在这个bean中实例化了<code>ControllerLogCollector</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@PropertySource</span>(</span><br><span class="line">    value = &#123;<span class="string">"classpath:mdplog.properties"</span>&#125;,</span><br><span class="line">    ignoreResourceNotFound = <span class="keyword">true</span></span><br><span class="line">)</span><br><span class="line"><span class="meta">@Conditional</span>(&#123;TraceSwitchCondition.class, HttpClassCondition.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpAutoConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger log = LoggerFactory.getLogger(HttpAutoConfiguration.class);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HttpAutoConfiguration</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Conditional</span>(&#123;HttpSwitchCondition.class&#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ControllerLogCollector <span class="title">controllerLogCollector</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        log.info(<span class="string">"[MdpLog Starter] controller support"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ControllerLogCollector();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>发现还是没有被cglib代理，将上面两个bean的配置放到父servlet   applicationContext.xml 中再次启动项目</p>
+<p>问题复现，private方法中注入的对象为null</p>
+
+          
         
       
     </div>
@@ -1170,16 +1622,14 @@ jetty请求头大小配置
       
         
           
-          pangu调mermaid-app的一个post接口，测试了一下给post请求VO中的一个boolean 类型字段传了2，得到的返回结果是：can not cast to boolean, value : 2
-相关异常堆栈如下1234567891011121314151617181920212223
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/16/java/spring/POST请求参数解析/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>pangu调mermaid-app的一个post接口，测试了一下给post请求VO中的一个boolean 类型字段传了2，得到的返回结果是：<br><code>can not cast to boolean, value : 2</code></p>
+<p>相关异常堆栈如下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">2019-01-16 21:33:10.981 - - [WARN] qtp348132918-46 ApiJsonHandlerExceptionResolver <span class="comment">#XMDT#&#123;__traceId__=8417844945673433437&#125;#XMDT#</span></span><br><span class="line">com.alibaba.fastjson.JSONException: can not cast to boolean, value : 2</span><br><span class="line">	at com.alibaba.fastjson.util.TypeUtils.castToBoolean(TypeUtils.java:621) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.serializer.BooleanCodec.deserialze(BooleanCodec.java:78) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.DefaultFieldDeserializer.parseField(DefaultFieldDeserializer.java:71) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.parseField(JavaBeanDeserializer.java:791) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.deserialze(JavaBeanDeserializer.java:596) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.parseRest(JavaBeanDeserializer.java:949) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.FastjsonASMDeserializer_35_RecallConfigDetailVO.deserialze(Unknown Source) ~[?:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.deserializer.JavaBeanDeserializer.deserialze(JavaBeanDeserializer.java:184) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.parser.DefaultJSONParser.parseObject(DefaultJSONParser.java:642) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.JSON.parseObject(JSON.java:350) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.JSON.parseObject(JSON.java:318) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.JSON.parseObject(JSON.java:281) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.JSON.parseObject(JSON.java:381) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.JSON.parseObject(JSON.java:463) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter.read(FastJsonHttpMessageConverter.java:211) ~[fastjson-1.2.29.jar:?]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:201) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:150) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:128) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:121) ~[spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:158) ~[spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:128) ~[spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:97) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:827) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85) ~[spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967) [spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901) [spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970) [spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872) [spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:707) [javax.servlet-api-3.1.0.jar:3.1.0]</span><br><span class="line">	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846) [spring-webmvc-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at javax.servlet.http.HttpServlet.service(HttpServlet.java:790) [javax.servlet-api-3.1.0.jar:3.1.0]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:808) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1669) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at com.sankuai.it.sso.sdk.oauth.AbstractSSOAuthFilter.doFilter(AbstractSSOAuthFilter.java:46) [sso-java-sdk-2.1.23.jar:?]</span><br><span class="line">	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:347) [spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:263) [spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at com.meituan.lvyou.mermaid.filter.CORSFilter.doFilter(CORSFilter.java:58) [classes/:?]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at com.meituan.jmonitor.collector.http.HttpMonitorFilter.doFilter(HttpMonitorFilter.java:75) [jmonitor-1.5.8.jar:1.5.8]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197) [spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-4.3.17.RELEASE.jar:4.3.17.RELEASE]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at com.meituan.lvyou.mermaid.filter.XssFilter.doFilter(XssFilter.java:65) [classes/:?]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler<span class="variable">$CachedChain</span>.doFilter(ServletHandler.java:1652) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:585) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:577) [jetty-security-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:223) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1127) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:515) [jetty-servlet-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:185) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1061) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:110) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.Server.handle(Server.java:497) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:310) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:257) [jetty-server-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.io.AbstractConnection<span class="variable">$2</span>.run(AbstractConnection.java:540) [jetty-io-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:635) [jetty-util-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at org.eclipse.jetty.util.thread.QueuedThreadPool<span class="variable">$3</span>.run(QueuedThreadPool.java:555) [jetty-util-9.2.9.v20150224.jar:9.2.9.v20150224]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]</span><br></pre></td></tr></table></figure></p>
+<p>看mermaid-app错误日志可以看出，是使用fastjson将请求体中的内容转成boolean类型的时候遇到了问题<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/AbstractMessageConverterMethodArgumentResolver.java <span class="number">201</span></span><br><span class="line">body = genericConverter.read(targetType, contextClass, inputMessage);</span><br></pre></td></tr></table></figure></p>
+<p>read方法有多个实现，其中我们主要关注使用到的<code>FastJsonHttpMessageConverter</code>中实现的</p>
+<p>查看源码 最后使用的是FastJson转换的一个TypeUtils<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">castToBoolean</span><span class="params">(Object value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> Boolean) &#123;</span><br><span class="line">        <span class="keyword">return</span> (Boolean) value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> Number) &#123;</span><br><span class="line">        <span class="keyword">return</span> ((Number) value).intValue() == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (value <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">        String strVal = (String) value;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (strVal.length() == <span class="number">0</span> <span class="comment">//</span></span><br><span class="line">            || <span class="string">"null"</span>.equals(strVal) <span class="comment">//</span></span><br><span class="line">            || <span class="string">"NULL"</span>.equals(strVal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"true"</span>.equalsIgnoreCase(strVal) <span class="comment">//</span></span><br><span class="line">            || <span class="string">"1"</span>.equals(strVal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> Boolean.TRUE;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"false"</span>.equalsIgnoreCase(strVal) <span class="comment">//</span></span><br><span class="line">            || <span class="string">"0"</span>.equals(strVal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> Boolean.FALSE;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"Y"</span>.equalsIgnoreCase(strVal) <span class="comment">//</span></span><br><span class="line">                || <span class="string">"T"</span>.equals(strVal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> Boolean.TRUE;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"F"</span>.equalsIgnoreCase(strVal) <span class="comment">//</span></span><br><span class="line">                || <span class="string">"N"</span>.equals(strVal)) &#123;</span><br><span class="line">            <span class="keyword">return</span> Boolean.FALSE;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> JSONException(<span class="string">"can not cast to boolean, value : "</span> + value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输入是String类型，所以 “2” 匹配不上，走到最后抛出异常</p>
+
+          
         
       
     </div>
@@ -1311,265 +1761,11 @@ jetty请求头大小配置
       
         
           
-          AbstractHandlerMethodMapping 这个类可以绑定URL和需要执行处理器的哪个方法。1234567891011121314151617181920212223242526272829303132333435363738394041public void afterPropert
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/14/java/spring/AbstractHandlerMethodMapping学习/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/database/MySQL锁学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fitzwilliam">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fitzwilliam's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/08/database/MySQL锁学习/" itemprop="url">MySQL锁学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T23:37:02+08:00">
-                2019-01-08
-              </time>
-            
-
-            
-
-            
-          </span>
+            <p>AbstractHandlerMethodMapping 这个类可以绑定URL和需要执行处理器的哪个方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterPropertiesSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    initHandlerMethods();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">initHandlerMethods</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">        logger.debug(<span class="string">"Looking for request mappings in application context: "</span> + getApplicationContext());</span><br><span class="line">    &#125;</span><br><span class="line">    String[] beanNames = (<span class="keyword">this</span>.detectHandlerMethodsInAncestorContexts ?</span><br><span class="line">            BeanFactoryUtils.beanNamesForTypeIncludingAncestors(getApplicationContext(), Object.class) :</span><br><span class="line">            getApplicationContext().getBeanNamesForType(Object.class));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (String beanName : beanNames) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!beanName.startsWith(SCOPED_TARGET_NAME_PREFIX)) &#123;</span><br><span class="line">            Class&lt;?&gt; beanType = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                beanType = getApplicationContext().getType(beanName);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">                <span class="comment">// An unresolvable bean type, probably from a lazy bean - let's ignore it.</span></span><br><span class="line">                <span class="keyword">if</span> (logger.isDebugEnabled()) &#123;</span><br><span class="line">                    logger.debug(<span class="string">"Could not resolve target class for bean with name '"</span> + beanName + <span class="string">"'"</span>, ex);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (beanType != <span class="keyword">null</span> &amp;&amp; isHandler(beanType)) &#123;</span><br><span class="line">                detectHandlerMethods(beanName);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    handlerMethodsInitialized(getHandlerMethods());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Map&lt;T, HandlerMethod&gt; <span class="title">getHandlerMethods</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.mappingRegistry.acquireReadLock();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Collections.unmodifiableMap(<span class="keyword">this</span>.mappingRegistry.getMappings());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.mappingRegistry.releaseReadLock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>判断类上面有没有Controller注解和RequestMapping注解。如果有，就建立相关的映射关系（RequestMappingInfo-&gt;Handler）</p>
+<p>RequestMappingInfo存储的是url pattern<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//RequestMappingHandlerMapping</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">isHandler</span><span class="params">(Class&lt;?&gt; beanType)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (AnnotatedElementUtils.hasAnnotation(beanType, Controller.class) ||</span><br><span class="line">            AnnotatedElementUtils.hasAnnotation(beanType, RequestMapping.class));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-锁分类
-死锁判断 wait for graph
-死锁产生举例
-参考文档锁分类MySQL有三种锁的级别：页级、表级、行级
-
-
-表级锁：开销小，加锁快；不会出现死锁；锁定粒度大，发生锁冲突的概率最高,并发度最低。
-行级锁：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低,并发度也最高。
-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/08/database/MySQL锁学习/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/programming/《重构 改善既有代码的设计》/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fitzwilliam">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fitzwilliam's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/17/programming/《重构 改善既有代码的设计》/" itemprop="url">《重构 改善既有代码的设计》</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-17T10:18:53+08:00">
-                2018-12-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          重构原则重构的定义
-重构：对软件内部结构的一种调整，目的是在不改变软件可观察行为的前提下，提高其理解性，降低其修改成本。
-
-根据定义可以看出，准备动手修改前需要考虑清楚，修改的结果是 提高了程序可读性？还是降低了程序的修改成本（提升可扩展性）？
-目标是：可读、可扩展
-一定要与性能优化区分开来，两者目
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/17/programming/《重构 改善既有代码的设计》/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1650,7 +1846,7 @@ jetty请求头大小配置
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">188</span>
+                <span class="site-state-item-count">189</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

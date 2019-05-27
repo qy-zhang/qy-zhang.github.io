@@ -307,6 +307,144 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/cpp/C++ vector初始化的方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fitzwilliam">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fitzwilliam's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/22/cpp/C++ vector初始化的方式/" itemprop="url">STL vector常用操作记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T23:25:00+08:00">
+                2017-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Blog/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>STL vector常用操作记录<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/22/cpp/C++ vector初始化的方式/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/cpp/C++函数默认参数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1231,16 +1369,84 @@
       
         
           
-          计算机硬件冯·诺伊曼结构冯.诺依曼指出：程序只是一种（特殊）的数据，它可以像数据一样被处理，因此可以和数据一起被存储在同一个存储器中——这就是著名的冯.诺依曼原理。
-冯·诺伊曼结构将程序指令和数据合并在一起，程序指令存储地址和数据存储地址指向同一个存储器的不同物理位置，因此程序指令和数据的宽度相同。
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/18/back-end/操作系统笔记/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="计算机硬件"><a href="#计算机硬件" class="headerlink" title="计算机硬件"></a>计算机硬件</h1><h2 id="冯·诺伊曼结构"><a href="#冯·诺伊曼结构" class="headerlink" title="冯·诺伊曼结构"></a>冯·诺伊曼结构</h2><p>冯.诺依曼指出：程序只是一种（特殊）的数据，它可以像数据一样被处理，因此可以和数据一起被存储在同一个存储器中——这就是著名的冯.诺依曼原理。</p>
+<p>冯·诺伊曼结构将程序指令和数据合并在一起，程序指令存储地址和数据存储地址指向同一个存储器的不同物理位置，因此程序指令和数据的宽度相同。<br>对比于哈佛结构：哈佛结构是一种将程序指令存储和数据存储分开的存储器结构。中央处理器首先到程序指令存储器中读取程序指令内容，解码后得到数据地址，再到相应的数据存储器中读取数据，并进行下一步的操作（通常是执行）。程序指令存储和数据存储分开，可以使指令和数据有不同的数据宽度。</p>
+<p>使用冯·诺依曼结构的计算机，程序空间不封闭，期程序空间的数据在运行期理论上可以被修改，此外程序一旦跑飞也有可能运行到数据区。所以，相对于冯·诺依曼结构，哈佛结构更加适合于那些程序固化、任务相对简单的控制系统。</p>
+<h1 id="程序、进程、线程"><a href="#程序、进程、线程" class="headerlink" title="程序、进程、线程"></a>程序、进程、线程</h1><h2 id="几者区别"><a href="#几者区别" class="headerlink" title="几者区别"></a>几者区别</h2><p>程序：一组指令的有序结合<br>进程：程序在某个数据集合上的一次运行活动（进程=程序+数据+PCB进程控制块）<br>线程：进程的一个实体，cpu调度和分派的基本单元<br>一个程序至少有一个进程，一个进程至少有一个线程<br>线程共享所属进程的所有资源、内存空间，进程之间相互独立、有独立的内存空间</p>
+<ol>
+<li>进程是资源分配的基本单位，线程是CPU调度的基本单位。</li>
+<li>进程之间资源独立（除了共享内存），同一个进程中的线程之间资源共享。所以进程切换消耗大，线程切换消耗小</li>
+<li>通信、同步方式不一样</li>
+</ol>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><h3 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h3><p>多进程在Linux下使用fork函数创建。<br>子进程返回值为0，父进程返回值为子进程的进程ID。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pid_t</span> pid1;</span><br><span class="line"><span class="keyword">pid_t</span> pid2;</span><br><span class="line">pid1 = fork();</span><br><span class="line">pid2 = fork();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"pid1:%d, pid2:%d\n"</span>, pid1, pid2);</span><br></pre></td></tr></table></figure></p>
+<p>四个进程，分别输出<br>进程一：1001, 1002、进程二：1001, 0、进程三：0，1003、进程四：0, 0</p>
+<p>写时复制，子进程共享父进程数据段、栈和堆，访问权限改变为只读，如果父进程或者子进程需要修改这些数据，内核只为修改的那块内存拷贝一个副本。<br>子进程和父进程执行先后顺序根据内核进程调度算法而不同。</p>
+<p>fork有以下两方面的用法</p>
+<ol>
+<li>一个父进程希望复制自己，使父进程和子进程同时执行不同的代码段（使用if语句判断fork函数值返回是否为0来执行不同代码块）。这在网络服务器进程中最常见——父进程等待客户端的服务请求，当请求到达时，父进程调用fork产生子进程，子进程处理客户端的请求，而父进程接着等待客户端的请求。</li>
+<li>一个进程要执行不同的程序。fork后面执行exec</li>
+</ol>
+<p>一旦进程调用了exec函数，系统把代码段替换成新的程序的代码，废弃原有的数据段和堆栈段，唯一留下的是进程号。对系统而言，还是同一个进程，不过已经是另一个程序了。</p>
+<h3 id="进程三个基本状态"><a href="#进程三个基本状态" class="headerlink" title="进程三个基本状态"></a>进程三个基本状态</h3><p>就绪、执行、阻塞<br>就绪→执行、执行→阻塞、阻塞→就绪、执行→就绪<br>本来是就绪、执行、阻塞三个的循环，但是多了一个执行到就绪状态，这个是当一个线程正在执行，但是时间片使用完了，所以从执行态转换成了就绪态。</p>
+<h3 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度算法</h3><ol>
+<li>先来先服务：从就绪进程队列中选最先进入该队列的进程执行，直到执行完毕。</li>
+<li>短作业优先：从后备队列中选择一个估计运行时间最短的作业，直到执行完毕。</li>
+<li>优先权调度：从后备队列中选择优先权最高的作业，如果是非抢占式优先权调度会将该作业先执行完毕；如果是抢占式，如果执行过程中后备队列有优先权更高的作业就停止当前进程，切换进程转而执行更高优先权作业。</li>
+<li>高响应比优先调度：用响应比来代表优先权，计算公式为 (等待时间+要求服务时间)/要求服务时间 ，然后将响应比作为优先权执行上面的优先权调度算法。</li>
+<li>时间片轮转：先将CPU分配给队首进程，执行完一个时间片(几十ms)，时间片消耗完毕之后由计时器发出时间中断请求，调度程序接收终端信号停止进程的执行，将这个进程放到队尾。</li>
+<li>多级反馈队列：设置多个就绪队列，各个队列优先级不同，优先级越高的队列时间片越短。新进程进来先到第一个进程队尾，如果进程能够在当前队列中的时间片执行完，就执行，如果不能执行完就放到下一个优先级的队列中。先将第一优先级队列执行完才执行第二优先级队列。</li>
+</ol>
+<h3 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h3><ol>
+<li>共享内存：共享内存是一段可以被多进程共享的物理内存，各个进程在使用之前，需要将这段物理内存映射到本进程的虚拟地址空间。多进程同时读写共享内存需要同步。</li>
+<li>管道：半双工（数据只能在一个方向上流动）、进程需要有父子关系（有名管道FIFO可以用于任意两个进程间的通信）</li>
+<li>信号量：相当于一个引用计数，PV操作，P表示获取资源，计数减1，V表示释放资源，计数加1。用来同步共享内存中的资源</li>
+<li>socket：网络间进程通信</li>
+</ol>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><h3 id="线程的基本概念"><a href="#线程的基本概念" class="headerlink" title="线程的基本概念"></a>线程的基本概念</h3><p>线程的5个基本状态：新建、就绪、执行、阻塞、死亡。就绪、执行、阻塞可以相互转换。<br>对比起进程来说，进程是就绪、执行、阻塞，这三个状态循环，其中只有执行-&gt;就绪这一条路可以倒着走，起因是时间片用完。</p>
+<p>原子操作：则要么执行完所有步骤，要么一步也不执行，不可能只执行所有步骤的一个子集。<br>线程安全：多线程的程序运行结果是可预期的，多个线程同时调用该函数，允许出现互相影响的情况。<br>可重入：函数被多次调用但是结果具有可再现性。比线程安全要求更高，要求不使用、返回任何非常量的<em>全局、静态</em>变量，也不调用任何不可重入函数。</p>
+<p>可重入函数必定是线程安全的，但是线程安全的函数不一定是可重入的。</p>
+<p>多线程中栈是私有的，堆是公有的。</p>
+<h3 id="进程-线程死锁"><a href="#进程-线程死锁" class="headerlink" title="进程/线程死锁"></a>进程/线程死锁</h3><ol>
+<li>互斥：一个资源每次只能被一个进程使用</li>
+<li>请求和保持条件：进程获得一定资源后又对其他资源发出请求，又对自己获得的资源保持不防</li>
+<li>不可剥夺：资源不可被剥夺，只能自己释放</li>
+<li>循环等待：资源之间的循环链</li>
+</ol>
+<h3 id="线程同步和互斥"><a href="#线程同步和互斥" class="headerlink" title="线程同步和互斥"></a>线程同步和互斥</h3><p>线程同步是指一个线程的执行依赖另一个线程的消息；互斥是指一个线程访问资源的时候另一个不能访问。</p>
+<p>实现方式：</p>
+<ol>
+<li>临界区Critical section：不是内核对象，只能用来一个进程内线程间的同步</li>
+<li>互斥量Mutex：内核对象，能够确保线程拥有对单一资源的互斥访问权。运行速度慢</li>
+<li>信号量Semaphore：内核对象，控制一个具有有限数量的用户资源</li>
+<li>事件Event：通知线程有一些事件已发生</li>
+</ol>
+<p>总结：<br>临界区效率最高，只能用于线程间互斥，不能用于进程间，所以不涉及用户态内核态切换，开销最小。<br>互斥量与临界区相比还能用于进程间互斥，信号量和事件也能用于进程间，可以用于同步。</p>
+<p>用户模式下的方法有：原子操作（要么执行完，要么不执行）、临界区<br>内核模式下的方法有：事件、信号量、互斥量</p>
+<h2 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法"></a>银行家算法</h2><p>允许进程动态地申请资源，但系统在进行资源分配之前，应先计算此次资源分配的安全性。若此次分配不会导致系统进入不安全状态，则将资源分配给进程；否则，令进程等待。</p>
+<p>死锁是指两个或两个以上的进程在执行过程中，由于竞争资源或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，这些永远在互相等待的进程称为死锁进程。</p>
+<p>操作系统按照银行家制定的规则为进程分配资源，当进程首次申请资源时，要测试该进程对资源的最大需求量，如果系统现存的资源可以满足它的最大需求量则按当前的申请量分配资源，否则就推迟分配。当进程在执行中继续申请资源时，先测试该进程已占用的资源数与本次申请的资源数之和是否超过了该进程对资源的最大需求量。若超过则拒绝分配资源，若没有超过则再测试系统现存的资源能否满足该进程尚需的最大资源量，若能满足则按当前的申请量分配资源，否则也要推迟分配。</p>
+<h2 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h2><p>5个哲学家（线程）围成一桌就餐，但是只有5只筷子（锁），一个人想要吃饭就必须要拥有左侧的筷子（锁1）和右侧的筷子（锁2）才能吃饭。每一个哲学家刚进桌前都持有了自己左侧的筷子，这样所有人只有一只筷子都无法就餐，所以就要想办法去拿右侧的筷子，而因为右侧的筷子被别人持有，所以无法拿到，这个时间就成了死锁状态。</p>
+<p>哲学家就餐问题满足死锁的四个条件：</p>
+<ol>
+<li>互斥：筷子不能同时使用</li>
+<li>请求和保持条件：没有右边筷子不放左边筷子</li>
+<li>不可剥夺：不能抢其他人的筷子</li>
+<li>循环等待：坐成圆形，循环</li>
+</ol>
+<p>解锁的条件：那就是在哲学家尝试去拿右侧筷子的时候，<em>如果失败了，那么将自己左手边的筷子放下</em>，此时这个哲学家左侧人就可以持有他原来左手边的筷子来就餐了。相当于破坏请求和保持这个条件。</p>
+<h1 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h1><p>内存管理方式：</p>
+<ol>
+<li>块式管理：将主存分为一大块一大块的，当所需的程序片段不在主存内就分配一块主存空间，把程序片段load入主存。易于管理、浪费内存空间<br>进程A进来，向os申请了200的内存空间，于是os把0~199分配给A<br>进程B进来，向os申请了5的内存空间，os把200~204分配给它<br>进程C进来，向os申请了100的内存空间，os把205~304分配给它<br>这个时候进程B运行完了，把200~204还给os<br>但是很长时间以后，只要系统中的出现的进程的大小&gt;5的话，200~204这段空间都不会被分配出去（只要A和C不退出）。<br>过了一段更长的时间，内存中就会出现许许多多200~204这样不能被利用的碎片</li>
+<li>页式管理：把主存分成一页一页的，可以适当消除内存的外零头，提高内存的利用率</li>
+<li>段式管理：把主存分成一段一段的，每段空间比上述分页更小，这样做内存利用率更高，但是查询效率降低，一个程序片段可能会被分成几十段。</li>
+<li>段页式管理：先将主存分成若干段，每个段又分成若干页，结合上述两种优点。段页式管理每取一次数据，要访问3次内存。</li>
+</ol>
+<p>分页的地址空间是一维的（页面大小已知），拿到一个位置自己计算出来页号和页内位置<br>分段的地址空间是二维的，段号和段内地址</p>
+<h1 id="Cache替换算法"><a href="#Cache替换算法" class="headerlink" title="Cache替换算法"></a>Cache替换算法</h1><p>CPU处理数据块，容量小；内存容量大，转交给CPU处理的速度慢。Cache起到折中的作用，最有可能被使用到的数据先被内存调入Cache，CPU再从Cache中读取数据。CPU从Cache中读取到有用的数据成为“命中”。<br>Cache替换算法：先进先出(FIFO)算法、最近最少使用(LRU)算法、最近最不常用(LFU)算法</p>
+<p>LRU首先淘汰最长时间未被使用的页面。<br>LFU淘汰一定时期被访问次数最少的页面。<br>若所需页面走向为2 1 2 1 2 3 4<br>若按LRU算法,应换页面1(1页面最久未被使用) 但按LFU算法应换页面3(十分钟内,页面3只使用了一次)<br>可见LRU关键是看页面最后一次被使用到发生调度的时间长短,<br>而LFU关键是看一定时间段内页面被使用的频率!</p>
+<h1 id="什么是中断？中断时CPU做什么工作？"><a href="#什么是中断？中断时CPU做什么工作？" class="headerlink" title="什么是中断？中断时CPU做什么工作？"></a>什么是中断？中断时CPU做什么工作？</h1><p>中断是指在计算机执行期间，系统内发生任何非寻常的或非预期的急需处理事件，使得CPU暂时中断当前正在执行的程序而转去执行相应的事件处理程序。待处理完毕后又返回原来被中断处继续执行或调度新的进程执行的过程。</p>
+
+          
         
       
     </div>
@@ -1549,144 +1755,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/11/cpp/C++ const关键字使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Fitzwilliam">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://raw.githubusercontent.com/qy-zhang/qy-zhang.github.io/master/image/about/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fitzwilliam's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/11/cpp/C++ const关键字使用/" itemprop="url">C++ const关键字使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-11T20:18:55+08:00">
-                2017-03-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Note/" itemprop="url" rel="index">
-                    <span itemprop="name">Note</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>const 是C++中常用的类型修饰符，表示常量概念，能够在变和不变之间画一条分界线。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/11/cpp/C++ const关键字使用/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1735,7 +1803,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">188</span>
+                <span class="site-state-item-count">189</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
